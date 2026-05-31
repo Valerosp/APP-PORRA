@@ -138,7 +138,7 @@
             box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4); cursor: pointer;
         }
 
-        /* BARRA INFERIOR (AJUSTADA A 7 BOTONES) */
+        /* BARRA INFERIOR (7 BOTONES) */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; width: 100%;
             background: rgba(13, 17, 23, 0.95);
@@ -200,7 +200,6 @@
 <div id="pantallaLogin">
     <div class="login-card">
         <div style="text-align: center; margin-bottom: 20px;">
-            <!-- LOGO DEFINITIVO CON PLAN B (ONERROR) -->
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/2026_FIFA_World_Cup_logo.svg/512px-2026_FIFA_World_Cup_logo.svg.png" 
                  onerror="this.onerror=null; this.src='https://img.icons8.com/color/240/000000/world-cup.png';" 
                  alt="Mundial 2026" style="max-height: 120px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.5));">
@@ -212,6 +211,7 @@
             <option value="">- Selecciona tu Jugador -</option>
             <option value="Alberto">Alberto</option><option value="Anto">Anto</option><option value="Gonxi">Gonxi</option><option value="Martos">Martos</option><option value="Santos">Santos</option><option value="Licos">Licos</option><option value="Espy">Espy</option><option value="Tron">Tron</option><option value="Pampli">Pampli</option><option value="Jaime">Jaime</option><option value="Fran">Fran</option><option value="Ayala">Ayala</option><option value="Salva">Salva</option><option value="Genu">Genu</option><option value="Bicho">Bicho</option><option value="Dardos">Dardos</option><option value="Bambino">Bambino</option><option value="Hector">Hector</option><option value="Mazon">Mazon</option><option value="Ximo">Ximo</option><option value="Txus">Txus</option>
         </select>
+        <!-- Al añadir type="tel" forzamos el teclado numérico del móvil -->
         <input type="password" id="loginPin" placeholder="Tu PIN secreto..." style="margin-bottom:25px; text-align:center;">
         
         <button id="btnEntrar" class="btn-principal">Entrar a la Liga ⚽</button>
@@ -226,7 +226,6 @@
       <!-- CABECERA -->
       <div class="top-header">
            <div style="text-align: center; width: 45px;">
-             <!-- LOGO DEFINITIVO CON PLAN B (ONERROR) -->
              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/2026_FIFA_World_Cup_logo.svg/512px-2026_FIFA_World_Cup_logo.svg.png" 
                   onerror="this.onerror=null; this.src='https://img.icons8.com/color/240/000000/world-cup.png';" 
                   alt="Mundial" style="width:100%; height:auto;">
@@ -343,4 +342,4 @@
         </div>
 
         <div id="zonaTablasProvisionalesJugador" style="display: none; margin-top: 20px; overflow-x:auto;">
-    
+          <div id="tableroProvJugador" style="width:100
