@@ -27,100 +27,26 @@
             min-height: 100vh;
         }
 
-        .contenedor.usuario {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            padding-bottom: 90px;
-        }
+        .contenedor.usuario { max-width: 600px; margin: 0 auto; padding: 20px; padding-bottom: 90px; }
 
         /* PANTALLA DE LOGIN */
-        #pantallaLogin {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .login-card {
-            background: rgba(13, 17, 23, 0.85);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 40px 30px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            text-align: center;
-        }
+        #pantallaLogin { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
+        .login-card { background: rgba(13, 17, 23, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px 30px; width: 100%; max-width: 400px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); text-align: center; }
+        .top-header { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); padding: 15px; border-radius: 16px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1); }
+        #btnLogout { background: rgba(238, 82, 83, 0.2); color: #ff7675; border: none; width: 35px; height: 35px; border-radius: 50%; font-weight: bold; cursor: pointer; font-size: 16px; }
 
-        .top-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            padding: 15px;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        #btnLogout {
-            background: rgba(238, 82, 83, 0.2); color: #ff7675; border: none;
-            width: 35px; height: 35px; border-radius: 50%;
-            font-weight: bold; cursor: pointer; font-size: 16px;
-        }
-
-        select, input[type="password"], input[type="text"], input[type="number"] {
-            background: rgba(0,0,0,0.5) !important;
-            border: 1px solid rgba(255,255,255,0.2) !important;
-            color: white !important;
-            border-radius: 8px;
-            padding: 12px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            width: 100%;
-            box-sizing: border-box;
-            font-size: 15px;
-        }
+        select, input[type="password"], input[type="text"], input[type="number"] { background: rgba(0,0,0,0.5) !important; border: 1px solid rgba(255,255,255,0.2) !important; color: white !important; border-radius: 8px; padding: 12px; font-family: 'Inter', sans-serif; font-weight: 600; width: 100%; box-sizing: border-box; font-size: 15px; }
         input:focus, select:focus { outline: none; border-color: var(--accent-gold) !important; }
 
-        .tarjeta {
-            background: var(--penka-grad) !important;
-            border: 1px solid rgba(255,255,255,0.1) !important;
-            border-radius: 16px !important;
-            padding: 20px !important;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5) !important;
-            position: relative;
-            overflow: hidden;
-        }
+        .tarjeta { background: var(--penka-grad) !important; border: 1px solid rgba(255,255,255,0.1) !important; border-radius: 16px !important; padding: 20px !important; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.5) !important; position: relative; overflow: hidden; }
         .tarjeta.clean { background: rgba(13, 17, 23, 0.8) !important; }
-        .tarjeta::before {
-            content: '🏆'; position: absolute; right: -15px; top: -15px;
-            font-size: 80px; opacity: 0.05; transform: rotate(15deg); pointer-events: none;
-        }
+        .tarjeta::before { content: '🏆'; position: absolute; right: -15px; top: -15px; font-size: 80px; opacity: 0.05; transform: rotate(15deg); pointer-events: none; }
 
         .profile-header { display: flex; align-items: center; gap: 15px; }
-        .avatar {
-            width: 60px; height: 60px; border-radius: 50%;
-            background: var(--accent-gold);
-            display: flex; justify-content: center; align-items: center;
-            font-size: 30px; font-weight: bold; color: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            border: 2px solid white;
-        }
+        .avatar { width: 60px; height: 60px; border-radius: 50%; background: var(--accent-gold); display: flex; justify-content: center; align-items: center; font-size: 30px; font-weight: bold; color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid white; }
         .profile-info h2 { font-size: 22px; margin: 0; color: white !important; letter-spacing: 0; text-transform: none; }
         .profile-info p { font-size: 13px; margin: 2px 0 0 0; color: var(--text-muted) !important; }
-        
-        .profile-stats {
-            display: flex; justify-content: space-between; align-items: center;
-            text-align: center; margin-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;
-        }
+        .profile-stats { display: flex; justify-content: space-between; align-items: center; text-align: center; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
         .stat-box { flex: 1; }
         .stat-box:not(:last-child) { border-right: 1px solid rgba(255,255,255,0.1); }
         .stat-value { display: block; font-size: 26px; font-weight: 900; color: white; line-height: 1; margin-bottom: 5px; }
@@ -130,76 +56,52 @@
         h2, h3 { color: white !important; margin-top: 0; font-weight: 800; font-size: 18px; text-transform: uppercase; letter-spacing: 0.5px; }
         p, label { color: #d1d5db !important; }
 
-        .btn-principal {
-            background: linear-gradient(135deg, var(--accent-gold), #ea580c) !important;
-            color: white !important; border: none; border-radius: 12px;
-            padding: 15px; font-weight: 800; font-size: 16px; width: 100%;
-            text-transform: uppercase; letter-spacing: 1px;
-            box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4); cursor: pointer;
-        }
+        .btn-principal { background: linear-gradient(135deg, var(--accent-gold), #ea580c) !important; color: white !important; border: none; border-radius: 12px; padding: 15px; font-weight: 800; font-size: 16px; width: 100%; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4); cursor: pointer; transition: 0.2s; }
+        .btn-principal:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
         /* BARRA INFERIOR (7 BOTONES) */
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(13, 17, 23, 0.95);
-            backdrop-filter: blur(15px);
-            border-top: 1px solid rgba(255,255,255,0.05);
-            display: flex; justify-content: space-around; align-items: flex-end;
-            padding: 10px 5px 20px 5px; z-index: 1000; box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
-        }
-        .bottom-nav button {
-            flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;
-            background: transparent; color: #6b7280; border: none;
-            font-size: 9px; font-weight: 700; text-transform: uppercase;
-            cursor: pointer; transition: 0.3s; padding: 0;
-        }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(13, 17, 23, 0.95); backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; align-items: flex-end; padding: 10px 5px 20px 5px; z-index: 1000; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
+        .bottom-nav button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; background: transparent; color: #6b7280; border: none; font-size: 9px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; padding: 0; }
         .bottom-nav button i { font-size: 20px; font-style: normal; filter: grayscale(100%); opacity: 0.6; transition: 0.3s; }
-        
         .bottom-nav button.activa { color: white; }
         .bottom-nav button.activa i { filter: grayscale(0%); opacity: 1; transform: translateY(-3px); }
-
-        #btnTabQuiniela {
-            position: relative; top: -20px;
-            background: radial-gradient(circle, var(--accent-gold) 0%, #d97706 100%);
-            width: 60px; height: 60px; border-radius: 50%;
-            justify-content: center; box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
-            border: 4px solid var(--bg-dark); color: white !important; flex: none; margin: 0 5px;
-        }
+        #btnTabQuiniela { position: relative; top: -20px; background: radial-gradient(circle, var(--accent-gold) 0%, #d97706 100%); width: 60px; height: 60px; border-radius: 50%; justify-content: center; box-shadow: 0 0 20px rgba(245, 158, 11, 0.6); border: 4px solid var(--bg-dark); color: white !important; flex: none; margin: 0 5px; }
         #btnTabQuiniela i { font-size: 26px; filter: grayscale(0%); opacity: 1; transform: none !important; }
         #btnTabQuiniela span { display: none; }
 
-        #relojQuiniela, #relojValerinha {
-            background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.1);
-            color: var(--accent-gold) !important; font-size: 14px; padding: 12px !important; letter-spacing: 1px;
-        }
+        #relojQuiniela, #relojValerinha { background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.1); color: var(--accent-gold) !important; font-size: 14px; padding: 12px !important; letter-spacing: 1px; }
 
         table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px; }
         th { background: rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 10px; border-bottom: 2px solid rgba(255,255,255,0.1); white-space:nowrap; }
         td { background: rgba(255,255,255,0.03); padding: 12px 10px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
         tr td:first-child { text-align: left; font-weight: 600; color: white; }
-        
-        table th:nth-child(1), table td:nth-child(1), table th:nth-child(2), table td:nth-child(2) {
-            white-space: nowrap !important; width: 1% !important; padding-left: 10px !important; padding-right: 10px !important;
-        }
+        table th:nth-child(1), table td:nth-child(1), table th:nth-child(2), table td:nth-child(2) { white-space: nowrap !important; width: 1% !important; padding-left: 10px !important; padding-right: 10px !important; }
         table th:nth-child(2), table td:nth-child(2) { text-align: center !important; }
 
         .exacto { background-color: var(--accent-green) !important; color: white !important; font-weight: bold; border-radius:4px; display:inline-block; }
         .signo { background-color: var(--accent-gold) !important; color: black !important; font-weight: bold; border-radius:4px; display:inline-block; }
         .fallo { background-color: #e74c3c !important; color: white !important; font-weight: bold; border-radius:4px; display:inline-block; }
         .blanco { background: rgba(255,255,255,0.1) !important; color: white !important; font-weight: bold; border-radius:4px; border:1px solid rgba(255,255,255,0.2); display:inline-block; }
-        
         .total-pts { background: rgba(59, 130, 246, 0.1) !important; color: #3b82f6 !important; font-weight: 800; font-size: 14px; }
         .td-pos { font-size: 16px; font-weight: 800; color: var(--text-muted); }
         .td-nombre { font-weight: 700; color: #ffffff; }
         .td-total-gen { background: #3b82f6 !important; color: white !important; font-weight: 800; border-radius: 4px; }
+
+        /* ESTILOS MODAL ESTADÍSTICAS */
+        #modalEstadisticas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 9999; display: none; justify-content: center; align-items: center; }
+        .modal-content { background: var(--bg-card, #21262d); width: 90%; max-width: 400px; border-radius: 16px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); position: relative; max-height: 85vh; overflow-y: auto; }
+        .btn-cerrar-modal { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.1); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-weight: bold; cursor: pointer; }
+        .barra-fondo { width: 100%; background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden; margin-top: 5px; }
+        .barra-progreso { height: 100%; border-radius: 4px; }
     </style>
 </head>
 <body>
 
+<!-- PANTALLA DE ACCESO (LOGIN) -->
 <div id="pantallaLogin">
     <div class="login-card">
         <div style="text-align: center; margin-bottom: 20px;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/2026_FIFA_World_Cup_logo.svg" 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/2026_FIFA_World_Cup_logo.svg/512px-2026_FIFA_World_Cup_logo.svg.png" 
                  onerror="this.onerror=null; this.src='https://img.icons8.com/color/240/000000/world-cup.png';" 
                  alt="Mundial 2026" style="max-height: 120px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.5));">
         </div>
@@ -217,12 +119,12 @@
     </div>
 </div>
 
+<!-- APLICACIÓN PRINCIPAL -->
 <div id="pantallaApp" style="display:none;">
     <div class="contenedor usuario">
-      
       <div class="top-header">
            <div style="text-align: center; width: 45px;">
-             <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/2026_FIFA_World_Cup_logo.svg" 
+             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/2026_FIFA_World_Cup_logo.svg/512px-2026_FIFA_World_Cup_logo.svg.png" 
                   onerror="this.onerror=null; this.src='https://img.icons8.com/color/240/000000/world-cup.png';" 
                   alt="Mundial" style="width:100%; height:auto;">
            </div>
@@ -233,6 +135,7 @@
 
       <div id="cargandoPlantillaMsg" style="text-align:center; font-weight:bold; padding:20px; color:var(--accent-gold);">Sincronizando Estado... ⏳</div>
 
+      <!-- VISTA 0: INICIO -->
       <div id="vistaInicio" style="display:none;">
           <div class="tarjeta clean">
               <div class="profile-header">
@@ -257,13 +160,13 @@
                   </div>
               </div>
           </div>
-
           <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important;">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">ESTADO DE LA COMPETICIÓN</h2>
               <div id="infoEstadoJornada" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
           </div>
       </div>
 
+      <!-- VISTA 1: HACER JORNADA -->
       <div id="vistaQuiniela" style="display:none;">
         <h2 id="tituloJornadaEnJuegoQ" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
         <div id="relojQuiniela" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -307,6 +210,7 @@
         </div>
       </div>
 
+      <!-- VISTA 2: VOTAR VALERINHA -->
       <div id="vistaValerinha" style="display: none;">
         <h2 id="tituloJornadaEnJuegoV" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
         <div id="relojValerinha" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -340,28 +244,13 @@
         </div>
       </div>
 
+      <!-- VISTA 3: JORNADA (PARTIDOS Y RESULTADOS) -->
       <div id="vistaEnJuego" style="display:none;">
          <div id="renderMátrixCandadoBloqueo"></div>
          <div id="zonaTableroEnJuego" style="display:none; margin-top:20px;"></div>
-         <div id="zonaClasificacionEnJuego" style="overflow-x: auto; width:100%; margin-top: 30px; display: none;">
-             <h2 id="tituloClasificacionEnJuego" style="text-align: center; color: var(--accent-gold); font-weight:900;">🏆 CLASIFICACIÓN</h2>
-             <div id="tablaClasificacionEnJuego"></div>
-         </div>
-         <div id="zonaGananciasEnJuego" style="display:none; margin-top:30px; padding:20px; background:rgba(245,158,11,0.1); border:1px solid var(--accent-gold); border-radius:12px;">
-           <h2 style="text-align: center; color: var(--accent-gold); margin-top: 0; font-size:18px;">💰 PREMIOS ACUMULADOS</h2>
-           <div style="display: flex; gap: 15px; flex-direction:column; margin-top:15px;">
-             <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px;">
-               <h3 style="color: white; margin-top: 0; font-size:14px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px;">🏆 Campeones de Jornada</h3>
-               <div id="historialGanadoresEnJuego" style="font-size: 12px; line-height: 1.6; white-space:pre-line;"></div>
-             </div>
-             <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px;">
-               <h3 style="color: white; margin-top: 0; font-size:14px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px;">💶 Cartera Virtual</h3>
-               <div id="tablaGananciasTotalesEnJuego"></div>
-             </div>
-           </div>
-         </div>
       </div>
 
+      <!-- VISTA 4: RANKING -->
       <div id="vistaResultados" style="display: none;">
         <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important;">
           <h2 style="color:white !important; font-size:16px; margin-bottom:15px;">🏆 Histórico del Mundial</h2>
@@ -379,9 +268,7 @@
             <h2 id="tituloClasificacionJugador" style="text-align: center; color: var(--accent-gold); font-weight:900;">🏆 CLASIFICACIÓN</h2>
             <div id="tablaClasificacionJugador"></div>
         </div>
-        
         <div id="zonaTableroJugador" style="width:100%; margin-top: 40px; display: none;"></div>
-        
         <div id="zonaGananciasJugador" style="margin-top: 40px; display: none; padding: 20px; background: rgba(245, 158, 11, 0.1); border: 1px solid var(--accent-gold); border-radius: 12px; width:100%; box-sizing:border-box;">
           <h2 style="text-align: center; color: var(--accent-gold); margin-top: 0; font-size:18px;">💰 PREMIOS ACUMULADOS</h2>
           <div style="display: flex; gap: 15px; flex-direction:column; margin-top:15px;">
@@ -395,13 +282,13 @@
             </div>
           </div>
         </div>
-        
         <div id="zonaClasificacionPuraJugador" style="overflow-x: auto; width:100%; margin-top: 40px; display: none;">
             <h2 style="text-align: center; color: white;">📊 CLASIFICACIÓN SIN HISTORIAS</h2>
             <div id="tablaClasificacionPuraJugador"></div>
         </div>
       </div>
 
+      <!-- VISTA 5: ESPECIALES -->
       <div id="vistaEspeciales" style="display:none;">
         <div class="tarjeta" style="background: linear-gradient(135deg, #be185d 0%, #831843 100%) !important;">
           <h2 style="margin-top:0; color:white !important; font-size:22px; font-weight:900;">⭐ BOTE ESPECIAL</h2>
@@ -418,13 +305,14 @@
         </div>
       </div>
 
+      <!-- VISTA 6: REGLAS -->
       <div id="vistaReglas" style="display: none;">
         <div class="tarjeta clean" style="border-left:none !important;">
           <h2 style="color: white !important; margin-top:0; text-align:center; font-size: 20px;">📖 REGLAS OFICIALES</h2>
           <div style="margin-bottom: 20px; background:rgba(0,0,0,0.3); padding:15px; border-radius:8px;">
             <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">1️⃣ Fases de la Jornada</h3>
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
-              <li><strong>Hacer Jornada:</strong> Introduce marcadores antes del <em>Límite</em>. Si no, se rellena con 1-1.</li>
+              <li><strong>Hacer Jornada:</strong> Introduce marcadores. Si no, se rellena con 1-1.</li>
               <li><strong>Votar Valerinha:</strong> Tras los partidos, se publica la Provisional. Si acertaste, tienes 1 voto de Ataque/Defensa.</li>
               <li><strong>Definitiva:</strong> Se procesan los votos y bonificaciones y se reparte el dinero.</li>
             </ul>
@@ -438,22 +326,26 @@
               <li><strong>La TroNpá!:</strong> Si aciertas sumas lo apostado, si fallas lo restas.</li>
             </ul>
           </div>
-          <div style="margin-bottom: 20px; background:rgba(0,0,0,0.3); padding:15px; border-radius:8px;">
+          <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:8px;">
             <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">3️⃣ El Salseo</h3>
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
-              <li><strong>Valerinha (Votos):</strong> +1 pt a ti mismo o -1 pt a un rival. Límite: -2 pts max de daño recibido por jornada.</li>
+              <li><strong>Valerinha (Votos):</strong> +1 pt a ti mismo o -1 pt a un rival.</li>
               <li><strong>Irlinha:</strong> Si aciertas y estás a 4 pts o menos del colista, +1 pt.</li>
               <li><strong>Santinha:</strong> Si fallas y estás a 4 pts o menos del líder, -1 pt.</li>
-              <li><strong>Especiales:</strong> 1 acierto=+10pts | 2=+15pts | 3=+18pts | Extras=+2pts.</li>
             </ul>
-          </div>
-          <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:8px;">
-            <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">4️⃣ Desempates</h3>
-            <p style="font-size:13px; color:#d1d5db; margin-bottom:5px;">El orden es: Puntos > Exactos > Signos > Puntos por Salseo.</p>
           </div>
         </div>
       </div>
 
+      <!-- MODAL ESTADÍSTICAS (PULSO DE LA FILÀ) -->
+      <div id="modalEstadisticas">
+          <div class="modal-content">
+              <button class="btn-cerrar-modal" onclick="cerrarEstadisticas()">X</button>
+              <div id="modalContenido"></div>
+          </div>
+      </div>
+
+      <!-- NAVEGACIÓN INFERIOR GAMER -->
       <nav class="bottom-nav">
         <button id="btnTabInicio" class="pestana activa"><i>🏠</i><span>Inicio</span></button>
         <button id="btnTabEnJuego" class="pestana"><i>⚽</i><span>Jornada</span></button>
@@ -463,7 +355,6 @@
         <button id="btnTabEspeciales" class="pestana"><i>⭐</i><span>Extras</span></button>
         <button id="btnTabReglas" class="pestana"><i>📖</i><span>Reglas</span></button>
       </nav>
-
     </div>
 </div>
 
@@ -476,12 +367,15 @@
 
   const pinesSecretos = { "Alberto": "1111", "Anto": "2222", "Gonxi": "3333", "Martos": "4444", "Santos": "5555", "Licos": "6666", "Espy": "7777", "Tron": "8888", "Pampli": "9999", "Jaime": "1010", "Fran": "1212", "Ayala": "1313", "Salva": "1414", "Genu": "1515", "Bicho": "1616", "Dardos": "1717", "Bambino": "1818", "Hector": "1919", "Mazon": "2020", "Ximo": "2121", "Txus": "2323" };
   const seleccionesMundial = { "Alemania": "🇩🇪", "Arabia Saudita": "🇸🇦", "Argentina": "🇦🇷", "Argelia": "🇩🇿", "Australia": "🇦🇺", "Austria": "🇦🇹", "Bélgica": "🇧🇪", "Bosnia y Herzegovina": "🇧🇦", "Brasil": "🇧🇷", "Cabo Verde": "🇨🇻", "Canadá": "🇨🇦", "Catar": "🇶🇦", "Colombia": "🇨🇴", "Corea del Sur": "🇰🇷", "Costa de Marfil": "🇨🇮", "Croacia": "🇭🇷", "Curazao": "🇨🇼", "Ecuador": "🇪🇨", "Egipto": "🇪🇬", "El Salvador": "🇸🇻", "Escocia": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "España": "🇪🇸", "Estados Unidos": "🇺🇸", "Francia": "🇫🇷", "Ghana": "🇬🇭", "Haití": "🇭🇹", "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Irak": "🇮🇶", "Irán": "🇮🇷", "Japón": "🇯🇵", "Jordania": "🇯🇴", "Marruecos": "🇲🇦", "México": "🇲🇽", "Noruega": "🇳🇴", "Nueva Zelanda": "🇳🇿", "Países Bajos": "🇳🇱", "Panamá": "🇵🇦", "Paraguay": "🇵🇾", "Portugal": "🇵🇹", "RD Congo": "🇨🇩", "República Checa": "🇨🇿", "Senegal": "🇸🇳", "Sudáfrica": "🇿🇦", "Suecia": "🇸🇪", "Suiza": "🇨🇭", "Túnez": "🇹🇳", "Turquía": "🇹🇷", "Uzbekistán": "🇺🇿" };
+  
+  // PUNTOS OFICIALES RANKING FIFA (Base de la Inteligencia Artificial de Cuotas)
+  const puntosFIFA = { "Alemania": 1730, "Arabia Saudita": 1421, "Argentina": 1875, "Argelia": 1564, "Australia": 1581, "Austria": 1593, "Bélgica": 1735, "Bosnia y Herzegovina": 1386, "Brasil": 1761, "Cabo Verde": 1366, "Canadá": 1556, "Catar": 1455, "Colombia": 1693, "Corea del Sur": 1589, "Costa de Marfil": 1533, "Croacia": 1717, "Curazao": 1295, "Ecuador": 1595, "Egipto": 1563, "El Salvador": 1380, "Escocia": 1498, "España": 1876, "Estados Unidos": 1673, "Francia": 1877, "Ghana": 1346, "Haití": 1292, "Inglaterra": 1826, "Irak": 1447, "Irán": 1615, "Japón": 1660, "Jordania": 1391, "Marruecos": 1756, "México": 1681, "Noruega": 1551, "Nueva Zelanda": 1282, "Países Bajos": 1758, "Panamá": 1541, "Paraguay": 1504, "Portugal": 1764, "RD Congo": 1478, "República Checa": 1501, "Senegal": 1689, "Sudáfrica": 1430, "Suecia": 1515, "Suiza": 1649, "Túnez": 1483, "Turquía": 1599, "Uzbekistán": 1465 };
 
   window.jorQuinielaActual = 1; window.jorValerinhaActual = 1; window.jugadorLogueado = null;
   let configQ_Data = null; let esMercadoQuinielaCerrado = false; let esMercadoValerinhaCerrado = false; let cfgEspecialesMem = null;
 
   // ========================================================
-  // 🔐 SISTEMA DE LOGIN Y SESIÓN CON TRIM()
+  // 🔐 SISTEMA DE LOGIN Y SESIÓN
   // ========================================================
   document.getElementById('btnEntrar').addEventListener('click', () => {
       let nom = document.getElementById('loginNombre').value;
@@ -577,7 +471,16 @@
       }
       
       document.getElementById('relojQuiniela').style.display = "block"; let htmlPartidos = "";
-      configQ_Data.partidos.forEach((p, i) => { let flagL = seleccionesMundial[p.local] || ""; let flagV = seleccionesMundial[p.visita] || ""; htmlPartidos += `<div class="fila" style="margin-bottom:8px; justify-content:center;"><label style="font-weight:bold; font-size:13px; text-align:right; width:40%;">${flagL} ${p.local}</label> <div style="display:flex; gap:5px;"><input type="number" id="playPL_${i}" min="0" style="width:45px; text-align:center;"> <input type="number" id="playPV_${i}" min="0" style="width:45px; text-align:center;"></div> <label style="font-weight:bold; font-size:13px; text-align:left; width:40%;">${p.visita} ${flagV}</label></div>`; });
+      configQ_Data.partidos.forEach((p, i) => { 
+        let flagL = seleccionesMundial[p.local] || ""; let flagV = seleccionesMundial[p.visita] || ""; 
+        // 🚨 BOTON ESTADISTICAS AÑADIDO AL FORMULARIO
+        htmlPartidos += `<div class="fila" style="margin-bottom:8px; justify-content:center; align-items:center;">
+          <label style="font-weight:bold; font-size:13px; text-align:right; width:35%; line-height:1.2;">${flagL} ${p.local}</label> 
+          <div style="display:flex; gap:5px;"><input type="number" id="playPL_${i}" min="0" style="width:45px; text-align:center;"> <input type="number" id="playPV_${i}" min="0" style="width:45px; text-align:center;"></div> 
+          <label style="font-weight:bold; font-size:13px; text-align:left; width:35%; line-height:1.2;">${p.visita} ${flagV}</label>
+          <button onclick="abrirEstadisticas(${i})" title="Ver Pulso de la Filà" style="background:transparent; border:none; font-size:18px; cursor:pointer; padding:0; transform:translateY(2px);">📊</button>
+        </div>`; 
+      });
       document.getElementById('cajasPartidosJugador').innerHTML = htmlPartidos;
       document.getElementById('lblValerinha').innerText = configQ_Data.pregValerinha; document.getElementById('lblIrlinha').innerText = configQ_Data.pregIrlinha; document.getElementById('lblSantinha').innerText = configQ_Data.pregSantinha; document.getElementById('lblTronpa').innerText = configQ_Data.pregTronpa; document.getElementById('lblBomba').innerText = configQ_Data.pregBomba;
 
@@ -597,6 +500,108 @@
       document.getElementById('cargandoPlantillaMsg').style.display = "none"; switchTabJugador('Inicio');
     } catch(e) { document.getElementById('cargandoPlantillaMsg').innerText = "⚠️ Error de conexión."; }
   }
+
+  // ========================================================
+  // 📊 LÓGICA MODAL ESTADÍSTICAS (IA Y COMUNIDAD)
+  // ========================================================
+  window.abrirEstadisticas = async function(idx) {
+    document.getElementById('modalEstadisticas').style.display = 'flex';
+    document.getElementById('modalContenido').innerHTML = '<div style="text-align:center; padding:30px; font-weight:bold; color:var(--accent-gold);">Cargando la magia... 🪄</div>';
+    
+    let local = configQ_Data.partidos[idx].local;
+    let visita = configQ_Data.partidos[idx].visita;
+    let ptsL = puntosFIFA[local] || 1500;
+    let ptsV = puntosFIFA[visita] || 1500;
+    
+    // FÓRMULA MATEMÁTICA SISTEMA ELO
+    let diff = ptsL - ptsV;
+    let tieProb = 30 * Math.exp(-Math.pow(diff/300, 2)); 
+    let remaining = 100 - tieProb;
+    let expectedA = 1 / (1 + Math.pow(10, -diff / 400));
+    let winL = remaining * expectedA;
+    let winV = remaining * (1 - expectedA);
+
+    // CONSULTA BASE DE DATOS PARA "EL PULSO DE LA FILÀ"
+    let numL = 0; let numE = 0; let numV = 0; let resultadosArray = [];
+    try {
+        const pronosSnap = await getDocs(collection(db, "pronosticos_jornada_" + window.jorQuinielaActual));
+        pronosSnap.forEach(doc => {
+           let data = doc.data();
+           let part = data.partidos[idx];
+           if (part) {
+               if (part.local > part.visita) numL++;
+               else if (part.local < part.visita) numV++;
+               else numE++;
+               resultadosArray.push(`${part.local}-${part.visita}`);
+           }
+        });
+    } catch(e){}
+
+    let totalVotos = numL + numE + numV;
+    let commL = totalVotos ? (numL / totalVotos * 100) : 0;
+    let commE = totalVotos ? (numE / totalVotos * 100) : 0;
+    let commV = totalVotos ? (numV / totalVotos * 100) : 0;
+
+    let resCounts = {};
+    resultadosArray.forEach(r => { resCounts[r] = (resCounts[r] || 0) + 1; });
+    let sortedRes = Object.keys(resCounts).map(k => ({res: k, count: resCounts[k]})).sort((a,b) => b.count - a.count).slice(0,3);
+    
+    let htmlTop = sortedRes.map(sr => {
+        let pct = (sr.count / totalVotos * 100).toFixed(0);
+        return `<div style="text-align:center; flex:1;">
+                  <div style="font-weight:900; font-size:22px; color:white; background:rgba(255,255,255,0.05); border-radius:50%; width:50px; height:50px; display:flex; align-items:center; justify-content:center; margin:0 auto 5px auto; border:2px solid var(--accent-gold);">${sr.res}</div>
+                  <div style="font-size:12px; color:var(--accent-gold); font-weight:bold;">${pct}%</div>
+                </div>`;
+    }).join("");
+
+    let html = `
+      <h3 style="text-align:center; color:white; margin-top:0; font-size:16px;">${seleccionesMundial[local]} ${local} <span style="color:var(--text-muted); font-size:12px; margin:0 5px;">VS</span> ${visita} ${seleccionesMundial[visita]}</h3>
+      
+      <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:12px; margin-top:20px;">
+        <h4 style="margin:0 0 10px 0; color:var(--text-muted); font-size:11px;">📊 PROBABILIDAD REAL (Ránking FIFA)</h4>
+        <div style="margin-bottom:10px;">
+           <div style="display:flex; justify-content:space-between; font-size:13px; color:white; font-weight:bold;"><span>Gana ${local}</span><span>${winL.toFixed(0)}%</span></div>
+           <div class="barra-fondo"><div class="barra-progreso" style="width:${winL}%; background:#3b82f6;"></div></div>
+        </div>
+        <div style="margin-bottom:10px;">
+           <div style="display:flex; justify-content:space-between; font-size:13px; color:white; font-weight:bold;"><span>Empate</span><span>${tieProb.toFixed(0)}%</span></div>
+           <div class="barra-fondo"><div class="barra-progreso" style="width:${tieProb}%; background:#9ca3af;"></div></div>
+        </div>
+        <div style="margin-bottom:10px;">
+           <div style="display:flex; justify-content:space-between; font-size:13px; color:white; font-weight:bold;"><span>Gana ${visita}</span><span>${winV.toFixed(0)}%</span></div>
+           <div class="barra-fondo"><div class="barra-progreso" style="width:${winV}%; background:#10ac84;"></div></div>
+        </div>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:12px; margin-top:15px;">
+        <h4 style="margin:0 0 10px 0; color:var(--text-muted); font-size:11px;">👥 EL PULSO DE LA FILÀ (${totalVotos} votos)</h4>
+        <div style="margin-bottom:10px;">
+           <div style="display:flex; justify-content:space-between; font-size:13px; color:white; font-weight:bold;"><span>Gana ${local}</span><span>${commL.toFixed(0)}%</span></div>
+           <div class="barra-fondo"><div class="barra-progreso" style="width:${commL}%; background:#3b82f6;"></div></div>
+        </div>
+        <div style="margin-bottom:10px;">
+           <div style="display:flex; justify-content:space-between; font-size:13px; color:white; font-weight:bold;"><span>Empate</span><span>${commE.toFixed(0)}%</span></div>
+           <div class="barra-fondo"><div class="barra-progreso" style="width:${commE}%; background:#9ca3af;"></div></div>
+        </div>
+        <div style="margin-bottom:10px;">
+           <div style="display:flex; justify-content:space-between; font-size:13px; color:white; font-weight:bold;"><span>Gana ${visita}</span><span>${commV.toFixed(0)}%</span></div>
+           <div class="barra-fondo"><div class="barra-progreso" style="width:${commV}%; background:#10ac84;"></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:15px; background:rgba(0,0,0,0.3); padding:15px; border-radius:12px;">
+        <h4 style="margin:0 0 10px 0; color:var(--text-muted); font-size:11px; text-align:center;">🎯 RESULTADOS EXACTOS MÁS VOTADOS</h4>
+        <div style="display:flex; justify-content:center; align-items:center; gap:10px;">
+          ${htmlTop || "<p style='font-size:12px; color:white;'>Sin votos aún</p>"}
+        </div>
+      </div>
+    `;
+    
+    document.getElementById('modalContenido').innerHTML = html;
+  }
+
+  window.cerrarEstadisticas = function() { document.getElementById('modalEstadisticas').style.display = 'none'; }
+
 
   // ========================================================
   // ✍️ ENVIAR JORNADA Y VALERINHA
@@ -651,7 +656,7 @@
       if(evalSnap.exists() && evalSnap.data().publicado) {
           document.getElementById('mensajeEspecialesCerrado').style.display = "none"; document.getElementById('zonaFormularioEspeciales').style.display = "none";
           let resultados = evalSnap.data().resultados; const cfgSnap = await getDoc(doc(db, "config_especiales", "general")); let pregs = cfgSnap.data().preguntas;
-          let htmlM = `<table style="width:100%;"><thead><tr><th>Jugador</th>`; pregs.forEach((p, i) => htmlM += `<th>Q${i+1}</th>`); htmlM += `<th>Aciertos</th><th>Pts Extra</th></tr></thead><tbody>`;
+          let htmlM = `<table><thead><tr><th>Jugador</th>`; pregs.forEach((p, i) => htmlM += `<th>Q${i+1}</th>`); htmlM += `<th>Aciertos</th><th>Pts Extra</th></tr></thead><tbody>`;
           let ranked = Object.keys(resultados).map(k => ({ nom: k, data: resultados[k] })).sort((a,b) => b.data.puntos - a.data.puntos);
           ranked.forEach(j => {
               htmlM += `<tr><td><strong>${j.nom}</strong></td>`;
@@ -676,7 +681,7 @@
          let m = document.getElementById('mensajeEspecialesCerrado'); m.innerText = "🔒 Plazo cerrado. Mercado definitivo."; m.style.background = "rgba(59,130,246,0.1)"; m.style.color = "var(--accent-blue)"; m.style.display = "block"; document.getElementById('zonaFormularioEspeciales').style.display = "none";
          let pregs = cfgSnap.data().preguntas; const allRespSnap = await getDocs(collection(db, "pronosticos_especiales"));
          if(!allRespSnap.empty) {
-            let htmlM = `<h3 style="color:white; text-align:center; margin-top:0;">📋 Apuestas Especiales Públicas</h3><div style="overflow-x:auto;"><table style="width:100%;"><thead><tr><th>Pregunta</th>`;
+            let htmlM = `<h3 style="color:white; text-align:center; margin-top:0;">📋 Apuestas Especiales Públicas</h3><div style="overflow-x:auto;"><table><thead><tr><th>Pregunta</th>`;
             let arrayResp = []; allRespSnap.forEach(d => arrayResp.push({jugador: d.id, resp: d.data().respuestas})); arrayResp.sort((a, b) => a.jugador.localeCompare(b.jugador));
             arrayResp.forEach(r => { htmlM += `<th>${r.jugador}</th>`; }); htmlM += `</tr></thead><tbody>`;
             pregs.forEach((pq, idx) => { htmlM += `<tr><td style="font-size:11px; text-align:left; min-width:150px;"><strong>${pq}</strong></td>`; arrayResp.forEach(r => { htmlM += `<td>${r.resp[idx] || '-'}</td>`; }); htmlM += `</tr>`; });
@@ -701,21 +706,18 @@
      let jor = window.jorQuinielaActual; 
      document.getElementById('renderMátrixCandadoBloqueo').style.display = "block";
      document.getElementById('zonaTableroEnJuego').style.display = "none";
-     document.getElementById('zonaClasificacionEnJuego').style.display = "none";
-     document.getElementById('zonaGananciasEnJuego').style.display = "none";
-     
      document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<div style="text-align:center; font-weight:bold; padding:20px; color:var(--accent-gold);">Sincronizando jornada... ⏳</div>`;
      
      try {
         const defSnap = await getDocs(collection(db, "clasificacion_general_jornada_" + jor));
         if (!defSnap.empty) {
             document.getElementById('renderMátrixCandadoBloqueo').style.display = "none";
-            let listaJugadores = []; window.realResultsActuales = null; let ganadoresAislados = [];
+            let listaJugadores = []; window.realResultsActuales = null;
             defSnap.forEach(doc => { 
                 let data = doc.data(); 
-                if (doc.id === "GANADORES_JORNADA") ganadoresAislados = data.textos || [];
-                else if (doc.id === "RESULTADOS_REALES") window.realResultsActuales = data; 
-                else if (data.jugador) {
+                if (doc.id === "RESULTADOS_REALES") {
+                    window.realResultsActuales = data; 
+                } else if (data.jugador && doc.id !== "GANADORES_JORNADA") {
                     listaJugadores.push({
                         nombre: data.jugador, 
                         c_exactos_gen: data.resultadosAcertados || 0, c_signos_gen: data.pronosticosAcertados || 0, 
@@ -734,7 +736,6 @@
             });
             const cfgSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor));
             pintarTablas(listaJugadores, "DEFINITIVA", cfgSnap.exists() ? cfgSnap.data() : {}, "EnJuego");
-            pintarGanancias(listaJugadores, ganadoresAislados, "EnJuego");
             return;
         }
         
@@ -788,7 +789,7 @@
   }
 
   // ========================================================
-  // 📊 TABLAS COMPARTIDAS (REORDENACIÓN DE COLUMNAS)
+  // 📊 TABLAS COMPARTIDAS
   // ========================================================
   document.getElementById('btnConsultar').addEventListener('click', async () => {
     let btn = document.getElementById('btnConsultar'); let jorStr = document.getElementById('jorConsulta').value; btn.innerText = "⏳";
@@ -811,7 +812,6 @@
     let sortBy = isDef ? "puntosFinalesMundial" : "totalGeneral"; 
     let tablaGeneral = [...listaJugadores].sort((a, b) => { if(b[sortBy] !== a[sortBy]) return b[sortBy] - a[sortBy]; if(b.c_exactos_gen !== a.c_exactos_gen) return b.c_exactos_gen - a.c_exactos_gen; if(b.c_signos_gen !== a.c_signos_gen) return b.c_signos_gen - a.c_signos_gen; return ((b.puntosFinalesMundial||b.totalGeneral) - b.puntosPurosAcumulados) - ((a.puntosFinalesMundial||a.totalGeneral) - a.puntosPurosAcumulados); });
 
-    // MATRIZ RESULTADOS
     let tablaJornada = [...tablaGeneral]; 
     let thNom = ""; let numPartidosVisuales = tablaJornada[0].partidosVisuales.length; let filasPartidos = Array(numPartidosVisuales).fill(""); let tdTr = "", tdBm = "", tdVa1 = "", tdVa2 = "", tdVaDec = "", tdIr = "", tdSa = "", tdTot = ""; let nombresPartidos = [];
     tablaJornada.forEach(j => {
@@ -831,25 +831,18 @@
     document.getElementById('zonaTablero' + containerPrefix).innerHTML = tabHTML;
     document.getElementById('zonaTablero' + containerPrefix).style.display = "block";
     
-    // CLASIFICACIÓN GENERAL
-    if(containerPrefix === "Jugador" || containerPrefix === "EnJuego") {
+    if(containerPrefix === "Jugador") {
         let htmlClasif = `<div style="overflow-x:auto; width:100%; -webkit-overflow-scrolling:touch;"><table><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS ACUM.</th><th class="th-clasif">PRONÓSTICOS ACUM.</th><th class="th-clasif">BOMBA ACUM.</th><th class="th-clasif">VALERINHAS ACUM.</th><th class="th-clasif">IRLINHAS ACUM.</th><th class="th-clasif">SANTINHAS ACUM.</th><th class="th-clasif">TroNpá! ACUM.</th>`;
         if(isDef && jorStr === "DEFINITIVA") htmlClasif += `<th style="color:#f472b6;">Pts. ESPECIALES</th>`;
         htmlClasif += `</tr></thead><tbody>`;
         tablaGeneral.forEach((j, idx) => { let tGen = (isDef && jorStr === "DEFINITIVA") ? (j.puntosFinalesMundial || j.totalGeneral) : j.totalGeneral; htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td class="td-total-gen">${tGen} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td>`; if(isDef && jorStr === "DEFINITIVA") htmlClasif += `<td style="font-weight:bold; color:#f472b6;">${j.puntosEspecialesExtra || 0}</td>`; htmlClasif += `</tr>`; });
         htmlClasif += `</tbody></table></div>`; 
         
-        if(containerPrefix === "Jugador") { 
-            document.getElementById('tituloClasificacionJugador').innerText = (jorStr === "DEFINITIVA") ? `🏆 CLASIFICACIÓN DEFINITIVA DEL MUNDIAL` : `🏆 CLASIFICACIÓN GENERAL ACUMULADA`;
-            document.getElementById('tablaClasificacionJugador').innerHTML = htmlClasif; 
-            document.getElementById('zonaClasificacionJugador').style.display = "block";
-        } else if (containerPrefix === "EnJuego") {
-            document.getElementById('tituloClasificacionEnJuego').innerText = `🏆 CLASIFICACIÓN DEFINITIVA J${jorStr}`;
-            document.getElementById('tablaClasificacionEnJuego').innerHTML = htmlClasif; 
-            document.getElementById('zonaClasificacionEnJuego').style.display = "block";
-        }
+        document.getElementById('tituloClasificacionJugador').innerText = (jorStr === "DEFINITIVA") ? `🏆 CLASIFICACIÓN DEFINITIVA DEL MUNDIAL` : `🏆 CLASIFICACIÓN GENERAL ACUMULADA`;
+        document.getElementById('tablaClasificacionJugador').innerHTML = htmlClasif; 
+        document.getElementById('zonaClasificacionJugador').style.display = "block";
 
-        if(containerPrefix === "Jugador" && document.getElementById('zonaClasificacionPura' + containerPrefix) && (listaJugadores[0].purosAcumulados !== undefined || listaJugadores[0].puntosPurosAcumulados !== undefined)) {
+        if(listaJugadores[0].purosAcumulados !== undefined || listaJugadores[0].puntosPurosAcumulados !== undefined) {
             let tablaPura = [...listaJugadores].sort((a, b) => { let ptsA = a.purosAcumulados !== undefined ? a.purosAcumulados : a.puntosPurosAcumulados; let ptsB = b.purosAcumulados !== undefined ? b.purosAcumulados : b.puntosPurosAcumulados; if(ptsB !== ptsA) return ptsB - ptsA; return (b.c_exactos_gen || 0) - (a.c_exactos_gen || 0); });
             let htmlPura = `<div style="overflow-x:auto; width:100%; -webkit-overflow-scrolling:touch;"><table><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-blue);">PUNTOS (Solo Partidos)</th><th>EXACTOS</th><th>SIGNOS</th></tr></thead><tbody>`;
             tablaPura.forEach((j, idx) => { let pts = j.purosAcumulados !== undefined ? j.purosAcumulados : j.puntosPurosAcumulados; htmlPura += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td style="font-weight:bold; font-size:16px; color:var(--accent-blue);">${pts} pts</td><td>${j.c_exactos_gen||0}</td><td>${j.c_signos_gen||0}</td></tr>`; });
@@ -863,7 +856,8 @@
     let htmlGanancias = `<table><thead><tr><th>JUGADOR</th><th style="text-align:right;">GANANCIAS (€)</th></tr></thead><tbody>`;
     let rankingGanancias = [...listaJugadores].sort((a, b) => b.gananciasTotales - a.gananciasTotales);
     rankingGanancias.forEach(g => { htmlGanancias += `<tr><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05);"><strong>${g.nombre}</strong></td><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); text-align:right; color:${g.gananciasTotales > 0 ? 'var(--accent-green)':'var(--text-muted)'}; font-weight:bold; font-size:15px;">${g.gananciasTotales.toFixed(2)} €</td></tr>`; });
-    htmlGanancias += `</tbody></table>`; document.getElementById('tablaGananciasTotales' + containerPrefix).innerHTML = htmlGanancias; document.getElementById('zonaGanancias' + containerPrefix).style.display = "block";
+    htmlGanancias += `</tbody></table>`; document.getElementById('tablaGananciasTotales' + containerPrefix).innerHTML = htmlGanancias; 
+    if(containerPrefix === "Jugador") { document.getElementById('zonaGanancias' + containerPrefix).style.display = "block"; }
   }
 
   function pintarProvisionalJugador(listaJugadores, jor, configJor = {}, containerPrefix = "Prov") {
