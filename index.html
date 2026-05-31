@@ -170,6 +170,7 @@
 
   <div id="cargandoPlantillaMsg" style="text-align:center; font-weight:bold; padding:20px; color:var(--accent-gold);">Sincronizando Estado... ⏳</div>
 
+  <!-- VISTA 1: HACER JORNADA -->
   <div id="vistaQuiniela" style="display:none;">
     <h2 id="tituloJornadaEnJuegoQ" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
     <div id="relojQuiniela" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -214,6 +215,7 @@
     </div>
   </div>
 
+  <!-- VISTA 2: VOTAR VALERINHA -->
   <div id="vistaValerinha" style="display: none;">
     <h2 id="tituloJornadaEnJuegoV" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
     <div id="relojValerinha" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -241,16 +243,33 @@
       <div id="mensajeVotoCorrecto" style="display:none; color: #34d399; margin-top: 15px; font-weight:bold; text-align:center;">¡Acción Registrada!</div>
     </div>
 
-    <div id="zonaTablasProvisionalesJugador" style="display: none; margin-top: 20px;">
-      <div id="tableroProvJugador" style="overflow-x: auto; width:100%;"></div>
-      <div id="clasifProvJugador" style="overflow-x: auto; width:100%; margin-top: 30px;"></div>
+    <div id="zonaTablasProvisionalesJugador" style="display: none; margin-top: 20px; overflow-x:auto;">
+      <div id="tableroProvJugador"></div>
+      <div id="clasifProvJugador" style="margin-top: 30px;"></div>
     </div>
   </div>
 
+  <!-- VISTA 3: JORNADA EN JUEGO (AHORA DINÁMICA PROV/DEF) -->
   <div id="vistaEnJuego" style="display:none;">
      <div id="renderMátrixCandadoBloqueo"></div>
+     <div id="zonaTableroEnJuego" style="display:none; margin-top:20px;"></div>
+     <div id="zonaClasificacionEnJuego" style="display:none; margin-top:30px;"></div>
+     <div id="zonaGananciasEnJuego" style="display:none; margin-top:30px; padding:20px; background:rgba(245,158,11,0.1); border:1px solid var(--accent-gold); border-radius:12px;">
+       <h2 style="text-align: center; color: var(--accent-gold); margin-top: 0; font-size:18px;">💰 PREMIOS ACUMULADOS</h2>
+       <div style="display: flex; gap: 15px; flex-direction:column; margin-top:15px;">
+         <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px;">
+           <h3 style="color: white; margin-top: 0; font-size:14px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px;">🏆 Campeones de Jornada</h3>
+           <div id="historialGanadoresEnJuego" style="font-size: 12px; line-height: 1.6;"></div>
+         </div>
+         <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px;">
+           <h3 style="color: white; margin-top: 0; font-size:14px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px;">💶 Cartera Virtual</h3>
+           <div id="tablaGananciasTotalesEnJuego"></div>
+         </div>
+       </div>
+     </div>
   </div>
 
+  <!-- VISTA 4: CLASIFICACIONES (ORDEN INVERTIDO) -->
   <div id="vistaResultados" style="display: none;">
     <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important;">
       <h2 style="color:white !important; font-size:16px; margin-bottom:15px;">🏆 Histórico del Mundial</h2>
@@ -264,11 +283,14 @@
       </div>
     </div>
     
-    <div id="zonaTableroJugador" style="overflow-x: auto; width:100%; margin-top: 20px; display: none;"></div>
-    <div id="zonaClasificacionJugador" style="overflow-x: auto; width:100%; margin-top: 30px; display: none;"><h2 id="tituloClasificacionJugador" style="text-align: center; color: var(--accent-gold); font-weight:900;">🏆 CLASIFICACIÓN</h2><div id="tablaClasificacionJugador"></div></div>
-    <div id="zonaClasificacionPuraJugador" style="overflow-x: auto; width:100%; margin-top: 40px; display: none;"><h2 style="text-align: center; color: white;">📊 CLASIFICACIÓN SIN HISTORIAS</h2><div id="tablaClasificacionPuraJugador"></div></div>
+    <!-- 1. CLASIFICACIÓN GENERAL -->
+    <div id="zonaClasificacionJugador" style="overflow-x: auto; width:100%; margin-top: 20px; display: none;"><h2 id="tituloClasificacionJugador" style="text-align: center; color: var(--accent-gold); font-weight:900;">🏆 CLASIFICACIÓN</h2><div id="tablaClasificacionJugador"></div></div>
     
-    <div id="zonaGananciasJugador" style="margin-top: 30px; display: none; padding: 20px; background: rgba(245, 158, 11, 0.1); border: 1px solid var(--accent-gold); border-radius: 12px; width:100%; box-sizing:border-box;">
+    <!-- 2. MATRIZ DE RESULTADOS -->
+    <div id="zonaTableroJugador" style="overflow-x: auto; width:100%; margin-top: 40px; display: none;"></div>
+    
+    <!-- 3. GANANCIAS -->
+    <div id="zonaGananciasJugador" style="margin-top: 40px; display: none; padding: 20px; background: rgba(245, 158, 11, 0.1); border: 1px solid var(--accent-gold); border-radius: 12px; width:100%; box-sizing:border-box;">
       <h2 style="text-align: center; color: var(--accent-gold); margin-top: 0; font-size:18px;">💰 PREMIOS ACUMULADOS</h2>
       <div style="display: flex; gap: 15px; flex-direction:column; margin-top:15px;">
         <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px;">
@@ -281,8 +303,12 @@
         </div>
       </div>
     </div>
+    
+    <!-- 4. CLASIFICACIÓN PURA -->
+    <div id="zonaClasificacionPuraJugador" style="overflow-x: auto; width:100%; margin-top: 40px; display: none;"><h2 style="text-align: center; color: white;">📊 CLASIFICACIÓN SIN HISTORIAS</h2><div id="tablaClasificacionPuraJugador"></div></div>
   </div>
 
+  <!-- VISTA 5: ESPECIALES -->
   <div id="vistaEspeciales" style="display:none;">
     <div class="tarjeta" style="background: linear-gradient(135deg, #be185d 0%, #831843 100%) !important;">
       <h2 style="margin-top:0; color:white !important; font-size:22px; font-weight:900;">⭐ BOTE ESPECIAL</h2>
@@ -302,6 +328,7 @@
     </div>
   </div>
 
+  <!-- VISTA 6: REGLAS DEL JUEGO -->
   <div id="vistaReglas" style="display: none;">
     <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important; border-left:none !important;">
       <h2 style="color: white !important; margin-top:0; text-align:center; font-size: 20px;">📖 REGLAS OFICIALES</h2>
@@ -338,8 +365,9 @@
     </div>
   </div>
 
+  <!-- NAVEGACIÓN INFERIOR GAMER -->
   <nav class="bottom-nav">
-    <button id="btnTabEnJuego" class="pestana"><i>⚽</i><span>Partidos</span></button>
+    <button id="btnTabEnJuego" class="pestana"><i>⚽</i><span>Jornada</span></button>
     <button id="btnTabValerinha" class="pestana"><i>👑</i><span>Valerinha</span></button>
     <button id="btnTabQuiniela" class="pestana activa"><i>➕</i><span></span></button>
     <button id="btnTabResultados" class="pestana"><i>🏆</i><span>Ránking</span></button>
@@ -356,7 +384,7 @@
   const app = initializeApp(firebaseConfig); const db = getFirestore(app);
 
   const pinesSecretos = { "Alberto": "1111", "Anto": "2222", "Gonxi": "3333", "Martos": "4444", "Santos": "5555", "Licos": "6666", "Espy": "7777", "Tron": "8888", "Pampli": "9999", "Jaime": "1010", "Fran": "1212", "Ayala": "1313", "Salva": "1414", "Genu": "1515", "Bicho": "1616", "Dardos": "1717", "Bambino": "1818", "Hector": "1919", "Mazon": "2020", "Ximo": "2121", "Txus": "2323" };
-  const seleccionesMundial = { "Alemania": "🇩🇪", "Arabia Saudita": "🇸🇦", "Argentina": "🇦🇷", "Argelia": "🇩🇿", "Australia": "🇦🇺", "Austria": "🇦🇹", "Bélgica": "🇧🇪", "Bosnia y Herzegovina": "🇧🇦", "Brasil": "🇧🇷", "Cabo Verde": "🇨🇻", "Canadá": "🇨🇦", "Catar": "🇶🇦", "Colombia": "🇨🇴", "Corea del Sur": "🇰🇷", "Costa de Marfil": "🇨🇮", "Croacia": "🇭🇷", "Curazao": "🇨🇼", "Ecuador": "🇪🇨", "Egipto": "🇪🇬", "El Salvador": "🇸🇻", "Escocia": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "España": "🇪🇸", "Estados Unidos": "🇺🇸", "Francia": "🇫🇷", "Ghana": "🇬🇭", "Haití": "🇨🇭", "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Irak": "🇮🇶", "Irán": "🇮🇷", "Japón": "🇯🇵", "Jordania": "🇯🇴", "Marruecos": "🇲🇦", "México": "🇲🇽", "Noruega": "🇳🇴", "Nueva Zelanda": "🇳🇿", "Países Bajos": "🇳🇱", "Panamá": "🇵🇦", "Paraguay": "🇵🇾", "Portugal": "🇵🇹", "RD Congo": "🇨🇩", "República Checa": "🇨🇿", "Senegal": "🇸🇳", "Sudáfrica": "🇿🇦", "Suecia": "🇸🇪", "Suiza": "🇨🇭", "Túnez": "🇹🇳", "Turquía": "🇹🇷", "Uzbekistán": "🇺🇿" };
+  const seleccionesMundial = { "Alemania": "🇩🇪", "Arabia Saudita": "🇸🇦", "Argentina": "🇦🇷", "Argelia": "🇩🇿", "Australia": "🇦🇺", "Austria": "🇦🇹", "Bélgica": "🇧🇪", "Bosnia y Herzegovina": "🇧🇦", "Brasil": "🇧🇷", "Cabo Verde": "🇨🇻", "Canadá": "🇨🇦", "Catar": "🇶🇦", "Colombia": "🇨🇴", "Corea del Sur": "🇰🇷", "Costa de Marfil": "🇨🇮", "Croacia": "🇭🇷", "Curazao": "🇨🇼", "Ecuador": "🇪🇨", "Egipto": "🇪🇬", "El Salvador": "🇸🇻", "Escocia": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "España": "🇪🇸", "Estados Unidos": "🇺🇸", "Francia": "🇫🇷", "Ghana": "🇬🇭", "Haití": "🇭🇹", "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Irak": "🇮🇶", "Irán": "🇮🇷", "Japón": "🇯🇵", "Jordania": "🇯🇴", "Marruecos": "🇲🇦", "México": "🇲🇽", "Noruega": "🇳🇴", "Nueva Zelanda": "🇳🇿", "Países Bajos": "🇳🇱", "Panamá": "🇵🇦", "Paraguay": "🇵🇾", "Portugal": "🇵🇹", "RD Congo": "🇨🇩", "República Checa": "🇨🇿", "Senegal": "🇸🇳", "Sudáfrica": "🇿🇦", "Suecia": "🇸🇪", "Suiza": "🇨🇭", "Túnez": "🇹🇳", "Turquía": "🇹🇷", "Uzbekistán": "🇺🇿" };
 
   window.jorQuinielaActual = 1; window.jorValerinhaActual = 1;
   let configQ_Data = null; let esMercadoQuinielaCerrado = false; let esMercadoValerinhaCerrado = false; let cfgEspecialesMem = null;
@@ -434,17 +462,7 @@
     if(esMercadoQuinielaCerrado) return alert("Acción denegada.");
     let jugadorElegido = document.getElementById('nombreJugador').value; let pinIntroducido = document.getElementById('pinJugador').value;
     if (jugadorElegido === "") return alert("Selecciona tu nombre.");
-    
-    // VERIFICACIÓN PUERTA TRASERA AUTOCOMPLETADO
-    try { 
-       const docVerificacion = await getDoc(doc(db, "pronosticos_jornada_" + window.jorQuinielaActual, jugadorElegido)); 
-       if (docVerificacion.exists()) { 
-           let dataVer = docVerificacion.data();
-           if (!dataVer.fechaEnvio || !dataVer.fechaEnvio.includes("(Auto)")) {
-               return alert("⚠️ Ya has enviado tus pronósticos de forma oficial."); 
-           }
-       } 
-    } catch(e) {}
+    try { const docVerificacion = await getDoc(doc(db, "pronosticos_jornada_" + window.jorQuinielaActual, jugadorElegido)); if (docVerificacion.exists()) { let dataVer = docVerificacion.data(); if (!dataVer.fechaEnvio || !dataVer.fechaEnvio.includes("(Auto)")) { return alert("⚠️ Ya has enviado tus pronósticos de forma oficial."); } } } catch(e) {}
 
     let resultadosJugador = [];
     for(let i=0; i<configQ_Data.partidos.length; i++) {
@@ -466,7 +484,7 @@
       const votoSnap = await getDoc(doc(db, "votos_valerinha_jornada_" + window.jorValerinhaActual, jugadorElegido));
       if(votoSnap.exists()) {
           document.getElementById('zonaFormularioVoto').style.display = "none"; let mBox = document.getElementById('mensajeSinVoto'); mBox.innerText = "✅ Ya has emitido tu voto."; mBox.style.background = "rgba(16,172,132,0.1)"; mBox.style.color = "var(--accent-green)"; mBox.style.display = "block";
-          const provSnap = await getDocs(collection(db, "provisional_jornada_" + window.jorValerinhaActual)); let listaProvisional = []; provSnap.forEach(doc => { if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); else listaProvisional.push(doc.data()); }); const cfgSnapV = await getDoc(doc(db, "config_jornadas", "jornada_" + window.jorValerinhaActual)); pintarProvisionalJugador(listaProvisional, window.jorValerinhaActual, cfgSnapV.data() || {}); document.getElementById('btnComprobarVoto').innerText = "Comprueba si tengo Valerinha ⚖️"; return;
+          const provSnap = await getDocs(collection(db, "provisional_jornada_" + window.jorValerinhaActual)); let listaProvisional = []; provSnap.forEach(doc => { if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); else listaProvisional.push(doc.data()); }); const cfgSnapV = await getDoc(doc(db, "config_jornadas", "jornada_" + window.jorValerinhaActual)); pintarProvisionalJugador(listaProvisional, window.jorValerinhaActual, cfgSnapV.data() || {}, "Prov"); document.getElementById('btnComprobarVoto').innerText = "Comprueba si tengo Valerinha ⚖️"; return;
       }
       const provSnap = await getDocs(collection(db, "provisional_jornada_" + window.jorValerinhaActual)); let listaProvisional = []; 
       provSnap.forEach(doc => { if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); else listaProvisional.push(doc.data()); });
@@ -479,7 +497,7 @@
         document.getElementById('zonaFormularioVoto').style.display = "none"; let mBox = document.getElementById('mensajeSinVoto'); mBox.style.background = "rgba(238,82,83,0.1)"; mBox.style.color = "var(--accent-red)";
         if(esMercadoValerinhaCerrado) { mBox.innerText = "Mercado cerrado."; } else { mBox.innerText = "No acertaste. No tienes voto."; } mBox.style.display = "block";
       }
-      const cfgSnapV = await getDoc(doc(db, "config_jornadas", "jornada_" + window.jorValerinhaActual)); pintarProvisionalJugador(listaProvisional, window.jorValerinhaActual, cfgSnapV.data() || {});
+      const cfgSnapV = await getDoc(doc(db, "config_jornadas", "jornada_" + window.jorValerinhaActual)); pintarProvisionalJugador(listaProvisional, window.jorValerinhaActual, cfgSnapV.data() || {}, "Prov");
     } catch (e) {} document.getElementById('btnComprobarVoto').innerText = "Comprueba si tengo Valerinha ⚖️";
   });
 
@@ -493,13 +511,12 @@
   document.getElementById('btnVerEspeciales').addEventListener('click', async () => {
     let jugadorElegido = document.getElementById('nombreJugador').value; if (jugadorElegido === "") return alert("❌ Selecciona nombre.");
     document.getElementById('btnVerEspeciales').innerText = "Consultando... ⏳";
-    
     try {
       const evalSnap = await getDoc(doc(db, "config_especiales", "evaluacion"));
       if(evalSnap.exists() && evalSnap.data().publicado) {
           document.getElementById('mensajeEspecialesCerrado').style.display = "none"; document.getElementById('zonaFormularioEspeciales').style.display = "none";
           let resultados = evalSnap.data().resultados; const cfgSnap = await getDoc(doc(db, "config_especiales", "general")); let pregs = cfgSnap.data().preguntas;
-          let htmlM = `<table style="width:100%;"><thead><tr><th>Jugador</th>`; pregs.forEach((p, i) => htmlM += `<th>Q${i+1}</th>`); htmlM += `<th>Aciertos</th><th>Pts Extra</th></tr></thead><tbody>`;
+          let htmlM = `<table><thead><tr><th>Jugador</th>`; pregs.forEach((p, i) => htmlM += `<th>Q${i+1}</th>`); htmlM += `<th>Aciertos</th><th>Pts Extra</th></tr></thead><tbody>`;
           let ranked = Object.keys(resultados).map(k => ({ nom: k, data: resultados[k] })).sort((a,b) => b.data.puntos - a.data.puntos);
           ranked.forEach(j => {
               htmlM += `<tr><td><strong>${j.nom}</strong></td>`;
@@ -514,8 +531,7 @@
       const cfgSnap = await getDoc(doc(db, "config_especiales", "general"));
       if(!cfgSnap.exists() || !cfgSnap.data().estado || cfgSnap.data().estado === "oculto") {
          let m = document.getElementById('mensajeEspecialesCerrado'); m.innerText = "🔒 Mercado pre-mundial cerrado."; m.style.background = "rgba(238,82,83,0.1)"; m.style.color = "var(--accent-red)"; m.style.display = "block"; document.getElementById('zonaFormularioEspeciales').style.display = "none"; document.getElementById('zonaMatrizEspecialesJugador').style.display = "none";
-      } 
-      else if(cfgSnap.data().estado === "abierto") {
+      } else if(cfgSnap.data().estado === "abierto") {
          cfgEspecialesMem = cfgSnap.data(); const resSnap = await getDoc(doc(db, "pronosticos_especiales", jugadorElegido));
          if(resSnap.exists()) {
              let m = document.getElementById('mensajeEspecialesCerrado'); m.innerText = "✅ Ya has enviado tus Apuestas Especiales."; m.style.background = "rgba(16,172,132,0.1)"; m.style.color = "var(--accent-green)"; m.style.display = "block"; document.getElementById('zonaFormularioEspeciales').style.display = "none"; document.getElementById('zonaMatrizEspecialesJugador').style.display = "none";
@@ -523,8 +539,7 @@
              let htmlC = ""; cfgEspecialesMem.preguntas.forEach((pq, i) => { htmlC += `<div style="margin-bottom:15px;"><label style="font-weight:bold; font-size:13px;">${i+1}. ${pq}</label><input type="text" id="ansEsp_${i}" placeholder="Escribe aquí..." style="margin-top:8px;"></div>`; });
              document.getElementById('cajasPreguntasEspeciales').innerHTML = htmlC; document.getElementById('mensajeEspecialesCerrado').style.display = "none"; document.getElementById('zonaFormularioEspeciales').style.display = "block"; document.getElementById('zonaMatrizEspecialesJugador').style.display = "none";
          }
-      } 
-      else if(cfgSnap.data().estado === "cerrado") {
+      } else if(cfgSnap.data().estado === "cerrado") {
          let m = document.getElementById('mensajeEspecialesCerrado'); m.innerText = "🔒 Plazo cerrado. Mercado definitivo."; m.style.background = "rgba(59,130,246,0.1)"; m.style.color = "var(--accent-blue)"; m.style.display = "block"; document.getElementById('zonaFormularioEspeciales').style.display = "none";
          let pregs = cfgSnap.data().preguntas; const allRespSnap = await getDocs(collection(db, "pronosticos_especiales"));
          if(!allRespSnap.empty) {
@@ -547,28 +562,67 @@
   });
 
   // ========================================================
-  // ⚽ PEESTAÑA JORNADA EN JUEGO CON SCROLL HORIZONTAL Y BLANCOS
+  // ⚽ PESTAÑA JORNADA (DINÁMICA: PÚBLICA, PROVISIONAL, DEFINITIVA)
   // ========================================================
   async function renderPestañaEnJuegoCompleta() {
-     let jor = window.jorQuinielaActual; document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<div style="text-align:center; font-weight:bold; padding:20px; color:var(--accent-gold);">Sincronizando candado... ⏳</div>`;
+     let jor = window.jorQuinielaActual; 
+     document.getElementById('renderMátrixCandadoBloqueo').style.display = "block";
+     document.getElementById('zonaTableroEnJuego').style.display = "none";
+     document.getElementById('zonaClasificacionEnJuego').style.display = "none";
+     document.getElementById('zonaGananciasEnJuego').style.display = "none";
+     
+     document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<div style="text-align:center; font-weight:bold; padding:20px; color:var(--accent-gold);">Sincronizando jornada... ⏳</div>`;
+     
      try {
-        const configSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor)); let estaPublicado = false; if(configSnap.exists()) { estaPublicado = configSnap.data().pronosticosPublicados || false; }
-        if(!estaPublicado) { document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<div class="tarjeta" style="text-align:center;"><h2 style="color:var(--text-muted) !important;">🔒 Mercado Protegido</h2><p>Las respuestas de los rivales están ocultas.</p></div>`; } 
-        else {
-           const pronosSnap = await getDocs(collection(db, "pronosticos_jornada_" + jor)); if(pronosSnap.empty) { document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<p style="text-align:center;">No hay respuestas registradas.</p>`; return; }
-           let ths = "<th>Partido</th>"; let arrayPronos = []; pronosSnap.forEach(d => arrayPronos.push(d.data())); arrayPronos.sort((a, b) => a.jugador.localeCompare(b.jugador));
+        // 1. COMPROBAR SI ESTÁ CERRADA DEFINITIVA
+        const defSnap = await getDocs(collection(db, "clasificacion_general_jornada_" + jor));
+        if (!defSnap.empty) {
+            document.getElementById('renderMátrixCandadoBloqueo').style.display = "none";
+            let listaJugadores = []; window.realResultsActuales = null; let ganadoresAislados = [];
+            defSnap.forEach(doc => { let data = doc.data(); if (doc.id === "GANADORES_JORNADA") ganadoresAislados = data.textos || []; else if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = data; else if (data.jugador) listaJugadores.push({...data, nombre: data.jugador}); });
+            const cfgSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor));
+            pintarTablas(listaJugadores, "DEFINITIVA", cfgSnap.exists() ? cfgSnap.data() : {}, "EnJuego");
+            pintarGanancias(listaJugadores, ganadoresAislados, "EnJuego");
+            return;
+        }
+        
+        // 2. COMPROBAR SI ESTÁ PROVISIONAL
+        const provSnap = await getDocs(collection(db, "provisional_jornada_" + jor));
+        if (!provSnap.empty) {
+            document.getElementById('renderMátrixCandadoBloqueo').style.display = "none";
+            let listaJugadores = []; window.realResultsActuales = null;
+            provSnap.forEach(doc => { if (doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); else listaJugadores.push(doc.data()); });
+            const cfgSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor));
+            pintarProvisionalJugador(listaJugadores, jor, cfgSnap.exists() ? cfgSnap.data() : {}, "EnJuego");
+            return;
+        }
+
+        // 3. COMPROBAR SI ESTÁN PÚBLICOS LOS PRONÓSTICOS (SIN JUGAR)
+        const configSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor)); 
+        let estaPublicado = configSnap.exists() ? (configSnap.data().pronosticosPublicados || false) : false;
+        
+        if(!estaPublicado) {
+           document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<div class="tarjeta" style="text-align:center;"><h2 style="color:var(--text-muted) !important;">🔒 Mercado Protegido</h2><p>Las respuestas de los rivales están ocultas hasta el pitido inicial.</p></div>`;
+        } else {
+           const pronosSnap = await getDocs(collection(db, "pronosticos_jornada_" + jor));
+           if(pronosSnap.empty) { document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<p style="text-align:center;">No hay respuestas registradas.</p>`; return; }
+           
+           let ths = "<th>Partido</th>"; let arrayPronos = []; pronosSnap.forEach(d => arrayPronos.push(d.data())); 
+           
+           // ORDEN ALFABÉTICO SOLO CUANDO AÚN NO SE HAN JUGADO
+           arrayPronos.sort((a, b) => a.jugador.localeCompare(b.jugador)); 
+           
            let numPartidos = arrayPronos[0].partidos.length; let filasPartidosBlank = Array(numPartidos).fill(""); let tdsTronpa = ""; let tdsBomba = ""; let tdsVal = ""; let tdsIrl = ""; let tdsSan = "";
            
            arrayPronos.forEach(p => {
               ths += `<th>${p.jugador}</th>`; 
               p.partidos.forEach((part, idx) => { 
-                 filasPartidosBlank[idx] += `<td style="background-color: #ffffff !important; color: #111827 !important; font-weight: 600; border: 1px solid #e2e8f0 !important;">${part.local} - ${part.visita}</td>`; 
+                 // ASPECTO BIWENGER: Fondo oscuro con letras claras
+                 filasPartidosBlank[idx] += `<td><span style="font-weight:600; color:var(--text-main);">${part.local} - ${part.visita}</span></td>`; 
               });
-              tdsTronpa += `<td style="background-color: #ffffff !important; color: #111827 !important; font-weight: 600; border: 1px solid #e2e8f0 !important;">${p.tronpa.respuesta}/${p.tronpa.puntosJugados}</td>`; 
-              tdsBomba += `<td style="background-color: #ffffff !important; color: #111827 !important; font-weight: 600; border: 1px solid #e2e8f0 !important;">${p.bombaGarnacha.local}-${p.bombaGarnacha.visita}</td>`; 
-              tdsVal += `<td style="background-color: #ffffff !important; color: #111827 !important; font-weight: 600; border: 1px solid #e2e8f0 !important;">${p.preguntasAbiertas?.valerinha || '-'}</td>`; 
-              tdsIrl += `<td style="background-color: #ffffff !important; color: #111827 !important; font-weight: 600; border: 1px solid #e2e8f0 !important;">${p.preguntasAbiertas?.irlinha || '-'}</td>`; 
-              tdsSan += `<td style="background-color: #ffffff !important; color: #111827 !important; font-weight: 600; border: 1px solid #e2e8f0 !important;">${p.preguntasAbiertas?.santinha || '-'}</td>`;
+              tdsTronpa += `<td><span style="font-weight:600; color:var(--text-main);">${p.tronpa.respuesta}/${p.tronpa.puntosJugados}</span></td>`; 
+              tdsBomba += `<td><span style="font-weight:600; color:var(--text-main);">${p.bombaGarnacha.local}-${p.bombaGarnacha.visita}</span></td>`; 
+              tdsVal += `<td>${p.preguntasAbiertas?.valerinha || '-'}</td>`; tdsIrl += `<td>${p.preguntasAbiertas?.irlinha || '-'}</td>`; tdsSan += `<td>${p.preguntasAbiertas?.santinha || '-'}</td>`;
            });
            
            let cfgD = configSnap.data() || {};
@@ -577,83 +631,94 @@
            let htmlMatrix = `<h2 style="text-align:center; color:white; margin-top:0;">📋 PRONÓSTICOS JORNADA ${jor}</h2><div style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;"><table><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05); color:white;">R</th>${ths.replace("<th>Partido</th>", "")}</tr></thead><tbody>`;
            let plantilla = configSnap.exists() ? configSnap.data().partidos : [];
            filasPartidosBlank.forEach((f, idx) => { let labelPartido = (plantilla[idx]) ? `${seleccionesMundial[plantilla[idx].local]||''} ${plantilla[idx].local} - ${seleccionesMundial[plantilla[idx].visita]||''} ${plantilla[idx].visita}` : `Partido ${idx+1}`; htmlMatrix += `<tr><td><strong>${labelPartido}</strong></td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${f}</tr>`; });
-           htmlMatrix += `<tr><td><strong>🌩️ La TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsTronpa}</tr><tr><td><strong>💣 Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsBomba}</tr><tr><td><strong>🔮 Valerinha</strong>${qVa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsVal}</tr><tr><td><strong>🏃‍♂️ Irlinha</strong>${qIr}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsIrl}</tr><tr><td><strong>🇪🇸 Santinha</strong>${qSa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsSan}</tr></tbody></table></div>`; 
+           
+           let tdNomRow = arrayPronos.map(p => `<td style="font-weight:bold; color:white; background:rgba(255,255,255,0.05); font-size:11px;">${p.jugador}</td>`).join("");
+
+           htmlMatrix += `<tr><td><strong>🌩️ La TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsTronpa}</tr><tr><td><strong>💣 Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsBomba}</tr><tr><td><strong>🔮 Valerinha</strong>${qVa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsVal}</tr><tr><td><strong>🏃‍♂️ Irlinha</strong>${qIr}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsIrl}</tr><tr><td><strong>🇪🇸 Santinha</strong>${qSa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsSan}</tr><tr><td><strong>JUGADOR</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdNomRow}</tr></tbody></table></div>`; 
            document.getElementById('renderMátrixCandadoBloqueo').innerHTML = htmlMatrix;
         }
-     } catch(e) {}
+     } catch(e) { document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<p style="text-align:center;">Error de conexión.</p>`; }
   }
 
+  // ========================================================
+  // 📊 TABLAS COMPARTIDAS (REORDENACIÓN DE COLUMNAS Y CIERRES)
+  // ========================================================
   document.getElementById('btnConsultar').addEventListener('click', async () => {
     let btn = document.getElementById('btnConsultar'); let jorStr = document.getElementById('jorConsulta').value; btn.innerText = "⏳";
     let isDefinitiva = (jorStr === "DEFINITIVA"); let colName = isDefinitiva ? "clasificacion_general_FINAL_MUNDIAL" : "clasificacion_general_jornada_" + jorStr;
     try {
       const snapshot = await getDocs(collection(db, colName)); let listaJugadores = []; let ganadoresAislados = []; window.realResultsActuales = null;
       snapshot.forEach((doc) => { let data = doc.data(); if (doc.id === "GANADORES_JORNADA") ganadoresAislados = data.textos || []; else if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = data; else if (data.jugador) listaJugadores.push({ nombre: data.jugador, c_exactos_gen: data.resultadosAcertados || 0, c_signos_gen: data.pronosticosAcertados || 0, p_bomba_gen: data.puntosBombaGarnacha || 0, p_val_gen: data.puntosValerinhas || 0, p_irl_gen: data.puntosIrlinhas || 0, p_san_gen: data.puntosSantinhas || 0, p_tronpa_gen: data.puntosTronpa || 0, puntosPurosAcumulados: data.puntosPurosAcumulados || 0, puntosEspecialesExtra: data.puntosEspecialesExtra || 0, puntosFinalesMundial: data.puntosFinalesMundial || 0, totalJornada: data.puntosTotalesJornada || 0, totalGeneral: data.puntosAcumulados || 0, gananciasTotales: data.gananciasAcumuladas || 0, partidosVisuales: data.partidosVisuales || [], trT: data.trT || "-", statTronpa: data.statTronpa || "", bmT: data.bmT || "-", statBomba: data.statBomba || "", valT: data.valT || "-", statVal: data.statVal || "", irlT: data.irlT || "-", statIrl: data.statIrl || "", sanT: data.sanT || "-", statSan: data.statSan || "", p_val: data.p_val || 0, p_irl: data.p_irl || 0, p_san: data.p_san || 0, dec_val: data.dec_val || "-" }); });
-      if(listaJugadores.length === 0) {
-        document.getElementById('zonaTableroJugador').style.display = "none"; document.getElementById('zonaClasificacionJugador').style.display = "none"; document.getElementById('zonaClasificacionPuraJugador').style.display = "none"; document.getElementById('zonaGananciasJugador').style.display = "none"; btn.innerText = "Ver"; return; 
-      }
+      if(listaJugadores.length === 0) { document.getElementById('zonaTableroJugador').style.display = "none"; document.getElementById('zonaClasificacionJugador').style.display = "none"; document.getElementById('zonaClasificacionPuraJugador').style.display = "none"; document.getElementById('zonaGananciasJugador').style.display = "none"; btn.innerText = "Ver"; return; }
       const cfgSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jorStr));
-      pintarTablas(listaJugadores, "DEFINITIVA", cfgSnap.exists() ? cfgSnap.data() : {}); pintarGanancias(listaJugadores, ganadoresAislados); btn.innerText = "Ver";
+      pintarTablas(listaJugadores, "DEFINITIVA", cfgSnap.exists() ? cfgSnap.data() : {}, "Jugador"); pintarGanancias(listaJugadores, ganadoresAislados, "Jugador"); btn.innerText = "Ver";
     } catch (error) { btn.innerText = "Ver"; }
   });
 
-  // ========================================================
-  // 📊 TABLAS COMPARTIDAS JUGADOR (REORDENACIÓN Y NOMBRES ABAJO)
-  // ========================================================
-  function pintarTablas(listaJugadores, titulo, configJor = {}) {
-    let jorStr = document.getElementById('jorConsulta').value; let isDef = (jorStr === "DEFINITIVA");
+  function pintarTablas(listaJugadores, titulo, configJor = {}, containerPrefix = "Jugador") {
+    let jorStr = (containerPrefix === "Jugador") ? document.getElementById('jorConsulta').value : window.jorQuinielaActual; 
+    let isDef = (jorStr === "DEFINITIVA");
 
     let qTr = configJor.pregTronpa ? `<br><span style="font-size:10px; font-weight:normal; color:var(--text-muted);">${configJor.pregTronpa}</span>` : ''; let qBm = configJor.pregBomba ? `<br><span style="font-size:10px; font-weight:normal; color:var(--text-muted);">${configJor.pregBomba}</span>` : ''; let qVa = configJor.pregValerinha ? `<br><span style="font-size:10px; font-weight:normal; color:var(--text-muted);">${configJor.pregValerinha}</span>` : ''; let qIr = configJor.pregIrlinha ? `<br><span style="font-size:10px; font-weight:normal; color:var(--text-muted);">${configJor.pregIrlinha}</span>` : ''; let qSa = configJor.pregSantinha ? `<br><span style="font-size:10px; font-weight:normal; color:var(--text-muted);">${configJor.pregSantinha}</span>` : '';
 
+    let sortBy = isDef ? "puntosFinalesMundial" : "totalGeneral"; 
+    let tablaGeneral = [...listaJugadores].sort((a, b) => { if(b[sortBy] !== a[sortBy]) return b[sortBy] - a[sortBy]; if(b.c_exactos_gen !== a.c_exactos_gen) return b.c_exactos_gen - a.c_exactos_gen; if(b.c_signos_gen !== a.c_signos_gen) return b.c_signos_gen - a.c_signos_gen; return ((b.puntosFinalesMundial||b.totalGeneral) - b.puntosPurosAcumulados) - ((a.puntosFinalesMundial||a.totalGeneral) - a.puntosPurosAcumulados); });
+
     if(!isDef) {
-       let tablaJornada = [...listaJugadores].sort((a, b) => a.nombre.localeCompare(b.nombre));
+       // ORDEN POR PUNTOS DE MATRIZ DE RESULTADOS = ORDEN DE LA GENERAL
+       let tablaJornada = [...tablaGeneral]; 
        let thNom = ""; let numPartidosVisuales = tablaJornada[0].partidosVisuales.length; let filasPartidos = Array(numPartidosVisuales).fill(""); let tdTr = "", tdBm = "", tdVa1 = "", tdVa2 = "", tdVaDec = "", tdIr = "", tdSa = "", tdTot = ""; let nombresPartidos = [];
        tablaJornada.forEach(j => {
          thNom += `<th>${j.nombre}</th>`; j.partidosVisuales.forEach((p, idx) => { if(nombresPartidos.length <= idx) nombresPartidos.push(p.matchText || `Partido ${idx+1}`); filasPartidos[idx] += `<td><span class="${p.stat}" style="padding:4px 8px;">${p.texto}</span></td>`; });
          tdTr += `<td><span class="${j.statTronpa}" style="padding:4px 8px;">${j.trT}</span></td>`; tdBm += `<td><span class="${j.statBomba}" style="padding:4px 8px;">${j.bmT}</span></td>`; tdVa1 += `<td><span class="${j.statVal}" style="padding:4px 8px;">${j.valT}</span></td>`;
-         let valPts = Number(j.p_val) || 0; let valClass = valPts > 0 ? "exacto" : (valPts < 0 ? "fallo" : ""); let valText = valPts > 0 ? `+${valPts}` : (titulo === "PROVISIONAL" ? "" : valPts); tdVa2 += `<td><span class="${valClass}" style="padding:4px 8px;">${valText}</span></td>`;
+         let valPts = Number(j.p_val) || 0; let valClass = valPts > 0 ? "exacto" : (valPts < 0 ? "fallo" : ""); let valText = valPts > 0 ? `+${valPts}` : (valPts === 0 ? "" : valPts); tdVa2 += `<td><span class="${valClass}" style="padding:4px 8px;">${valText}</span></td>`;
          let dVal = j.dec_val || "-"; let decClass = dVal.includes("🛡️") ? "exacto" : (dVal.includes("⚔️") ? "fallo" : ""); tdVaDec += `<td><span class="${decClass}" style="font-size:11px; padding:4px 8px;">${dVal}</span></td>`;
          tdIr += `<td><span class="${j.statIrl}" style="padding:4px 8px;">${j.irlT} (${j.p_irl})</span></td>`; tdSa += `<td><span class="${j.statSan}" style="padding:4px 8px;">${j.sanT} (${j.p_san})</span></td>`; tdTot += `<td class="total-pts">${j.totalJornada}</td>`;
        });
        let resPartidos = window.realResultsActuales?.partidos || []; let resTronpa = window.realResultsActuales?.tronpa || "-"; let resBomba = window.realResultsActuales?.bomba || "-";
        let htmlPartidosTerminado = filasPartidos.map((f, i) => { let rRes = resPartidos[i] || "-"; return `<tr><td style="font-size:11px;"><strong>${nombresPartidos[i]}</strong></td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${rRes}</td>${f}</tr>`; }).join("");
 
-       // 🚨 Fila inferior con nombres repetidos
        let tdNomRow = tablaJornada.map(j => `<td style="font-weight:bold; color:white; background:rgba(255,255,255,0.05); font-size:11px;">${j.nombre}</td>`).join("");
 
-       document.getElementById('zonaTableroJugador').innerHTML = `<h2 style="text-align: center; color: white;">📊 RESULTADOS JORNADA ${jorStr}</h2><div style="overflow-x:auto; width:100%;"><table><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05); color:white;">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td style="font-size:11px;"><strong>TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resTronpa}</td> ${tdTr} </tr><tr><td style="font-size:11px;"><strong>Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resBomba}</td> ${tdBm} </tr><tr><td style="font-size:11px;"><strong>Valerinha</strong>${qVa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa1} </tr><tr><td style="font-size:11px;"><strong>Resultado Valerinha</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa2} </tr><tr><td style="font-size:11px;"><strong>Decisión Valerinha</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVaDec} </tr><tr><td style="font-size:11px;"><strong>Irlinha</strong>${qIr}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdIr} </tr><tr><td style="font-size:11px;"><strong>Santinha</strong>${qSa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdSa} </tr><tr><td style="font-size:11px;"><strong>TOTAL JORNADA</strong></td><td style="background:rgba(255,255,255,0.1); font-weight:bold; color:white;">-</td> ${tdTot} </tr><tr><td style="font-size:11px;"><strong>JUGADOR</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdNomRow} </tr></tbody></table></div>`;
-       document.getElementById('zonaTableroJugador').style.display = "block";
-    } else { document.getElementById('zonaTableroJugador').style.display = "none"; }
-
-    let sortBy = isDef ? "puntosFinalesMundial" : "totalGeneral"; let tablaGeneral = [...listaJugadores].sort((a, b) => { if(b[sortBy] !== a[sortBy]) return b[sortBy] - a[sortBy]; if(b.c_exactos_gen !== a.c_exactos_gen) return b.c_exactos_gen - a.c_exactos_gen; if(b.c_signos_gen !== a.c_signos_gen) return b.c_signos_gen - a.c_signos_gen; return ((b.puntosFinalesMundial||b.totalGeneral) - b.puntosPurosAcumulados) - ((a.puntosFinalesMundial||a.totalGeneral) - a.puntosPurosAcumulados); });
+       document.getElementById('zonaTablero' + containerPrefix).innerHTML = `<h2 style="text-align: center; color: white;">📊 RESULTADOS JORNADA ${jorStr}</h2><div style="overflow-x:auto; width:100%; -webkit-overflow-scrolling:touch;"><table><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05); color:white;">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td style="font-size:11px;"><strong>TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resTronpa}</td> ${tdTr} </tr><tr><td style="font-size:11px;"><strong>Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resBomba}</td> ${tdBm} </tr><tr><td style="font-size:11px;"><strong>Valerinha</strong>${qVa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa1} </tr><tr><td style="font-size:11px;"><strong>Resultado Valerinha</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa2} </tr><tr><td style="font-size:11px;"><strong>Decisión Valerinha</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVaDec} </tr><tr><td style="font-size:11px;"><strong>Irlinha</strong>${qIr}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdIr} </tr><tr><td style="font-size:11px;"><strong>Santinha</strong>${qSa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdSa} </tr><tr><td style="font-size:11px;"><strong>TOTAL JORNADA</strong></td><td style="background:rgba(255,255,255,0.1); font-weight:bold; color:white;">-</td> ${tdTot} </tr><tr><td style="font-size:11px;"><strong>JUGADOR</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdNomRow} </tr></tbody></table></div>`;
+       document.getElementById('zonaTablero' + containerPrefix).style.display = "block";
+    } else { document.getElementById('zonaTablero' + containerPrefix).style.display = "none"; }
     
-    // 🚨 TOTAL GENERAL reordenado a la 3ª columna
-    let htmlClasif = `<div style="overflow-x:auto;"><table><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS ACUM.</th><th class="th-clasif">PRONÓSTICOS ACUM.</th><th class="th-clasif">BOMBA ACUM.</th><th class="th-clasif">VALERINHAS ACUM.</th><th class="th-clasif">IRLINHAS ACUM.</th><th class="th-clasif">SANTINHAS ACUM.</th><th class="th-clasif">TroNpá! ACUM.</th>`;
+    // CLASIFICACIÓN GENERAL
+    let htmlClasif = `<div style="overflow-x:auto; width:100%; -webkit-overflow-scrolling:touch;"><table><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS ACUM.</th><th class="th-clasif">PRONÓSTICOS ACUM.</th><th class="th-clasif">BOMBA ACUM.</th><th class="th-clasif">VALERINHAS ACUM.</th><th class="th-clasif">IRLINHAS ACUM.</th><th class="th-clasif">SANTINHAS ACUM.</th><th class="th-clasif">TroNpá! ACUM.</th>`;
     if(isDef) htmlClasif += `<th style="color:#f472b6;">Pts. ESPECIALES</th>`;
     htmlClasif += `</tr></thead><tbody>`;
     tablaGeneral.forEach((j, idx) => { let tGen = isDef ? (j.puntosFinalesMundial || j.totalGeneral) : j.totalGeneral; htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td class="td-total-gen">${tGen} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td>`; if(isDef) htmlClasif += `<td style="font-weight:bold; color:#f472b6;">${j.puntosEspecialesExtra || 0}</td>`; htmlClasif += `</tr>`; });
-    htmlClasif += `</tbody></table></div>`; document.getElementById('tituloClasificacionJugador').innerText = isDef ? `🏆 CLASIFICACIÓN DEFINITIVA DEL MUNDIAL` : `🏆 CLASIFICACIÓN GENERAL ACUMULADA`; document.getElementById('tablaClasificacionJugador').innerHTML = htmlClasif; document.getElementById('zonaClasificacionJugador').style.display = "block";
+    htmlClasif += `</tbody></table></div>`; 
+    
+    if(document.getElementById('zonaClasificacion' + containerPrefix)) {
+        if(containerPrefix === "Jugador") { document.getElementById('tituloClasificacionJugador').innerText = isDef ? `🏆 CLASIFICACIÓN DEFINITIVA DEL MUNDIAL` : `🏆 CLASIFICACIÓN GENERAL ACUMULADA`; }
+        document.getElementById('tablaClasificacion' + containerPrefix).innerHTML = htmlClasif; document.getElementById('zonaClasificacion' + containerPrefix).style.display = "block";
+    }
 
-    if(listaJugadores[0].purosAcumulados !== undefined || listaJugadores[0].puntosPurosAcumulados !== undefined) {
+    if(document.getElementById('zonaClasificacionPura' + containerPrefix) && (listaJugadores[0].purosAcumulados !== undefined || listaJugadores[0].puntosPurosAcumulados !== undefined)) {
         let tablaPura = [...listaJugadores].sort((a, b) => { let ptsA = a.purosAcumulados !== undefined ? a.purosAcumulados : a.puntosPurosAcumulados; let ptsB = b.purosAcumulados !== undefined ? b.purosAcumulados : b.puntosPurosAcumulados; if(ptsB !== ptsA) return ptsB - ptsA; return (b.c_exactos_gen || 0) - (a.c_exactos_gen || 0); });
-        let htmlPura = `<div style="overflow-x:auto;"><table><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-blue);">PUNTOS (Solo Partidos)</th><th>EXACTOS</th><th>SIGNOS</th></tr></thead><tbody>`;
+        let htmlPura = `<div style="overflow-x:auto; width:100%; -webkit-overflow-scrolling:touch;"><table><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-blue);">PUNTOS (Solo Partidos)</th><th>EXACTOS</th><th>SIGNOS</th></tr></thead><tbody>`;
         tablaPura.forEach((j, idx) => { let pts = j.purosAcumulados !== undefined ? j.purosAcumulados : j.puntosPurosAcumulados; htmlPura += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td style="font-weight:bold; font-size:16px; color:var(--accent-blue);">${pts} pts</td><td>${j.c_exactos_gen||0}</td><td>${j.c_signos_gen||0}</td></tr>`; });
-        htmlPura += `</tbody></table></div>`; document.getElementById('tablaClasificacionPuraJugador').innerHTML = htmlPura; document.getElementById('zonaClasificacionPuraJugador').style.display = "block";
+        htmlPura += `</tbody></table></div>`; document.getElementById('tablaClasificacionPura' + containerPrefix).innerHTML = htmlPura; document.getElementById('zonaClasificacionPura' + containerPrefix).style.display = "block";
     }
   }
 
-  function pintarGanancias(listaJugadores, ganadoresDeLaJornada) {
-    if(!ganadoresDeLaJornada) ganadoresDeLaJornada = []; document.getElementById('historialGanadoresJugador').innerHTML = ganadoresDeLaJornada.map(txt => `<p style="margin: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px;">${txt}</p>`).join("");
+  function pintarGanancias(listaJugadores, ganadoresDeLaJornada, containerPrefix = "Jugador") {
+    if(!ganadoresDeLaJornada) ganadoresDeLaJornada = []; document.getElementById('historialGanadores' + containerPrefix).innerHTML = ganadoresDeLaJornada.map(txt => `<p style="margin: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px;">${txt}</p>`).join("");
     let htmlGanancias = `<table><thead><tr><th>JUGADOR</th><th style="text-align:right;">GANANCIAS (€)</th></tr></thead><tbody>`;
     let rankingGanancias = [...listaJugadores].sort((a, b) => b.gananciasTotales - a.gananciasTotales);
     rankingGanancias.forEach(g => { htmlGanancias += `<tr><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05);"><strong>${g.nombre}</strong></td><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); text-align:right; color:${g.gananciasTotales > 0 ? 'var(--accent-green)':'var(--text-muted)'}; font-weight:bold; font-size:15px;">${g.gananciasTotales.toFixed(2)} €</td></tr>`; });
-    htmlGanancias += `</tbody></table>`; document.getElementById('tablaGananciasTotalesJugador').innerHTML = htmlGanancias; document.getElementById('zonaGananciasJugador').style.display = "block";
+    htmlGanancias += `</tbody></table>`; document.getElementById('tablaGananciasTotales' + containerPrefix).innerHTML = htmlGanancias; document.getElementById('zonaGanancias' + containerPrefix).style.display = "block";
   }
 
-  function pintarProvisionalJugador(listaJugadores, jor, configJor = {}) {
+  function pintarProvisionalJugador(listaJugadores, jor, configJor = {}, containerPrefix = "Prov") {
     let qTr = configJor.pregTronpa ? `<br><span style="font-size:10px; font-weight:normal; color:var(--text-muted);">${configJor.pregTronpa}</span>` : ''; let qBm = configJor.pregBomba ? `<br><span style="font-size:10px; font-weight:normal; color:var(--text-muted);">${configJor.pregBomba}</span>` : ''; let qVa = configJor.pregValerinha ? `<br><span style="font-size:10px; font-weight:normal; color:var(--text-muted);">${configJor.pregValerinha}</span>` : ''; let qIr = configJor.pregIrlinha ? `<br><span style="font-size:10px; font-weight:normal; color:var(--text-muted);">${configJor.pregIrlinha}</span>` : ''; let qSa = configJor.pregSantinha ? `<br><span style="font-size:10px; font-weight:normal; color:var(--text-muted);">${configJor.pregSantinha}</span>` : '';
 
-    let tablaJornada = [...listaJugadores].sort((a, b) => a.nombre.localeCompare(b.nombre));
+    let tablaGeneral = [...listaJugadores].sort((a, b) => b.totalGeneral - a.totalGeneral);
+    // ORDEN DE LA MATRIZ IGUAL A LA GENERAL (MAYOR A MENOR PUNTOS)
+    let tablaJornada = [...tablaGeneral];
+    
     let thNom = ""; let numPartidosVisuales = tablaJornada[0].partidosVisuales.length; let filasPartidos = Array(numPartidosVisuales).fill(""); let tdTr = "", tdBm = "", tdVa1 = "", tdVa2 = "", tdIr = "", tdSa = "", tdTot = ""; let nombresPartidos = [];
     tablaJornada.forEach(j => {
       thNom += `<th>${j.nombre}</th>`; j.partidosVisuales.forEach((p, idx) => { if(nombresPartidos.length <= idx) nombresPartidos.push(p.matchText || `Partido ${idx+1}`); filasPartidos[idx] += `<td><span class="${p.stat}" style="padding:4px 8px;">${p.texto}</span></td>`; });
@@ -662,16 +727,21 @@
     let resPartidos = window.realResultsActuales?.partidos || []; let resTronpa = window.realResultsActuales?.tronpa || "-"; let resBomba = window.realResultsActuales?.bomba || "-";
     let htmlPartidosTerminado = filasPartidos.map((f, i) => { let rRes = resPartidos[i] || "-"; return `<tr><td style="font-size:11px;"><strong>${nombresPartidos[i]}</strong></td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${rRes}</td>${f}</tr>`; }).join("");
     
-    // 🚨 Fila inferior repetida
     let tdNomRow = tablaJornada.map(j => `<td style="font-weight:bold; color:white; background:rgba(255,255,255,0.05); font-size:11px;">${j.nombre}</td>`).join("");
 
-    document.getElementById('tableroProvJugador').innerHTML = `<h2 style="text-align: center; color: white;">📊 RESULTADOS JORNADA ${jor} (Provisional)</h2><div style="overflow-x:auto;"><table><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05); color:white;">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td style="font-size:11px;"><strong>TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resTronpa}</td> ${tdTr} </tr><tr><td style="font-size:11px;"><strong>Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resBomba}</td> ${tdBm} </tr><tr><td style="font-size:11px;"><strong>Valerinha</strong>${qVa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa1} </tr><tr><td style="font-size:11px;"><strong>Resultado Valerinha</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa2} </tr><tr><td style="font-size:11px;"><strong>Irlinha</strong>${qIr}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdIr} </tr><tr><td style="font-size:11px;"><strong>Santinha</strong>${qSa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdSa} </tr><tr><td style="font-size:11px;"><strong>TOTAL JORNADA</strong></td><td style="background:rgba(255,255,255,0.1); font-weight:bold; color:white;">-</td> ${tdTot} </tr><tr><td style="font-size:11px;"><strong>JUGADOR</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdNomRow} </tr></tbody></table></div>`;
-
-    let tablaGeneral = [...listaJugadores].sort((a, b) => b.totalGeneral - a.totalGeneral);
-    // 🚨 TOTAL GENERAL en 3ª Columna
-    let htmlClasif = `<h2 style="text-align: center; color: var(--accent-gold);">🏆 CLASIFICACIÓN GENERAL (Provisional Acumulada)</h2><div style="overflow-x:auto;"><table><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS ACUM.</th><th class="th-clasif">PRONÓSTICOS ACUM.</th><th class="th-clasif">BOMBA ACUM.</th><th class="th-clasif">VALERINHAS ACUM.</th><th>IRLINHAS ACUM.</th><th>SANTINHAS ACUM.</th><th>TroNpá! ACUM.</th></tr></thead><tbody>`;
-    tablaGeneral.forEach((j, idx) => { htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td class="td-total-gen">${j.totalGeneral} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td></tr>`; });
-    htmlClasif += `</tbody></table></div>`; document.getElementById('clasifProvJugador').innerHTML = htmlClasif; document.getElementById('zonaTablasProvisionalesJugador').style.display = "block";
+    let tabHTML = `<h2 style="text-align: center; color: white;">📊 RESULTADOS JORNADA ${jor} (Provisional)</h2><div style="overflow-x:auto; width:100%; -webkit-overflow-scrolling:touch;"><table><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05); color:white;">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td style="font-size:11px;"><strong>TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resTronpa}</td> ${tdTr} </tr><tr><td style="font-size:11px;"><strong>Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resBomba}</td> ${tdBm} </tr><tr><td style="font-size:11px;"><strong>Valerinha</strong>${qVa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa1} </tr><tr><td style="font-size:11px;"><strong>Resultado Valerinha</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa2} </tr><tr><td style="font-size:11px;"><strong>Irlinha</strong>${qIr}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdIr} </tr><tr><td style="font-size:11px;"><strong>Santinha</strong>${qSa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdSa} </tr><tr><td style="font-size:11px;"><strong>TOTAL JORNADA</strong></td><td style="background:rgba(255,255,255,0.1); font-weight:bold; color:white;">-</td> ${tdTot} </tr><tr><td style="font-size:11px;"><strong>JUGADOR</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdNomRow} </tr></tbody></table></div>`;
+    
+    if(containerPrefix === "Prov") {
+        document.getElementById('tableroProvJugador').innerHTML = tabHTML;
+        let htmlClasif = `<h2 style="text-align: center; color: var(--accent-gold);">🏆 CLASIFICACIÓN GENERAL</h2><div style="overflow-x:auto; width:100%; -webkit-overflow-scrolling:touch;"><table><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS</th><th class="th-clasif">SIGNOS</th><th class="th-clasif">BOMBA</th><th class="th-clasif">VALERINHAS</th><th>IRLINHAS</th><th>SANTINHAS</th><th>TroNpá!</th></tr></thead><tbody>`;
+        tablaGeneral.forEach((j, idx) => { htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td class="td-total-gen">${j.totalGeneral} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td></tr>`; });
+        htmlClasif += `</tbody></table></div>`; 
+        document.getElementById('clasifProvJugador').innerHTML = htmlClasif; 
+        document.getElementById('zonaTablasProvisionalesJugador').style.display = "block";
+    } else if (containerPrefix === "EnJuego") {
+        document.getElementById('zonaTableroEnJuego').innerHTML = tabHTML;
+        document.getElementById('zonaTableroEnJuego').style.display = "block";
+    }
   }
 </script>
 </body>
