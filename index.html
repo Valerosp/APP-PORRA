@@ -209,12 +209,8 @@
             <div style="margin-bottom:15px; border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
                 <p id="lblTronpa" style="font-size: 12px; margin-bottom:4px; font-weight:bold;"></p>
                 <div style="display:flex; gap:10px; justify-content:center; align-items:center;">
-                  <select id="tronpaApuesta" style="width:50%;"><option value="1">Riesgo: 1 Pt</option><option value="2">Riesgo: 2 Pts</option><option value="3">Riesgo: 3 Pts</option></select>
-                  <div style="display:flex; flex-direction:column; align-items:center; gap:3px; width:50%;">
-                     <button type="button" class="btn-step" onclick="window.modScore('tronpaRespuesta', 1)">+</button>
-                     <input type="number" id="tronpaRespuesta" value="0" readonly style="width:100%; height:40px; text-align:center; padding:0; font-size:18px; border-radius:6px; background:rgba(0,0,0,0.6) !important; color:white; border:1px solid var(--accent-gold) !important; margin:0;">
-                     <button type="button" class="btn-step" onclick="window.modScore('tronpaRespuesta', -1)">-</button>
-                  </div>
+                  <select id="tronpaApuesta" style="width:50%; height:45px; margin:0;"><option value="1">Riesgo: 1 Pt</option><option value="2">Riesgo: 2 Pts</option><option value="3">Riesgo: 3 Pts</option></select>
+                  <input type="number" id="tronpaRespuesta" placeholder="Ej: 60" style="width:50%; height:45px; text-align:center; font-size:16px; border-radius:8px; background:rgba(0,0,0,0.6) !important; color:white; border:1px solid var(--accent-gold) !important; margin:0;">
                 </div>
             </div>
             <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
@@ -273,13 +269,13 @@
         </div>
       </div>
 
-      <!-- VISTA 3: JORNADA (SOLO PARTIDOS Y RESULTADOS) -->
+      <!-- VISTA 3: JORNADA (DINÁMICA PÚBLICA, PROVISIONAL, DEFINITIVA) -->
       <div id="vistaEnJuego" style="display:none;">
          <div id="renderMátrixCandadoBloqueo"></div>
          <div id="zonaTableroEnJuego" style="display:none; margin-top:20px;"></div>
       </div>
 
-      <!-- VISTA 4: RANKING (ORDEN: CLASIF -> MATRIZ -> GANANCIAS -> PURA) -->
+      <!-- VISTA 4: RANKING -->
       <div id="vistaResultados" style="display: none;">
         <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important;">
           <h2 style="color:white !important; font-size:16px; margin-bottom:15px;">🏆 Histórico del Mundial</h2>
@@ -289,7 +285,6 @@
               <option value="5">Jornada 5</option><option value="6">Jornada 6</option><option value="7">Jornada 7</option><option value="8">Jornada 8</option>
               <option value="DEFINITIVA" style="font-weight:bold; color:var(--accent-gold);">🌟 DEFINITIVA</option>
             </select>
-            <!-- BOTÓN VER ELIMINADO. LA BÚSQUEDA ES AUTOMÁTICA -->
           </div>
         </div>
         
@@ -297,7 +292,9 @@
             <h2 id="tituloClasificacionJugador" style="text-align: center; color: var(--accent-gold); font-weight:900;">🏆 CLASIFICACIÓN</h2>
             <div id="tablaClasificacionJugador"></div>
         </div>
+        
         <div id="zonaTableroJugador" style="width:100%; margin-top: 40px; display: none;"></div>
+        
         <div id="zonaGananciasJugador" style="margin-top: 40px; display: none; padding: 20px; background: rgba(245, 158, 11, 0.1); border: 1px solid var(--accent-gold); border-radius: 12px; width:100%; box-sizing:border-box;">
           <h2 style="text-align: center; color: var(--accent-gold); margin-top: 0; font-size:18px;">💰 PREMIOS ACUMULADOS</h2>
           <div style="display: flex; gap: 15px; flex-direction:column; margin-top:15px;">
@@ -311,6 +308,7 @@
             </div>
           </div>
         </div>
+        
         <div id="zonaClasificacionPuraJugador" style="overflow-x: auto; width:100%; margin-top: 40px; display: none;">
             <h2 style="text-align: center; color: white;">📊 CLASIFICACIÓN SIN HISTORIAS</h2>
             <div id="tablaClasificacionPuraJugador"></div>
@@ -341,7 +339,7 @@
           <div style="margin-bottom: 20px; background:rgba(0,0,0,0.3); padding:15px; border-radius:8px;">
             <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">1️⃣ Fases de la Jornada</h3>
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
-              <li><strong>Hacer Jornada:</strong> Introduce marcadores con los botones de + y -. Si no entras, se rellena con 1-1 automático.</li>
+              <li><strong>Hacer Jornada:</strong> Introduce marcadores. Si no, se rellena con 1-1.</li>
               <li><strong>Votar Valerinha:</strong> Tras los partidos, se publica la Provisional. Si acertaste, tienes 1 voto de Ataque/Defensa.</li>
               <li><strong>Definitiva:</strong> Se procesan los votos y bonificaciones y se reparte el dinero.</li>
             </ul>
@@ -479,7 +477,6 @@
       }
       document.getElementById('relojQuiniela').style.display = "block"; 
       
-      // BLOQUEAR QUINIELA SI YA ENVIÓ (MANTENER VALORES EN EL FORM)
       let yaEnviado = false; let pData = null;
       try {
           const snapProno = await getDoc(doc(db, "pronosticos_jornada_" + targetJor, window.jugadorLogueado));
@@ -528,7 +525,7 @@
               document.getElementById('irlinhaRespuesta').value = pData.preguntasAbiertas.irlinha; document.getElementById('irlinhaRespuesta').readOnly = true;
               document.getElementById('santinhaRespuesta').value = pData.preguntasAbiertas.santinha; document.getElementById('santinhaRespuesta').readOnly = true;
               document.getElementById('tronpaApuesta').value = pData.tronpa.puntosJugados; document.getElementById('tronpaApuesta').disabled = true;
-              document.getElementById('tronpaRespuesta').value = pData.tronpa.respuesta;
+              document.getElementById('tronpaRespuesta').value = pData.tronpa.respuesta; document.getElementById('tronpaRespuesta').readOnly = true;
               document.getElementById('bombaLocal').value = pData.bombaGarnacha.local; document.getElementById('bombaVisita').value = pData.bombaGarnacha.visita;
               document.querySelectorAll('#vistaQuiniela .btn-step').forEach(b => b.style.display = 'none');
           }
@@ -549,7 +546,7 @@
       document.getElementById('relojValerinha').style.display = "block";
 
       let selJ = document.getElementById('jorConsulta'); if(selJ.value === "1") selJ.value = jorCerrada === 0 ? 1 : jorCerrada; 
-      selJ.dispatchEvent(new Event('change')); // Fuerza que cargue el Ranking
+      selJ.dispatchEvent(new Event('change'));
       document.getElementById('cargandoPlantillaMsg').style.display = "none"; window.switchTabJugador('Inicio');
     } catch(e) { document.getElementById('cargandoPlantillaMsg').innerText = "⚠️ Error de conexión."; }
   }
@@ -628,7 +625,7 @@
         await setDoc(doc(db, "pronosticos_jornada_" + window.jorQuinielaActual, window.jugadorLogueado), misDatos); 
         document.getElementById('btnEnviar').innerText = "JORNADA ENVIADA ✅"; document.getElementById('btnEnviar').disabled = true; document.getElementById('btnEnviar').style.background = "var(--accent-green)";
         document.querySelectorAll('#vistaQuiniela .btn-step').forEach(b => b.style.display = 'none');
-        document.getElementById('valerinhaRespuesta').readOnly = true; document.getElementById('irlinhaRespuesta').readOnly = true; document.getElementById('santinhaRespuesta').readOnly = true; document.getElementById('tronpaApuesta').disabled = true;
+        document.getElementById('valerinhaRespuesta').readOnly = true; document.getElementById('irlinhaRespuesta').readOnly = true; document.getElementById('santinhaRespuesta').readOnly = true; document.getElementById('tronpaApuesta').disabled = true; document.getElementById('tronpaRespuesta').readOnly = true;
     } catch (error) { document.getElementById('btnEnviar').innerText = "Error. Reintentar 🚀"; }
   });
 
@@ -734,7 +731,7 @@
   }
 
   // ========================================================
-  // ⚽ PESTAÑA JORNADA EN JUEGO (SOLO TABLA PARTIDOS)
+  // ⚽ PESTAÑA JORNADA EN JUEGO
   // ========================================================
   async function renderPestañaEnJuegoCompleta() {
      let jor = window.jorQuinielaActual; 
@@ -874,6 +871,7 @@
     document.getElementById('zonaTablero' + containerPrefix).innerHTML = tabHTML;
     document.getElementById('zonaTablero' + containerPrefix).style.display = "block";
     
+    // CLASIFICACIÓN GENERAL FLEXIBLE
     if(containerPrefix === "Jugador" || containerPrefix === "EnJuego") {
         let htmlClasif = `<div style="overflow-x:auto; width:100%; -webkit-overflow-scrolling:touch;"><table class="tabla-clasif"><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS ACUM.</th><th class="th-clasif">PRONÓSTICOS ACUM.</th><th class="th-clasif">BOMBA ACUM.</th><th class="th-clasif">VALERINHAS ACUM.</th><th class="th-clasif">IRLINHAS ACUM.</th><th class="th-clasif">SANTINHAS ACUM.</th><th class="th-clasif">TroNpá! ACUM.</th>`;
         if(isDef && jorStr === "DEFINITIVA") htmlClasif += `<th style="color:#f472b6;">Pts. ESPECIALES</th>`;
