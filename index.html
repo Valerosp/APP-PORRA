@@ -50,16 +50,16 @@
         .profile-info h2 { font-size: 22px; margin: 0; color: white !important; letter-spacing: 0; text-transform: none; }
         .profile-info p { font-size: 13px; margin: 2px 0 0 0; color: var(--text-muted) !important; }
         .profile-stats { display: flex; justify-content: space-between; align-items: center; text-align: center; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
-        .stat-box { flex: 1; }
+        .stat-box { flex: 1; overflow: hidden; }
         .stat-box:not(:last-child) { border-right: 1px solid rgba(255,255,255,0.1); }
-        .stat-value { display: block; font-size: 26px; font-weight: 900; color: white; line-height: 1; margin-bottom: 5px; }
+        .stat-value { display: block; font-size: clamp(18px, 5vw, 24px); font-weight: 900; color: white; line-height: 1; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .stat-value.money { color: #10ac84; }
-        .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+        .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
 
         h2, h3 { color: white !important; margin-top: 0; font-weight: 800; font-size: 18px; text-transform: uppercase; letter-spacing: 0.5px; }
         p, label { color: #d1d5db !important; }
 
-        .btn-principal { background: linear-gradient(135deg, var(--accent-gold), #ea580c) !important; color: white !important; border: none; border-radius: 12px; padding: 15px; font-weight: 800; font-size: 16px; width: 100%; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4); cursor: pointer; transition: 0.2s; }
+        .btn-principal { background: linear-gradient(135deg, var(--accent-gold), #ea580c) !important; color: white !important; border: none; border-radius: 12px; padding: 15px; font-weight: 800; font-size: 15px; width: 100%; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4); cursor: pointer; transition: 0.2s; }
         .btn-principal:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-2px); }
         .btn-principal:disabled { opacity: 0.8; cursor: not-allowed; transform: none; box-shadow: none; }
 
@@ -79,12 +79,16 @@
 
         #relojQuiniela, #relojValerinha { background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.1); color: var(--accent-gold) !important; font-size: 14px; padding: 12px !important; letter-spacing: 1px; }
 
-        /* SISTEMA MATRICIAL ESTRICTO PARA RESULTADOS */
-        .tabla-matriz { width: max-content; min-width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 11px; table-layout: fixed; }
-        .tabla-matriz th { background: rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 4px; border-bottom: 2px solid rgba(255,255,255,0.1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 10px; }
-        .tabla-matriz td { background: rgba(255,255,255,0.03); padding: 2px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); height: 45px; vertical-align: middle; overflow: hidden; }
-        .tabla-matriz th:nth-child(1), .tabla-matriz td:nth-child(1) { width: 85px !important; min-width: 85px !important; max-width: 85px !important; white-space: normal !important; word-wrap: break-word; text-align:left; padding-left:5px; font-size:9px; line-height:1.2; }
-        .tabla-matriz th:nth-child(2), .tabla-matriz td:nth-child(2) { width: 22px !important; min-width: 22px !important; max-width: 22px !important; }
+        /* SISTEMA MATRICIAL ESTRICTO (CONGELADO STICKY) */
+        .table-container-matriz { max-height: 65vh; overflow: auto; width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-dark); position: relative; }
+        .tabla-matriz { width: max-content; min-width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 0; font-size: 11px; table-layout: fixed; }
+        .tabla-matriz th, .tabla-matriz td { background: var(--bg-dark); }
+        .tabla-matriz thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 4px; border-bottom: 2px solid rgba(255,255,255,0.1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 10px; }
+        .tabla-matriz tbody td { padding: 2px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); height: 45px; vertical-align: middle; overflow: hidden; }
+        
+        .tabla-matriz th:nth-child(1), .tabla-matriz td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; box-shadow: 2px 0 4px rgba(0,0,0,0.5); width: 85px !important; min-width: 85px !important; max-width: 85px !important; white-space: normal !important; word-wrap: break-word; text-align:left; padding-left:5px; font-size:9px; line-height:1.2; border-right: 1px solid rgba(255,255,255,0.05); }
+        .tabla-matriz th:nth-child(2), .tabla-matriz td:nth-child(2) { position: sticky; left: 85px; z-index: 5; background: #111827; box-shadow: 2px 0 4px rgba(0,0,0,0.5); width: 22px !important; min-width: 22px !important; max-width: 22px !important; border-right: 1px solid rgba(255,255,255,0.1); }
+        .tabla-matriz thead th:nth-child(1), .tabla-matriz thead th:nth-child(2) { z-index: 15; background: #111827; }
         .tabla-matriz th:not(:nth-child(1)):not(:nth-child(2)) { width: 45px !important; min-width: 45px !important; max-width: 45px !important; }
         
         .exacto { background-color: var(--accent-green) !important; color: white !important; font-weight: bold; border-radius:4px; display:flex; justify-content:center; align-items:center; height:28px; width:90%; margin:0 auto; font-size:10px; }
@@ -93,14 +97,21 @@
         .blanco { background: rgba(255,255,255,0.1) !important; color: white !important; font-weight: bold; border-radius:4px; border:1px solid rgba(255,255,255,0.2); display:flex; justify-content:center; align-items:center; height:28px; width:90%; margin:0 auto; font-size:10px; }
         .total-pts { background: rgba(59, 130, 246, 0.1) !important; color: #3b82f6 !important; font-weight: 800; font-size: 14px; }
 
-        /* SISTEMA FLEXIBLE PARA CLASIFICACIONES (FILAS COMPACTAS) */
-        .tabla-clasif { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px; table-layout: auto; }
-        .tabla-clasif th { background: rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 6px 8px; border-bottom: 2px solid rgba(255,255,255,0.1); white-space:nowrap; }
-        .tabla-clasif td { background: rgba(255,255,255,0.03); padding: 6px 8px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .tabla-clasif tr td:first-child { text-align: left; font-weight: 600; color: white; }
+        /* SISTEMA FLEXIBLE PARA CLASIFICACIONES (CONGELADO STICKY) */
+        .table-container-clasif { max-height: 65vh; overflow: auto; width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-dark); position: relative; }
+        .tabla-clasif { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 0; font-size: 12px; table-layout: auto; }
+        .tabla-clasif th, .tabla-clasif td { background: var(--bg-dark); }
+        .tabla-clasif thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 6px 8px; border-bottom: 2px solid rgba(255,255,255,0.1); white-space:nowrap; }
+        .tabla-clasif tbody td { padding: 6px 8px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .tabla-clasif tbody tr td:first-child { text-align: left; font-weight: 600; color: white; }
+        
+        .tabla-clasif th:nth-child(1), .tabla-clasif td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; box-shadow: 2px 0 4px rgba(0,0,0,0.5); width: 35px !important; min-width: 35px !important; max-width: 35px !important; text-align: center; padding-left: 5px; padding-right: 5px; border-right: 1px solid rgba(255,255,255,0.05); }
+        .tabla-clasif th:nth-child(2), .tabla-clasif td:nth-child(2) { position: sticky; left: 35px; z-index: 5; background: #111827; box-shadow: 2px 0 4px rgba(0,0,0,0.5); width: 90px !important; min-width: 90px !important; max-width: 90px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 5px; padding-right: 5px; border-right: 1px solid rgba(255,255,255,0.1); }
+        .tabla-clasif thead th:nth-child(1), .tabla-clasif thead th:nth-child(2) { z-index: 15; background: #111827; }
+
         .td-pos { font-size: 16px; font-weight: 800; color: var(--text-muted); }
         .td-nombre { font-weight: 700; color: #ffffff; white-space: nowrap; }
-        .td-total-gen { background: #3b82f6 !important; color: white !important; font-weight: 800; border-radius: 4px; }
+        .td-total-gen { color: #3b82f6 !important; font-weight: 800; font-size: 14px; }
 
         /* ESTILOS MODAL ESTADÍSTICAS */
         #modalEstadisticas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 9999; display: none; justify-content: center; align-items: center; }
@@ -175,6 +186,13 @@
               </div>
           </div>
           
+          <!-- TARJETA CLICKABLE ESPECIALES (Aparece primero cuando está abierto) -->
+          <div id="tarjetaEspecialesInicio" class="tarjeta" style="background:rgba(255,255,255,0.05) !important; cursor:pointer; display:none; border-left:4px solid var(--accent-green) !important;" onclick="window.switchTabJugador('Especiales')" title="Ir a Apuestas Especiales">
+              <h2 style="color:var(--accent-green) !important; font-size:14px; margin-bottom:10px;">⭐ APUESTAS ESPECIALES</h2>
+              <div style="font-size:16px; font-weight:bold; color:white;">¡Periodo Abierto!</div>
+              <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para enviar tus respuestas ➡️</div>
+          </div>
+
           <!-- TARJETA CLICKABLE JORNADA -->
           <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" onclick="window.switchTabJugador('Quiniela')" title="Ir a rellenar jornada">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">ESTADO DE LA JORNADA</h2>
@@ -187,13 +205,6 @@
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">EL SALSEO (VALERINHA)</h2>
               <div id="infoEstadoValerinha" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Revisa el estado de la Valerinha ➡️</div>
-          </div>
-
-          <!-- TARJETA CLICKABLE ESPECIALES (Oculta por defecto) -->
-          <div id="tarjetaEspecialesInicio" class="tarjeta" style="background:rgba(255,255,255,0.05) !important; cursor:pointer; display:none; border-left:4px solid #e84393 !important;" onclick="window.switchTabJugador('Especiales')" title="Ir a Apuestas Especiales">
-              <h2 style="color:#fbcfe8 !important; font-size:14px; margin-bottom:10px;">⭐ APUESTAS ESPECIALES</h2>
-              <div style="font-size:16px; font-weight:bold; color:white;">¡Periodo Abierto!</div>
-              <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para enviar tus respuestas ➡️</div>
           </div>
       </div>
 
@@ -304,7 +315,7 @@
           </div>
         </div>
         
-        <div id="zonaClasificacionJugador" style="overflow-x: auto; width:100%; margin-top: 20px; display: none;">
+        <div id="zonaClasificacionJugador" style="width:100%; margin-top: 20px; display: none;">
             <h2 id="tituloClasificacionJugador" style="text-align: center; color: var(--accent-gold); font-weight:900;">🏆 CLASIFICACIÓN</h2>
             <div id="tablaClasificacionJugador"></div>
         </div>
@@ -328,24 +339,31 @@
 
       <!-- VISTA 5: ESPECIALES Y CLASIF PURA -->
       <div id="vistaEspeciales" style="display:none;">
-        <div class="tarjeta" style="background: linear-gradient(135deg, #be185d 0%, #831843 100%) !important;">
+        <div class="tarjeta" style="background: linear-gradient(135deg, #0d5f49 0%, #06382a 100%) !important;">
           <h2 style="margin-top:0; color:white !important; font-size:22px; font-weight:900;">⭐ APUESTAS ESPECIALES</h2>
-          <p style="font-size:13px; margin-bottom:15px; color:#fbcfe8 !important;">Pronósticos globales del torneo. <strong>Solo una oportunidad</strong> antes del partido inaugural.</p>
+          <p style="font-size:13px; margin-bottom:15px; color:#d1fae5 !important;">Pronósticos globales del torneo. <strong>Solo una oportunidad</strong> antes del partido inaugural.</p>
           <div id="textoEstadoEspeciales" style="font-size:14px; font-weight:bold; color:white; margin-bottom:10px; display:none; background:rgba(0,0,0,0.3); padding:10px; border-radius:8px; text-align:center;">APUESTAS ESPECIALES NO DISPONIBLES</div>
-          <button id="btnVerEspeciales" class="btn-principal" style="background:white !important; color:#be185d !important; display:none;"></button>
+          <button id="btnVerEspeciales" class="btn-principal" style="background:white !important; color:var(--accent-green) !important; display:none;"></button>
         </div>
         <div id="mensajeEspecialesCerrado" style="display:none; padding:15px; font-weight:bold; margin-bottom:20px; text-align:center; font-size:14px; border-radius:8px;"></div>
-        <div id="zonaFormularioEspeciales" class="tarjeta" style="display:none; border-left:4px solid #f472b6 !important;">
+        <div id="zonaFormularioEspeciales" class="tarjeta" style="display:none; border-left:4px solid var(--accent-green) !important;">
           <div id="cajasPreguntasEspeciales"></div>
-          <button id="btnEnviarEspeciales" class="btn-principal" style="background:#be185d !important; margin-top:20px;">Sellar Apuestas 🚀</button>
+          <button id="btnEnviarEspeciales" class="btn-principal" style="background:var(--accent-green) !important; margin-top:20px;">Sellar Apuestas 🚀</button>
         </div>
         <div id="zonaMatrizEspecialesJugador" style="display:none; margin-top:20px; overflow-x:auto;">
            <div id="renderMatrixEspeciales"></div>
         </div>
 
+        <!-- SALÓN DE LA FAMA MUDADO AQUÍ -->
+        <div id="zonaMiniRankings" style="display:none; margin-top: 40px; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1);">
+            <h2 style="text-align: center; color: var(--accent-gold); margin-bottom:5px; margin-top:0;">🏆 SALÓN DE LA FAMA</h2>
+            <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Top 3 jugadores con más puntos en apartados de salseo.</p>
+            <div id="gridMiniRankings" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:15px;"></div>
+        </div>
+
         <!-- CLASIFICACIÓN SIN HISTORIAS MUDADA AQUÍ -->
-        <div id="zonaClasificacionPuraJugador" style="overflow-x: auto; width:100%; margin-top: 40px; display: none; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1);">
-            <h2 style="text-align: center; color: white; margin-bottom:5px;">📊 CLASIFICACIÓN SIN HISTORIAS</h2>
+        <div id="zonaClasificacionPuraJugador" style="width:100%; margin-top: 40px; display: none; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); box-sizing:border-box;">
+            <h2 style="text-align: center; color: white; margin-bottom:5px; margin-top:0;">📊 CLASIFICACIÓN SIN HISTORIAS</h2>
             <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Solo puntos de partidos exactos y signos.</p>
             <div id="tablaClasificacionPuraJugador"></div>
         </div>
@@ -433,6 +451,36 @@
       if(el) { let val = parseInt(el.value) || 0; val += delta; if(val < 0) val = 0; el.value = val; }
   };
 
+  window.renderMiniRankings = function(lista) {
+      const cats = [
+          { id: 'p_val_gen', title: '👑 Reyes Valerinha', color: 'var(--accent-gold)' },
+          { id: 'p_irl_gen', title: '🏃‍♂️ Héroes Irlinha', color: '#34d399' },
+          { id: 'p_san_gen', title: '🇪🇸 Villanos Santinha', color: '#f87171' },
+          { id: 'p_bomba_gen', title: '💣 Expertos en Bombas', color: '#f43f5e' },
+          { id: 'p_tronpa_gen', title: '🌩️ Gurús TroNpá!', color: '#60a5fa' }
+      ];
+      let html = '';
+      cats.forEach(c => {
+          let sorted = [...lista].sort((a,b) => b[c.id] - a[c.id]).filter(j => j[c.id] > 0);
+          let top3 = sorted.slice(0, 3);
+          html += `<div style="background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.05); border-radius:8px; padding:12px;">
+              <h3 style="color:${c.color}; font-size:13px; margin-top:0; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px; text-transform:uppercase;">${c.title}</h3>`;
+          if(top3.length === 0) { html += `<div style="font-size:12px; color:var(--text-muted); text-align:center; margin-top:10px;">Sin puntos aún</div>`; } 
+          else {
+              top3.forEach((j, idx) => {
+                  let medal = idx === 0 ? '🥇' : (idx === 1 ? '🥈' : '🥉');
+                  html += `<div style="display:flex; justify-content:space-between; font-size:12px; margin-top:8px;">
+                      <span>${medal} <strong>${j.nombre}</strong></span>
+                      <span style="font-weight:bold; color:white;">${j[c.id]} pts</span>
+                  </div>`;
+              });
+          }
+          html += `</div>`;
+      });
+      document.getElementById('gridMiniRankings').innerHTML = html;
+      document.getElementById('zonaMiniRankings').style.display = 'block';
+  }
+
   // ========================================================
   // 🔐 SISTEMA DE LOGIN Y SESIÓN
   // ========================================================
@@ -464,7 +512,7 @@
       } else {
           let colName = isDefinitiva ? "clasificacion_general_FINAL_MUNDIAL" : "clasificacion_general_jornada_" + jorCerrada;
           const snapshot = await getDocs(collection(db, colName)); let lista = [];
-          snapshot.forEach(doc => { let d = doc.data(); if(d.jugador && doc.id !== "GANADORES_JORNADA" && doc.id !== "RESULTADOS_REALES") lista.push({ nombre: d.jugador, totalGeneral: d.puntosAcumulados||0, puntosFinalesMundial: d.puntosFinalesMundial||0, puntosPurosAcumulados: d.puntosPurosAcumulados||0, c_exactos_gen: d.resultadosAcertados||0, c_signos_gen: d.pronosticosAcertados||0, gananciasTotales: d.gananciasAcumuladas||0 }); });
+          snapshot.forEach(doc => { let d = doc.data(); if(d.jugador && doc.id !== "GANADORES_JORNADA" && doc.id !== "RESULTADOS_REALES") lista.push({ nombre: d.jugador, totalGeneral: d.puntosAcumulados||0, puntosFinalesMundial: d.puntosFinalesMundial||0, puntosPurosAcumulados: d.puntosPurosAcumulados||0, c_exactos_gen: d.resultadosAcertados||0, c_signos_gen: d.pronosticosAcertados||0, p_val_gen: d.puntosValerinhas||0, p_irl_gen: d.puntosIrlinhas||0, p_san_gen: d.puntosSantinhas||0, p_bomba_gen: d.puntosBombaGarnacha||0, p_tronpa_gen: d.puntosTronpa||0, gananciasTotales: d.gananciasAcumuladas||0 }); });
           let sortBy = isDefinitiva ? "puntosFinalesMundial" : "totalGeneral";
           lista.sort((a, b) => { if(b[sortBy] !== a[sortBy]) return b[sortBy] - a[sortBy]; if(b.c_exactos_gen !== a.c_exactos_gen) return b.c_exactos_gen - a.c_exactos_gen; if(b.c_signos_gen !== a.c_signos_gen) return b.c_signos_gen - a.c_signos_gen; return ((b.puntosFinalesMundial||b.totalGeneral) - b.puntosPurosAcumulados) - ((a.puntosFinalesMundial||a.totalGeneral) - a.puntosPurosAcumulados); });
           
@@ -474,6 +522,7 @@
               document.getElementById('uiPuntos').innerText = isDefinitiva ? lista[myIndex].puntosFinalesMundial : lista[myIndex].totalGeneral;
               document.getElementById('uiSaldo').innerText = lista[myIndex].gananciasTotales.toFixed(2) + " €";
           }
+          if(lista.length > 0) { window.renderMiniRankings(lista); }
       }
 
       // CARGAR ESTADO ESPECIALES PARA UI INICIAL
@@ -715,22 +764,20 @@
   });
 
   document.getElementById('btnVerEspeciales').addEventListener('click', async () => {
-    let btnEsp = document.getElementById('btnVerEspeciales');
-    let originalText = btnEsp.innerText;
-    btnEsp.innerText = "Consultando... ⏳";
+    let btnEsp = document.getElementById('btnVerEspeciales'); let originalText = btnEsp.innerText; btnEsp.innerText = "Consultando... ⏳";
     try {
       const evalSnap = await getDoc(doc(db, "config_especiales", "evaluacion"));
       if(evalSnap.exists() && evalSnap.data().publicado) {
           document.getElementById('mensajeEspecialesCerrado').style.display = "none"; document.getElementById('zonaFormularioEspeciales').style.display = "none";
           let resultados = evalSnap.data().resultados; const cfgSnap = await getDoc(doc(db, "config_especiales", "general")); let pregs = cfgSnap.data().preguntas;
-          let htmlM = `<table class="tabla-clasif"><thead><tr><th>Jugador</th>`; pregs.forEach((p, i) => htmlM += `<th>Q${i+1}</th>`); htmlM += `<th>Aciertos</th><th>Pts Extra</th></tr></thead><tbody>`;
+          let htmlM = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>Jugador</th>`; pregs.forEach((p, i) => htmlM += `<th>Q${i+1}</th>`); htmlM += `<th>Aciertos</th><th>Pts Extra</th></tr></thead><tbody>`;
           let ranked = Object.keys(resultados).map(k => ({ nom: k, data: resultados[k] })).sort((a,b) => b.data.puntos - a.data.puntos);
           ranked.forEach(j => {
               htmlM += `<tr><td><strong>${j.nom}</strong></td>`;
               j.data.evaluaciones.forEach(ev => { htmlM += `<td><span class="${ev.acierto ? 'exacto' : 'fallo'}" style="padding:4px 8px; font-size:12px;">${ev.resp}</span></td>`; });
               htmlM += `<td><strong>${j.data.aciertos}</strong></td><td style="color:var(--accent-gold); font-weight:bold;">+${j.data.puntos}</td></tr>`;
           });
-          htmlM += `</tbody></table>`; document.getElementById('renderMatrixEspeciales').innerHTML = `<h3 style="color:white; text-align:center; margin-top:0;">✅ Corrección Definitiva</h3><div style="overflow-x:auto;">${htmlM}</div>`; document.getElementById('zonaMatrizEspecialesJugador').style.display = "block"; btnEsp.innerText = originalText; return;
+          htmlM += `</tbody></table></div>`; document.getElementById('renderMatrixEspeciales').innerHTML = `<h3 style="color:white; text-align:center; margin-top:0;">✅ Corrección Definitiva</h3>${htmlM}`; document.getElementById('zonaMatrizEspecialesJugador').style.display = "block"; btnEsp.innerText = originalText; return;
       }
 
       const cfgSnap = await getDoc(doc(db, "config_especiales", "general"));
@@ -748,7 +795,7 @@
          let m = document.getElementById('mensajeEspecialesCerrado'); m.innerText = "🔒 Plazo cerrado. Periodo definitivo."; m.style.background = "rgba(59,130,246,0.1)"; m.style.color = "var(--accent-blue)"; m.style.display = "block"; document.getElementById('zonaFormularioEspeciales').style.display = "none";
          let pregs = cfgSnap.data().preguntas; const allRespSnap = await getDocs(collection(db, "pronosticos_especiales"));
          if(!allRespSnap.empty) {
-            let htmlM = `<h3 style="color:white; text-align:center; margin-top:0;">📋 Apuestas Especiales Públicas</h3><div style="overflow-x:auto;"><table class="tabla-clasif"><thead><tr><th>Pregunta</th>`;
+            let htmlM = `<h3 style="color:white; text-align:center; margin-top:0;">📋 Apuestas Especiales Públicas</h3><div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>Pregunta</th>`;
             let arrayResp = []; allRespSnap.forEach(d => arrayResp.push({jugador: d.id, resp: d.data().respuestas})); arrayResp.sort((a, b) => a.jugador.localeCompare(b.jugador));
             arrayResp.forEach(r => { htmlM += `<th>${r.jugador}</th>`; }); htmlM += `</tr></thead><tbody>`;
             pregs.forEach((pq, idx) => { htmlM += `<tr><td style="font-size:11px; text-align:left; min-width:150px;"><strong>${pq}</strong></td>`; arrayResp.forEach(r => { htmlM += `<td>${r.resp[idx] || '-'}</td>`; }); htmlM += `</tr>`; });
@@ -863,7 +910,7 @@
            let cfgD = configSnap.data() || {};
            let qTr = cfgD.pregTronpa ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregTronpa}</span>` : ''; let qBm = cfgD.pregBomba ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregBomba}</span>` : ''; let qVa = cfgD.pregValerinha ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregValerinha}</span>` : ''; let qIr = cfgD.pregIrlinha ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregIrlinha}</span>` : ''; let qSa = cfgD.pregSantinha ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregSantinha}</span>` : '';
 
-           let htmlMatrix = `<h2 style="text-align:center; color:white; margin-top:0;">📋 PRONÓSTICOS JORNADA ${jor}</h2><div style="overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch;"><table class="tabla-matriz"><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05); color:white;">R</th>${ths.replace("<th>Partido</th>", "")}</tr></thead><tbody>`;
+           let htmlMatrix = `<h2 style="text-align:center; color:white; margin-top:0;">📋 PRONÓSTICOS JORNADA ${jor}</h2><div class="table-container-matriz"><table class="tabla-matriz"><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05); color:white;">R</th>${ths.replace("<th>Partido</th>", "")}</tr></thead><tbody>`;
            let plantilla = configSnap.exists() ? configSnap.data().partidos : [];
            filasPartidosBlank.forEach((f, idx) => { 
                let lLoc = plantilla[idx] ? plantilla[idx].local : ""; let lVis = plantilla[idx] ? plantilla[idx].visita : "";
@@ -926,13 +973,13 @@
     let tdNomRow = tablaJornada.map(j => `<td style="font-weight:bold; color:white; background:rgba(255,255,255,0.05); font-size:9px; overflow:hidden; text-overflow:ellipsis;">${j.nombre}</td>`).join("");
 
     let txtTituloMatriz = containerPrefix === "EnJuego" ? `JORNADA ${jorStr} (Definitiva)` : `JORNADA ${jorStr}`;
-    let tabHTML = `<h2 style="text-align: center; color: white;">📊 RESULTADOS ${txtTituloMatriz}</h2><div style="overflow-x:auto; width:100%; -webkit-overflow-scrolling:touch;"><table class="tabla-matriz"><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05); color:white;">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa1} </tr><tr><td><strong>Resultado Valerinha</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa2} </tr><tr><td><strong>Decisión Valerinha</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVaDec} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdSa} </tr><tr><td><strong>TOTAL JORNADA</strong></td><td style="background:rgba(255,255,255,0.1); font-weight:bold; color:white;">-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdNomRow} </tr></tbody></table></div>`;
+    let tabHTML = `<h2 style="text-align: center; color: white;">📊 RESULTADOS ${txtTituloMatriz}</h2><div class="table-container-matriz"><table class="tabla-matriz"><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05); color:white;">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa1} </tr><tr><td><strong>Resultado Valerinha</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa2} </tr><tr><td><strong>Decisión Valerinha</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVaDec} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdSa} </tr><tr><td><strong>TOTAL JORNADA</strong></td><td style="background:rgba(255,255,255,0.1); font-weight:bold; color:white;">-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdNomRow} </tr></tbody></table></div>`;
     document.getElementById('zonaTablero' + containerPrefix).innerHTML = tabHTML;
     document.getElementById('zonaTablero' + containerPrefix).style.display = "block";
     
     // CLASIFICACIÓN GENERAL FLEXIBLE
     if(containerPrefix === "Jugador" || containerPrefix === "EnJuego") {
-        let htmlClasif = `<div style="overflow-x:auto; width:100%; -webkit-overflow-scrolling:touch;"><table class="tabla-clasif"><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS ACUM.</th><th class="th-clasif">PRONÓSTICOS ACUM.</th><th class="th-clasif">BOMBA ACUM.</th><th class="th-clasif">VALERINHAS ACUM.</th><th class="th-clasif">IRLINHAS ACUM.</th><th class="th-clasif">SANTINHAS ACUM.</th><th class="th-clasif">TroNpá! ACUM.</th>`;
+        let htmlClasif = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS ACUM.</th><th class="th-clasif">PRONÓSTICOS ACUM.</th><th class="th-clasif">BOMBA ACUM.</th><th class="th-clasif">VALERINHAS ACUM.</th><th class="th-clasif">IRLINHAS ACUM.</th><th class="th-clasif">SANTINHAS ACUM.</th><th class="th-clasif">TroNpá! ACUM.</th>`;
         if(isDef && jorStr === "DEFINITIVA") htmlClasif += `<th style="color:#f472b6;">Pts. ESPECIALES</th>`;
         htmlClasif += `</tr></thead><tbody>`;
         tablaGeneral.forEach((j, idx) => { 
@@ -961,7 +1008,7 @@
 
         if(containerPrefix === "Jugador" && document.getElementById('zonaClasificacionPura' + containerPrefix) && (listaJugadores[0].purosAcumulados !== undefined || listaJugadores[0].puntosPurosAcumulados !== undefined)) {
             let tablaPura = [...listaJugadores].sort((a, b) => { let ptsA = a.purosAcumulados !== undefined ? a.purosAcumulados : a.puntosPurosAcumulados; let ptsB = b.purosAcumulados !== undefined ? b.purosAcumulados : b.puntosPurosAcumulados; if(ptsB !== ptsA) return ptsB - ptsA; return (b.c_exactos_gen || 0) - (a.c_exactos_gen || 0); });
-            let htmlPura = `<div style="overflow-x:auto; width:100%; -webkit-overflow-scrolling:touch;"><table class="tabla-clasif"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-blue);">PUNTOS (Solo Partidos)</th><th>EXACTOS</th><th>SIGNOS</th></tr></thead><tbody>`;
+            let htmlPura = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-blue);">PUNTOS (Solo Partidos)</th><th>EXACTOS</th><th>SIGNOS</th></tr></thead><tbody>`;
             tablaPura.forEach((j, idx) => { let pts = j.purosAcumulados !== undefined ? j.purosAcumulados : j.puntosPurosAcumulados; htmlPura += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td style="font-weight:bold; font-size:16px; color:var(--accent-blue);">${pts} pts</td><td>${j.c_exactos_gen||0}</td><td>${j.c_signos_gen||0}</td></tr>`; });
             htmlPura += `</tbody></table></div>`; document.getElementById('tablaClasificacionPura' + containerPrefix).innerHTML = htmlPura; document.getElementById('zonaClasificacionPura' + containerPrefix).style.display = "block";
         }
@@ -970,9 +1017,9 @@
 
   function pintarGanancias(listaJugadores, ganadoresDeLaJornada, containerPrefix = "Jugador") {
     if(!ganadoresDeLaJornada) ganadoresDeLaJornada = []; document.getElementById('historialGanadores' + containerPrefix).innerHTML = ganadoresDeLaJornada.map(txt => `<p style="margin: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px;">${txt}</p>`).join("");
-    let htmlGanancias = `<table class="tabla-clasif"><thead><tr><th>JUGADOR</th><th style="text-align:right;">GANANCIAS (€)</th></tr></thead><tbody>`;
+    let htmlGanancias = `<table class="tabla-clasif" style="border-collapse:collapse;"><thead><tr><th style="text-align:left;">JUGADOR</th><th style="text-align:right;">GANANCIAS (€)</th></tr></thead><tbody>`;
     let rankingGanancias = [...listaJugadores].sort((a, b) => b.gananciasTotales - a.gananciasTotales);
-    rankingGanancias.forEach(g => { htmlGanancias += `<tr><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05);"><strong>${g.nombre}</strong></td><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); text-align:right; color:${g.gananciasTotales > 0 ? 'var(--accent-green)':'var(--text-muted)'}; font-weight:bold; font-size:15px;">${g.gananciasTotales.toFixed(2)} €</td></tr>`; });
+    rankingGanancias.forEach(g => { htmlGanancias += `<tr><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); text-align:left;"><strong>${g.nombre}</strong></td><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); text-align:right; color:${g.gananciasTotales > 0 ? 'var(--accent-green)':'var(--text-muted)'}; font-weight:bold; font-size:15px;">${g.gananciasTotales.toFixed(2)} €</td></tr>`; });
     htmlGanancias += `</tbody></table>`; document.getElementById('tablaGananciasTotales' + containerPrefix).innerHTML = htmlGanancias; 
     if(containerPrefix === "Jugador") { document.getElementById('zonaGanancias' + containerPrefix).style.display = "block"; }
   }
@@ -997,11 +1044,11 @@
     
     let tdNomRow = tablaJornada.map(j => `<td style="font-weight:bold; color:white; background:rgba(255,255,255,0.05); font-size:9px; overflow:hidden; text-overflow:ellipsis;">${j.nombre}</td>`).join("");
 
-    let tabHTML = `<h2 style="text-align: center; color: white;">📊 RESULTADOS JORNADA ${jor} (Provisional)</h2><div style="overflow-x:auto; width:100%; -webkit-overflow-scrolling:touch;"><table class="tabla-matriz"><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05); color:white;">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa1} </tr><tr><td><strong>Resultado Valerinha</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa2} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdSa} </tr><tr><td><strong>TOTAL JORNADA</strong></td><td style="background:rgba(255,255,255,0.1); font-weight:bold; color:white;">-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdNomRow} </tr></tbody></table></div>`;
+    let tabHTML = `<h2 style="text-align: center; color: white;">📊 RESULTADOS JORNADA ${jor} (Provisional)</h2><div class="table-container-matriz"><table class="tabla-matriz"><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05); color:white;">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa1} </tr><tr><td><strong>Resultado Valerinha</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa2} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdSa} </tr><tr><td><strong>TOTAL JORNADA</strong></td><td style="background:rgba(255,255,255,0.1); font-weight:bold; color:white;">-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdNomRow} </tr></tbody></table></div>`;
     
     if(containerPrefix === "Prov") {
         document.getElementById('tableroProvJugador').innerHTML = tabHTML;
-        let htmlClasif = `<h2 style="text-align: center; color: var(--accent-gold);">🏆 CLASIFICACIÓN GENERAL</h2><div style="overflow-x:auto; width:100%; -webkit-overflow-scrolling:touch;"><table class="tabla-clasif"><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS</th><th class="th-clasif">SIGNOS</th><th class="th-clasif">BOMBA</th><th class="th-clasif">VALERINHAS</th><th>IRLINHAS</th><th>SANTINHAS</th><th>TroNpá!</th></tr></thead><tbody>`;
+        let htmlClasif = `<h2 style="text-align: center; color: var(--accent-gold);">🏆 CLASIFICACIÓN GENERAL</h2><div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS</th><th class="th-clasif">SIGNOS</th><th class="th-clasif">BOMBA</th><th class="th-clasif">VALERINHAS</th><th>IRLINHAS</th><th>SANTINHAS</th><th>TroNpá!</th></tr></thead><tbody>`;
         tablaGeneral.forEach((j, idx) => { htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td class="td-total-gen">${j.totalGeneral} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td></tr>`; });
         htmlClasif += `</tbody></table></div>`; 
         document.getElementById('clasifProvJugador').innerHTML = htmlClasif; 
