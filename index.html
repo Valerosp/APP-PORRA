@@ -174,10 +174,19 @@
                   </div>
               </div>
           </div>
+          
+          <!-- TARJETA CLICKABLE JORNADA -->
           <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" onclick="window.switchTabJugador('Quiniela')" title="Ir a rellenar jornada">
-              <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">ESTADO DE LA COMPETICIÓN</h2>
+              <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">ESTADO DE LA JORNADA</h2>
               <div id="infoEstadoJornada" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para ir a la Jornada ➡️</div>
+          </div>
+
+          <!-- TARJETA CLICKABLE VALERINHA -->
+          <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" onclick="window.switchTabJugador('Valerinha')" title="Ir a votar Valerinha">
+              <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">EL SALSEO (VALERINHA)</h2>
+              <div id="infoEstadoValerinha" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
+              <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Revisa el estado de la Valerinha ➡️</div>
           </div>
       </div>
 
@@ -269,13 +278,13 @@
         </div>
       </div>
 
-      <!-- VISTA 3: JORNADA (DINÁMICA PÚBLICA, PROVISIONAL, DEFINITIVA) -->
+      <!-- VISTA 3: JORNADA (SOLO PARTIDOS Y RESULTADOS) -->
       <div id="vistaEnJuego" style="display:none;">
          <div id="renderMátrixCandadoBloqueo"></div>
          <div id="zonaTableroEnJuego" style="display:none; margin-top:20px;"></div>
       </div>
 
-      <!-- VISTA 4: RANKING -->
+      <!-- VISTA 4: RANKING (ORDEN INVERTIDO: CLASIF -> MATRIZ -> GANANCIAS -> PURA) -->
       <div id="vistaResultados" style="display: none;">
         <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important;">
           <h2 style="color:white !important; font-size:16px; margin-bottom:15px;">🏆 Histórico del Mundial</h2>
@@ -339,7 +348,7 @@
           <div style="margin-bottom: 20px; background:rgba(0,0,0,0.3); padding:15px; border-radius:8px;">
             <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">1️⃣ Fases de la Jornada</h3>
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
-              <li><strong>Hacer Jornada:</strong> Introduce marcadores. Si no, se rellena con 1-1.</li>
+              <li><strong>Hacer Jornada:</strong> Introduce marcadores con los botones de + y -. Si no entras, se rellena con 1-1 automático.</li>
               <li><strong>Votar Valerinha:</strong> Tras los partidos, se publica la Provisional. Si acertaste, tienes 1 voto de Ataque/Defensa.</li>
               <li><strong>Definitiva:</strong> Se procesan los votos y bonificaciones y se reparte el dinero.</li>
             </ul>
@@ -398,7 +407,7 @@
   const puntosFIFA = { "Alemania": 1730, "Arabia Saudita": 1421, "Argentina": 1875, "Argelia": 1564, "Australia": 1581, "Austria": 1593, "Bélgica": 1735, "Bosnia y Herzegovina": 1386, "Brasil": 1761, "Cabo Verde": 1366, "Canadá": 1556, "Catar": 1455, "Colombia": 1693, "Corea del Sur": 1589, "Costa de Marfil": 1533, "Croacia": 1717, "Curazao": 1295, "Ecuador": 1595, "Egipto": 1563, "El Salvador": 1380, "Escocia": 1498, "España": 1876, "Estados Unidos": 1673, "Francia": 1877, "Ghana": 1346, "Haití": 1292, "Inglaterra": 1826, "Irak": 1447, "Irán": 1615, "Japón": 1660, "Jordania": 1391, "Marruecos": 1756, "México": 1681, "Noruega": 1551, "Nueva Zelanda": 1282, "Países Bajos": 1758, "Panamá": 1541, "Paraguay": 1504, "Portugal": 1764, "RD Congo": 1478, "República Checa": 1501, "Senegal": 1689, "Sudáfrica": 1430, "Suecia": 1515, "Suiza": 1649, "Túnez": 1483, "Turquía": 1599, "Uzbekistán": 1465 };
 
   window.jorQuinielaActual = 1; window.jorValerinhaActual = 1; window.jugadorLogueado = null;
-  let configQ_Data = null; let esMercadoQuinielaCerrado = false; let esMercadoValerinhaCerrado = false; let cfgEspecialesMem = null;
+  let configQ_Data = null; let esJornadaQuinielaCerrada = false; let esJornadaValerinhaCerrada = false; let cfgEspecialesMem = null;
 
   // FUNCIONES GLOBALES
   window.switchTabJugador = function(tabName) {
@@ -464,16 +473,16 @@
 
       let ahora = new Date(); let configQ = configs.find(c => c.fechaLimite && new Date(c.fechaLimite) > ahora);
       let targetJor = configQ ? configQ.num : configs[configs.length-1].num;
-      window.jorQuinielaActual = targetJor; configQ_Data = configQ || configs[configs.length-1]; esMercadoQuinielaCerrado = !configQ;
+      window.jorQuinielaActual = targetJor; configQ_Data = configQ || configs[configs.length-1]; esJornadaQuinielaCerrada = !configQ;
       
-      if(!esMercadoQuinielaCerrado) {
+      if(!esJornadaQuinielaCerrada) {
          document.getElementById('infoEstadoJornada').innerText = "Jornada " + targetJor + " en juego. ¡Haz tus pronósticos!";
          document.getElementById('tituloJornadaEnJuegoQ').innerText = "JORNADA " + targetJor + " EN JUEGO";
          document.getElementById('relojQuiniela').innerText = "✅ ABIERTO | LÍMITE: " + new Date(configQ.fechaLimite).toLocaleString(); document.getElementById('relojQuiniela').style.color = "var(--accent-green)"; document.getElementById('relojQuiniela').style.borderColor = "var(--accent-green)";
       } else {
-         document.getElementById('infoEstadoJornada').innerText = "Mercado cerrado (J" + targetJor + "). Revisa los resultados.";
+         document.getElementById('infoEstadoJornada').innerText = "Jornada cerrada (J" + targetJor + "). Revisa los resultados.";
          document.getElementById('tituloJornadaEnJuegoQ').innerText = "JORNADA " + targetJor + " CERRADA";
-         document.getElementById('relojQuiniela').innerText = "🔒 MERCADO CERRADO"; document.getElementById('relojQuiniela').style.color = "#ef4444"; document.getElementById('relojQuiniela').style.borderColor = "#ef4444";
+         document.getElementById('relojQuiniela').innerText = "🔒 JORNADA CERRADA"; document.getElementById('relojQuiniela').style.color = "#ef4444"; document.getElementById('relojQuiniela').style.borderColor = "#ef4444";
       }
       document.getElementById('relojQuiniela').style.display = "block"; 
       
@@ -490,7 +499,7 @@
         let flagL = seleccionesMundial[p.local] || ""; let flagV = seleccionesMundial[p.visita] || ""; 
         let codL = codigosMundial[p.local] || p.local.substring(0,3).toUpperCase(); let codV = codigosMundial[p.visita] || p.visita.substring(0,3).toUpperCase();
         let valL = yaEnviado ? pData.partidos[i].local : 0; let valV = yaEnviado ? pData.partidos[i].visita : 0;
-        let btnStyle = yaEnviado ? "display:none;" : "display:flex;";
+        let btnStyle = (yaEnviado || esJornadaQuinielaCerrada) ? "display:none;" : "display:flex;";
         
         htmlPartidos += `
         <div class="fila" style="margin-bottom:15px; padding:12px 10px; background:rgba(0,0,0,0.25); border-radius:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid rgba(255,255,255,0.05);">
@@ -519,7 +528,7 @@
       document.getElementById('cajasPartidosJugador').innerHTML = htmlPartidos;
       document.getElementById('lblValerinha').innerText = configQ_Data.pregValerinha; document.getElementById('lblIrlinha').innerText = configQ_Data.pregIrlinha; document.getElementById('lblSantinha').innerText = configQ_Data.pregSantinha; document.getElementById('lblTronpa').innerText = configQ_Data.pregTronpa; document.getElementById('lblBomba').innerText = configQ_Data.pregBomba;
 
-      if(yaEnviado || esMercadoQuinielaCerrado) {
+      if(yaEnviado || esJornadaQuinielaCerrada) {
           if(yaEnviado) {
               document.getElementById('valerinhaRespuesta').value = pData.preguntasAbiertas.valerinha; document.getElementById('valerinhaRespuesta').readOnly = true;
               document.getElementById('irlinhaRespuesta').value = pData.preguntasAbiertas.irlinha; document.getElementById('irlinhaRespuesta').readOnly = true;
@@ -527,8 +536,8 @@
               document.getElementById('tronpaApuesta').value = pData.tronpa.puntosJugados; document.getElementById('tronpaApuesta').disabled = true;
               document.getElementById('tronpaRespuesta').value = pData.tronpa.respuesta; document.getElementById('tronpaRespuesta').readOnly = true;
               document.getElementById('bombaLocal').value = pData.bombaGarnacha.local; document.getElementById('bombaVisita').value = pData.bombaGarnacha.visita;
-              document.querySelectorAll('#vistaQuiniela .btn-step').forEach(b => b.style.display = 'none');
           }
+          document.querySelectorAll('#vistaQuiniela .btn-step').forEach(b => b.style.display = 'none');
           let btnE = document.getElementById('btnEnviar');
           btnE.innerText = yaEnviado ? "JORNADA ENVIADA ✅" : "JORNADA CERRADA 🛑";
           btnE.disabled = true; btnE.style.background = yaEnviado ? "var(--accent-green)" : "#374151";
@@ -538,10 +547,24 @@
       if(configV) {
          window.jorValerinhaActual = configV.num; document.getElementById('tituloJornadaEnJuegoV').innerText = "JORNADA " + configV.num + " EN JUEGO";
          const provCheck = await getDocs(collection(db, "provisional_jornada_" + configV.num));
-         if(provCheck.empty) { esMercadoValerinhaCerrado = true; document.getElementById('relojValerinha').innerText = "⏳ ESPERANDO RESULTADOS DE J" + configV.num; document.getElementById('relojValerinha').style.color = "var(--accent-gold)"; } 
-         else { esMercadoValerinhaCerrado = false; document.getElementById('relojValerinha').innerText = "✅ VOTACIONES ABIERTAS"; document.getElementById('relojValerinha').style.color = "var(--accent-green)"; }
+         if(provCheck.empty) { 
+             esJornadaValerinhaCerrada = true; 
+             document.getElementById('relojValerinha').innerText = "⏳ ESPERANDO RESULTADOS DE J" + configV.num; 
+             document.getElementById('relojValerinha').style.color = "var(--accent-gold)"; 
+             document.getElementById('infoEstadoValerinha').innerText = "Periodo Valerinha (J" + configV.num + ") cerrado. Esperando provisional.";
+         } 
+         else { 
+             esJornadaValerinhaCerrada = false; 
+             document.getElementById('relojValerinha').innerText = "✅ VOTACIONES ABIERTAS"; 
+             document.getElementById('relojValerinha').style.color = "var(--accent-green)"; 
+             document.getElementById('infoEstadoValerinha').innerText = "Periodo Valerinha (J" + configV.num + ") abierto. ¡Vota ahora!";
+         }
       } else {
-         let ultimaV = configs[configs.length-1]; window.jorValerinhaActual = ultimaV.num; esMercadoValerinhaCerrado = true; document.getElementById('tituloJornadaEnJuegoV').innerText = "JORNADA " + ultimaV.num + " CERRADA"; document.getElementById('relojValerinha').innerText = "🔒 VOTACIONES CERRADAS"; document.getElementById('relojValerinha').style.color = "#ef4444";
+         let ultimaV = configs[configs.length-1]; window.jorValerinhaActual = ultimaV.num; esJornadaValerinhaCerrada = true; 
+         document.getElementById('tituloJornadaEnJuegoV').innerText = "JORNADA " + ultimaV.num + " CERRADA"; 
+         document.getElementById('relojValerinha').innerText = "🔒 VOTACIONES CERRADAS"; 
+         document.getElementById('relojValerinha').style.color = "#ef4444";
+         document.getElementById('infoEstadoValerinha').innerText = "Periodo Valerinha (J" + ultimaV.num + ") cerrado.";
       }
       document.getElementById('relojValerinha').style.display = "block";
 
@@ -614,6 +637,9 @@
   // ✍️ ENVIAR JORNADA Y VALERINHA
   // ========================================================
   document.getElementById('btnEnviar').addEventListener('click', async function() {
+    if(esJornadaQuinielaCerrada) return alert("Acción denegada.");
+    try { const docVerificacion = await getDoc(doc(db, "pronosticos_jornada_" + window.jorQuinielaActual, window.jugadorLogueado)); if (docVerificacion.exists()) { let dataVer = docVerificacion.data(); if (!dataVer.fechaEnvio || !dataVer.fechaEnvio.includes("(Auto)")) { return alert("⚠️ Ya has enviado tus pronósticos de forma oficial."); } } } catch(e) {}
+
     let resultadosJugador = [];
     for(let i=0; i<configQ_Data.partidos.length; i++) { let l = document.getElementById(`playPL_${i}`).value; let v = document.getElementById(`playPV_${i}`).value; if(l==="" || v==="") return alert("Faltan resultados."); resultadosJugador.push({ id: i+1, local: parseInt(l), visita: parseInt(v) }); }
     let valerinha = document.getElementById('valerinhaRespuesta').value; let irlinha = document.getElementById('irlinhaRespuesta').value; let santinha = document.getElementById('santinhaRespuesta').value; let apuestaTronpa = document.getElementById('tronpaApuesta').value; let respuestaTronpa = document.getElementById('tronpaRespuesta').value; let bombaL = document.getElementById('bombaLocal').value; let bombaV = document.getElementById('bombaVisita').value;
@@ -642,18 +668,18 @@
       if (listaProvisional.length === 0) return alert("Aún no hay resultados provisionales.");
 
       let miDato = listaProvisional.find(j => j.nombre === window.jugadorLogueado);
-      if (miDato && miDato.statVal === "exacto" && !esMercadoValerinhaCerrado) {
+      if (miDato && miDato.statVal === "exacto" && !esJornadaValerinhaCerrada) {
         document.getElementById('mensajeSinVoto').style.display = "none"; document.getElementById('jugadorObjetivo').innerHTML = Object.keys(pinesSecretos).filter(n => n !== window.jugadorLogueado).map(n => `<option value="${n}">${n}</option>`).join(""); document.getElementById('zonaFormularioVoto').style.display = "block";
       } else {
         document.getElementById('zonaFormularioVoto').style.display = "none"; let mBox = document.getElementById('mensajeSinVoto'); mBox.style.background = "rgba(238,82,83,0.1)"; mBox.style.color = "var(--accent-red)";
-        if(esMercadoValerinhaCerrado) { mBox.innerText = "Mercado cerrado."; } else { mBox.innerText = "No acertaste. No tienes voto."; } mBox.style.display = "block";
+        if(esJornadaValerinhaCerrada) { mBox.innerText = "Periodo cerrado."; } else { mBox.innerText = "No acertaste. No tienes voto."; } mBox.style.display = "block";
       }
       const cfgSnapV = await getDoc(doc(db, "config_jornadas", "jornada_" + window.jorValerinhaActual)); pintarProvisionalJugador(listaProvisional, window.jorValerinhaActual, cfgSnapV.data() || {}, "Prov");
     } catch (e) {} document.getElementById('btnComprobarVoto').innerText = "Comprueba si tengo Valerinha ⚖️";
   });
 
   document.getElementById('btnEnviarVoto').addEventListener('click', async function() {
-    if(esMercadoValerinhaCerrado) return alert("Plazo expirado."); let tipoVoto = document.querySelector('input[name="tipoVoto"]:checked').value; let objetivo = tipoVoto === "restar" ? document.getElementById('jugadorObjetivo').value : "";
+    if(esJornadaValerinhaCerrada) return alert("Plazo expirado."); let tipoVoto = document.querySelector('input[name="tipoVoto"]:checked').value; let objetivo = tipoVoto === "restar" ? document.getElementById('jugadorObjetivo').value : "";
     try { await setDoc(doc(db, "votos_valerinha_jornada_" + window.jorValerinhaActual, window.jugadorLogueado), { tipo: tipoVoto, objetivo: objetivo, fechaVoto: new Date().toISOString() }); document.getElementById('mensajeVotoCorrecto').style.display = "block"; document.getElementById('btnEnviarVoto').disabled = true; } catch (e) {}
   });
 
@@ -676,7 +702,7 @@
 
       const cfgSnap = await getDoc(doc(db, "config_especiales", "general"));
       if(!cfgSnap.exists() || !cfgSnap.data().estado || cfgSnap.data().estado === "oculto") {
-         let m = document.getElementById('mensajeEspecialesCerrado'); m.innerText = "🔒 Mercado pre-mundial cerrado."; m.style.background = "rgba(238,82,83,0.1)"; m.style.color = "var(--accent-red)"; m.style.display = "block"; document.getElementById('zonaFormularioEspeciales').style.display = "none"; document.getElementById('zonaMatrizEspecialesJugador').style.display = "none";
+         let m = document.getElementById('mensajeEspecialesCerrado'); m.innerText = "🔒 Periodo pre-mundial cerrado."; m.style.background = "rgba(238,82,83,0.1)"; m.style.color = "var(--accent-red)"; m.style.display = "block"; document.getElementById('zonaFormularioEspeciales').style.display = "none"; document.getElementById('zonaMatrizEspecialesJugador').style.display = "none";
       } else if(cfgSnap.data().estado === "abierto") {
          cfgEspecialesMem = cfgSnap.data(); const resSnap = await getDoc(doc(db, "pronosticos_especiales", window.jugadorLogueado));
          if(resSnap.exists()) {
@@ -686,7 +712,7 @@
              document.getElementById('cajasPreguntasEspeciales').innerHTML = htmlC; document.getElementById('mensajeEspecialesCerrado').style.display = "none"; document.getElementById('zonaFormularioEspeciales').style.display = "block"; document.getElementById('zonaMatrizEspecialesJugador').style.display = "none";
          }
       } else if(cfgSnap.data().estado === "cerrado") {
-         let m = document.getElementById('mensajeEspecialesCerrado'); m.innerText = "🔒 Plazo cerrado. Mercado definitivo."; m.style.background = "rgba(59,130,246,0.1)"; m.style.color = "var(--accent-blue)"; m.style.display = "block"; document.getElementById('zonaFormularioEspeciales').style.display = "none";
+         let m = document.getElementById('mensajeEspecialesCerrado'); m.innerText = "🔒 Plazo cerrado. Periodo definitivo."; m.style.background = "rgba(59,130,246,0.1)"; m.style.color = "var(--accent-blue)"; m.style.display = "block"; document.getElementById('zonaFormularioEspeciales').style.display = "none";
          let pregs = cfgSnap.data().preguntas; const allRespSnap = await getDocs(collection(db, "pronosticos_especiales"));
          if(!allRespSnap.empty) {
             let htmlM = `<h3 style="color:white; text-align:center; margin-top:0;">📋 Apuestas Especiales Públicas</h3><div style="overflow-x:auto;"><table class="tabla-clasif"><thead><tr><th>Pregunta</th>`;
@@ -781,7 +807,7 @@
         let estaPublicado = configSnap.exists() ? (configSnap.data().pronosticosPublicados || false) : false;
         
         if(!estaPublicado) {
-           document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<div class="tarjeta" style="text-align:center;"><h2 style="color:var(--text-muted) !important;">🔒 Mercado Protegido</h2><p>Las respuestas de los rivales están ocultas hasta el pitido inicial.</p></div>`;
+           document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<div class="tarjeta" style="text-align:center;"><h2 style="color:var(--text-muted) !important;">🔒 Jornada Protegida</h2><p>Las respuestas de los rivales están ocultas hasta el pitido inicial.</p></div>`;
         } else {
            const pronosSnap = await getDocs(collection(db, "pronosticos_jornada_" + jor));
            if(pronosSnap.empty) { document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<p style="text-align:center;">No hay respuestas registradas.</p>`; return; }
