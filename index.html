@@ -83,7 +83,6 @@
         .tabla-matriz th:nth-child(2), .tabla-matriz td:nth-child(2) { width: 22px !important; min-width: 22px !important; max-width: 22px !important; }
         .tabla-matriz th:not(:nth-child(1)):not(:nth-child(2)) { width: 45px !important; min-width: 45px !important; max-width: 45px !important; }
         
-        /* ETIQUETAS DE RESULTADOS EN MATRIZ */
         .exacto { background-color: var(--accent-green) !important; color: white !important; font-weight: bold; border-radius:4px; display:flex; justify-content:center; align-items:center; height:28px; width:90%; margin:0 auto; font-size:10px; }
         .signo { background-color: var(--accent-gold) !important; color: black !important; font-weight: bold; border-radius:4px; display:flex; justify-content:center; align-items:center; height:28px; width:90%; margin:0 auto; font-size:10px; }
         .fallo { background-color: #e74c3c !important; color: white !important; font-weight: bold; border-radius:4px; display:flex; justify-content:center; align-items:center; height:28px; width:90%; margin:0 auto; font-size:10px; }
@@ -135,7 +134,7 @@
 <div id="pantallaApp" style="display:none;">
     <div class="contenedor usuario">
       
-      <!-- CABECERA DE LA APP CON EL NUEVO TÍTULO -->
+      <!-- CABECERA DE LA APP -->
       <div class="top-header">
            <div style="text-align: center; width: 45px;">
              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/2026_FIFA_World_Cup_logo.svg/512px-2026_FIFA_World_Cup_logo.svg.png" 
@@ -176,7 +175,7 @@
               </div>
           </div>
           <!-- TARJETA CLICKABLE QUE TE LLEVA A HACER LA JORNADA -->
-          <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" onclick="switchTabJugador('Quiniela')" title="Ir a rellenar jornada">
+          <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" onclick="window.switchTabJugador('Quiniela')" title="Ir a rellenar jornada">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">ESTADO DE LA COMPETICIÓN</h2>
               <div id="infoEstadoJornada" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para ir a la Jornada ➡️</div>
@@ -261,7 +260,7 @@
         </div>
       </div>
 
-      <!-- VISTA 3: JORNADA (DINÁMICA PÚBLICA, PROVISIONAL, DEFINITIVA) -->
+      <!-- VISTA 3: JORNADA -->
       <div id="vistaEnJuego" style="display:none;">
          <div id="renderMátrixCandadoBloqueo"></div>
          <div id="zonaTableroEnJuego" style="display:none; margin-top:20px;"></div>
@@ -269,22 +268,9 @@
              <h2 id="tituloClasificacionEnJuego" style="text-align: center; color: var(--accent-gold); font-weight:900;">🏆 CLASIFICACIÓN</h2>
              <div id="tablaClasificacionEnJuego"></div>
          </div>
-         <div id="zonaGananciasEnJuego" style="display:none; margin-top:30px; padding:20px; background:rgba(245,158,11,0.1); border:1px solid var(--accent-gold); border-radius:12px;">
-           <h2 style="text-align: center; color: var(--accent-gold); margin-top: 0; font-size:18px;">💰 PREMIOS ACUMULADOS</h2>
-           <div style="display: flex; gap: 15px; flex-direction:column; margin-top:15px;">
-             <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px;">
-               <h3 style="color: white; margin-top: 0; font-size:14px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px;">🏆 Campeones de Jornada</h3>
-               <div id="historialGanadoresEnJuego" style="font-size: 12px; line-height: 1.6; white-space:pre-line;"></div>
-             </div>
-             <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px;">
-               <h3 style="color: white; margin-top: 0; font-size:14px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px;">💶 Cartera Virtual</h3>
-               <div id="tablaGananciasTotalesEnJuego"></div>
-             </div>
-           </div>
-         </div>
       </div>
 
-      <!-- VISTA 4: RANKING (ORDEN: CLASIF -> MATRIZ -> GANANCIAS -> PURA) -->
+      <!-- VISTA 4: RANKING -->
       <div id="vistaResultados" style="display: none;">
         <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important;">
           <h2 style="color:white !important; font-size:16px; margin-bottom:15px;">🏆 Histórico del Mundial</h2>
@@ -377,7 +363,7 @@
       <!-- MODAL ESTADÍSTICAS -->
       <div id="modalEstadisticas">
           <div class="modal-content">
-              <button class="btn-cerrar-modal" onclick="cerrarEstadisticas()">X</button>
+              <button class="btn-cerrar-modal" onclick="window.cerrarEstadisticas()">X</button>
               <div id="modalContenido"></div>
           </div>
       </div>
@@ -411,7 +397,7 @@
   let configQ_Data = null; let esMercadoQuinielaCerrado = false; let esMercadoValerinhaCerrado = false; let cfgEspecialesMem = null;
 
   // ========================================================
-  // 🔐 SISTEMA DE LOGIN Y SESIÓN
+  // 🔐 SISTEMA DE LOGIN Y CONTROL DE PESTAÑAS (CORREGIDO)
   // ========================================================
   document.getElementById('btnEntrar').addEventListener('click', () => {
       let nom = document.getElementById('loginNombre').value;
@@ -443,13 +429,22 @@
       document.getElementById('loginPin').value = "";
   });
 
+  // SOLUCIÓN A LOS MENÚS (Se fuerza su vinculación a Window para evitar conflictos)
   window.switchTabJugador = function(tabName) {
     ['vistaInicio', 'vistaQuiniela', 'vistaValerinha', 'vistaResultados', 'vistaReglas', 'vistaEnJuego', 'vistaEspeciales'].forEach(v => document.getElementById(v).style.display = 'none');
     ['btnTabInicio', 'btnTabQuiniela', 'btnTabValerinha', 'btnTabResultados', 'btnTabEnJuego', 'btnTabEspeciales', 'btnTabReglas'].forEach(b => { document.getElementById(b).classList.remove('activa'); });
     document.getElementById('vista' + tabName).style.display = 'block';
     document.getElementById('btnTab' + tabName).classList.add('activa');
     if(tabName === 'EnJuego') { renderPestañaEnJuegoCompleta(); }
-  }
+  };
+
+  document.getElementById('btnTabInicio').addEventListener('click', () => window.switchTabJugador('Inicio'));
+  document.getElementById('btnTabQuiniela').addEventListener('click', () => window.switchTabJugador('Quiniela'));
+  document.getElementById('btnTabValerinha').addEventListener('click', () => window.switchTabJugador('Valerinha'));
+  document.getElementById('btnTabEnJuego').addEventListener('click', () => window.switchTabJugador('EnJuego'));
+  document.getElementById('btnTabResultados').addEventListener('click', () => window.switchTabJugador('Resultados'));
+  document.getElementById('btnTabEspeciales').addEventListener('click', () => window.switchTabJugador('Especiales'));
+  document.getElementById('btnTabReglas').addEventListener('click', () => window.switchTabJugador('Reglas'));
 
   // ========================================================
   // ⚙️ INICIO DEL MOTOR Y CARGA DE DATOS DEL PERFIL
@@ -500,12 +495,22 @@
       document.getElementById('relojQuiniela').style.display = "block"; let htmlPartidos = "";
       configQ_Data.partidos.forEach((p, i) => { 
         let flagL = seleccionesMundial[p.local] || ""; let flagV = seleccionesMundial[p.visita] || ""; 
-        htmlPartidos += `<div class="fila" style="margin-bottom:8px; justify-content:center; align-items:center;">
-          <label style="font-weight:bold; font-size:13px; text-align:right; width:35%; line-height:1.2;">${flagL} ${p.local}</label> 
-          <div style="display:flex; gap:5px;"><input type="number" id="playPL_${i}" min="0" style="width:45px; text-align:center;"> <input type="number" id="playPV_${i}" min="0" style="width:45px; text-align:center;"></div> 
-          <label style="font-weight:bold; font-size:13px; text-align:left; width:35%; line-height:1.2;">${p.visita} ${flagV}</label>
-          <button onclick="abrirEstadisticas(${i})" title="Ver Pulso de la Filà" style="background:transparent; border:none; font-size:18px; cursor:pointer; padding:0; transform:translateY(2px);">📊</button>
-        </div>`; 
+        
+        // 🚨 NUEVO DISEÑO DE PARTIDO: BOTÓN DE ESTADÍSTICAS MODERNIZADO Y AL LADO DE LAS CAJAS
+        htmlPartidos += `<div class="fila" style="margin-bottom:10px; padding:10px; background:rgba(0,0,0,0.25); border-radius:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid rgba(255,255,255,0.05);">
+          <label style="font-weight:bold; font-size:13px; text-align:right; width:32%; line-height:1.2; word-wrap:break-word;">${flagL} ${p.local}</label> 
+          
+          <div style="display:flex; gap:4px; align-items:center; justify-content:center; width:36%;">
+            <input type="number" id="playPL_${i}" min="0" style="width:40px; height:40px; text-align:center; padding:0; font-size:18px; border-radius:6px; background:rgba(0,0,0,0.6) !important;"> 
+            <input type="number" id="playPV_${i}" min="0" style="width:40px; height:40px; text-align:center; padding:0; font-size:18px; border-radius:6px; background:rgba(0,0,0,0.6) !important;">
+            
+            <button onclick="window.abrirEstadisticas(${i})" title="Ver Estadísticas" style="background:linear-gradient(135deg, #3b82f6, #2563eb); border:none; border-radius:6px; color:white; cursor:pointer; padding:8px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 10px rgba(37,99,235,0.4); margin-left:2px; height:40px; width:40px; transition:0.2s;">
+               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+            </button>
+          </div> 
+          
+          <label style="font-weight:bold; font-size:13px; text-align:left; width:32%; line-height:1.2; word-wrap:break-word;">${p.visita} ${flagV}</label>
+        </div>`;
       });
       document.getElementById('cajasPartidosJugador').innerHTML = htmlPartidos;
       document.getElementById('lblValerinha').innerText = configQ_Data.pregValerinha; document.getElementById('lblIrlinha').innerText = configQ_Data.pregIrlinha; document.getElementById('lblSantinha').innerText = configQ_Data.pregSantinha; document.getElementById('lblTronpa').innerText = configQ_Data.pregTronpa; document.getElementById('lblBomba').innerText = configQ_Data.pregBomba;
@@ -523,7 +528,7 @@
 
       let selJ = document.getElementById('jorConsulta'); if(selJ.value === "1") selJ.value = jorCerrada === 0 ? 1 : jorCerrada; 
       document.getElementById('btnConsultar').click();
-      document.getElementById('cargandoPlantillaMsg').style.display = "none"; switchTabJugador('Inicio');
+      document.getElementById('cargandoPlantillaMsg').style.display = "none"; window.switchTabJugador('Inicio');
     } catch(e) { document.getElementById('cargandoPlantillaMsg').innerText = "⚠️ Error de conexión."; }
   }
 
@@ -631,7 +636,6 @@
     try { await setDoc(doc(db, "votos_valerinha_jornada_" + window.jorValerinhaActual, window.jugadorLogueado), { tipo: tipoVoto, objetivo: objetivo, fechaVoto: new Date().toISOString() }); document.getElementById('mensajeVotoCorrecto').style.display = "block"; document.getElementById('btnEnviarVoto').disabled = true; } catch (e) {}
   });
 
-  // BOTONES APUESTAS ESPECIALES
   document.getElementById('btnVerEspeciales').addEventListener('click', async () => {
     document.getElementById('btnVerEspeciales').innerText = "Consultando... ⏳";
     try {
@@ -791,8 +795,7 @@
            let plantilla = configSnap.exists() ? configSnap.data().partidos : [];
            filasPartidosBlank.forEach((f, idx) => { 
                let lLoc = plantilla[idx] ? plantilla[idx].local : ""; let lVis = plantilla[idx] ? plantilla[idx].visita : "";
-               let labelPartido = plantilla[idx] ? `🇪🇸 ESP - 🇩🇪 GER` : `Partido ${idx+1}`; // Fallback placeholder
-               if(plantilla[idx]){ labelPartido = `<span style="white-space:nowrap">${seleccionesMundial[lLoc]||''} ${codigosMundial[lLoc]||lLoc.substring(0,3).toUpperCase()}</span> - <span style="white-space:nowrap">${seleccionesMundial[lVis]||''} ${codigosMundial[lVis]||lVis.substring(0,3).toUpperCase()}</span>`; }
+               let labelPartido = plantilla[idx] ? `<span style="white-space:nowrap">${seleccionesMundial[lLoc]||''} ${codigosMundial[lLoc]||lLoc.substring(0,3).toUpperCase()}</span> - <span style="white-space:nowrap">${seleccionesMundial[lVis]||''} ${codigosMundial[lVis]||lVis.substring(0,3).toUpperCase()}</span>` : `Partido ${idx+1}`;
                htmlMatrix += `<tr><td><strong>${labelPartido}</strong></td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:var(--text-muted);">R</td>${f}</tr>`; 
            });
            
