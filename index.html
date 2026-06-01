@@ -35,10 +35,10 @@
         
         /* HEADER CON TÍTULO */
         .top-header { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); padding: 15px; border-radius: 16px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1); }
-        .titulo-header { color: var(--accent-gold); font-size: 19px; margin: 0; text-transform: uppercase; font-weight: 900; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        #btnLogout { background: rgba(238, 82, 83, 0.2); color: #ff7675; border: none; width: 35px; height: 35px; border-radius: 50%; font-weight: bold; cursor: pointer; font-size: 16px; }
+        .titulo-header { color: var(--accent-gold); font-size: 20px; margin: 0; text-transform: uppercase; font-weight: 900; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        #btnLogout { background: rgba(238, 82, 83, 0.2); color: #ff7675; border: none; width: 35px; height: 35px; border-radius: 50%; font-weight: bold; cursor: pointer; font-size: 16px; display: flex; justify-content: center; align-items: center; }
 
-        select, input[type="password"], input[type="text"], input[type="number"] { background: rgba(0,0,0,0.5) !important; border: 1px solid rgba(255,255,255,0.2) !important; color: white !important; border-radius: 8px; padding: 12px; font-family: 'Inter', sans-serif; font-weight: 600; width: 100%; box-sizing: border-box; font-size: 15px; }
+        select, input[type="password"], input[type="text"] { background: rgba(0,0,0,0.5) !important; border: 1px solid rgba(255,255,255,0.2) !important; color: white !important; border-radius: 8px; padding: 12px; font-family: 'Inter', sans-serif; font-weight: 600; width: 100%; box-sizing: border-box; font-size: 15px; }
         input:focus, select:focus { outline: none; border-color: var(--accent-gold) !important; }
 
         .tarjeta { background: var(--penka-grad) !important; border: 1px solid rgba(255,255,255,0.1) !important; border-radius: 16px !important; padding: 20px !important; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.5) !important; position: relative; overflow: hidden; }
@@ -61,6 +61,10 @@
 
         .btn-principal { background: linear-gradient(135deg, var(--accent-gold), #ea580c) !important; color: white !important; border: none; border-radius: 12px; padding: 15px; font-weight: 800; font-size: 16px; width: 100%; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4); cursor: pointer; transition: 0.2s; }
         .btn-principal:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+        /* BOTONES + Y - DEL FORMULARIO */
+        .btn-step { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 36px; height: 26px; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3); transition: 0.1s; }
+        .btn-step:active { background: var(--accent-gold); border-color: var(--accent-gold); transform: scale(0.95); }
 
         /* BARRA INFERIOR */
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(13, 17, 23, 0.95); backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; align-items: flex-end; padding: 10px 5px 20px 5px; z-index: 1000; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
@@ -112,9 +116,7 @@
 <div id="pantallaLogin">
     <div class="login-card">
         <div style="text-align: center; margin-bottom: 20px;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/2026_FIFA_World_Cup_logo.svg/512px-2026_FIFA_World_Cup_logo.svg.png" 
-                 onerror="this.onerror=null; this.src='https://img.icons8.com/color/240/000000/world-cup.png';" 
-                 alt="Mundial 2026" style="max-height: 120px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.5));">
+            <img src="https://cdn-icons-png.flaticon.com/512/8153/8153102.png" alt="Mundial 2026" style="max-height: 120px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.5));">
         </div>
         <h2 style="color:var(--accent-gold) !important; font-size:24px; margin-bottom: 5px;">MUNDIAL 2026</h2>
         <p style="margin-bottom: 25px; color:var(--text-muted) !important;">Identifícate para entrar a la liga</p>
@@ -123,6 +125,7 @@
             <option value="">- Selecciona tu Jugador -</option>
             <option value="Alberto">Alberto</option><option value="Anto">Anto</option><option value="Gonxi">Gonxi</option><option value="Martos">Martos</option><option value="Santos">Santos</option><option value="Licos">Licos</option><option value="Espy">Espy</option><option value="Tron">Tron</option><option value="Pampli">Pampli</option><option value="Jaime">Jaime</option><option value="Fran">Fran</option><option value="Ayala">Ayala</option><option value="Salva">Salva</option><option value="Genu">Genu</option><option value="Bicho">Bicho</option><option value="Dardos">Dardos</option><option value="Bambino">Bambino</option><option value="Hector">Hector</option><option value="Mazon">Mazon</option><option value="Ximo">Ximo</option><option value="Txus">Txus</option>
         </select>
+        <!-- Forzamos el teclado en móvil con type="password" y evitamos espacios -->
         <input type="password" id="loginPin" placeholder="Tu PIN secreto..." style="margin-bottom:25px; text-align:center;">
         
         <button id="btnEntrar" class="btn-principal">Entrar a la Liga ⚽</button>
@@ -134,12 +137,10 @@
 <div id="pantallaApp" style="display:none;">
     <div class="contenedor usuario">
       
-      <!-- CABECERA DE LA APP -->
+      <!-- CABECERA DE LA APP (CON EL TÍTULO "MUNDIAL 2026") -->
       <div class="top-header">
            <div style="text-align: center; width: 45px;">
-             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/2026_FIFA_World_Cup_logo.svg/512px-2026_FIFA_World_Cup_logo.svg.png" 
-                  onerror="this.onerror=null; this.src='https://img.icons8.com/color/240/000000/world-cup.png';" 
-                  alt="Mundial" style="width:100%; height:auto;">
+             <img src="https://cdn-icons-png.flaticon.com/512/8153/8153102.png" alt="Mundial" style="width:100%; height:auto;">
            </div>
            <h1 class="titulo-header">MUNDIAL 2026</h1>
           <div class="right-actions">
@@ -211,13 +212,24 @@
                 <p id="lblTronpa" style="font-size: 12px; margin-bottom:4px; font-weight:bold;"></p>
                 <div style="display:flex; gap:10px;">
                   <select id="tronpaApuesta" style="width:50%;"><option value="1">Riesgo: 1 Pt</option><option value="2">Riesgo: 2 Pts</option><option value="3">Riesgo: 3 Pts</option></select>
-                  <input type="number" id="tronpaRespuesta" placeholder="Goles PP" style="width:50%;">
+                  <input type="number" id="tronpaRespuesta" value="0" readonly placeholder="0" style="width:50%;">
+                  <!-- Botones paso para tronpa si se desea, por ahora dejo el select y el cuadro que son estáticos -->
                 </div>
             </div>
             <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
                 <p id="lblBomba" style="font-size: 12px; margin-bottom:4px; font-weight:bold; color:#f43f5e !important;"></p>
-                <div style="display:flex; align-items:center; gap:10px; justify-content:center;">
-                    <input type="number" id="bombaLocal" placeholder="L" style="text-align:center;"> <span style="color:white; font-weight:bold;">-</span> <input type="number" id="bombaVisita" placeholder="V" style="text-align:center;">
+                <div style="display:flex; align-items:center; gap:15px; justify-content:center;">
+                   <div style="display:flex; flex-direction:column; align-items:center; gap:3px;">
+                      <button type="button" class="btn-step" onclick="window.modScore('bombaLocal', 1)">+</button>
+                      <input type="number" id="bombaLocal" value="0" readonly style="width:40px; height:40px; text-align:center; padding:0; font-size:18px; border-radius:6px; background:rgba(0,0,0,0.6) !important; color:white; border:1px solid var(--accent-gold) !important; margin:0;">
+                      <button type="button" class="btn-step" onclick="window.modScore('bombaLocal', -1)">-</button>
+                   </div>
+                   <span style="color:white; font-weight:bold;">-</span>
+                   <div style="display:flex; flex-direction:column; align-items:center; gap:3px;">
+                      <button type="button" class="btn-step" onclick="window.modScore('bombaVisita', 1)">+</button>
+                      <input type="number" id="bombaVisita" value="0" readonly style="width:40px; height:40px; text-align:center; padding:0; font-size:18px; border-radius:6px; background:rgba(0,0,0,0.6) !important; color:white; border:1px solid var(--accent-gold) !important; margin:0;">
+                      <button type="button" class="btn-step" onclick="window.modScore('bombaVisita', -1)">-</button>
+                   </div>
                 </div>
             </div>
           </div>
@@ -260,17 +272,13 @@
         </div>
       </div>
 
-      <!-- VISTA 3: JORNADA -->
+      <!-- VISTA 3: JORNADA (PARTIDOS Y RESULTADOS - SIN CLASIFICACIONES) -->
       <div id="vistaEnJuego" style="display:none;">
          <div id="renderMátrixCandadoBloqueo"></div>
          <div id="zonaTableroEnJuego" style="display:none; margin-top:20px;"></div>
-         <div id="zonaClasificacionEnJuego" style="overflow-x: auto; width:100%; margin-top: 30px; display: none;">
-             <h2 id="tituloClasificacionEnJuego" style="text-align: center; color: var(--accent-gold); font-weight:900;">🏆 CLASIFICACIÓN</h2>
-             <div id="tablaClasificacionEnJuego"></div>
-         </div>
       </div>
 
-      <!-- VISTA 4: RANKING -->
+      <!-- VISTA 4: RANKING (ORDEN: CLASIF -> MATRIZ -> GANANCIAS -> PURA) -->
       <div id="vistaResultados" style="display: none;">
         <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important;">
           <h2 style="color:white !important; font-size:16px; margin-bottom:15px;">🏆 Histórico del Mundial</h2>
@@ -397,7 +405,7 @@
   let configQ_Data = null; let esMercadoQuinielaCerrado = false; let esMercadoValerinhaCerrado = false; let cfgEspecialesMem = null;
 
   // ========================================================
-  // 🔐 SISTEMA DE LOGIN Y CONTROL DE PESTAÑAS (CORREGIDO)
+  // 🔐 SISTEMA DE LOGIN Y CONTROL DE PESTAÑAS
   // ========================================================
   document.getElementById('btnEntrar').addEventListener('click', () => {
       let nom = document.getElementById('loginNombre').value;
@@ -429,7 +437,6 @@
       document.getElementById('loginPin').value = "";
   });
 
-  // SOLUCIÓN A LOS MENÚS (Se fuerza su vinculación a Window para evitar conflictos)
   window.switchTabJugador = function(tabName) {
     ['vistaInicio', 'vistaQuiniela', 'vistaValerinha', 'vistaResultados', 'vistaReglas', 'vistaEnJuego', 'vistaEspeciales'].forEach(v => document.getElementById(v).style.display = 'none');
     ['btnTabInicio', 'btnTabQuiniela', 'btnTabValerinha', 'btnTabResultados', 'btnTabEnJuego', 'btnTabEspeciales', 'btnTabReglas'].forEach(b => { document.getElementById(b).classList.remove('activa'); });
@@ -438,13 +445,16 @@
     if(tabName === 'EnJuego') { renderPestañaEnJuegoCompleta(); }
   };
 
-  document.getElementById('btnTabInicio').addEventListener('click', () => window.switchTabJugador('Inicio'));
-  document.getElementById('btnTabQuiniela').addEventListener('click', () => window.switchTabJugador('Quiniela'));
-  document.getElementById('btnTabValerinha').addEventListener('click', () => window.switchTabJugador('Valerinha'));
-  document.getElementById('btnTabEnJuego').addEventListener('click', () => window.switchTabJugador('EnJuego'));
-  document.getElementById('btnTabResultados').addEventListener('click', () => window.switchTabJugador('Resultados'));
-  document.getElementById('btnTabEspeciales').addEventListener('click', () => window.switchTabJugador('Especiales'));
-  document.getElementById('btnTabReglas').addEventListener('click', () => window.switchTabJugador('Reglas'));
+  // Función global para los botones de + y -
+  window.modScore = function(id, delta) {
+      let el = document.getElementById(id);
+      if(el) {
+          let val = parseInt(el.value) || 0;
+          val += delta;
+          if(val < 0) val = 0;
+          el.value = val;
+      }
+  };
 
   // ========================================================
   // ⚙️ INICIO DEL MOTOR Y CARGA DE DATOS DEL PERFIL
@@ -495,21 +505,34 @@
       document.getElementById('relojQuiniela').style.display = "block"; let htmlPartidos = "";
       configQ_Data.partidos.forEach((p, i) => { 
         let flagL = seleccionesMundial[p.local] || ""; let flagV = seleccionesMundial[p.visita] || ""; 
+        let codL = codigosMundial[p.local] || p.local.substring(0,3).toUpperCase();
+        let codV = codigosMundial[p.visita] || p.visita.substring(0,3).toUpperCase();
         
-        // 🚨 NUEVO DISEÑO DE PARTIDO: BOTÓN DE ESTADÍSTICAS MODERNIZADO Y AL LADO DE LAS CAJAS
-        htmlPartidos += `<div class="fila" style="margin-bottom:10px; padding:10px; background:rgba(0,0,0,0.25); border-radius:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid rgba(255,255,255,0.05);">
-          <label style="font-weight:bold; font-size:13px; text-align:right; width:32%; line-height:1.2; word-wrap:break-word;">${flagL} ${p.local}</label> 
-          
-          <div style="display:flex; gap:4px; align-items:center; justify-content:center; width:36%;">
-            <input type="number" id="playPL_${i}" min="0" style="width:40px; height:40px; text-align:center; padding:0; font-size:18px; border-radius:6px; background:rgba(0,0,0,0.6) !important;"> 
-            <input type="number" id="playPV_${i}" min="0" style="width:40px; height:40px; text-align:center; padding:0; font-size:18px; border-radius:6px; background:rgba(0,0,0,0.6) !important;">
+        htmlPartidos += `
+        <div class="fila" style="margin-bottom:15px; padding:12px 10px; background:rgba(0,0,0,0.25); border-radius:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid rgba(255,255,255,0.05);">
+            <div style="flex:1; text-align:right; font-weight:900; font-size:15px; padding-right:12px; white-space:nowrap;">${flagL} ${codL}</div>
             
-            <button onclick="window.abrirEstadisticas(${i})" title="Ver Estadísticas" style="background:linear-gradient(135deg, #3b82f6, #2563eb); border:none; border-radius:6px; color:white; cursor:pointer; padding:8px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 10px rgba(37,99,235,0.4); margin-left:2px; height:40px; width:40px; transition:0.2s;">
-               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-            </button>
-          </div> 
-          
-          <label style="font-weight:bold; font-size:13px; text-align:left; width:32%; line-height:1.2; word-wrap:break-word;">${p.visita} ${flagV}</label>
+            <div style="display:flex; gap:10px; align-items:center; justify-content:center;">
+               <div style="display:flex; flex-direction:column; align-items:center; gap:3px;">
+                  <button type="button" class="btn-step" onclick="window.modScore('playPL_${i}', 1)">+</button>
+                  <input type="number" id="playPL_${i}" value="0" readonly style="width:40px; height:40px; text-align:center; padding:0; font-size:18px; border-radius:6px; background:rgba(0,0,0,0.6) !important; color:white; border:1px solid var(--accent-gold) !important; margin:0;">
+                  <button type="button" class="btn-step" onclick="window.modScore('playPL_${i}', -1)">-</button>
+               </div>
+               <span style="font-weight:bold; color:var(--text-muted);">-</span>
+               <div style="display:flex; flex-direction:column; align-items:center; gap:3px;">
+                  <button type="button" class="btn-step" onclick="window.modScore('playPV_${i}', 1)">+</button>
+                  <input type="number" id="playPV_${i}" value="0" readonly style="width:40px; height:40px; text-align:center; padding:0; font-size:18px; border-radius:6px; background:rgba(0,0,0,0.6) !important; color:white; border:1px solid var(--accent-gold) !important; margin:0;">
+                  <button type="button" class="btn-step" onclick="window.modScore('playPV_${i}', -1)">-</button>
+               </div>
+            </div>
+
+            <div style="flex:1; text-align:left; font-weight:900; font-size:15px; padding-left:12px; white-space:nowrap;">${codV} ${flagV}</div>
+            
+            <div style="width:40px; display:flex; justify-content:flex-end;">
+                <button type="button" onclick="window.abrirEstadisticas(${i})" title="Ver Estadísticas" style="background:linear-gradient(135deg, #3b82f6, #2563eb); border:none; border-radius:6px; color:white; cursor:pointer; padding:8px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 10px rgba(37,99,235,0.4); height:40px; width:40px; transition:0.2s;">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                </button>
+            </div>
         </div>`;
       });
       document.getElementById('cajasPartidosJugador').innerHTML = htmlPartidos;
@@ -588,8 +611,8 @@
       </div>
     `;
     document.getElementById('modalContenido').innerHTML = html;
-  }
-  window.cerrarEstadisticas = function() { document.getElementById('modalEstadisticas').style.display = 'none'; }
+  };
+  window.cerrarEstadisticas = function() { document.getElementById('modalEstadisticas').style.display = 'none'; };
 
   // ========================================================
   // ✍️ ENVIAR JORNADA Y VALERINHA
@@ -687,7 +710,7 @@
   });
 
   // ========================================================
-  // 📈 UTILIDAD DE TENDENCIA (FLECHAS ⬆️⬇️)
+  // 📈 UTILIDAD DE TENDENCIA (FLECHAS ⬆️⬇️🟰)
   // ========================================================
   async function obtenerMapaRankingAnterior(jorStr) {
       if(jorStr === "1") return {};
@@ -716,9 +739,6 @@
      let jor = window.jorQuinielaActual; 
      document.getElementById('renderMátrixCandadoBloqueo').style.display = "block";
      document.getElementById('zonaTableroEnJuego').style.display = "none";
-     document.getElementById('zonaClasificacionEnJuego').style.display = "none";
-     document.getElementById('zonaGananciasEnJuego').style.display = "none";
-     
      document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<div style="text-align:center; font-weight:bold; padding:20px; color:var(--accent-gold);">Sincronizando jornada... ⏳</div>`;
      
      try {
@@ -750,7 +770,6 @@
             const cfgSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor));
             let prevMap = await obtenerMapaRankingAnterior(jor.toString());
             pintarTablas(listaJugadores, "DEFINITIVA", cfgSnap.exists() ? cfgSnap.data() : {}, "EnJuego", prevMap);
-            pintarGanancias(listaJugadores, ganadoresAislados, "EnJuego");
             return;
         }
         
@@ -804,11 +823,11 @@
            htmlMatrix += `<tr><td><strong>🌩️ La TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsTronpa}</tr><tr><td><strong>💣 Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsBomba}</tr><tr><td><strong>🔮 Valerinha</strong>${qVa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsVal}</tr><tr><td><strong>🏃‍♂️ Irlinha</strong>${qIr}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsIrl}</tr><tr><td><strong>🇪🇸 Santinha</strong>${qSa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdsSan}</tr><tr><td><strong>JUGADOR</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td>${tdNomRow}</tr></tbody></table></div>`; 
            document.getElementById('renderMátrixCandadoBloqueo').innerHTML = htmlMatrix;
         }
-     } catch(e) { document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<p style="text-align:center;">Error de conexión.</p>`; }
+     } catch(e) { document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<p style="text-align:center;">Error de conexión o no hay datos.</p>`; }
   }
 
   // ========================================================
-  // 📊 TABLAS COMPARTIDAS (REORDENACIÓN DE COLUMNAS)
+  // 📊 TABLAS COMPARTIDAS
   // ========================================================
   document.getElementById('btnConsultar').addEventListener('click', async () => {
     let btn = document.getElementById('btnConsultar'); let jorStr = document.getElementById('jorConsulta').value; btn.innerText = "⏳";
@@ -833,7 +852,6 @@
     let sortBy = isDef ? "puntosFinalesMundial" : "totalGeneral"; 
     let tablaGeneral = [...listaJugadores].sort((a, b) => { if(b[sortBy] !== a[sortBy]) return b[sortBy] - a[sortBy]; if(b.c_exactos_gen !== a.c_exactos_gen) return b.c_exactos_gen - a.c_exactos_gen; if(b.c_signos_gen !== a.c_signos_gen) return b.c_signos_gen - a.c_signos_gen; return ((b.puntosFinalesMundial||b.totalGeneral) - b.puntosPurosAcumulados) - ((a.puntosFinalesMundial||a.totalGeneral) - a.puntosPurosAcumulados); });
 
-    // MATRIZ RESULTADOS EXACTAMENTE CUADRADA
     let tablaJornada = [...tablaGeneral]; 
     let thNom = ""; let numPartidosVisuales = tablaJornada[0].partidosVisuales.length; let filasPartidos = Array(numPartidosVisuales).fill(""); let tdTr = "", tdBm = "", tdVa1 = "", tdVa2 = "", tdVaDec = "", tdIr = "", tdSa = "", tdTot = ""; let nombresPartidos = [];
     tablaJornada.forEach(j => {
@@ -872,9 +890,9 @@
                 let p = prevRankingMap[j.nombre]; let c = idx + 1;
                 if (c < p) arrow = " <span style='color:#10ac84; font-size:11px; font-weight:bold;'>⬆️</span>";
                 else if (c > p) arrow = " <span style='color:#e74c3c; font-size:11px; font-weight:bold;'>⬇️</span>";
-                else arrow = " <span style='color:#f59e0b; font-size:11px; font-weight:bold;'>⏸️</span>";
+                else arrow = " <span style='color:#f59e0b; font-size:11px; font-weight:bold;'>🟰</span>";
             } else if (isDef && prevRankingMap && Object.keys(prevRankingMap).length > 0) {
-                arrow = " <span style='color:#f59e0b; font-size:11px; font-weight:bold;'>⏸️</span>";
+                arrow = " <span style='color:#f59e0b; font-size:11px; font-weight:bold;'>🟰</span>";
             }
 
             htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}${arrow}</td><td class="td-total-gen">${tGen} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td>`; if(isDef && jorStr === "DEFINITIVA") htmlClasif += `<td style="font-weight:bold; color:#f472b6;">${j.puntosEspecialesExtra || 0}</td>`; htmlClasif += `</tr>`; 
