@@ -97,7 +97,7 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 1: PROVISIONAL (GUARDADO INCREMENTAL) -->
+  <!-- PESTAÑA 1: PROVISIONAL -->
   <div id="vistaAdmin1" style="display: none;">
     <div class="tarjeta" style="background: #e8f4f8; border-left: 5px solid #2980b9;">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 15px;">
@@ -200,7 +200,25 @@
        <div id="renderMatrixBlanca"></div>
     </div>
 
-    <!-- BOTÓN APOCALIPSIS (NUEVO) -->
+    <div class="tarjeta" style="background: #fffde7; border-left: 5px solid #f1c40f; margin-top:20px;">
+        <h2 style="color: #d35400; margin-top:0;">⏰ Modificar Plazos de la Jornada</h2>
+        <div class="fila">
+            <label>Jornada:</label>
+            <select id="numJornadaPlazos" style="width: 120px;">
+                <option value="1">Jornada 1</option><option value="2">Jornada 2</option><option value="3">Jornada 3</option><option value="4">Jornada 4</option>
+                <option value="5">Jornada 5</option><option value="6">Jornada 6</option><option value="7">Jornada 7</option><option value="8">Jornada 8</option>
+            </select>
+            <button id="btnCargarPlazos" class="btn-secundario" style="background:#f39c12; color:white;">Cargar Plazos</button>
+        </div>
+        <div id="zonaEditarPlazos" style="display:none; margin-top:15px; border-top:1px solid #ccc; padding-top:15px;">
+            <div class="grid-2-columnas">
+                <div><label style="font-weight:bold;">⚽ Límite Jornada (Partidos):</label><input type="datetime-local" id="editLimiteJornada"></div>
+                <div><label style="font-weight:bold;">👑 Límite Valerinha (Votos):</label><input type="datetime-local" id="editLimiteValerinha"></div>
+            </div>
+            <button id="btnGuardarPlazos" class="btn-principal" style="background:#f39c12;">💾 Actualizar Plazos</button>
+        </div>
+    </div>
+
     <div class="tarjeta" style="background: #fdf2e9; border-left: 5px solid #e74c3c; text-align:center; margin-top:40px;">
         <h2 style="color: #e74c3c; margin-top:0;">☢️ ZONA DE PELIGRO</h2>
         <p style="font-size:13px; color:#c0392b;">Este botón borrará absolutamente <strong>TODOS</strong> los datos de la liga (Apuestas, usuarios, jornadas y premios). Solo usar al principio del Mundial o para pruebas.</p>
@@ -265,7 +283,6 @@
   const seleccionesMundial = { "Alemania": "🇩🇪", "Arabia Saudita": "🇸🇦", "Argentina": "🇦🇷", "Argelia": "🇩🇿", "Australia": "🇦🇺", "Austria": "🇦🇹", "Bélgica": "🇧🇪", "Bosnia y Herzegovina": "🇧🇦", "Brasil": "🇧🇷", "Cabo Verde": "🇨🇻", "Canadá": "🇨🇦", "Catar": "🇶🇦", "Colombia": "🇨🇴", "Corea del Sur": "🇰🇷", "Costa de Marfil": "🇨🇮", "Croacia": "🇭🇷", "Curazao": "🇨🇼", "Ecuador": "🇪🇨", "Egipto": "🇪🇬", "El Salvador": "🇸🇻", "Escocia": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "España": "🇪🇸", "Estados Unidos": "🇺🇸", "Francia": "🇫🇷", "Ghana": "🇬🇭", "Haití": "🇭🇹", "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Irak": "🇮🇶", "Irán": "🇮🇷", "Japón": "🇯🇵", "Jordania": "🇯🇴", "Marruecos": "🇲🇦", "México": "🇲🇽", "Noruega": "🇳🇴", "Nueva Zelanda": "🇳🇿", "Países Bajos": "🇳🇱", "Panamá": "🇵🇦", "Paraguay": "🇵🇾", "Portugal": "🇵🇹", "RD Congo": "🇨🇩", "República Checa": "🇨🇿", "Senegal": "🇸🇳", "Sudáfrica": "🇿🇦", "Suecia": "🇸🇪", "Suiza": "🇨🇭", "Túnez": "🇹🇳", "Turquía": "🇹🇷", "Uzbekistán": "🇺🇿" };
   const listaOficialNombres = ["Alberto","Anto","Gonxi","Martos","Santos","Licos","Espy","Tron","Pampli","Jaime","Fran","Ayala","Salva","Genu","Bicho","Dardos","Bambino","Hector","Mazon","Ximo","Txus"];
   
-  // LAS 9 PREGUNTAS ESPECIALES FIJAS
   const preguntasEspecialesGlobal = [
       "Adivinar selecciones que jugarán la final",
       "Adivinar ganador del Mundial",
@@ -287,7 +304,7 @@
       const prizeSnap = await getDoc(doc(db, "config_premios", "globales"));
       if (prizeSnap.exists()) { let pd = prizeSnap.data(); document.getElementById('premioGenDef').value = pd.genDef || 0; document.getElementById('premioGenPura').value = pd.genPura || 0; document.getElementById('lblSavedGenDef').innerText = `(Guardado: ${pd.genDef || 0}€)`; document.getElementById('lblSavedGenPura').innerText = `(Guardado: ${pd.genPura || 0}€)`; }
       const snapConfig = await getDocs(collection(db, "config_jornadas")); let maxJor = 0; snapConfig.forEach(doc => { let parts = doc.id.split("_"); if(parts.length === 2 && !isNaN(parts[1])) { let num = parseInt(parts[1]); if(num > maxJor) maxJor = num; } });
-      if(maxJor > 0) { document.getElementById('lblUltimaConfig').innerText = maxJor; ['jorConfig', 'numJornadaCorregir', 'numJornadaFinal', 'numJornadaControl'].forEach(id => { if(document.getElementById(id)) { document.getElementById(id).value = maxJor < 8 && id === 'jorConfig' ? maxJor + 1 : maxJor; } }); }
+      if(maxJor > 0) { document.getElementById('lblUltimaConfig').innerText = maxJor; ['jorConfig', 'numJornadaCorregir', 'numJornadaFinal', 'numJornadaControl', 'numJornadaPlazos'].forEach(id => { if(document.getElementById(id)) { document.getElementById(id).value = maxJor < 8 && id === 'jorConfig' ? maxJor + 1 : maxJor; } }); }
       let jorCerrada = 0; for(let i = 8; i >= 1; i--) { const snapGen = await getDocs(collection(db, "clasificacion_general_jornada_" + i)); if(!snapGen.empty) { jorCerrada = i; break; } }
       if(jorCerrada > 0) { document.getElementById('lblUltimaCerrada').innerText = jorCerrada; let selAdmin = document.getElementById('jorConsultaAdmin'); if(selAdmin && selAdmin.value === "1") selAdmin.value = jorCerrada; }
     } catch(e) {}
@@ -512,7 +529,7 @@
           let counts = {};
           Object.keys(votos).forEach(att => {
               let v = votos[att];
-              if (v.tipo === "restar" && v.objetivo) {
+              if (v.tipo === "restar" && v.objetivo !== "") {
                   let target = redirigidos[att] ? v.objetivo2 : v.objetivo;
                   if(!counts[target]) counts[target] = [];
                   counts[target].push(att);
@@ -706,12 +723,42 @@
      } catch(e) {} 
   });
 
+  // GESTIÓN DE PLAZOS EN VIVO
+  document.getElementById('btnCargarPlazos').addEventListener('click', async () => {
+      let jor = document.getElementById('numJornadaPlazos').value;
+      let btn = document.getElementById('btnCargarPlazos'); btn.innerText = "Cargando...";
+      try {
+          const snap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor));
+          if(snap.exists()) {
+              let d = snap.data();
+              document.getElementById('editLimiteJornada').value = d.fechaLimite || "";
+              document.getElementById('editLimiteValerinha').value = d.fechaLimiteValerinha || "";
+              document.getElementById('zonaEditarPlazos').style.display = "block";
+          } else {
+              alert("Esta jornada aún no ha sido configurada.");
+              document.getElementById('zonaEditarPlazos').style.display = "none";
+          }
+      } catch(e) {}
+      btn.innerText = "Cargar Plazos";
+  });
+
+  document.getElementById('btnGuardarPlazos').addEventListener('click', async () => {
+      let jor = document.getElementById('numJornadaPlazos').value;
+      let lJor = document.getElementById('editLimiteJornada').value;
+      let lVal = document.getElementById('editLimiteValerinha').value;
+      if(!lJor || !lVal) return alert("Rellena ambos plazos.");
+      if(!confirm("¿Confirmas la modificación de los plazos para la Jornada " + jor + "?")) return;
+      try {
+          await updateDoc(doc(db, "config_jornadas", "jornada_" + jor), { fechaLimite: lJor, fechaLimiteValerinha: lVal });
+          alert("¡Plazos actualizados con éxito!");
+      } catch(e) { alert("Error actualizando plazos."); }
+  });
+
   // BOTÓN APOCALIPSIS RESET
   document.getElementById('btnResetLiga').addEventListener('click', async () => {
       if(!confirm("⚠️ ADVERTENCIA 1/3: Vas a BORRAR POR COMPLETO toda la base de datos de la liga. Los saldos, los puntos, todo. ¿Estás seguro?")) return;
       if(!confirm("🚨 ADVERTENCIA 2/3: Esto es irreversible y no hay copia de seguridad. ¿Continuar?")) return;
       if(!confirm("💀 ADVERTENCIA 3/3: ÚLTIMA OPORTUNIDAD. Dale a Aceptar para iniciar la Purga.")) return;
-      
       try {
           for(let i=1; i<=8; i++) {
               let cols = ["pronosticos_jornada_", "provisional_jornada_", "votos_valerinha_jornada_", "clasificacion_general_jornada_"];
