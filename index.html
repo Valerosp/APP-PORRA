@@ -20,20 +20,14 @@
             font-family: 'Inter', sans-serif;
             background: linear-gradient(to bottom, rgba(13, 17, 23, 0.8), rgba(13, 17, 23, 1)), 
                         url('https://images.unsplash.com/photo-1518605368461-1ee7e53f5312?q=80&w=2070') no-repeat center center fixed;
-            background-size: cover;
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
+            background-size: cover; color: var(--text-main); margin: 0; padding: 0; min-height: 100vh;
         }
 
         .contenedor.usuario { max-width: 600px; margin: 0 auto; padding: 20px; padding-bottom: 90px; }
 
-        /* PANTALLA DE LOGIN */
         #pantallaLogin { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
         .login-card { background: rgba(13, 17, 23, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px 30px; width: 100%; max-width: 400px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); text-align: center; }
         
-        /* HEADER CON TÍTULO */
         .top-header { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); padding: 15px; border-radius: 16px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1); }
         .titulo-header { color: var(--accent-gold); font-size: 20px; margin: 0; text-transform: uppercase; font-weight: 900; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         #btnLogout { background: rgba(238, 82, 83, 0.2); color: #ff7675; border: none; width: 35px; height: 35px; border-radius: 50%; font-weight: bold; cursor: pointer; font-size: 16px; display: flex; justify-content: center; align-items: center; }
@@ -79,37 +73,26 @@
 
         #relojQuiniela, #relojValerinha { background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.1); color: var(--accent-gold) !important; font-size: 14px; padding: 12px !important; letter-spacing: 1px; }
 
-        /* SISTEMA MATRICIAL ESTRICTO (CONGELADO STICKY) */
+        /* SISTEMA MATRICIAL (STICKY CONGELADO) */
         .table-container-matriz { max-height: 65vh; overflow: auto; width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-dark); position: relative; }
         .tabla-matriz { width: max-content; min-width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 0; font-size: 11px; table-layout: fixed; }
         .tabla-matriz th, .tabla-matriz td { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.05); }
         
         .tabla-matriz thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 6px 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 10px; }
-        
-        /* Columnas 1 y 2 fijadas a la izquierda */
         .tabla-matriz th:nth-child(1), .tabla-matriz td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; width: 85px !important; min-width: 85px !important; max-width: 85px !important; white-space: normal !important; word-wrap: break-word; text-align: left; padding-left: 5px; font-size: 9px; line-height: 1.2; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
         .tabla-matriz th:nth-child(2), .tabla-matriz td:nth-child(2) { position: sticky; left: 85px; z-index: 5; background: #111827; width: 22px !important; min-width: 22px !important; max-width: 22px !important; border-right: 1px solid rgba(255,255,255,0.1); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
-        
-        /* Intersección de cabecera y columnas fijas */
         .tabla-matriz thead th:nth-child(1), .tabla-matriz thead th:nth-child(2) { z-index: 15; background: #111827; }
-        
         .tabla-matriz th:not(:nth-child(1)):not(:nth-child(2)) { width: 45px !important; min-width: 45px !important; max-width: 45px !important; }
         .tabla-matriz tbody td { padding: 2px; text-align: center; height: 45px; vertical-align: middle; overflow: hidden; }
 
-        /* SISTEMA FLEXIBLE PARA CLASIFICACIONES (CONGELADO STICKY) */
+        /* SISTEMA FLEXIBLE PARA CLASIFICACIONES (STICKY CONGELADO) */
         .table-container-clasif { max-height: 65vh; overflow: auto; width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-dark); position: relative; }
         .tabla-clasif { width: max-content; min-width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 0; font-size: 12px; }
         .tabla-clasif th, .tabla-clasif td { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        
         .tabla-clasif thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 8px 10px; white-space: nowrap; }
-        
-        /* Columnas 1 y 2 fijadas a la izquierda */
         .tabla-clasif th:nth-child(1), .tabla-clasif td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; width: 35px; min-width: 35px; text-align: center; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
         .tabla-clasif th:nth-child(2), .tabla-clasif td:nth-child(2) { position: sticky; left: 35px; z-index: 5; background: #111827; width: 100px; min-width: 100px; text-align: left; padding-left: 10px; border-right: 1px solid rgba(255,255,255,0.1); box-shadow: 2px 0 4px rgba(0,0,0,0.3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        
-        /* Intersección */
         .tabla-clasif thead th:nth-child(1), .tabla-clasif thead th:nth-child(2) { z-index: 15; background: #111827; }
-        
         .tabla-clasif tbody td { padding: 8px 10px; text-align: center; }
 
         .exacto { background-color: var(--accent-green) !important; color: white !important; font-weight: bold; border-radius:4px; display:flex; justify-content:center; align-items:center; height:28px; width:90%; margin:0 auto; font-size:10px; }
@@ -258,7 +241,7 @@
                 <input type="text" id="irlinhaRespuesta" placeholder="Respuesta Irlinha...">
             </div>
             <div style="margin-bottom:15px;">
-                <p id="lblSantinha" style="font-size: 12px; margin-bottom:4px; font-weight:bold; color:#f87171 !important;">🇪🇸 SANTINHA: <span id="spanSantinha" style="color:white; font-weight:normal;"></span></p>
+                <p style="font-size: 12px; margin-bottom:4px; font-weight:bold; color:#f87171 !important;">🇪🇸 SANTINHA: <span id="spanSantinha" style="color:white; font-weight:normal;"></span></p>
                 <input type="text" id="santinhaRespuesta" placeholder="Respuesta Santinha...">
             </div>
             <div style="margin-bottom:15px; border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
@@ -343,7 +326,7 @@
             <select id="jorConsulta" style="flex:1;">
               <option value="1">Jornada 1</option><option value="2">Jornada 2</option><option value="3">Jornada 3</option><option value="4">Jornada 4</option>
               <option value="5">Jornada 5</option><option value="6">Jornada 6</option><option value="7">Jornada 7</option><option value="8">Jornada 8</option>
-              <option value="DEFINITiva" style="font-weight:bold; color:var(--accent-gold);">🌟 DEFINITIVA</option>
+              <option value="DEFINITIVA" style="font-weight:bold; color:var(--accent-gold);">🌟 DEFINITIVA</option>
             </select>
           </div>
         </div>
@@ -424,7 +407,7 @@
             <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">1️⃣ Fases de la Jornada</h3>
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
               <li><strong>Hacer Jornada:</strong> Introduce marcadores con botones. Si no, 1-1 automático. Se puede modificar antes del cierre.</li>
-              <li><strong>Votar Valerinha:</strong> Tras los partidos, se publica la Provisional. Si acertaste, tienes 1 voto de Ataque/Defensa.</li>
+              <li><strong>Votar Valerinha:</strong> Tras los partidos y publicación de Provisional. Si acertaste, tienes 1 voto de Ataque/Defensa.</li>
               <li><strong>Definitiva:</strong> Se procesan los votos y bonificaciones y se reparte el dinero.</li>
             </ul>
           </div>
@@ -449,15 +432,10 @@
         </div>
       </div>
 
-      <!-- MODAL ESTADÍSTICAS -->
       <div id="modalEstadisticas">
-          <div class="modal-content">
-              <button class="btn-cerrar-modal" id="btnCerrarModal">X</button>
-              <div id="modalContenido"></div>
-          </div>
+          <div class="modal-content"><button class="btn-cerrar-modal" id="btnCerrarModal">X</button><div id="modalContenido"></div></div>
       </div>
 
-      <!-- NAVEGACIÓN INFERIOR GAMER -->
       <nav class="bottom-nav">
         <button id="btnTabInicio" class="pestana activa" data-tab="Inicio"><i>🏠</i><span>Inicio</span></button>
         <button id="btnTabEnJuego" class="pestana" data-tab="EnJuego"><i>⚽</i><span>Jornada</span></button>
@@ -484,12 +462,10 @@
   const codigosMundial = { "Alemania": "GER", "Arabia Saudita": "KSA", "Argentina": "ARG", "Argelia": "ALG", "Australia": "AUS", "Austria": "AUT", "Bélgica": "BEL", "Bosnia y Herzegovina": "BIH", "Brasil": "BRA", "Cabo Verde": "CPV", "Canadá": "CAN", "Catar": "QAT", "Colombia": "COL", "Corea del Sur": "KOR", "Costa de Marfil": "CIV", "Croacia": "CRO", "Curazao": "CUW", "Ecuador": "ECU", "Egipto": "EGY", "El Salvador": "SLV", "Escocia": "SCO", "España": "ESP", "Estados Unidos": "USA", "Francia": "FRA", "Ghana": "GHA", "Haití": "HAI", "Inglaterra": "ENG", "Irak": "IRQ", "Irán": "IRN", "Japón": "JPN", "Jordania": "JOR", "Marruecos": "MAR", "México": "MEX", "Noruega": "NOR", "Nueva Zelanda": "NZL", "Países Bajos": "NED", "Panamá": "PAN", "Paraguay": "PAR", "Portugal": "POR", "RD Congo": "COD", "República Checa": "CZE", "Senegal": "SEN", "Sudáfrica": "RSA", "Suecia": "SWE", "Suiza": "SUI", "Túnez": "TUN", "Turquía": "TUR", "Uzbekistán": "UZB" };
   const puntosFIFA = { "Alemania": 1730, "Arabia Saudita": 1421, "Argentina": 1875, "Argelia": 1564, "Australia": 1581, "Austria": 1593, "Bélgica": 1735, "Bosnia y Herzegovina": 1386, "Brasil": 1761, "Cabo Verde": 1366, "Canadá": 1556, "Catar": 1455, "Colombia": 1693, "Corea del Sur": 1589, "Costa de Marfil": 1533, "Croacia": 1717, "Curazao": 1295, "Ecuador": 1595, "Egipto": 1563, "El Salvador": 1380, "Escocia": 1498, "España": 1876, "Estados Unidos": 1673, "Francia": 1877, "Ghana": 1346, "Haití": 1292, "Inglaterra": 1826, "Irak": 1447, "Irán": 1615, "Japón": 1660, "Jordania": 1391, "Marruecos": 1756, "México": 1681, "Noruega": 1551, "Nueva Zelanda": 1282, "Países Bajos": 1758, "Panamá": 1541, "Paraguay": 1504, "Portugal": 1764, "RD Congo": 1478, "República Checa": 1501, "Senegal": 1689, "Sudáfrica": 1430, "Suecia": 1515, "Suiza": 1649, "Túnez": 1483, "Turquía": 1599, "Uzbekistán": 1465 };
   
-  window.jorQuinielaActual = 1; 
-  window.jorValerinhaActual = 1; 
-  window.jugadorLogueado = null;
-  let configQ_Data = null; 
-  let esJornadaQuinielaCerrada = false; 
-  let esJornadaValerinhaCerrada = false;
+  const preguntasEspecialesGlobal = [ "Adivinar selecciones que jugarán la final", "Adivinar ganador del Mundial", "Adivinar máximo goleador", "Adivinar mejor jugador", "Adivinar mejor portero", "Adivinar mejor jugador joven", "Adivinar premio juego limpio", "¿Quién sumará más Puntos Puros?", "¿Quién sumará menos Puntos Puros?" ];
+
+  window.jorQuinielaActual = 1; window.jorValerinhaActual = 1; window.jugadorLogueado = null;
+  let configQ_Data = null; let esJornadaQuinielaCerrada = false; let esJornadaValerinhaCerrada = false;
 
   function switchTabJugador(tabName) {
       ['vistaInicio', 'vistaQuiniela', 'vistaValerinha', 'vistaResultados', 'vistaReglas', 'vistaEnJuego', 'vistaEspeciales'].forEach(v => { let el = document.getElementById(v); if(el) el.style.display = 'none'; });
@@ -543,7 +519,7 @@
       `; document.getElementById('modalContenido').innerHTML = html;
   };
 
-  window.renderMiniRankings = function(lista) {
+  function renderMiniRankings(lista) {
       const cats = [ { id: 'p_val_gen', title: '👑 Reyes Valerinha', color: 'var(--accent-gold)' }, { id: 'p_irl_gen', title: '🏃‍♂️ Héroes Irlinha', color: '#34d399' }, { id: 'p_san_gen', title: '🇪🇸 Villanos Santinha', color: '#f87171' }, { id: 'p_bomba_gen', title: '💣 Expertos en Bombas', color: '#f43f5e' }, { id: 'p_tronpa_gen', title: '🌩️ Gurús TroNpá!', color: '#60a5fa' } ];
       let html = '';
       cats.forEach(c => {
@@ -590,7 +566,7 @@
           lista.sort((a, b) => { if(b[sortBy] !== a[sortBy]) return b[sortBy] - a[sortBy]; if(b.c_exactos_gen !== a.c_exactos_gen) return b.c_exactos_gen - a.c_exactos_gen; if(b.c_signos_gen !== a.c_signos_gen) return b.c_signos_gen - a.c_signos_gen; return ((b.puntosFinalesMundial||b.totalGeneral) - b.puntosPurosAcumulados) - ((a.puntosFinalesMundial||a.totalGeneral) - a.puntosPurosAcumulados); });
           let myIndex = lista.findIndex(j => j.nombre === window.jugadorLogueado);
           if(myIndex !== -1) { document.getElementById('uiPosicion').innerText = (myIndex + 1) + "º"; document.getElementById('uiPuntos').innerText = isDefinitiva ? lista[myIndex].puntosFinalesMundial : lista[myIndex].totalGeneral; document.getElementById('uiSaldo').innerText = lista[myIndex].gananciasTotales.toFixed(2) + " €"; }
-          if(lista.length > 0) { window.renderMiniRankings(lista); }
+          if(lista.length > 0) { renderMiniRankings(lista); }
       }
 
       try {
@@ -645,31 +621,38 @@
 
       if(yaEnviado || esJornadaQuinielaCerrada) {
           if(yaEnviado) {
-              document.getElementById('valerinhaRespuesta').value = pData.preguntasAbiertas.valerinha;
-              document.getElementById('irlinhaRespuesta').value = pData.preguntasAbiertas.irlinha;
-              document.getElementById('santinhaRespuesta').value = pData.preguntasAbiertas.santinha;
-              document.getElementById('tronpaApuesta').value = pData.tronpa.puntosJugados;
-              document.getElementById('tronpaRespuesta').value = pData.tronpa.respuesta;
-              document.getElementById('bombaLocal').value = pData.bombaGarnacha.local; 
-              document.getElementById('bombaVisita').value = pData.bombaGarnacha.visita;
+              document.getElementById('valerinhaRespuesta').value = pData.preguntasAbiertas.valerinha; 
+              document.getElementById('irlinhaRespuesta').value = pData.preguntasAbiertas.irlinha; 
+              document.getElementById('santinhaRespuesta').value = pData.preguntasAbiertas.santinha; 
+              document.getElementById('tronpaApuesta').value = pData.tronpa.puntosJugados; 
+              document.getElementById('tronpaRespuesta').value = pData.tronpa.respuesta; 
+              document.getElementById('bombaLocal').value = pData.bombaGarnacha.local; document.getElementById('bombaVisita').value = pData.bombaGarnacha.visita;
           }
           if (esJornadaQuinielaCerrada) {
               document.querySelectorAll('#vistaQuiniela .btn-step').forEach(b => b.style.display = 'none');
               let btnE = document.getElementById('btnEnviar'); btnE.innerText = yaEnviado ? "JORNADA ENVIADA ✅" : "JORNADA CERRADA 🛑"; btnE.disabled = true; btnE.style.background = yaEnviado ? "var(--accent-green)" : "#374151";
               document.getElementById('valerinhaRespuesta').readOnly = true; document.getElementById('irlinhaRespuesta').readOnly = true; document.getElementById('santinhaRespuesta').readOnly = true; document.getElementById('tronpaApuesta').disabled = true; document.getElementById('tronpaRespuesta').readOnly = true;
           } else {
-              let btnE = document.getElementById('btnEnviar'); 
-              btnE.innerText = "MODIFICAR PRONÓSTICOS 🔄"; 
-              btnE.disabled = false; 
-              btnE.style.background = "var(--accent-gold)";
+              let btnE = document.getElementById('btnEnviar'); btnE.innerText = "MODIFICAR PRONÓSTICOS 🔄"; btnE.disabled = false; btnE.style.background = "var(--accent-gold)";
           }
       }
 
       let configV = configs.find(c => c.fechaLimiteValerinha && new Date(c.fechaLimiteValerinha) > ahora);
       if(configV) {
-         window.jorValerinhaActual = configV.num; document.getElementById('tituloJornadaEnJuegoV').innerText = "JORNADA " + configV.num + " EN JUEGO"; const provCheck = await getDocs(collection(db, "provisional_jornada_" + configV.num));
-         if(provCheck.empty) { esJornadaValerinhaCerrada = true; document.getElementById('relojValerinha').innerText = "⏳ ESPERANDO RESULTADOS DE J" + configV.num; document.getElementById('relojValerinha').style.color = "var(--accent-gold)"; document.getElementById('infoEstadoValerinha').innerText = "Periodo Valerinha (J" + configV.num + ") cerrado. Esperando provisional."; } 
-         else { esJornadaValerinhaCerrada = false; document.getElementById('relojValerinha').innerText = "✅ VOTACIONES ABIERTAS"; document.getElementById('relojValerinha').style.color = "var(--accent-green)"; document.getElementById('infoEstadoValerinha').innerText = "Periodo Valerinha (J" + configV.num + ") abierto. ¡Vota ahora!"; }
+         window.jorValerinhaActual = configV.num; 
+         document.getElementById('tituloJornadaEnJuegoV').innerText = "JORNADA " + configV.num + " EN JUEGO"; 
+         
+         if(configV.votacionesAbiertas === true) { 
+             esJornadaValerinhaCerrada = false; 
+             document.getElementById('relojValerinha').innerText = "✅ VOTACIONES ABIERTAS"; 
+             document.getElementById('relojValerinha').style.color = "var(--accent-green)"; 
+             document.getElementById('infoEstadoValerinha').innerText = "Periodo Valerinha (J" + configV.num + ") abierto. ¡Vota ahora!"; 
+         } else { 
+             esJornadaValerinhaCerrada = true; 
+             document.getElementById('relojValerinha').innerText = "⏳ ESPERANDO APERTURA DE VOTACIONES"; 
+             document.getElementById('relojValerinha').style.color = "var(--accent-gold)"; 
+             document.getElementById('infoEstadoValerinha').innerText = "Periodo Valerinha (J" + configV.num + ") en espera. El administrador aún no ha abierto la veda."; 
+         }
       } else {
          let ultimaV = configs[configs.length-1]; window.jorValerinhaActual = ultimaV.num; esJornadaValerinhaCerrada = true; document.getElementById('tituloJornadaEnJuegoV').innerText = "JORNADA " + ultimaV.num + " CERRADA"; document.getElementById('relojValerinha').innerText = "🔒 VOTACIONES CERRADAS"; document.getElementById('relojValerinha').style.color = "#ef4444"; document.getElementById('infoEstadoValerinha').innerText = "Periodo Valerinha (J" + ultimaV.num + ") cerrado.";
       }
@@ -714,7 +697,7 @@
         document.getElementById('mensajeSinVoto').style.display = "none"; document.getElementById('jugadorObjetivo').innerHTML = Object.keys(pinesSecretos).filter(n => n !== window.jugadorLogueado).map(n => `<option value="${n}">${n}</option>`).join(""); document.getElementById('jugadorObjetivo2').innerHTML = Object.keys(pinesSecretos).filter(n => n !== window.jugadorLogueado).map(n => `<option value="${n}">${n}</option>`).join(""); document.getElementById('zonaFormularioVoto').style.display = "block";
       } else {
         document.getElementById('zonaFormularioVoto').style.display = "none"; let mBox = document.getElementById('mensajeSinVoto'); mBox.style.background = "rgba(238,82,83,0.1)"; mBox.style.color = "var(--accent-red)";
-        if(esJornadaValerinhaCerrada) { mBox.innerText = "Periodo cerrado."; } else { mBox.innerText = "No acertaste. No tienes voto."; } mBox.style.display = "block";
+        if(esJornadaValerinhaCerrada) { mBox.innerText = "El periodo de votación está cerrado o no ha comenzado."; } else { mBox.innerText = "No acertaste. No tienes voto."; } mBox.style.display = "block";
       }
       const cfgSnapV = await getDoc(doc(db, "config_jornadas", "jornada_" + window.jorValerinhaActual)); pintarProvisionalJugador(listaProvisional, window.jorValerinhaActual, cfgSnapV.data() || {}, "Prov");
     } catch (e) {} document.getElementById('btnComprobarVoto').innerText = "Comprueba si tengo Valerinha ⚖️";
@@ -889,7 +872,18 @@
     let tdNomRow = tablaJornada.map(j => `<td style="font-weight:bold; color:white; background:rgba(255,255,255,0.05); font-size:9px; overflow:hidden; text-overflow:ellipsis;">${j.nombre}</td>`).join("");
 
     let tabHTML = `<h2 style="text-align: center; color: white;">📊 RESULTADOS JORNADA ${jor} (Provisional)</h2><div class="table-container-matriz"><table class="tabla-matriz"><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05); color:white;">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa1} </tr><tr><td><strong>Resultado Valerinha</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdVa2} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdSa} </tr><tr><td><strong>TOTAL JORNADA</strong></td><td style="background:rgba(255,255,255,0.1); font-weight:bold; color:white;">-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td style="background:rgba(0,0,0,0.5); color:var(--text-muted);">-</td> ${tdNomRow} </tr></tbody></table></div>`;
-    if(containerPrefix === "Prov") { document.getElementById('tableroProvJugador').innerHTML = tabHTML; let htmlClasif = `<h2 style="text-align: center; color: var(--accent-gold);">🏆 CLASIFICACIÓN GENERAL</h2><div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS</th><th class="th-clasif">SIGNOS</th><th class="th-clasif">BOMBA</th><th class="th-clasif">VALERINHAS</th><th>IRLINHAS</th><th>SANTINHAS</th><th>TroNpá!</th></tr></thead><tbody>`; tablaGeneral.forEach((j, idx) => { htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td class="td-total-gen">${j.totalGeneral} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td></tr>`; }); htmlClasif += `</tbody></table></div>`; document.getElementById('clasifProvJugador').innerHTML = htmlClasif; document.getElementById('zonaTablasProvisionalesJugador').style.display = "block"; } else if (containerPrefix === "EnJuego") { document.getElementById('zonaTableroEnJuego').innerHTML = tabHTML; document.getElementById('zonaTableroEnJuego').style.display = "block"; }
+    
+    if(containerPrefix === "Prov") { 
+        document.getElementById('tableroProvJugador').innerHTML = tabHTML; 
+        let htmlClasif = `<h2 style="text-align: center; color: var(--accent-gold);">🏆 CLASIFICACIÓN GENERAL</h2><div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS</th><th class="th-clasif">SIGNOS</th><th class="th-clasif">BOMBA</th><th class="th-clasif">VALERINHAS</th><th>IRLINHAS</th><th>SANTINHAS</th><th>TroNpá!</th></tr></thead><tbody>`; 
+        tablaGeneral.forEach((j, idx) => { htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td class="td-total-gen">${j.totalGeneral} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td></tr>`; }); 
+        htmlClasif += `</tbody></table></div>`; 
+        document.getElementById('clasifProvJugador').innerHTML = htmlClasif; 
+        document.getElementById('zonaTablasProvisionalesJugador').style.display = "block"; 
+    } else if (containerPrefix === "EnJuego") { 
+        document.getElementById('zonaTableroEnJuego').innerHTML = tabHTML; 
+        document.getElementById('zonaTableroEnJuego').style.display = "block"; 
+    }
   }
 </script>
 </body>
