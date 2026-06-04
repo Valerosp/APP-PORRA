@@ -29,6 +29,7 @@
         .td-total-gen { font-weight: bold; background: #e8f4f8; }
         .total-pts { font-weight: bold; color: #d35400; font-size: 16px; }
         
+        /* ADAPTACIÓN PARA MÓVILES */
         @media (max-width: 768px) {
             .menu-pestanas { flex-direction: column; gap: 5px; }
             .grid-2-columnas { grid-template-columns: 1fr; }
@@ -39,7 +40,7 @@
 <body>
 <div class="contenedor admin">
   <div style="text-align: center; margin-bottom: 10px;">
-    <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="Mundial" style="max-height: 100px; width: auto; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2));">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/2026_FIFA_World_Cup_logo.svg" crossorigin="anonymous" alt="Logo Mundial 2026" style="max-height: 100px; width: auto; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2));">
   </div>
   <h1>👑 Panel de Administrador</h1>
 
@@ -75,10 +76,10 @@
           <div class="fila" style="margin-top:15px;"><label>Nº Partidos:</label><input type="number" id="numPartidosConfig" value="2" min="1" max="10" style="width: 60px;"><button id="btnGenerarCajasPartidos" class="btn-secundario" style="background:#d35400; color:white; margin-left:10px;">Generar Partidos</button></div>
         </div>
         <div style="background: #fdfefe; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-          <h3 style="margin-top:0; color:#27ae60; font-size:14px; border-bottom:1px solid #eee; padding-bottom:5px;">💰 Premios de Jornada (Modificable)</h3>
+          <h3 style="margin-top:0; color:#27ae60; font-size:14px; border-bottom:1px solid #eee; padding-bottom:5px;">💰 Premios de Jornada</h3>
           <div class="fila"><label>Ganador Provisional:</label><input type="number" id="premioProv" value="5.8" step="0.1" style="width:60px;"> €</div>
           <div class="fila"><label>Ganador Definitiva:</label><input type="number" id="premioDef" value="29" step="0.1" style="width:60px;"> €</div>
-          <h3 style="margin-top:15px; color:#8e44ad; font-size:14px; border-bottom:1px solid #eee; padding-bottom:5px;">🏆 Botes Globales (Fin de Mundial)</h3>
+          <h3 style="margin-top:15px; color:#8e44ad; font-size:14px; border-bottom:1px solid #eee; padding-bottom:5px;">🏆 Botes Globales</h3>
           <div class="fila"><label>Ganador General Definitiva:</label><input type="number" id="premioGenDef" value="0" step="1" style="width:60px;"> <span id="lblSavedGenDef" style="font-size:11px; color:#7f8c8d; font-weight:bold; margin-left:5px;">(Guardado: 0€)</span></div>
           <div class="fila"><label>Ganador General Sin Historias:</label><input type="number" id="premioGenPura" value="0" step="1" style="width:60px;"> <span id="lblSavedGenPura" style="font-size:11px; color:#7f8c8d; font-weight:bold; margin-left:5px;">(Guardado: 0€)</span></div>
         </div>
@@ -136,7 +137,7 @@
         </select>
       </div>
       <h2 style="color: #27ae60; margin-top:15px;">3️⃣ Procesar Alianzas Valerinha</h2>
-      <p style="font-size:12px; color:#7f8c8d;">* El sistema limitará a un máximo de -4 puntos por Valerinha y aplicará el multiplicador (x1.5) si procede automáticamente.</p>
+      <p style="font-size:12px; color:#7f8c8d;">El sistema aplica Límite Máximo de 4 restas por persona y Desvío automático a la 2ª opción si hay sobrecarga.</p>
       <button id="btnPaso3" class="btn-principal" style="background: #3498db;">📈 Paso 3: Descargar Votos y Generar TRAS VALERINHAS</button>
     </div>
     <div id="zonaPaso4" style="display:none; margin-top: 30px; padding: 15px; border: 3px dashed #27ae60; background: #f0fdf4;">
@@ -181,12 +182,6 @@
       <div id="txtEstadoPublicacion" style="margin-top:10px; font-weight:bold; font-size:14px; color:#2c3e50;"></div>
     </div>
     
-    <div class="tarjeta" style="background: #fdf2e9; border-left: 5px solid #e74c3c; text-align:center;">
-        <h2 style="color: #e74c3c; margin-top:0;">☢️ ZONA DE PELIGRO</h2>
-        <p style="font-size:13px;">Este botón borrará absolutamente <strong>TODOS</strong> los datos del servidor (Apuestas, configuraciones, usuarios y premios). Solo usar al principio del Mundial o para pruebas.</p>
-        <button id="btnResetLiga" class="btn-principal" style="background:#c0392b;">🔥 RESETEAR LIGA DESDE CERO 🔥</button>
-    </div>
-
     <div id="zonaTablaControl" style="margin-top:20px; display:none; overflow-x:auto;">
       <h3 style="color:#2c3e50; text-align:center;" id="txtCabeceraControl"></h3>
       <table id="tablaChivatosBase"></table>
@@ -195,15 +190,21 @@
        <h3 style="color:#2c3e50; text-align:center;">📋 Respuestas Registradas (Modo Espectador)</h3>
        <div id="renderMatrixBlanca"></div>
     </div>
+
+    <div class="tarjeta" style="background: #fdf2e9; border-left: 5px solid #e74c3c; text-align:center; margin-top:40px;">
+        <h2 style="color: #e74c3c; margin-top:0;">☢️ ZONA DE PELIGRO</h2>
+        <p style="font-size:13px; color:#c0392b;">Este botón borrará absolutamente <strong>TODOS</strong> los datos de la liga (Apuestas, usuarios, jornadas y premios). Solo usar al principio del Mundial o para pruebas.</p>
+        <button id="btnResetLiga" class="btn-principal" style="background:#c0392b; width:auto; padding:15px 30px;">🔥 RESETEAR LIGA DESDE CERO 🔥</button>
+    </div>
   </div>
 
   <div id="vistaAdmin5" style="display:none;">
     <div class="tarjeta" style="background: #fce4ec; border-left: 5px solid #e84393;">
       <h2 style="color: #e84393; margin-top:0;">⭐ Configurar Apuestas Especiales (Pre-Mundial)</h2>
-      <p style="font-size:13px; color:#7f8c8d;">Las 9 preguntas ya están preconfiguradas con sus selecciones automáticas. Solo decide cuándo abrir y cerrar el plazo de envío para los jugadores.</p>
-      <div style="margin-top:15px;">
-        <button id="btnAbrirEspeciales" class="btn-secundario" style="background:#27ae60; color:white; padding:12px; font-size:14px;">👁️ Abrir Plazo para Jugadores</button>
-        <button id="btnCerrarPublicarEspeciales" class="btn-secundario" style="background:#c0392b; color:white; padding:12px; font-size:14px;">🔒 Cerrar Plazo (Bloquear envíos)</button>
+      <p style="font-size:13px; color:#7f8c8d;">Las 9 preguntas ya están preconfiguradas y automatizadas. Solo decide cuándo abrir y cerrar el plazo.</p>
+      <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button id="btnAbrirEspeciales" class="btn-secundario" style="background:#27ae60; color:white; padding:12px; font-size:14px;">👁️ Abrir Plazo Jugadores</button>
+        <button id="btnCerrarPublicarEspeciales" class="btn-secundario" style="background:#c0392b; color:white; padding:12px; font-size:14px;">🔒 Cerrar Plazo</button>
       </div>
     </div>
     <div class="tarjeta" style="background: #ebf5fb; border-left: 5px solid #2980b9;">
@@ -217,8 +218,8 @@
          <div id="renderCorreccionEspeciales"></div>
          <button id="btnPrevisualizarEspeciales" class="btn-principal" style="background:#f39c12; margin-top:20px;">🔍 Visualizar Puntuaciones Especiales</button>
          <div id="tablaPrevisualizacionEspeciales" style="display:none; margin-top:20px; overflow-x:auto;"></div>
-         <button id="btnPublicarEvaluacionEspeciales" class="btn-principal" style="background:#2980b9; margin-top:20px; display:none;">👁️ Publicar Evaluación en el Panel del Jugador</button>
-         <button id="btnCalcularMundialEspeciales" class="btn-principal" style="background:#8e44ad; margin-top:20px; display:none;">🏆 Calcular Clasificación Final "DEFINITIVA"</button>
+         <button id="btnPublicarEvaluacionEspeciales" class="btn-principal" style="background:#2980b9; margin-top:20px; display:none;">👁️ Publicar Evaluación</button>
+         <button id="btnCalcularMundialEspeciales" class="btn-principal" style="background:#8e44ad; margin-top:20px; display:none;">🏆 Calcular Clasificación Final DEFINITIVA</button>
       </div>
     </div>
   </div>
@@ -244,13 +245,16 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-  import { getFirestore, collection, getDocs, doc, setDoc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+  import { getFirestore, collection, getDocs, doc, setDoc, getDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
   const firebaseConfig = { apiKey: "AIzaSyD_agcptTd-HPxMYHWU5damUk6gF0M5aoE", authDomain: "liga-fila-fila.firebaseapp.com", projectId: "liga-fila-fila", storageBucket: "liga-fila-fila.firebasestorage.app", messagingSenderId: "825473276982", appId: "1:825473276982:web:0a5645fdb9d8faf3110c97", measurementId: "G-31J4EH2MCD" };
-  const app = initializeApp(firebaseConfig); const db = getFirestore(app);
+  const app = initializeApp(firebaseConfig); 
+  const db = getFirestore(app);
 
   const seleccionesMundial = { "Alemania": "🇩🇪", "Arabia Saudita": "🇸🇦", "Argentina": "🇦🇷", "Argelia": "🇩🇿", "Australia": "🇦🇺", "Austria": "🇦🇹", "Bélgica": "🇧🇪", "Bosnia y Herzegovina": "🇧🇦", "Brasil": "🇧🇷", "Cabo Verde": "🇨🇻", "Canadá": "🇨🇦", "Catar": "🇶🇦", "Colombia": "🇨🇴", "Corea del Sur": "🇰🇷", "Costa de Marfil": "🇨🇮", "Croacia": "🇭🇷", "Curazao": "🇨🇼", "Ecuador": "🇪🇨", "Egipto": "🇪🇬", "El Salvador": "🇸🇻", "Escocia": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "España": "🇪🇸", "Estados Unidos": "🇺🇸", "Francia": "🇫🇷", "Ghana": "🇬🇭", "Haití": "🇭🇹", "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Irak": "🇮🇶", "Irán": "🇮🇷", "Japón": "🇯🇵", "Jordania": "🇯🇴", "Marruecos": "🇲🇦", "México": "🇲🇽", "Noruega": "🇳🇴", "Nueva Zelanda": "🇳🇿", "Países Bajos": "🇳🇱", "Panamá": "🇵🇦", "Paraguay": "🇵🇾", "Portugal": "🇵🇹", "RD Congo": "🇨🇩", "República Checa": "🇨🇿", "Senegal": "🇸🇳", "Sudáfrica": "🇿🇦", "Suecia": "🇸🇪", "Suiza": "🇨🇭", "Túnez": "🇹🇳", "Turquía": "🇹🇷", "Uzbekistán": "🇺🇿" };
   const listaOficialNombres = ["Alberto","Anto","Gonxi","Martos","Santos","Licos","Espy","Tron","Pampli","Jaime","Fran","Ayala","Salva","Genu","Bicho","Dardos","Bambino","Hector","Mazon","Ximo","Txus"];
+  
+  // LAS 9 PREGUNTAS ESPECIALES FIJAS
   const preguntasEspecialesGlobal = [
       "Adivinar selecciones que jugarán la final",
       "Adivinar ganador del Mundial",
@@ -259,8 +263,8 @@
       "Adivinar mejor portero",
       "Adivinar mejor jugador joven",
       "Adivinar juego limpio",
-      "¿Quién sumará más puntos sin historias?",
-      "¿Quién sumará menos puntos sin historias?"
+      "¿Quién sumará más Puntos Puros?",
+      "¿Quién sumará menos Puntos Puros?"
   ];
 
   let datosGlobales = []; let jugadoresProvisionales = []; let configJornadaActual = null;
@@ -358,7 +362,7 @@
         htmlCorreccion += `<div style="background: white; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;"><h3 style="margin: 0;">👤 ${jug.jugador}</h3><div><strong>Valerinha:</strong> "${val}" <select id="est_val_${i}"><option value="fallo">Fallo</option><option value="exacto">Acierto</option></select></div><div><strong>Irlinha:</strong> "${irl}" <select id="est_irl_${i}"><option value="fallo">Fallo</option><option value="exacto">Acierto</option></select></div><div><strong>Santinha:</strong> "${san}" <select id="est_san_${i}"><option value="exacto">Acierto</option><option value="fallo">Fallo</option></select></div></div>`;
       });
       document.getElementById('listaCorreccionesTextos').innerHTML = htmlCorreccion; document.getElementById('zonaPaso1').style.display = "block"; btn.innerText = "📥 Base Cargada ✅";
-    } catch (error) { btn.innerText = "📥 Paso 1"; }
+    } catch (error) { btn.innerText = "📥 Paso 1"; console.error(error); }
   });
 
   document.getElementById('btnPaso2').addEventListener('click', async function() {
@@ -390,30 +394,28 @@
     pintarTablas(configPintar, "PROVISIONAL", configJornadaActual);
   });
 
-  // FASE 3: DEFINITIVA Y LÓGICA DE VALERINHA
   document.getElementById('btnPaso3').addEventListener('click', async function() {
     let jor = parseInt(document.getElementById('numJornadaFinal').value);
-    let multiVS = (jor <= 3) ? 1 : 1.5; // ESCALADO DE PUNTOS
+    let multiVS = (jor <= 3) ? 1 : 1.5;
     try {
       const provSnap = await getDocs(collection(db, "provisional_jornada_" + jor)); jugadoresProvisionales = [];
       provSnap.forEach(doc => { if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); else jugadoresProvisionales.push(doc.data()); });
       if(jugadoresProvisionales.length === 0) return alert("No existe base provisional.");
 
       historicoGanancias = {}; if (jor > 1) { const genSnap = await getDocs(collection(db, "clasificacion_general_jornada_" + (jor - 1))); genSnap.forEach((docSnap) => { let data = docSnap.data(); if (data.jugador) historicoGanancias[String(data.jugador).trim().toLowerCase()] = Number(data.gananciasAcumuladas) || 0; }); }
-      
       const votosSnap = await getDocs(collection(db, "votos_valerinha_jornada_" + jor)); let votos = {}; votosSnap.forEach(doc => { votos[doc.id] = doc.data(); });
       
       jugadoresProvisionales.forEach(j => { j.val_ganados = 0; j.val_perdidos = 0; j.dec_val = "-"; });
-      
-      // LÓGICA ANTI-BULLYING (Límite 4 ataques y Desvíos)
+
+      // LOGICA DE DESVÍOS ANTI-BULLYING MAX 4
       let redirigidos = {};
       let changed = true;
       while(changed) {
           changed = false;
-          let counts = {}; // Quien recibe y quiénes le atacan
+          let counts = {};
           Object.keys(votos).forEach(att => {
               let v = votos[att];
-              if (v.tipo === "restar" && v.objetivo !== "") {
+              if (v.tipo === "restar" && v.objetivo) {
                   let target = redirigidos[att] ? v.objetivo2 : v.objetivo;
                   if(!counts[target]) counts[target] = [];
                   counts[target].push(att);
@@ -421,53 +423,51 @@
           });
 
           for (let target in counts) {
-              if (counts[target].length > 4) { // Límite superado
-                  let attackers = counts[target].filter(a => !redirigidos[a]); // Solo desviamos a los que no han sido desviados aún
+              if (counts[target].length > 4) {
+                  let attackers = counts[target].filter(a => !redirigidos[a]);
                   if (attackers.length > 0) {
-                      // Ordenar atacantes según el "poder" de su 2ª opción
                       attackers.sort((a, b) => {
                           let a2 = votos[a].objetivo2; let b2 = votos[b].objetivo2;
-                          let a2Data = jugadoresProvisionales.find(p => p.nombre === a2); let b2Data = jugadoresProvisionales.find(p => p.nombre === b2);
-                          let ptsA = a2Data ? a2Data.prev.puntosAcumulados : 0; let ptsB = b2Data ? b2Data.prev.puntosAcumulados : 0;
+                          let a2Data = jugadoresProvisionales.find(p => p.nombre === a2);
+                          let b2Data = jugadoresProvisionales.find(p => p.nombre === b2);
+                          let ptsA = a2Data ? a2Data.prev.puntosAcumulados : 0;
+                          let ptsB = b2Data ? b2Data.prev.puntosAcumulados : 0;
                           if (ptsB !== ptsA) return ptsB - ptsA;
-                          let exA = a2Data ? a2Data.prev.resultadosAcertados : 0; let exB = b2Data ? b2Data.prev.resultadosAcertados : 0;
+                          let exA = a2Data ? a2Data.prev.resultadosAcertados : 0;
+                          let exB = b2Data ? b2Data.prev.resultadosAcertados : 0;
                           if (exB !== exA) return exB - exA;
-                          return a2.localeCompare(b2);
+                          return (a2 || "").localeCompare(b2 || "");
                       });
-                      // El que tenga la 2ª opción más fuerte, se desvía
                       redirigidos[attackers[0]] = true;
                       changed = true;
-                      break; // Reiniciamos el conteo para ver si hay efecto cascada
+                      break;
                   }
               }
           }
       }
 
-      // APLICAR VOTOS FINALES
       jugadoresProvisionales.forEach(j => {
-          if (j.statVal === "exacto" && votos[j.nombre]) {
-              let miVoto = votos[j.nombre];
-              if (miVoto.tipo === "sumar") { 
-                  j.val_ganados += 1; 
-                  j.dec_val = "🛡️ Se suma +" + multiVS; 
-              } else if (miVoto.tipo === "restar" && miVoto.objetivo !== "") {
-                  let isDiverted = redirigidos[j.nombre];
-                  let targetName = isDiverted ? miVoto.objetivo2 : miVoto.objetivo;
-                  j.dec_val = `⚔️ Resta -${multiVS} a ${targetName}` + (isDiverted ? " (Desvío)" : "");
-                  let target = jugadoresProvisionales.find(p => p.nombre === targetName);
-                  if (target) target.val_perdidos -= 1;
-              }
+        if (j.statVal === "exacto" && votos[j.nombre]) {
+          let miVoto = votos[j.nombre]; 
+          if (miVoto.tipo === "sumar") { 
+              j.val_ganados += 1; j.dec_val = "🛡️ Se suma +" + multiVS; 
+          } else if (miVoto.tipo === "restar" && miVoto.objetivo !== "") { 
+              let isDiverted = redirigidos[j.nombre];
+              let finalTarget = isDiverted ? miVoto.objetivo2 : miVoto.objetivo;
+              j.dec_val = `⚔️ Resta -${multiVS} a ${finalTarget}` + (isDiverted ? " (Desvío)" : ""); 
+              let target = jugadoresProvisionales.find(p => p.nombre === finalTarget); 
+              if (target) target.val_perdidos -= 1; 
           }
+        }
       });
 
-      // Asegurar el tope matemático y aplicar el multiplicador
       jugadoresProvisionales.forEach(j => { 
           if (j.val_perdidos < -4) j.val_perdidos = -4; 
           j.p_val = (j.val_ganados + j.val_perdidos) * multiVS; 
           j.totalJornada = j.base + j.p_val; 
           j.generalTrasVal = j.prev.puntosAcumulados + j.totalJornada; 
       });
-
+      
       puntosPrimeroGenTrasVal = Math.max(...jugadoresProvisionales.map(j => j.generalTrasVal)); puntosUltimoGenTrasVal = Math.min(...jugadoresProvisionales.map(j => j.generalTrasVal));
       let configPintar = jugadoresProvisionales.map(j => ({ ...j, p_irl: 0, p_san: 0, c_exactos_gen: j.prev.resultadosAcertados + j.c_exactos, c_signos_gen: j.prev.pronosticosAcertados + j.c_signos, p_bomba_gen: j.prev.puntosBombaGarnacha + j.p_bomba, p_tronpa_gen: j.prev.puntosTronpa + j.p_tronpa, p_val_gen: j.prev.puntosValerinhas + j.p_val, p_irl_gen: j.prev.puntosIrlinhas, p_san_gen: j.prev.puntosSantinhas, totalGeneral: j.generalTrasVal, purosAcumulados: j.prev.puntosPurosAcumulados + j.puntosPurosJornada }));
       const cfgSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor));
@@ -478,18 +478,13 @@
   document.getElementById('btnPaso4').addEventListener('click', function() {
     let jor = parseInt(document.getElementById('numJornadaFinal').value); window.ganadoresProv = obtenerGanadoresDesempate(jugadoresProvisionales, "base");
     let multiVS = (jor <= 3) ? 1 : 1.5;
-    
+
     let jugadoresParaPintarDefinitivo = jugadoresProvisionales.map(j => {
       j.p_irl = 0; j.p_san = 0; 
       if (j.statIrl === "exacto" && j.generalTrasVal <= puntosUltimoGenTrasVal + 4) j.p_irl = multiVS; 
       if (j.statSan === "fallo" && j.generalTrasVal >= puntosPrimeroGenTrasVal - 4) j.p_san = -multiVS;
-      
-      j.totalJornada = j.base + j.p_val + j.p_irl + j.p_san; 
-      j.totalGeneral = j.generalTrasVal + j.p_irl + j.p_san; 
-      j.p_irl_gen = j.prev.puntosIrlinhas + j.p_irl; j.p_san_gen = j.prev.puntosSantinhas + j.p_san; j.p_val_gen = j.prev.puntosValerinhas + j.p_val; 
-      return j;
+      j.totalJornada = j.base + j.p_val + j.p_irl + j.p_san; j.totalGeneral = j.generalTrasVal + j.p_irl + j.p_san; j.p_irl_gen = j.prev.puntosIrlinhas + j.p_irl; j.p_san_gen = j.prev.puntosSantinhas + j.p_san; j.p_val_gen = j.prev.puntosValerinhas + j.p_val; return j;
     });
-    
     jugadoresProvisionales = jugadoresParaPintarDefinitivo; window.ganadoresDef = obtenerGanadoresDesempate(jugadoresProvisionales, "totalJornada");
     document.getElementById('btnGuardarGeneral').style.display = "block"; 
     pintarTablas(jugadoresProvisionales, "DEFINITIVA");
@@ -513,7 +508,6 @@
     } catch(e) {}
   });
 
-  // ================= PESTAÑA 3 =================
   async function cargarTablasDefinitivasAdmin() {
     let jorStr = document.getElementById('jorConsultaAdmin').value; let colName = jorStr === "DEFINITIVA" ? "clasificacion_general_FINAL_MUNDIAL" : "clasificacion_general_jornada_" + jorStr;
     try {
@@ -526,7 +520,6 @@
   }
   document.getElementById('btnConsultarAdmin').addEventListener('click', cargarTablasDefinitivasAdmin);
 
-  // ================= PESTAÑA 4 (CONTROL Y RESET) =================
   document.getElementById('btnCargarControl').addEventListener('click', async () => {
      let jor = parseInt(document.getElementById('numJornadaControl').value); document.getElementById('txtCabeceraControl').innerText = "📊 Sincronización de Envíos | Jornada " + jor;
      try {
@@ -628,14 +621,17 @@
       } catch(e) { alert("Error durante el borrado masivo."); }
   });
 
-  // ================= PESTAÑA 5 (ESPECIALES FIJADOS) =================
-  document.getElementById('btnAbrirEspeciales').addEventListener('click', async () => { try { await setDoc(doc(db, "config_especiales", "general"), { numPreguntas: 9, preguntas: preguntasEspecialesGlobal, estado: "abierto" }, { merge: true }); alert("¡Abiertas para los jugadores!"); } catch(e){} });
+  // ================= PESTAÑA 5 (ESPECIALES) =================
+  document.getElementById('btnAbrirEspeciales').addEventListener('click', async () => { try { await setDoc(doc(db, "config_especiales", "general"), { estado: "abierto" }, { merge: true }); alert("¡Abiertas para los jugadores!"); } catch(e){} });
   document.getElementById('btnCerrarPublicarEspeciales').addEventListener('click', async () => { try { await setDoc(doc(db, "config_especiales", "general"), { estado: "cerrado" }, { merge: true }); alert("¡Cerradas y publicadas para visualización!"); } catch(e){} });
   
   document.getElementById('btnCargarControlEspeciales').addEventListener('click', async () => {
+    let btn = document.getElementById('btnCargarControlEspeciales');
+    let originalText = btn.innerText;
+    btn.innerText = "Cargando... ⏳";
     try {
-      const cfgSnap = await getDoc(doc(db, "config_especiales", "general")); if(!cfgSnap.exists()) return alert("No hay especiales.");
-      cfgEspecialesMem = cfgSnap.data(); let pregs = preguntasEspecialesGlobal;
+      const cfgSnap = await getDoc(doc(db, "config_especiales", "general"));
+      let pregs = preguntasEspecialesGlobal;
       const respSnap = await getDocs(collection(db, "pronosticos_especiales")); let dicResp = {}; respSnap.forEach(d => dicResp[d.id] = d.data().respuestas);
       let htmlChiv = `<thead><tr><th>Jugador</th><th>Envío Apuestas Especiales</th></tr></thead><tbody>`;
       listaOficialNombres.forEach(nom => { let est = dicResp[nom] ? 'exacto' : 'fallo'; let txt = dicResp[nom] ? 'Enviadas ✅' : 'Faltan ❌'; let bBorrar = dicResp[nom] ? `<button onclick="window.borrarEspeciales('${nom}')" style="margin-left:8px; background:none; border:none; cursor:pointer;">🗑️</button>` : ''; htmlChiv += `<tr><td><strong>${nom}</strong></td><td class="${est}">${txt}${bBorrar}</td></tr>`; });
@@ -654,7 +650,8 @@
          }
       });
       document.getElementById('renderCorreccionEspeciales').innerHTML = htmlEval; document.getElementById('zonaEvaluacionEspeciales').style.display = "block";
-    } catch(e) {}
+      btn.innerText = originalText;
+    } catch(e) { console.error(e); alert("Error cargando."); btn.innerText = originalText; }
   });
 
   window.borrarEspeciales = async function(nom) { if(confirm("¿Borrar respuestas especiales de " + nom + "?")) { await deleteDoc(doc(db, "pronosticos_especiales", nom)); alert("Borrado"); document.getElementById('btnCargarControlEspeciales').click(); } };
@@ -709,7 +706,6 @@
   // ========================================================
   function pintarTablas(listaJugadores, titulo, configJor = {}) {
     let jorStr = document.getElementById('jorConsultaAdmin').value; let isDef = (jorStr === "DEFINITIVA");
-
     let qTr = configJor.pregTronpa ? `<br><span style="font-size:10px; font-weight:normal; color:#7f8c8d;">${configJor.pregTronpa}</span>` : ''; let qBm = configJor.pregBomba ? `<br><span style="font-size:10px; font-weight:normal; color:#7f8c8d;">${configJor.pregBomba}</span>` : ''; let qVa = configJor.pregValerinha ? `<br><span style="font-size:10px; font-weight:normal; color:#7f8c8d;">${configJor.pregValerinha}</span>` : ''; let qIr = configJor.pregIrlinha ? `<br><span style="font-size:10px; font-weight:normal; color:#7f8c8d;">${configJor.pregIrlinha}</span>` : ''; let qSa = configJor.pregSantinha ? `<br><span style="font-size:10px; font-weight:normal; color:#7f8c8d;">${configJor.pregSantinha}</span>` : '';
 
     if(!isDef) {
@@ -725,7 +721,6 @@
 
        let resPartidos = window.realResultsActuales?.partidos || []; let resTronpa = window.realResultsActuales?.tronpa || "-"; let resBomba = window.realResultsActuales?.bomba || "-";
        let htmlPartidosTerminado = filasPartidos.map((f, i) => { let rRes = resPartidos[i] || "-"; return `<tr><td><strong>${nombresPartidos[i]}</strong></td><td style="font-weight:bold; background:#f4f6f6; color:#2c3e50;">${rRes}</td>${f}</tr>`; }).join("");
-
        let tdNomRow = tablaJornada.map(j => `<td style="font-weight:bold; color:white; background:#bdc3c7; font-size:11px;">${j.nombre}</td>`).join("");
 
        document.getElementById('zonaTablero').innerHTML = `<h2 style="text-align: center; color: #8e44ad;">📊 RESULTADOS JORNADA ${jorStr}</h2><div style="overflow-x:auto; width:100%;"><table><thead><tr><th>Partido</th><th style="background:#ecf0f1; color:#333;">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:#f4f6f6; color:#2c3e50;">${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:#f4f6f6; color:#2c3e50;">${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdVa1} </tr><tr><td><strong>Resultado Valerinha</strong></td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdVa2} </tr><tr><td><strong>Decisión Valerinha</strong></td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdVaDec} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdSa} </tr><tr><td><strong>TOTAL JORNADA</strong></td><td style="background:#e5e7e9; font-weight:bold; color:#2c3e50;">-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdNomRow} </tr></tbody></table></div>`; document.getElementById('zonaTablero').style.display = "block";
