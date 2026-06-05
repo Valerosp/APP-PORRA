@@ -120,7 +120,6 @@
 </head>
 <body>
 
-<!-- PANTALLA DE ACCESO (LOGIN) -->
 <div id="pantallaLogin">
     <div class="login-card">
         <div style="text-align: center; margin-bottom: 20px;">
@@ -160,11 +159,9 @@
     </div>
 </div>
 
-<!-- APLICACIÓN PRINCIPAL -->
 <div id="pantallaApp" style="display:none;">
     <div class="contenedor usuario">
       
-      <!-- CABECERA -->
       <div class="top-header">
            <div style="text-align: center; width: 45px;">
              <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="Mundial" style="width:100%; height:auto;">
@@ -177,7 +174,6 @@
 
       <div id="cargandoPlantillaMsg" style="text-align:center; font-weight:bold; padding:20px; color:var(--accent-gold);">Sincronizando Estado... ⏳</div>
 
-      <!-- VISTA 0: INICIO -->
       <div id="vistaInicio" style="display:none;">
           <div class="tarjeta clean">
               <div class="profile-header">
@@ -203,21 +199,18 @@
               </div>
           </div>
           
-          <!-- TARJETA CLICKABLE ESPECIALES (Aparece primero cuando está abierto) -->
           <div id="tarjetaEspecialesInicio" class="tarjeta" style="background:rgba(255,255,255,0.05) !important; cursor:pointer; display:none; border-left:4px solid var(--accent-green) !important;" title="Ir a Apuestas Especiales">
               <h2 style="color:var(--accent-green) !important; font-size:14px; margin-bottom:10px;">⭐ APUESTAS ESPECIALES</h2>
               <div style="font-size:16px; font-weight:bold; color:white;">¡Periodo Abierto!</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para enviar tus respuestas ➡️</div>
           </div>
 
-          <!-- TARJETA CLICKABLE JORNADA -->
           <div class="tarjeta" id="btnIrJornada" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" title="Ir a rellenar jornada">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">ESTADO DE LA JORNADA</h2>
               <div id="infoEstadoJornada" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para ir a la Jornada ➡️</div>
           </div>
 
-          <!-- TARJETA CLICKABLE VALERINHA -->
           <div class="tarjeta" id="btnIrValerinha" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" title="Ir a votar Valerinha">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">EL SALSEO (VALERINHA)</h2>
               <div id="infoEstadoValerinha" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
@@ -225,7 +218,6 @@
           </div>
       </div>
 
-      <!-- VISTA 1: HACER JORNADA -->
       <div id="vistaQuiniela" style="display:none;">
         <h2 id="tituloJornadaEnJuegoQ" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
         <div id="relojQuiniela" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -279,7 +271,6 @@
         </div>
       </div>
 
-      <!-- VISTA 2: VOTAR VALERINHA -->
       <div id="vistaValerinha" style="display: none;">
         <h2 id="tituloJornadaEnJuegoV" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
         <div id="relojValerinha" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -318,13 +309,11 @@
         </div>
       </div>
 
-      <!-- VISTA 3: JORNADA EN JUEGO -->
       <div id="vistaEnJuego" style="display:none;">
          <div id="renderMátrixCandadoBloqueo"></div>
          <div id="zonaTableroEnJuego" style="display:none; margin-top:20px;"></div>
       </div>
 
-      <!-- VISTA 4: RANKING -->
       <div id="vistaResultados" style="display: none;">
         <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important;">
           <h2 style="color:white !important; font-size:16px; margin-bottom:15px;">🏆 Histórico del Mundial</h2>
@@ -346,7 +335,7 @@
           <h2 style="text-align: center; color: var(--accent-gold); margin-top: 0; font-size:18px;">💰 PREMIOS ACUMULADOS</h2>
           <div style="display: flex; gap: 15px; flex-direction:column; margin-top:15px;">
             <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px;">
-              <h3 style="color: white; margin-top: 0; font-size:14px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px;">🏆 Campeones de Jornada</h3>
+              <h3 id="lblTituloGanadoresJugador" style="color: white; margin-top: 0; font-size:14px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px;">🏆 Campeones de Jornada</h3>
               <div id="historialGanadoresJugador" style="font-size: 12px; line-height: 1.6; white-space: pre-line;"></div>
             </div>
             <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px;">
@@ -357,7 +346,6 @@
         </div>
       </div>
 
-      <!-- VISTA 5: ESPECIALES Y CLASIF PURA -->
       <div id="vistaEspeciales" style="display:none;">
         <div class="tarjeta" style="background: linear-gradient(135deg, #0d5f49 0%, #06382a 100%) !important;">
           <h2 style="margin-top:0; color:white !important; font-size:22px; font-weight:900;">⭐ APUESTAS ESPECIALES</h2>
@@ -388,14 +376,12 @@
            <div id="renderMatrixEspeciales"></div>
         </div>
 
-        <!-- SALÓN DE LA FAMA -->
         <div id="zonaMiniRankings" style="display:none; margin-top: 40px; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1);">
             <h2 style="text-align: center; color: var(--accent-gold); margin-bottom:5px; margin-top:0;">🏆 SALÓN DE LA FAMA</h2>
             <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Top 3 jugadores con más puntos en apartados de salseo.</p>
             <div id="gridMiniRankings" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:15px;"></div>
         </div>
 
-        <!-- CLASIFICACIÓN SIN HISTORIAS -->
         <div id="zonaClasificacionPuraJugador" style="width:100%; margin-top: 40px; display: none; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); box-sizing:border-box;">
             <h2 style="text-align: center; color: white; margin-bottom:5px; margin-top:0;">📊 CLASIFICACIÓN SIN HISTORIAS</h2>
             <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Solo puntos de partidos exactos y signos.</p>
@@ -403,7 +389,6 @@
         </div>
       </div>
 
-      <!-- VISTA 6: REGLAS -->
       <div id="vistaReglas" style="display: none;">
         <div class="tarjeta clean" style="border-left:none !important;">
           <h2 style="color: white !important; margin-top:0; text-align:center; font-size: 20px;">📖 REGLAS OFICIALES</h2>
@@ -474,8 +459,8 @@
       "Adivinar mejor portero", 
       "Adivinar mejor jugador joven", 
       "Adivinar juego limpio", 
-      "¿Quién sumará más puntos sin historias?", 
-      "¿Quién sumará menos puntos sin historias?" 
+      "¿Quién sumará más Puntos Puros?", 
+      "¿Quién sumará menos Puntos Puros?" 
   ];
 
   window.jorQuinielaActual = 1; 
@@ -577,18 +562,20 @@
       document.getElementById('modalContenido').innerHTML = html;
   };
 
-  function renderMiniRankings(lista) {
+  window.renderMiniRankings = function(lista) {
       const cats = [
-          { id: 'p_val_gen', title: '👑 Reyes Valerinha', color: 'var(--accent-gold)' },
-          { id: 'p_irl_gen', title: '🏃‍♂️ Héroes Irlinha', color: '#34d399' },
-          { id: 'p_san_gen', title: '🇪🇸 Villanos Santinha', color: '#f87171' },
-          { id: 'p_bomba_gen', title: '💣 Expertos en Bombas', color: '#f43f5e' },
-          { id: 'p_tronpa_gen', title: '🌩️ Gurús TroNpá!', color: '#60a5fa' }
+          { id: 'p_val_gen', title: '👑 Reyes Valerinha', color: 'var(--accent-gold)', sort: 'asc' }, // Más negativos
+          { id: 'p_irl_gen', title: '🏃‍♂️ Paquetes de la Irlinha', color: '#34d399', sort: 'desc' }, // Más positivos
+          { id: 'p_san_gen', title: '🇪🇸 Villanos Santinha', color: '#f87171', sort: 'asc' }, // Más negativos
+          { id: 'p_bomba_gen', title: '💣 Expertos en Bombas', color: '#f43f5e', sort: 'desc' },
+          { id: 'p_tronpa_gen', title: '🌩️ Gurús TroNpá!', color: '#60a5fa', sort: 'desc' }
       ];
       let html = '';
       cats.forEach(c => {
-          let sorted = [...lista].sort((a,b) => b[c.id] - a[c.id]).filter(j => j[c.id] > 0 || j[c.id] < 0);
+          let filtered = lista.filter(j => c.sort === 'asc' ? j[c.id] < 0 : j[c.id] > 0);
+          let sorted = filtered.sort((a,b) => c.sort === 'asc' ? a[c.id] - b[c.id] : b[c.id] - a[c.id]);
           let top3 = sorted.slice(0, 3);
+          
           html += `<div style="background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.05); border-radius:8px; padding:12px;">
               <h3 style="color:${c.color}; font-size:13px; margin-top:0; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:5px; text-transform:uppercase;">${c.title}</h3>`;
           if(top3.length === 0) { 
@@ -687,10 +674,17 @@
               let d = doc.data(); 
               if(d.jugador && doc.id !== "GANADORES_JORNADA" && doc.id !== "RESULTADOS_REALES") {
                   lista.push({ 
-                      nombre: d.jugador, totalGeneral: d.puntosAcumulados||0, puntosFinalesMundial: d.puntosFinalesMundial||0, 
-                      puntosPurosAcumulados: d.puntosPurosAcumulados||0, c_exactos_gen: d.resultadosAcertados||0, 
-                      c_signos_gen: d.pronosticosAcertados||0, p_val_gen: d.puntosValerinhas||0, p_irl_gen: d.puntosIrlinhas||0, 
-                      p_san_gen: d.puntosSantinhas||0, p_bomba_gen: d.puntosBombaGarnacha||0, p_tronpa_gen: d.puntosTronpa||0, 
+                      nombre: d.jugador, 
+                      totalGeneral: d.puntosAcumulados||0, 
+                      puntosFinalesMundial: d.puntosFinalesMundial||0, 
+                      puntosPurosAcumulados: d.puntosPurosAcumulados||0, 
+                      c_exactos_gen: d.resultadosAcertados||0, 
+                      c_signos_gen: d.pronosticosAcertados||0, 
+                      p_val_gen: d.puntosValerinhas||0, 
+                      p_irl_gen: d.puntosIrlinhas||0, 
+                      p_san_gen: d.puntosSantinhas||0, 
+                      p_bomba_gen: d.puntosBombaGarnacha||0, 
+                      p_tronpa_gen: d.puntosTronpa||0, 
                       gananciasTotales: d.gananciasAcumuladas||0 
                   }); 
               }
@@ -724,13 +718,19 @@
           let tarjetaInicioEsp = document.getElementById('tarjetaEspecialesInicio');
 
           if (estadoEsp === "oculto") {
-              btnEsp.style.display = "none"; txtEsp.style.display = "block"; tarjetaInicioEsp.style.display = "none";
+              btnEsp.style.display = "none"; 
+              txtEsp.style.display = "block"; 
+              tarjetaInicioEsp.style.display = "none";
           } else if (estadoEsp === "abierto") {
-              btnEsp.style.display = "block"; btnEsp.innerText = "APUESTAS ESPECIALES DISPONIBLES";
-              txtEsp.style.display = "none"; tarjetaInicioEsp.style.display = "block";
+              btnEsp.style.display = "block"; 
+              btnEsp.innerText = "APUESTAS ESPECIALES DISPONIBLES";
+              txtEsp.style.display = "none"; 
+              tarjetaInicioEsp.style.display = "block";
           } else if (estadoEsp === "cerrado") {
-              btnEsp.style.display = "block"; btnEsp.innerText = "COMPROBAR APUESTAS ESPECIALES";
-              txtEsp.style.display = "none"; tarjetaInicioEsp.style.display = "none";
+              btnEsp.style.display = "block"; 
+              btnEsp.innerText = "COMPROBAR APUESTAS ESPECIALES";
+              txtEsp.style.display = "none"; 
+              tarjetaInicioEsp.style.display = "none";
           }
       } catch(e) {}
 
@@ -758,13 +758,13 @@
       if(!esJornadaQuinielaCerrada) {
          let limiteDateQ = new Date(configQ.fechaLimite).toLocaleString([], {year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute:'2-digit'});
          document.getElementById('infoEstadoJornada').innerHTML = `Jornada ${targetJor} en juego.<br><span style="font-size:13px; color:var(--accent-green); font-weight:normal;">Límite: ${limiteDateQ}</span>`;
-         document.getElementById('tituloJornadaEnJuegoQ').innerText = "JORNADA " + targetJor + " EN JUEGO"; 
+         document.getElementById('tituloJornadaEnJuegoQ').innerText = "JORNADA " + targetJor + " EN JUEGO";
          document.getElementById('relojQuiniela').innerText = "✅ ABIERTO | LÍMITE: " + limiteDateQ; 
          document.getElementById('relojQuiniela').style.color = "var(--accent-green)"; 
          document.getElementById('relojQuiniela').style.borderColor = "var(--accent-green)";
       } else {
          document.getElementById('infoEstadoJornada').innerHTML = `Jornada cerrada (J${targetJor}).<br><span style="font-size:13px; color:#ef4444; font-weight:normal;">Plazo finalizado</span>`;
-         document.getElementById('tituloJornadaEnJuegoQ').innerText = "JORNADA " + targetJor + " CERRADA"; 
+         document.getElementById('tituloJornadaEnJuegoQ').innerText = "JORNADA " + targetJor + " CERRADA";
          document.getElementById('relojQuiniela').innerText = "🔒 JORNADA CERRADA"; 
          document.getElementById('relojQuiniela').style.color = "#ef4444"; 
          document.getElementById('relojQuiniela').style.borderColor = "#ef4444";
@@ -781,11 +781,13 @@
 
       let htmlPartidos = "";
       configQ_Data.partidos.forEach((p, i) => { 
-        let flagL = seleccionesMundial[p.local] || ""; let flagV = seleccionesMundial[p.visita] || ""; 
+        let flagL = seleccionesMundial[p.local] || ""; 
+        let flagV = seleccionesMundial[p.visita] || ""; 
         let codL = codigosMundial[p.local] || p.local.substring(0,3).toUpperCase(); 
         let codV = codigosMundial[p.visita] || p.visita.substring(0,3).toUpperCase();
         
-        let valL = yaEnviado ? pData.partidos[i].local : 0; let valV = yaEnviado ? pData.partidos[i].visita : 0;
+        let valL = yaEnviado ? pData.partidos[i].local : 0; 
+        let valV = yaEnviado ? pData.partidos[i].visita : 0;
         let btnStyle = esJornadaQuinielaCerrada ? "display:none;" : "display:flex;";
         
         htmlPartidos += `
@@ -1392,6 +1394,12 @@
     if(!ganadoresDeLaJornada) ganadoresDeLaJornada = []; 
     document.getElementById('historialGanadores' + containerPrefix).innerHTML = ganadoresDeLaJornada.map(txt => `<p style="margin: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px;">${txt}</p>`).join("");
     
+    let lbl = document.getElementById('lblTituloGanadoresJugador');
+    if(lbl) {
+        let jorStr = document.getElementById('jorConsulta').value;
+        lbl.innerText = (jorStr === "DEFINITIVA") ? "🏆 Campeones del Mundial" : "🏆 Campeones de Jornada";
+    }
+
     let htmlGanancias = `<table class="tabla-clasif" style="border-collapse:collapse;"><thead><tr><th style="text-align:left;">JUGADOR</th><th style="text-align:right;">GANANCIAS (€)</th></tr></thead><tbody>`;
     let rankingGanancias = [...listaJugadores].sort((a, b) => b.gananciasTotales - a.gananciasTotales);
     rankingGanancias.forEach(g => { 
