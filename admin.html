@@ -52,7 +52,6 @@
     <button id="btnTabAdmin5" class="pestana" style="background:#e84393; color:white;">⭐ 6. Especiales</button>
   </div>
 
-  <!-- PESTAÑA 0: CONFIGURAR JORNADA -->
   <div id="vistaAdmin0">
     <div class="tarjeta" style="background: #fffaf0; border-left: 5px solid #f39c12;">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 15px;">
@@ -97,7 +96,6 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 1: PROVISIONAL -->
   <div id="vistaAdmin1" style="display: none;">
     <div class="tarjeta" style="background: #e8f4f8; border-left: 5px solid #2980b9;">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 15px;">
@@ -133,7 +131,6 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 2: DEFINITIVA -->
   <div id="vistaAdmin2" style="display: none;">
     <div class="tarjeta" style="background: #e8f8f5; border-left: 5px solid #27ae60;">
       <div class="fila">
@@ -154,7 +151,6 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 3: HISTÓRICO -->
   <div id="vistaAdmin3" style="display: none;">
     <div class="tarjeta" style="background: #f4ecf8; border-left: 5px solid #8e44ad;">
       <h2 style="margin-top:0; color:#8e44ad; font-size:18px;">🏆 Histórico de Jornadas Oficiales</h2>
@@ -170,7 +166,6 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 4: CONTROL Y RESET -->
   <div id="vistaAdmin4" style="display:none;">
     <div class="tarjeta" style="background: #ebf5fb; border-left: 5px solid #2c3e50;">
       <h2 style="color: #2c3e50; margin-top:0;">📡 Panel de Control y Envíos</h2>
@@ -226,7 +221,6 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 5: ESPECIALES -->
   <div id="vistaAdmin5" style="display:none;">
     <div class="tarjeta" style="background: #fce4ec; border-left: 5px solid #e84393;">
       <h2 style="color: #e84393; margin-top:0;">⭐ Configurar Apuestas Especiales (Pre-Mundial)</h2>
@@ -249,6 +243,8 @@
          <div id="tablaPrevisualizacionEspeciales" style="display:none; margin-top:20px; overflow-x:auto;"></div>
          <button id="btnPublicarEvaluacionEspeciales" class="btn-principal" style="background:#2980b9; margin-top:20px; display:none;">👁️ Publicar Evaluación</button>
          <button id="btnCalcularMundialEspeciales" class="btn-principal" style="background:#8e44ad; margin-top:20px; display:none;">🏆 Calcular Clasificación Final DEFINITIVA</button>
+         
+         <button id="btnBorrarEvaluacionEspeciales" class="btn-principal" style="background:#c0392b; margin-top:20px;">🗑️ Eliminar Evaluación Publicada</button>
       </div>
     </div>
   </div>
@@ -529,7 +525,7 @@
           let counts = {};
           Object.keys(votos).forEach(att => {
               let v = votos[att];
-              if (v.tipo === "restar" && v.objetivo !== "") {
+              if (v.tipo === "restar" && v.objetivo) {
                   let target = redirigidos[att] ? v.objetivo2 : v.objetivo;
                   if(!counts[target]) counts[target] = [];
                   counts[target].push(att);
@@ -847,6 +843,20 @@
 
   document.getElementById('btnPublicarEvaluacionEspeciales').addEventListener('click', async () => {
       try { await setDoc(doc(db, "config_especiales", "evaluacion"), { resultados: evaluacionEspecialesMemoria, publicado: true }); alert("¡Evaluación publicada en el Panel del Jugador!"); document.getElementById('btnCalcularMundialEspeciales').style.display = "block"; } catch(e) {}
+  });
+
+  document.getElementById('btnBorrarEvaluacionEspeciales').addEventListener('click', async () => {
+      if(!confirm("⚠️ ¿Seguro que quieres borrar la evaluación de Especiales?\n\nLos jugadores dejarán de ver estos puntos y tendrás que volver a evaluar y publicar para que reaparezcan.")) return;
+      try {
+          await deleteDoc(doc(db, "config_especiales", "evaluacion"));
+          evaluacionEspecialesMemoria = {};
+          document.getElementById('tablaPrevisualizacionEspeciales').style.display = "none";
+          document.getElementById('btnPublicarEvaluacionEspeciales').style.display = "none";
+          document.getElementById('btnCalcularMundialEspeciales').style.display = "none";
+          alert("🗑️ Evaluación eliminada. Puedes volver a evaluar cuando quieras.");
+      } catch(e) {
+          alert("Error al borrar.");
+      }
   });
 
   document.getElementById('btnCalcularMundialEspeciales').addEventListener('click', async () => {
