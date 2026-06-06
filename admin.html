@@ -52,7 +52,6 @@
     <button id="btnTabAdmin5" class="pestana" style="background:#e84393; color:white;">⭐ 6. Especiales</button>
   </div>
 
-  <!-- PESTAÑA 0: CONFIGURAR JORNADA -->
   <div id="vistaAdmin0">
     <div class="tarjeta" style="background: #fffaf0; border-left: 5px solid #f39c12;">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 15px;">
@@ -97,7 +96,6 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 1: PROVISIONAL -->
   <div id="vistaAdmin1" style="display: none;">
     <div class="tarjeta" style="background: #e8f4f8; border-left: 5px solid #2980b9;">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 15px;">
@@ -133,7 +131,6 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 2: DEFINITIVA -->
   <div id="vistaAdmin2" style="display: none;">
     <div class="tarjeta" style="background: #e8f8f5; border-left: 5px solid #27ae60;">
       <div class="fila">
@@ -154,7 +151,6 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 3: HISTÓRICO -->
   <div id="vistaAdmin3" style="display: none;">
     <div class="tarjeta" style="background: #f4ecf8; border-left: 5px solid #8e44ad;">
       <h2 style="margin-top:0; color:#8e44ad; font-size:18px;">🏆 Histórico de Jornadas Oficiales</h2>
@@ -170,7 +166,6 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 4: CONTROL Y RESET -->
   <div id="vistaAdmin4" style="display:none;">
     <div class="tarjeta" style="background: #ebf5fb; border-left: 5px solid #2c3e50;">
       <h2 style="color: #2c3e50; margin-top:0;">📡 Panel de Control y Envíos</h2>
@@ -226,7 +221,6 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 5: ESPECIALES -->
   <div id="vistaAdmin5" style="display:none;">
     <div class="tarjeta" style="background: #fce4ec; border-left: 5px solid #e84393;">
       <h2 style="color: #e84393; margin-top:0;">⭐ Configurar Apuestas Especiales (Pre-Mundial)</h2>
@@ -327,6 +321,26 @@
   }
   function calcEsp(aciertos) { if(aciertos === 0) return 0; if(aciertos === 1) return 10; if(aciertos === 2) return 15; if(aciertos === 3) return 18; return 18 + ((aciertos - 3) * 2); }
 
+  function obtenerGanadoresGeneral(jugadores, campoPuntos) {
+    if(jugadores.length === 0) return [];
+    
+    let maxPts = Math.max(...jugadores.map(j => j[campoPuntos])); 
+    let emps = jugadores.filter(j => j[campoPuntos] === maxPts); 
+    if(emps.length === 1) return emps.map(j => j.jugador || j.nombre);
+    
+    let maxEx = Math.max(...emps.map(j => j.resultadosAcertados)); 
+    emps = emps.filter(j => j.resultadosAcertados === maxEx); 
+    if(emps.length === 1) return emps.map(j => j.jugador || j.nombre);
+    
+    let maxSig = Math.max(...emps.map(j => j.pronosticosAcertados)); 
+    emps = emps.filter(j => j.pronosticosAcertados === maxSig); 
+    if(emps.length === 1) return emps.map(j => j.jugador || j.nombre);
+    
+    let maxResto = Math.max(...emps.map(j => (j.puntosFinalesMundial || j.puntosAcumulados) - j.puntosPurosAcumulados));
+    emps = emps.filter(j => ((j.puntosFinalesMundial || j.puntosAcumulados) - j.puntosPurosAcumulados) === maxResto); 
+    return emps.map(j => j.jugador || j.nombre);
+  }
+
   function obtenerGanadoresDesempate(jugadores, campoPuntos) {
     if(jugadores.length === 0) return [];
     let maxPts = Math.max(...jugadores.map(j => j[campoPuntos])); let emps = jugadores.filter(j => j[campoPuntos] === maxPts); if(emps.length === 1) return emps.map(j => j.nombre);
@@ -334,15 +348,6 @@
     let maxSig = Math.max(...emps.map(j => j.c_signos)); emps = emps.filter(j => j.c_signos === maxSig); if(emps.length === 1) return emps.map(j => j.nombre);
     emps.forEach(j => { j.esp_acertadas = (j.statTronpa === "exacto" ? 1 : 0) + (j.p_bomba > 0 ? 1 : 0) + (j.statVal === "exacto" ? 1 : 0) + (j.statIrl === "exacto" ? 1 : 0) + (j.statSan === "exacto" ? 1 : 0); });
     let maxEsp = Math.max(...emps.map(j => j.esp_acertadas)); return emps.filter(j => j.esp_acertadas === maxEsp).map(j => j.nombre);
-  }
-
-  function obtenerGanadoresGeneral(jugadores, campoPuntos) {
-    if(jugadores.length === 0) return [];
-    let maxPts = Math.max(...jugadores.map(j => j[campoPuntos])); let emps = jugadores.filter(j => j[campoPuntos] === maxPts); if(emps.length === 1) return emps.map(j => j.nombre);
-    let maxEx = Math.max(...emps.map(j => j.c_exactos_gen)); emps = emps.filter(j => j.c_exactos_gen === maxEx); if(emps.length === 1) return emps.map(j => j.nombre);
-    let maxSig = Math.max(...emps.map(j => j.c_signos_gen)); emps = emps.filter(j => j.c_signos_gen === maxSig); if(emps.length === 1) return emps.map(j => j.nombre);
-    let maxResto = Math.max(...emps.map(j => (j.puntosFinalesMundial || j.totalGeneral) - j.puntosPurosAcumulados));
-    emps = emps.filter(j => ((j.puntosFinalesMundial || j.totalGeneral) - j.puntosPurosAcumulados) === maxResto); return emps.map(j => j.nombre);
   }
 
   function switchTab(id) {
@@ -531,7 +536,7 @@
           let counts = {};
           Object.keys(votos).forEach(att => {
               let v = votos[att];
-              if (v.tipo === "restar" && v.objetivo !== "") {
+              if (v.tipo === "restar" && v.objetivo) {
                   let target = redirigidos[att] ? v.objetivo2 : v.objetivo;
                   if(!counts[target]) counts[target] = [];
                   counts[target].push(att);
