@@ -85,14 +85,9 @@
         .tabla-matriz th, .tabla-matriz td { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.05); }
         
         .tabla-matriz thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 6px 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 10px; }
-        
-        /* Columnas 1 y 2 fijadas a la izquierda */
         .tabla-matriz th:nth-child(1), .tabla-matriz td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; width: 85px !important; min-width: 85px !important; max-width: 85px !important; white-space: normal !important; word-wrap: break-word; text-align: left; padding-left: 5px; font-size: 9px; line-height: 1.2; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
         .tabla-matriz th:nth-child(2), .tabla-matriz td:nth-child(2) { position: sticky; left: 85px; z-index: 5; background: #111827; width: 22px !important; min-width: 22px !important; max-width: 22px !important; border-right: 1px solid rgba(255,255,255,0.1); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
-        
-        /* Intersección de cabecera y columnas fijas */
         .tabla-matriz thead th:nth-child(1), .tabla-matriz thead th:nth-child(2) { z-index: 15; background: #111827; }
-        
         .tabla-matriz th:not(:nth-child(1)):not(:nth-child(2)) { width: 45px !important; min-width: 45px !important; max-width: 45px !important; }
         .tabla-matriz tbody td { padding: 2px; text-align: center; height: 45px; vertical-align: middle; overflow: hidden; }
 
@@ -101,12 +96,8 @@
         .tabla-clasif { width: max-content; min-width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 0; font-size: 12px; }
         .tabla-clasif th, .tabla-clasif td { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.05); }
         .tabla-clasif thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 8px 10px; white-space: nowrap; }
-        
-        /* Columnas 1 y 2 fijadas a la izquierda */
         .tabla-clasif th:nth-child(1), .tabla-clasif td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; width: 35px; min-width: 35px; text-align: center; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
         .tabla-clasif th:nth-child(2), .tabla-clasif td:nth-child(2) { position: sticky; left: 35px; z-index: 5; background: #111827; width: 100px; min-width: 100px; text-align: left; padding-left: 10px; border-right: 1px solid rgba(255,255,255,0.1); box-shadow: 2px 0 4px rgba(0,0,0,0.3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        
-        /* Intersección */
         .tabla-clasif thead th:nth-child(1), .tabla-clasif thead th:nth-child(2) { z-index: 15; background: #111827; }
         .tabla-clasif tbody td { padding: 8px 10px; text-align: center; }
 
@@ -139,27 +130,35 @@
         
         <select id="loginNombre" style="margin-bottom:15px; font-size:16px;">
             <option value="">- Selecciona tu Jugador -</option>
+            <option value="L'Ant">L'Ant</option>
+            <option value="Barri">Barri</option>
             <option value="Alberto">Alberto</option>
-            <option value="Anto">Anto</option>
             <option value="Gonxi">Gonxi</option>
-            <option value="Martos">Martos</option>
-            <option value="Santos">Santos</option>
-            <option value="Licos">Licos</option>
-            <option value="Espy">Espy</option>
+            <option value="Héctor">Héctor</option>
+            <option value="Irles">Irles</option>
+            <option value="Bambino">Bambino</option>
             <option value="Tron">Tron</option>
+            <option value="Sants">Sants</option>
+            <option value="Valer">Valer</option>
+            <option value="Víctor">Víctor</option>
+            <option value="Dardos">Dardos</option>
+            <option value="Bicho">Bicho</option>
+            <option value="Vinxi">Vinxi</option>
+            <option value="Mazon">Mazon</option>
+            <option value="Junior">Junior</option>
+            <option value="Txus">Txus</option>
+            <option value="Ors">Ors</option>
+            <option value="Pech">Pech</option>
+            <option value="Manolo">Manolo</option>
+            <option value="Gil">Gil</option>
             <option value="Pampli">Pampli</option>
             <option value="Jaime">Jaime</option>
+            <option value="Martos">Martos</option>
+            <option value="Raúl">Raúl</option>
+            <option value="Boque">Boque</option>
+            <option value="Isi">Isi</option>
             <option value="Fran">Fran</option>
-            <option value="Ayala">Ayala</option>
-            <option value="Salva">Salva</option>
-            <option value="Genu">Genu</option>
-            <option value="Bicho">Bicho</option>
-            <option value="Dardos">Dardos</option>
-            <option value="Bambino">Bambino</option>
-            <option value="Hector">Hector</option>
-            <option value="Mazon">Mazon</option>
-            <option value="Ximo">Ximo</option>
-            <option value="Txus">Txus</option>
+            <option value="Kevin">Kevin</option>
         </select>
         <input type="password" id="loginPin" placeholder="Tu PIN secreto..." style="margin-bottom:25px; text-align:center;">
         
@@ -210,7 +209,7 @@
           
           <div id="tarjetaEspecialesInicio" class="tarjeta" style="background:rgba(255,255,255,0.05) !important; cursor:pointer; display:none; border-left:4px solid var(--accent-green) !important;" title="Ir a Apuestas Especiales">
               <h2 style="color:var(--accent-green) !important; font-size:14px; margin-bottom:10px;">⭐ APUESTAS ESPECIALES</h2>
-              <div style="font-size:16px; font-weight:bold; color:white;">¡Periodo Abierto!</div>
+              <div id="infoEstadoEspeciales" style="font-size:16px; font-weight:bold; color:white;">¡Periodo Abierto!</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para enviar tus respuestas ➡️</div>
           </div>
 
@@ -387,7 +386,7 @@
 
         <div id="zonaMiniRankings" style="display:none; margin-top: 40px; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1);">
             <h2 style="text-align: center; color: var(--accent-gold); margin-bottom:5px; margin-top:0;">🏆 SALÓN DE LA FAMA</h2>
-            <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Top 3 jugadores con más puntos en apartados de salseo.</p>
+            <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Top 3 jugadores en apartados de salseo.</p>
             <div id="gridMiniRankings" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:15px;"></div>
         </div>
 
@@ -442,9 +441,9 @@
           <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:8px;">
             <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">5️⃣ Premios y Especiales</h3>
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
-              <li><strong>Premios por Jornada:</strong> El ganador de la Clasificación Provisional se lleva <strong>5.80€</strong> y el ganador de la Clasificación Definitiva (tras el salseo) se lleva <strong>29€</strong>. En caso de empate, el premio se divide entre los ganadores.</li>
+              <li><strong>Premios por Jornada:</strong> El ganador de la Clasificación Provisional se lleva <strong>5.80€</strong> y el ganador de la Clasificación Definitiva (tras el salseo) se lleva <strong>29.00€</strong>. En caso de empate, el premio se divide equitativamente.</li>
               <li><strong>Apuestas Especiales:</strong> Se lanzan antes del inicio del torneo. La evaluación de estos puntos extra se publicará al final del Mundial y se sumará a los puntos que tengas en la Jornada 8.</li>
-              <li><strong>Premios del Mundial:</strong> El ganador de la "General Definitiva" (con salseos y especiales) y el ganador de la clasificación "Sin Historias" (solo puntos de partidos) se reparten los botes acumulados de la liga.</li>
+              <li><strong>Premios del Mundial:</strong> El ganador de la "General Definitiva" (con salseos y especiales) se lleva el gran bote de <strong>261.00€</strong>. El ganador de la clasificación "Sin Historias" (solo puntos de partidos) se lleva <strong>98.60€</strong>. Estos premios se sumarán directamente a la Cartera Virtual.</li>
             </ul>
           </div>
 
@@ -475,8 +474,8 @@
   const app = initializeApp(firebaseConfig); 
   const db = getFirestore(app);
 
-  const pinesSecretos = { "Alberto": "1111", "Anto": "2222", "Gonxi": "3333", "Martos": "4444", "Santos": "5555", "Licos": "6666", "Espy": "7777", "Tron": "8888", "Pampli": "9999", "Jaime": "1010", "Fran": "1212", "Ayala": "1313", "Salva": "1414", "Genu": "1515", "Bicho": "1616", "Dardos": "1717", "Bambino": "1818", "Hector": "1919", "Mazon": "2020", "Ximo": "2121", "Txus": "2323" };
-  const listaOficialNombres = ["Alberto","Anto","Gonxi","Martos","Santos","Licos","Espy","Tron","Pampli","Jaime","Fran","Ayala","Salva","Genu","Bicho","Dardos","Bambino","Hector","Mazon","Ximo","Txus"];
+  const pinesSecretos = { "L'Ant": "1111", "Barri": "2222", "Alberto": "3333", "Gonxi": "4444", "Héctor": "5555", "Irles": "6666", "Bambino": "7777", "Tron": "8888", "Sants": "9999", "Valer": "1010", "Víctor": "1212", "Dardos": "1313", "Bicho": "1414", "Vinxi": "1515", "Mazon": "1616", "Junior": "1717", "Txus": "1818", "Ors": "1919", "Pech": "2020", "Manolo": "2121", "Gil": "2323", "Pampli": "2424", "Jaime": "2525", "Martos": "2626", "Raúl": "2727", "Boque": "2828", "Isi": "2929", "Fran": "3030", "Kevin": "3131" };
+  const listaOficialNombres = ["L'Ant", "Barri", "Alberto", "Gonxi", "Héctor", "Irles", "Bambino", "Tron", "Sants", "Valer", "Víctor", "Dardos", "Bicho", "Vinxi", "Mazon", "Junior", "Txus", "Ors", "Pech", "Manolo", "Gil", "Pampli", "Jaime", "Martos", "Raúl", "Boque", "Isi", "Fran", "Kevin"];
   const seleccionesMundial = { "Alemania": "🇩🇪", "Arabia Saudita": "🇸🇦", "Argentina": "🇦🇷", "Argelia": "🇩🇿", "Australia": "🇦🇺", "Austria": "🇦🇹", "Bélgica": "🇧🇪", "Bosnia y Herzegovina": "🇧🇦", "Brasil": "🇧🇷", "Cabo Verde": "🇨🇻", "Canadá": "🇨🇦", "Catar": "🇶🇦", "Colombia": "🇨🇴", "Corea del Sur": "🇰🇷", "Costa de Marfil": "🇨🇮", "Croacia": "🇭🇷", "Curazao": "🇨🇼", "Ecuador": "🇪🇨", "Egipto": "🇪🇬", "El Salvador": "🇸🇻", "Escocia": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "España": "🇪🇸", "Estados Unidos": "🇺🇸", "Francia": "🇫🇷", "Ghana": "🇬🇭", "Haití": "🇭🇹", "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Irak": "🇮🇶", "Irán": "🇮🇷", "Japón": "🇯🇵", "Jordania": "🇯🇴", "Marruecos": "🇲🇦", "México": "🇲🇽", "Noruega": "🇳🇴", "Nueva Zelanda": "🇳🇿", "Países Bajos": "🇳🇱", "Panamá": "🇵🇦", "Paraguay": "🇵🇾", "Portugal": "🇵🇹", "RD Congo": "🇨🇩", "República Checa": "🇨🇿", "Senegal": "🇸🇳", "Sudáfrica": "🇿🇦", "Suecia": "🇸🇪", "Suiza": "🇨🇭", "Túnez": "🇹🇳", "Turquía": "🇹🇷", "Uzbekistán": "🇺🇿" };
   const codigosMundial = { "Alemania": "GER", "Arabia Saudita": "KSA", "Argentina": "ARG", "Argelia": "ALG", "Australia": "AUS", "Austria": "AUT", "Bélgica": "BEL", "Bosnia y Herzegovina": "BIH", "Brasil": "BRA", "Cabo Verde": "CPV", "Canadá": "CAN", "Catar": "QAT", "Colombia": "COL", "Corea del Sur": "KOR", "Costa de Marfil": "CIV", "Croacia": "CRO", "Curazao": "CUW", "Ecuador": "ECU", "Egipto": "EGY", "El Salvador": "SLV", "Escocia": "SCO", "España": "ESP", "Estados Unidos": "USA", "Francia": "FRA", "Ghana": "GHA", "Haití": "HAI", "Inglaterra": "ENG", "Irak": "IRQ", "Irán": "IRN", "Japón": "JPN", "Jordania": "JOR", "Marruecos": "MAR", "México": "MEX", "Noruega": "NOR", "Nueva Zelanda": "NZL", "Países Bajos": "NED", "Panamá": "PAN", "Paraguay": "PAR", "Portugal": "POR", "RD Congo": "COD", "República Checa": "CZE", "Senegal": "SEN", "Sudáfrica": "RSA", "Suecia": "SWE", "Suiza": "SUI", "Túnez": "TUN", "Turquía": "TUR", "Uzbekistán": "UZB" };
   const puntosFIFA = { "Alemania": 1730, "Arabia Saudita": 1421, "Argentina": 1875, "Argelia": 1564, "Australia": 1581, "Austria": 1593, "Bélgica": 1735, "Bosnia y Herzegovina": 1386, "Brasil": 1761, "Cabo Verde": 1366, "Canadá": 1556, "Catar": 1455, "Colombia": 1693, "Corea del Sur": 1589, "Costa de Marfil": 1533, "Croacia": 1717, "Curazao": 1295, "Ecuador": 1595, "Egipto": 1563, "El Salvador": 1380, "Escocia": 1498, "España": 1876, "Estados Unidos": 1673, "Francia": 1877, "Ghana": 1346, "Haití": 1292, "Inglaterra": 1826, "Irak": 1447, "Irán": 1615, "Japón": 1660, "Jordania": 1391, "Marruecos": 1756, "México": 1681, "Noruega": 1551, "Nueva Zelanda": 1282, "Países Bajos": 1758, "Panamá": 1541, "Paraguay": 1504, "Portugal": 1764, "RD Congo": 1478, "República Checa": 1501, "Senegal": 1689, "Sudáfrica": 1430, "Suecia": 1515, "Suiza": 1649, "Túnez": 1483, "Turquía": 1599, "Uzbekistán": 1465 };
@@ -602,8 +601,8 @@
       ];
       let html = '';
       cats.forEach(c => {
-          let filtered = lista.filter(j => c.sort === 'asc' ? j[c.id] < 0 : j[c.id] > 0);
-          let sorted = filtered.sort((a,b) => c.sort === 'asc' ? a[c.id] - b[c.id] : b[c.id] - a[c.id]);
+          let filtered = lista.filter(j => c.sort === 'asc' ? Number(j[c.id]) < 0 : Number(j[c.id]) > 0);
+          let sorted = filtered.sort((a,b) => c.sort === 'asc' ? Number(a[c.id]) - Number(b[c.id]) : Number(b[c.id]) - Number(a[c.id]));
           let top3 = sorted.slice(0, 3);
           
           html += `<div style="background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.05); border-radius:8px; padding:12px;">
@@ -725,10 +724,10 @@
           
           let sortBy = isDefinitiva ? "puntosFinalesMundial" : "totalGeneral";
           lista.sort((a, b) => { 
-              if(b[sortBy] !== a[sortBy]) return b[sortBy] - a[sortBy]; 
-              if(b.c_exactos_gen !== a.c_exactos_gen) return b.c_exactos_gen - a.c_exactos_gen; 
-              if(b.c_signos_gen !== a.c_signos_gen) return b.c_signos_gen - a.c_signos_gen; 
-              return ((b.puntosFinalesMundial||b.totalGeneral) - b.puntosPurosAcumulados) - ((a.puntosFinalesMundial||a.totalGeneral) - a.puntosPurosAcumulados); 
+              if(Number(b[sortBy]) !== Number(a[sortBy])) return Number(b[sortBy]) - Number(a[sortBy]); 
+              if(Number(b.c_exactos_gen) !== Number(a.c_exactos_gen)) return Number(b.c_exactos_gen) - Number(a.c_exactos_gen); 
+              if(Number(b.c_signos_gen) !== Number(a.c_signos_gen)) return Number(b.c_signos_gen) - Number(a.c_signos_gen); 
+              return ((Number(b.puntosFinalesMundial)||Number(b.totalGeneral)) - Number(b.puntosPurosAcumulados)) - ((Number(a.puntosFinalesMundial)||Number(a.totalGeneral)) - Number(a.puntosPurosAcumulados)); 
           });
           
           let myIndex = lista.findIndex(j => j.nombre === window.jugadorLogueado);
@@ -745,17 +744,26 @@
     try {
         const snapEsp = await getDoc(doc(db, "config_especiales", "general"));
         let estadoEsp = "oculto";
-        if (snapEsp.exists()) { estadoEsp = snapEsp.data().estado || "oculto"; }
+        let limiteEsp = null;
+        if (snapEsp.exists()) { 
+            estadoEsp = snapEsp.data().estado || "oculto"; 
+            limiteEsp = snapEsp.data().fechaLimite || null;
+        }
         
         let btnEsp = document.getElementById('btnVerEspeciales');
         let txtEsp = document.getElementById('textoEstadoEspeciales');
         let tarjetaInicioEsp = document.getElementById('tarjetaEspecialesInicio');
+        let divInfoEsp = document.getElementById('infoEstadoEspeciales');
 
         if (estadoEsp === "oculto") {
             btnEsp.style.display = "none"; txtEsp.style.display = "block"; tarjetaInicioEsp.style.display = "none";
         } else if (estadoEsp === "abierto") {
             btnEsp.style.display = "block"; btnEsp.innerText = "APUESTAS ESPECIALES DISPONIBLES";
             txtEsp.style.display = "none"; tarjetaInicioEsp.style.display = "block";
+            if (limiteEsp) {
+                let dL = new Date(limiteEsp).toLocaleString([], {year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute:'2-digit'});
+                divInfoEsp.innerHTML = `¡Periodo Abierto!<br><span style="font-size:13px; color:var(--accent-green); font-weight:normal;">Límite: ${dL}</span>`;
+            }
         } else if (estadoEsp === "cerrado") {
             btnEsp.style.display = "block"; btnEsp.innerText = "COMPROBAR APUESTAS ESPECIALES";
             txtEsp.style.display = "none"; tarjetaInicioEsp.style.display = "none";
@@ -928,10 +936,9 @@
       
     } catch(e) { 
         console.warn("Aviso general:", e); 
-        // No bloqueamos la UI aunque haya algún fallo
+        // No bloqueamos la UI aunque haya algún fallo en las lecturas secundarias
     }
     
-    // Finalizamos la carga y mostramos
     document.getElementById('cargandoPlantillaMsg').style.display = "none"; 
     switchTabJugador('Inicio');
   }
@@ -1194,10 +1201,10 @@
           snap.forEach(doc => { let d = doc.data(); if(d.jugador && doc.id !== "GANADORES_JORNADA" && doc.id !== "RESULTADOS_REALES") pList.push(d); }); 
           
           pList.sort((a, b) => { 
-              let ptsA = a.puntosAcumulados || 0; let ptsB = b.puntosAcumulados || 0; 
+              let ptsA = Number(a.puntosAcumulados) || 0; let ptsB = Number(b.puntosAcumulados) || 0; 
               if(ptsB !== ptsA) return ptsB - ptsA; 
-              if(b.resultadosAcertados !== a.resultadosAcertados) return (b.resultadosAcertados||0) - (a.resultadosAcertados||0); 
-              return (b.pronosticosAcertados||0) - (a.pronosticosAcertados||0); 
+              if(Number(b.resultadosAcertados) !== Number(a.resultadosAcertados)) return (Number(b.resultadosAcertados)||0) - (Number(a.resultadosAcertados)||0); 
+              return (Number(b.pronosticosAcertados)||0) - (Number(a.pronosticosAcertados)||0); 
           }); 
           
           pList.forEach((j, i) => { map[j.jugador] = i + 1; }); 
@@ -1333,10 +1340,10 @@
 
     let sortBy = isDef ? "puntosFinalesMundial" : "totalGeneral"; 
     let tablaGeneral = [...listaJugadores].sort((a, b) => { 
-        if(b[sortBy] !== a[sortBy]) return b[sortBy] - a[sortBy]; 
-        if(b.c_exactos_gen !== a.c_exactos_gen) return b.c_exactos_gen - a.c_exactos_gen; 
-        if(b.c_signos_gen !== a.c_signos_gen) return b.c_signos_gen - a.c_signos_gen; 
-        return ((b.puntosFinalesMundial||b.totalGeneral) - b.puntosPurosAcumulados) - ((a.puntosFinalesMundial||a.totalGeneral) - a.puntosPurosAcumulados); 
+        if(Number(b[sortBy]) !== Number(a[sortBy])) return Number(b[sortBy]) - Number(a[sortBy]); 
+        if(Number(b.c_exactos_gen) !== Number(a.c_exactos_gen)) return Number(b.c_exactos_gen) - Number(a.c_exactos_gen); 
+        if(Number(b.c_signos_gen) !== Number(a.c_signos_gen)) return Number(b.c_signos_gen) - Number(a.c_signos_gen); 
+        return ((Number(b.puntosFinalesMundial)||Number(b.totalGeneral)) - Number(b.puntosPurosAcumulados)) - ((Number(a.puntosFinalesMundial)||Number(a.totalGeneral)) - Number(a.puntosPurosAcumulados)); 
     });
 
     let tablaJornada = [...tablaGeneral]; 
@@ -1419,10 +1426,10 @@
 
         if(containerPrefix === "Jugador" && document.getElementById('zonaClasificacionPura' + containerPrefix) && (listaJugadores[0].purosAcumulados !== undefined || listaJugadores[0].puntosPurosAcumulados !== undefined)) {
             let tablaPura = [...listaJugadores].sort((a, b) => { 
-                let ptsA = a.purosAcumulados !== undefined ? a.purosAcumulados : a.puntosPurosAcumulados; 
-                let ptsB = b.purosAcumulados !== undefined ? b.purosAcumulados : b.puntosPurosAcumulados; 
+                let ptsA = a.purosAcumulados !== undefined ? Number(a.purosAcumulados) : Number(a.puntosPurosAcumulados); 
+                let ptsB = b.purosAcumulados !== undefined ? Number(b.purosAcumulados) : Number(b.puntosPurosAcumulados); 
                 if(ptsB !== ptsA) return ptsB - ptsA; 
-                return (b.c_exactos_gen || 0) - (a.c_exactos_gen || 0); 
+                return (Number(b.c_exactos_gen) || 0) - (Number(a.c_exactos_gen) || 0); 
             });
             let htmlPura = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-blue);">PUNTOS (Solo Partidos)</th><th>EXACTOS</th><th>SIGNOS</th></tr></thead><tbody>`;
             tablaPura.forEach((j, idx) => { 
@@ -1447,9 +1454,9 @@
     }
 
     let htmlGanancias = `<table class="tabla-clasif" style="border-collapse:collapse;"><thead><tr><th style="text-align:left;">JUGADOR</th><th style="text-align:right;">GANANCIAS (€)</th></tr></thead><tbody>`;
-    let rankingGanancias = [...listaJugadores].sort((a, b) => b.gananciasTotales - a.gananciasTotales);
+    let rankingGanancias = [...listaJugadores].sort((a, b) => Number(b.gananciasTotales) - Number(a.gananciasTotales));
     rankingGanancias.forEach(g => { 
-        htmlGanancias += `<tr><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); text-align:left;"><strong>${g.nombre}</strong></td><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); text-align:right; color:${g.gananciasTotales > 0 ? 'var(--accent-green)':'var(--text-muted)'}; font-weight:bold; font-size:15px;">${g.gananciasTotales.toFixed(2)} €</td></tr>`; 
+        htmlGanancias += `<tr><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); text-align:left;"><strong>${g.nombre}</strong></td><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); text-align:right; color:${g.gananciasTotales > 0 ? 'var(--accent-green)':'var(--text-muted)'}; font-weight:bold; font-size:15px;">${Number(g.gananciasTotales).toFixed(2)} €</td></tr>`; 
     });
     htmlGanancias += `</tbody></table>`; 
     document.getElementById('tablaGananciasTotales' + containerPrefix).innerHTML = htmlGanancias; 
