@@ -85,9 +85,14 @@
         .tabla-matriz th, .tabla-matriz td { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.05); }
         
         .tabla-matriz thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 6px 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 10px; }
+        
+        /* Columnas 1 y 2 fijadas a la izquierda */
         .tabla-matriz th:nth-child(1), .tabla-matriz td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; width: 85px !important; min-width: 85px !important; max-width: 85px !important; white-space: normal !important; word-wrap: break-word; text-align: left; padding-left: 5px; font-size: 9px; line-height: 1.2; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
         .tabla-matriz th:nth-child(2), .tabla-matriz td:nth-child(2) { position: sticky; left: 85px; z-index: 5; background: #111827; width: 22px !important; min-width: 22px !important; max-width: 22px !important; border-right: 1px solid rgba(255,255,255,0.1); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
+        
+        /* Intersección de cabecera y columnas fijas */
         .tabla-matriz thead th:nth-child(1), .tabla-matriz thead th:nth-child(2) { z-index: 15; background: #111827; }
+        
         .tabla-matriz th:not(:nth-child(1)):not(:nth-child(2)) { width: 45px !important; min-width: 45px !important; max-width: 45px !important; }
         .tabla-matriz tbody td { padding: 2px; text-align: center; height: 45px; vertical-align: middle; overflow: hidden; }
 
@@ -95,10 +100,16 @@
         .table-container-clasif { max-height: 65vh; overflow: auto; width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-dark); position: relative; }
         .tabla-clasif { width: max-content; min-width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 0; font-size: 12px; }
         .tabla-clasif th, .tabla-clasif td { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        
         .tabla-clasif thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 8px 10px; white-space: nowrap; }
+        
+        /* Columnas 1 y 2 fijadas a la izquierda */
         .tabla-clasif th:nth-child(1), .tabla-clasif td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; width: 35px; min-width: 35px; text-align: center; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
         .tabla-clasif th:nth-child(2), .tabla-clasif td:nth-child(2) { position: sticky; left: 35px; z-index: 5; background: #111827; width: 100px; min-width: 100px; text-align: left; padding-left: 10px; border-right: 1px solid rgba(255,255,255,0.1); box-shadow: 2px 0 4px rgba(0,0,0,0.3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        /* Intersección */
         .tabla-clasif thead th:nth-child(1), .tabla-clasif thead th:nth-child(2) { z-index: 15; background: #111827; }
+        
         .tabla-clasif tbody td { padding: 8px 10px; text-align: center; }
 
         .exacto { background-color: var(--accent-green) !important; color: white !important; font-weight: bold; border-radius:4px; display:flex; justify-content:center; align-items:center; height:28px; width:90%; margin:0 auto; font-size:10px; }
@@ -458,7 +469,7 @@
       "Adivinar mejor jugador", 
       "Adivinar mejor portero", 
       "Adivinar mejor jugador joven", 
-      "Adivinar juego limpio", 
+      "Adivinar premio juego limpio", 
       "¿Quién sumará más Puntos Puros?", 
       "¿Quién sumará menos Puntos Puros?" 
   ];
@@ -562,7 +573,7 @@
       document.getElementById('modalContenido').innerHTML = html;
   };
 
-  window.renderMiniRankings = function(lista) {
+  function renderMiniRankings(lista) {
       const cats = [
           { id: 'p_val_gen', title: '👑 Reyes Valerinha', color: 'var(--accent-gold)', sort: 'asc' }, // Más negativos
           { id: 'p_irl_gen', title: '🏃‍♂️ Paquetes de la Irlinha', color: '#34d399', sort: 'desc' }, // Más positivos
@@ -602,9 +613,12 @@
       listaOficialNombres.forEach(n => optJug += `<option value="${n}">${n}</option>`);
       
       if(document.getElementById('esp1_a')) {
-          document.getElementById('esp1_a').innerHTML = optSel; document.getElementById('esp1_b').innerHTML = optSel; 
-          document.getElementById('esp2').innerHTML = optSel; document.getElementById('esp7').innerHTML = optSel;
-          document.getElementById('esp8').innerHTML = optJug; document.getElementById('esp9').innerHTML = optJug;
+          document.getElementById('esp1_a').innerHTML = optSel; 
+          document.getElementById('esp1_b').innerHTML = optSel; 
+          document.getElementById('esp2').innerHTML = optSel; 
+          document.getElementById('esp7').innerHTML = optSel;
+          document.getElementById('esp8').innerHTML = optJug; 
+          document.getElementById('esp9').innerHTML = optJug;
       }
   }
 
