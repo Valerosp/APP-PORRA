@@ -327,6 +327,27 @@
   }
   function calcEsp(aciertos) { if(aciertos === 0) return 0; if(aciertos === 1) return 10; if(aciertos === 2) return 15; if(aciertos === 3) return 18; return 18 + ((aciertos - 3) * 2); }
 
+  function obtenerGanadoresGeneral(jugadores, campoPuntos) {
+    if(jugadores.length === 0) return [];
+    
+    // Convertimos todos los valores a número para evitar que Firebase los compare como texto
+    let maxPts = Math.max(...jugadores.map(j => Number(j[campoPuntos]) || 0)); 
+    let emps = jugadores.filter(j => (Number(j[campoPuntos]) || 0) === maxPts); 
+    if(emps.length === 1) return emps.map(j => j.jugador || j.nombre);
+    
+    let maxEx = Math.max(...emps.map(j => Number(j.resultadosAcertados) || 0)); 
+    emps = emps.filter(j => (Number(j.resultadosAcertados) || 0) === maxEx); 
+    if(emps.length === 1) return emps.map(j => j.jugador || j.nombre);
+    
+    let maxSig = Math.max(...emps.map(j => Number(j.pronosticosAcertados) || 0)); 
+    emps = emps.filter(j => (Number(j.pronosticosAcertados) || 0) === maxSig); 
+    if(emps.length === 1) return emps.map(j => j.jugador || j.nombre);
+    
+    let maxResto = Math.max(...emps.map(j => (Number(j.puntosFinalesMundial || j.puntosAcumulados) || 0) - (Number(j.puntosPurosAcumulados) || 0)));
+    emps = emps.filter(j => ((Number(j.puntosFinalesMundial || j.puntosAcumulados) || 0) - (Number(j.puntosPurosAcumulados) || 0)) === maxResto); 
+    return emps.map(j => j.jugador || j.nombre);
+  }
+
   function obtenerGanadoresDesempate(jugadores, campoPuntos) {
     if(jugadores.length === 0) return [];
     let maxPts = Math.max(...jugadores.map(j => j[campoPuntos])); let emps = jugadores.filter(j => j[campoPuntos] === maxPts); if(emps.length === 1) return emps.map(j => j.nombre);
@@ -334,15 +355,6 @@
     let maxSig = Math.max(...emps.map(j => j.c_signos)); emps = emps.filter(j => j.c_signos === maxSig); if(emps.length === 1) return emps.map(j => j.nombre);
     emps.forEach(j => { j.esp_acertadas = (j.statTronpa === "exacto" ? 1 : 0) + (j.p_bomba > 0 ? 1 : 0) + (j.statVal === "exacto" ? 1 : 0) + (j.statIrl === "exacto" ? 1 : 0) + (j.statSan === "exacto" ? 1 : 0); });
     let maxEsp = Math.max(...emps.map(j => j.esp_acertadas)); return emps.filter(j => j.esp_acertadas === maxEsp).map(j => j.nombre);
-  }
-
-  function obtenerGanadoresGeneral(jugadores, campoPuntos) {
-    if(jugadores.length === 0) return [];
-    let maxPts = Math.max(...jugadores.map(j => j[campoPuntos])); let emps = jugadores.filter(j => j[campoPuntos] === maxPts); if(emps.length === 1) return emps.map(j => j.nombre);
-    let maxEx = Math.max(...emps.map(j => j.c_exactos_gen)); emps = emps.filter(j => j.c_exactos_gen === maxEx); if(emps.length === 1) return emps.map(j => j.nombre);
-    let maxSig = Math.max(...emps.map(j => j.c_signos_gen)); emps = emps.filter(j => j.c_signos_gen === maxSig); if(emps.length === 1) return emps.map(j => j.nombre);
-    let maxResto = Math.max(...emps.map(j => (j.puntosFinalesMundial || j.totalGeneral) - j.puntosPurosAcumulados));
-    emps = emps.filter(j => ((j.puntosFinalesMundial || j.totalGeneral) - j.puntosPurosAcumulados) === maxResto); return emps.map(j => j.nombre);
   }
 
   function switchTab(id) {
@@ -872,32 +884,69 @@
   document.getElementById('btnCalcularMundialEspeciales').addEventListener('click', async () => {
     if(!confirm("⚠️ VAS A CERRAR EL MUNDIAL DEFINITIVAMENTE.\n\nEsto sumará los puntos de las Apuestas Especiales a la Jornada 8 y creará la clasificación Histórica Final.\n\n¿Proceder?")) return;
     try {
-      const j8Snap = await getDocs(collection(db, "clasificacion_general_jornada_8")); let cJ8 = []; j8Snap.forEach(d => { if(d.data().jugador) cJ8.push(d.data()); });
+      const j8Snap = await getDocs(collection(db, "clasificacion_general_jornada_8")); 
+      let cJ8 = []; 
+      j8Snap.forEach(d => { if(d.data().jugador) cJ8.push(d.data()); });
+      
       if(cJ8.length === 0) return alert("Primero debes calcular la Definitiva de la Jornada 8 en la pestaña 3.");
       
       let cierreTotal = [];
-      let premioGenDef = 0; let premioGenPura = 0; const prizeSnap = await getDoc(doc(db, "config_premios", "globales"));
-      if (prizeSnap.exists()) { premioGenDef = prizeSnap.data().genDef || 0; premioGenPura = prizeSnap.data().genPura || 0; }
+      let premioGenDef = 0; let premioGenPura = 0; 
+      const prizeSnap = await getDoc(doc(db, "config_premios", "globales"));
+      if (prizeSnap.exists()) { 
+          premioGenDef = Number(prizeSnap.data().genDef) || 0; 
+          premioGenPura = Number(prizeSnap.data().genPura) || 0; 
+      }
 
-      cJ8.forEach(j => { let ptE = evaluacionEspecialesMemoria[j.jugador]?.puntos || 0; cierreTotal.push({ ...j, puntosEspecialesExtra: ptE, puntosFinalesMundial: j.puntosAcumulados + ptE, puntosPurosAcumulados: j.puntosPurosAcumulados }); });
-      let ganadoresGenDef = obtenerGanadoresGeneral(cierreTotal, "puntosFinalesMundial"); let ganadoresGenPura = obtenerGanadoresGeneral(cierreTotal, "puntosPurosAcumulados");
+      cJ8.forEach(j => { 
+          let ptE = evaluacionEspecialesMemoria[j.jugador]?.puntos || 0; 
+          let ptsFinales = Number(j.puntosAcumulados || 0) + ptE;
+          cierreTotal.push({ 
+              ...j, 
+              puntosEspecialesExtra: ptE, 
+              puntosFinalesMundial: ptsFinales, 
+              puntosPurosAcumulados: Number(j.puntosPurosAcumulados || 0) 
+          }); 
+      });
+      
+      let ganadoresGenDef = obtenerGanadoresGeneral(cierreTotal, "puntosFinalesMundial"); 
+      let ganadoresGenPura = obtenerGanadoresGeneral(cierreTotal, "puntosPurosAcumulados");
 
-      let premiosFinales = {}; cierreTotal.forEach(j => premiosFinales[j.jugador] = 0);
-      if(ganadoresGenDef.length > 0 && premioGenDef > 0) { let p = premioGenDef / ganadoresGenDef.length; ganadoresGenDef.forEach(n => premiosFinales[n] += p); }
-      if(ganadoresGenPura.length > 0 && premioGenPura > 0) { let p = premioGenPura / ganadoresGenPura.length; ganadoresGenPura.forEach(n => premiosFinales[n] += p); }
+      let premiosFinales = {}; 
+      cierreTotal.forEach(j => premiosFinales[j.jugador] = 0);
+      if(ganadoresGenDef.length > 0 && premioGenDef > 0) { 
+          let p = premioGenDef / ganadoresGenDef.length; 
+          ganadoresGenDef.forEach(n => premiosFinales[n] += p); 
+      }
+      if(ganadoresGenPura.length > 0 && premioGenPura > 0) { 
+          let p = premioGenPura / ganadoresGenPura.length; 
+          ganadoresGenPura.forEach(n => premiosFinales[n] += p); 
+      }
 
       cierreTotal.forEach(j => { 
-          let totalCartera = Number(j.gananciasAcumuladas || 0) + premiosFinales[j.jugador];
+          let carteraPrevia = Number(j.gananciasAcumuladas || 0);
+          let premioGanado = Number(premiosFinales[j.jugador] || 0);
+          let totalCartera = carteraPrevia + premioGanado;
+          
           j.gananciasAcumuladas = totalCartera; 
           j.gananciasTotales = totalCartera; 
       });
       
-      let textosFinales = [`<strong style="color:#8e44ad;">🏆 Ganador General DEFINITIVA (${premioGenDef}€):</strong> ${ganadoresGenDef.join(", ") || "-"}`,`<strong style="color:#2c3e50;">⚽ Ganador Gen. SIN HISTORIAS (${premioGenPura}€):</strong> ${ganadoresGenPura.join(", ") || "-"}`];
+      let textosFinales = [
+          `<strong style="color:#8e44ad;">🏆 Ganador General DEFINITIVA (${premioGenDef}€):</strong> ${ganadoresGenDef.join(", ") || "-"}`,
+          `<strong style="color:#2c3e50;">⚽ Ganador Gen. SIN HISTORIAS (${premioGenPura}€):</strong> ${ganadoresGenPura.join(", ") || "-"}`
+      ];
 
-      for (let j of cierreTotal) { await setDoc(doc(db, "clasificacion_general_FINAL_MUNDIAL", j.jugador), j); }
+      for (let j of cierreTotal) { 
+          await setDoc(doc(db, "clasificacion_general_FINAL_MUNDIAL", j.jugador), j); 
+      }
       await setDoc(doc(db, "clasificacion_general_FINAL_MUNDIAL", "GANADORES_JORNADA"), { textos: textosFinales });
+      
       alert("🏆 ¡MUNDIAL CERRADO CON ÉXITO! Clasificación DEFINITIVA generada y botes entregados.");
-    } catch(e){ alert("Error cerrando el Mundial."); }
+      
+      document.getElementById('jorConsultaAdmin').value = "DEFINITIVA";
+      document.getElementById('btnConsultarAdmin').click();
+    } catch(e){ console.error(e); alert("Error cerrando el Mundial."); }
   });
 
   // ========================================================
@@ -951,7 +1000,7 @@
     }
 
     let htmlGanancias = `<table style="width: 100%; border-collapse: collapse; text-align: left;"><thead><tr><th>JUGADOR</th><th style="text-align:right;">GANANCIAS (€)</th></tr></thead><tbody>`;
-    let listaGanancias = listaJugadores.map(j => ({nombre: j.nombre, dinero: j.gananciasTotales})); listaGanancias.sort((a,b) => b.dinero - a.dinero);
+    let listaGanancias = listaJugadores.map(j => ({nombre: j.nombre, dinero: Number(j.gananciasTotales)})); listaGanancias.sort((a,b) => b.dinero - a.dinero);
     listaGanancias.forEach(g => { htmlGanancias += `<tr><td style="padding:8px; border-bottom:1px solid #eee;"><strong>${g.nombre}</strong></td><td style="padding:8px; border-bottom:1px solid #eee; text-align:right; color:${g.dinero > 0 ? '#27ae60':'#95a5a6'}; font-weight:bold; font-size: 16px;">${g.dinero.toFixed(2)} €</td></tr>`; });
     htmlGanancias += `</tbody></table>`; document.getElementById('tablaGananciasTotales').innerHTML = htmlGanancias; document.getElementById('zonaGanancias').style.display = "block";
   }
