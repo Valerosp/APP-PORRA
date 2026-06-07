@@ -85,14 +85,9 @@
         .tabla-matriz th, .tabla-matriz td { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.05); }
         
         .tabla-matriz thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 6px 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 10px; }
-        
-        /* Columnas 1 y 2 fijadas a la izquierda */
         .tabla-matriz th:nth-child(1), .tabla-matriz td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; width: 85px !important; min-width: 85px !important; max-width: 85px !important; white-space: normal !important; word-wrap: break-word; text-align: left; padding-left: 5px; font-size: 9px; line-height: 1.2; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
         .tabla-matriz th:nth-child(2), .tabla-matriz td:nth-child(2) { position: sticky; left: 85px; z-index: 5; background: #111827; width: 22px !important; min-width: 22px !important; max-width: 22px !important; border-right: 1px solid rgba(255,255,255,0.1); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
-        
-        /* Intersección de cabecera y columnas fijas */
         .tabla-matriz thead th:nth-child(1), .tabla-matriz thead th:nth-child(2) { z-index: 15; background: #111827; }
-        
         .tabla-matriz th:not(:nth-child(1)):not(:nth-child(2)) { width: 45px !important; min-width: 45px !important; max-width: 45px !important; }
         .tabla-matriz tbody td { padding: 2px; text-align: center; height: 45px; vertical-align: middle; overflow: hidden; }
 
@@ -100,16 +95,10 @@
         .table-container-clasif { max-height: 65vh; overflow: auto; width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-dark); position: relative; }
         .tabla-clasif { width: max-content; min-width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 0; font-size: 12px; }
         .tabla-clasif th, .tabla-clasif td { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        
         .tabla-clasif thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 8px 10px; white-space: nowrap; }
-        
-        /* Columnas 1 y 2 fijadas a la izquierda */
         .tabla-clasif th:nth-child(1), .tabla-clasif td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; width: 35px; min-width: 35px; text-align: center; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
         .tabla-clasif th:nth-child(2), .tabla-clasif td:nth-child(2) { position: sticky; left: 35px; z-index: 5; background: #111827; width: 100px; min-width: 100px; text-align: left; padding-left: 10px; border-right: 1px solid rgba(255,255,255,0.1); box-shadow: 2px 0 4px rgba(0,0,0,0.3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        
-        /* Intersección */
         .tabla-clasif thead th:nth-child(1), .tabla-clasif thead th:nth-child(2) { z-index: 15; background: #111827; }
-        
         .tabla-clasif tbody td { padding: 8px 10px; text-align: center; }
 
         .exacto { background-color: var(--accent-green) !important; color: white !important; font-weight: bold; border-radius:4px; display:flex; justify-content:center; align-items:center; height:28px; width:90%; margin:0 auto; font-size:10px; }
@@ -131,6 +120,7 @@
 </head>
 <body>
 
+<!-- PANTALLA DE ACCESO (LOGIN) -->
 <div id="pantallaLogin">
     <div class="login-card">
         <div style="text-align: center; margin-bottom: 20px;">
@@ -170,9 +160,11 @@
     </div>
 </div>
 
+<!-- APLICACIÓN PRINCIPAL -->
 <div id="pantallaApp" style="display:none;">
     <div class="contenedor usuario">
       
+      <!-- CABECERA -->
       <div class="top-header">
            <div style="text-align: center; width: 45px;">
              <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="Mundial" style="width:100%; height:auto;">
@@ -185,6 +177,7 @@
 
       <div id="cargandoPlantillaMsg" style="text-align:center; font-weight:bold; padding:20px; color:var(--accent-gold);">Sincronizando Estado... ⏳</div>
 
+      <!-- VISTA 0: INICIO -->
       <div id="vistaInicio" style="display:none;">
           <div class="tarjeta clean">
               <div class="profile-header">
@@ -210,18 +203,21 @@
               </div>
           </div>
           
+          <!-- TARJETA CLICKABLE ESPECIALES -->
           <div id="tarjetaEspecialesInicio" class="tarjeta" style="background:rgba(255,255,255,0.05) !important; cursor:pointer; display:none; border-left:4px solid var(--accent-green) !important;" title="Ir a Apuestas Especiales">
               <h2 style="color:var(--accent-green) !important; font-size:14px; margin-bottom:10px;">⭐ APUESTAS ESPECIALES</h2>
               <div style="font-size:16px; font-weight:bold; color:white;">¡Periodo Abierto!</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para enviar tus respuestas ➡️</div>
           </div>
 
+          <!-- TARJETA CLICKABLE JORNADA -->
           <div class="tarjeta" id="btnIrJornada" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" title="Ir a rellenar jornada">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">ESTADO DE LA JORNADA</h2>
               <div id="infoEstadoJornada" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para ir a la Jornada ➡️</div>
           </div>
 
+          <!-- TARJETA CLICKABLE VALERINHA -->
           <div class="tarjeta" id="btnIrValerinha" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" title="Ir a votar Valerinha">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">EL SALSEO (VALERINHA)</h2>
               <div id="infoEstadoValerinha" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
@@ -229,6 +225,7 @@
           </div>
       </div>
 
+      <!-- VISTA 1: HACER JORNADA -->
       <div id="vistaQuiniela" style="display:none;">
         <h2 id="tituloJornadaEnJuegoQ" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
         <div id="relojQuiniela" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -254,14 +251,14 @@
                 <input type="text" id="santinhaRespuesta" placeholder="Respuesta Santinha...">
             </div>
             <div style="margin-bottom:15px; border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
-                <p id="lblTronpa" style="font-size: 12px; margin-bottom:4px; font-weight:bold;"></p>
+                <p style="font-size: 12px; margin-bottom:4px; font-weight:bold; color:#60a5fa !important;">🌩️ LA TRONPÀ!: <span id="lblTronpa" style="color:white; font-weight:normal;"></span></p>
                 <div style="display:flex; gap:10px; justify-content:center; align-items:center;">
                   <select id="tronpaApuesta" style="width:50%; height:45px; margin:0;"><option value="1">Riesgo: 1 Pt</option><option value="2">Riesgo: 2 Pts</option><option value="3">Riesgo: 3 Pts</option></select>
                   <input type="number" id="tronpaRespuesta" placeholder="Ej: 60" style="width:50%; height:45px; text-align:center; font-size:16px; border-radius:8px; background:rgba(0,0,0,0.6) !important; color:white; border:1px solid var(--accent-gold) !important; margin:0;">
                 </div>
             </div>
             <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
-                <p id="lblBomba" style="font-size: 12px; margin-bottom:4px; font-weight:bold; color:#f43f5e !important;"></p>
+                <p style="font-size: 12px; margin-bottom:4px; font-weight:bold; color:#f43f5e !important;">💣 BOMBA GARNACHA: <span id="lblBomba" style="color:white; font-weight:normal;"></span></p>
                 <div style="display:flex; align-items:center; gap:15px; justify-content:center;">
                    <div style="display:flex; flex-direction:column; align-items:center; gap:3px;">
                       <button type="button" class="btn-step step-btn-gen" data-target="bombaLocal" data-val="1">+</button>
@@ -282,6 +279,7 @@
         </div>
       </div>
 
+      <!-- VISTA 2: VOTAR VALERINHA -->
       <div id="vistaValerinha" style="display: none;">
         <h2 id="tituloJornadaEnJuegoV" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
         <div id="relojValerinha" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -320,11 +318,13 @@
         </div>
       </div>
 
+      <!-- VISTA 3: JORNADA EN JUEGO -->
       <div id="vistaEnJuego" style="display:none;">
          <div id="renderMátrixCandadoBloqueo"></div>
          <div id="zonaTableroEnJuego" style="display:none; margin-top:20px;"></div>
       </div>
 
+      <!-- VISTA 4: RANKING -->
       <div id="vistaResultados" style="display: none;">
         <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important;">
           <h2 style="color:white !important; font-size:16px; margin-bottom:15px;">🏆 Histórico del Mundial</h2>
@@ -357,6 +357,7 @@
         </div>
       </div>
 
+      <!-- VISTA 5: ESPECIALES Y CLASIF PURA -->
       <div id="vistaEspeciales" style="display:none;">
         <div class="tarjeta" style="background: linear-gradient(135deg, #0d5f49 0%, #06382a 100%) !important;">
           <h2 style="margin-top:0; color:white !important; font-size:22px; font-weight:900;">⭐ APUESTAS ESPECIALES</h2>
@@ -387,12 +388,14 @@
            <div id="renderMatrixEspeciales"></div>
         </div>
 
+        <!-- SALÓN DE LA FAMA -->
         <div id="zonaMiniRankings" style="display:none; margin-top: 40px; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1);">
             <h2 style="text-align: center; color: var(--accent-gold); margin-bottom:5px; margin-top:0;">🏆 SALÓN DE LA FAMA</h2>
             <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Top 3 jugadores con más puntos en apartados de salseo.</p>
             <div id="gridMiniRankings" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:15px;"></div>
         </div>
 
+        <!-- CLASIFICACIÓN SIN HISTORIAS -->
         <div id="zonaClasificacionPuraJugador" style="width:100%; margin-top: 40px; display: none; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); box-sizing:border-box;">
             <h2 style="text-align: center; color: white; margin-bottom:5px; margin-top:0;">📊 CLASIFICACIÓN SIN HISTORIAS</h2>
             <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Solo puntos de partidos exactos y signos.</p>
@@ -400,35 +403,48 @@
         </div>
       </div>
 
+      <!-- VISTA 6: REGLAS -->
       <div id="vistaReglas" style="display: none;">
         <div class="tarjeta clean" style="border-left:none !important;">
           <h2 style="color: white !important; margin-top:0; text-align:center; font-size: 20px;">📖 REGLAS OFICIALES</h2>
+          
           <div style="margin-bottom: 20px; background:rgba(0,0,0,0.3); padding:15px; border-radius:8px;">
             <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">1️⃣ Fases de la Jornada</h3>
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
-              <li><strong>Hacer Jornada:</strong> Introduce marcadores con botones. Si no, 1-1 automático. Se puede modificar antes del cierre.</li>
-              <li><strong>Votar Valerinha:</strong> Tras los partidos y publicación de Provisional. Si acertaste, tienes 1 voto de Ataque/Defensa.</li>
-              <li><strong>Definitiva:</strong> Se procesan los votos y bonificaciones y se reparte el dinero.</li>
+              <li><strong>Hacer Jornada:</strong> Introduce los marcadores antes de la fecha límite. Puedes modificarlos todas las veces que quieras mientras el plazo esté abierto. Si no envías a tiempo, se rellena con 1-1 automático.</li>
+              <li><strong>Votar Valerinha:</strong> Tras los partidos, el Administrador publica la Clasificación Provisional. Si has acertado la pregunta de la Valerinha, se te abrirá el derecho a voto (Ataque o Blindaje).</li>
+              <li><strong>Definitiva:</strong> Una vez finalizan las votaciones, se calculan las sumas, restas y desvíos, generando la clasificación definitiva de la jornada y repartiendo el premio.</li>
             </ul>
           </div>
+
           <div style="margin-bottom: 20px; background:rgba(0,0,0,0.3); padding:15px; border-radius:8px;">
-            <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">2️⃣ Puntuación Base</h3>
+            <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">2️⃣ Puntuación de Partidos</h3>
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
-              <li><strong>J1 a J3:</strong> Exacto = +5 pts | Signo = +2 pts.</li>
-              <li><strong>J4 a J8:</strong> Exacto = +8 pts | Signo = +3.5 pts.</li>
-              <li><strong>Bomba Garnacha:</strong> Exacto = +3 pts | Signo = +1 pt | Fallo = -1 pt.</li>
-              <li><strong>La TroNpá!:</strong> Si aciertas sumas lo apostado, si fallas lo restas.</li>
+              <li><strong>Fase de Grupos (J1 a J3):</strong> Acertar el resultado Exacto suma <strong>+5 pts</strong>. Acertar solo el Signo (1X2) suma <strong>+2 pts</strong>.</li>
+              <li><strong>Fase Final (J4 a J8):</strong> Acertar el resultado Exacto suma <strong>+8 pts</strong>. Acertar el Signo suma <strong>+3.5 pts</strong>.</li>
             </ul>
           </div>
+
+          <div style="margin-bottom: 20px; background:rgba(0,0,0,0.3); padding:15px; border-radius:8px;">
+            <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">3️⃣ Apuestas Extra de Jornada</h3>
+            <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
+              <li><strong>💣 Bomba Garnacha:</strong> Es un partido destacado. Si aciertas el resultado Exacto: <strong>+3 pts</strong>. Solo el Signo: <strong>+1 pt</strong>. Si fallas el Signo: <strong>-1 pt</strong>.</li>
+              <li><strong>🌩️ La TroNpá!:</strong> Apuestas 1, 2 o 3 puntos a un evento (ej. goles en propia puerta). Si aciertas el número exacto, <strong>sumas</strong> lo apostado. Si fallas, lo <strong>restas</strong>.</li>
+            </ul>
+          </div>
+
           <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:8px;">
-            <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">3️⃣ El Salseo</h3>
+            <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">4️⃣ El Salseo</h3>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:10px;"><em>Nota: Todas las opciones de salseo valen <strong>1 punto en Fase de Grupos (J1-J3)</strong> y <strong>1.5 puntos en Fase Final (J4-J8)</strong>.</em></p>
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
-              <li><strong>Valerinha:</strong> +Ptos a ti mismo o resta a un rival (Max 4 restas por jugador). Si atacas a uno lleno, el ataque se desvía a tu 2ª opción.</li>
-              <li><strong>Multiplicadores:</strong> En J1-J3 valen 1 punto. En J4-J8 valen 1.5 puntos.</li>
-              <li><strong>Irlinha:</strong> Si aciertas y estás a 4 pts o menos del colista, sumas.</li>
-              <li><strong>Santinha:</strong> Si fallas y estás a 4 pts o menos del líder, restas.</li>
+              <li><strong>🔮 Valerinha:</strong> Si aciertas la pregunta, ganas el derecho a votar. Puedes sumar los puntos a tu marcador (Blindaje) o restárselos a un rival (Ataque).
+                  <br><br>🛡️ <em>Escudo Anti-Bullying:</em> Un jugador solo puede recibir un máximo de <strong>4 ataques</strong> por jornada. Si le atacan 5 o más personas, el sistema interviene: desvía el ataque de quien tenga a su "2ª opción" mejor clasificada en la general.
+              </li>
+              <li style="margin-top:8px;"><strong>🏃‍♂️ Irlinha:</strong> Solo se aplica si estás en la "zona baja" (a 4 puntos o menos del colista). Si aciertas la pregunta, sumas los puntos.</li>
+              <li style="margin-top:8px;"><strong>🇪🇸 Santinha:</strong> Solo se aplica si estás en la "zona alta" (a 4 puntos o menos del líder). ¡Cuidado! Si <strong>fallas</strong> la pregunta, restas los puntos.</li>
             </ul>
           </div>
+
         </div>
       </div>
 
@@ -836,8 +852,8 @@
       document.getElementById('lblValerinha').innerText = configQ_Data.pregValerinha; 
       document.getElementById('lblIrlinha').innerText = configQ_Data.pregIrlinha; 
       document.getElementById('spanSantinha').innerText = configQ_Data.pregSantinha; 
-      document.getElementById('lblTronpa').innerText = configQ_Data.pregTronpa; 
-      document.getElementById('lblBomba').innerText = configQ_Data.pregBomba;
+      document.getElementById('spanTronpa').innerText = configQ_Data.pregTronpa; 
+      document.getElementById('spanBomba').innerText = configQ_Data.pregBomba;
 
       if(yaEnviado || esJornadaQuinielaCerrada) {
           if(yaEnviado) {
@@ -1366,8 +1382,8 @@
             let arrow = ""; 
             if (isDef && prevRankingMap && prevRankingMap[j.nombre]) { 
                 let p = prevRankingMap[j.nombre]; let c = idx + 1; 
-                if (c < p) arrow = " <span style='color:#10ac84; font-size:11px; font-weight:bold;'>⬆️</span>"; 
-                else if (c > p) arrow = " <span style='color:#e74c3c; font-size:11px; font-weight:bold;'>⬇️</span>"; 
+                if (c < p) arrow = " <span style='color:var(--accent-green); font-size:12px; font-weight:900;'>▲</span>"; 
+                else if (c > p) arrow = " <span style='color:#e74c3c; font-size:12px; font-weight:900;'>▼</span>"; 
             }
             htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}${arrow}</td><td class="td-total-gen">${tGen} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td>`; 
             if(isDef && jorStr === "DEFINITIVA") htmlClasif += `<td style="font-weight:bold; color:#f472b6;">${j.puntosEspecialesExtra || 0}</td>`; 
