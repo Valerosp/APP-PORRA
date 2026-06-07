@@ -85,9 +85,14 @@
         .tabla-matriz th, .tabla-matriz td { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.05); }
         
         .tabla-matriz thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 6px 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 10px; }
+        
+        /* Columnas 1 y 2 fijadas a la izquierda */
         .tabla-matriz th:nth-child(1), .tabla-matriz td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; width: 85px !important; min-width: 85px !important; max-width: 85px !important; white-space: normal !important; word-wrap: break-word; text-align: left; padding-left: 5px; font-size: 9px; line-height: 1.2; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
         .tabla-matriz th:nth-child(2), .tabla-matriz td:nth-child(2) { position: sticky; left: 85px; z-index: 5; background: #111827; width: 22px !important; min-width: 22px !important; max-width: 22px !important; border-right: 1px solid rgba(255,255,255,0.1); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
+        
+        /* Intersección de cabecera y columnas fijas */
         .tabla-matriz thead th:nth-child(1), .tabla-matriz thead th:nth-child(2) { z-index: 15; background: #111827; }
+        
         .tabla-matriz th:not(:nth-child(1)):not(:nth-child(2)) { width: 45px !important; min-width: 45px !important; max-width: 45px !important; }
         .tabla-matriz tbody td { padding: 2px; text-align: center; height: 45px; vertical-align: middle; overflow: hidden; }
 
@@ -96,8 +101,12 @@
         .tabla-clasif { width: max-content; min-width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 0; font-size: 12px; }
         .tabla-clasif th, .tabla-clasif td { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.05); }
         .tabla-clasif thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 8px 10px; white-space: nowrap; }
+        
+        /* Columnas 1 y 2 fijadas a la izquierda */
         .tabla-clasif th:nth-child(1), .tabla-clasif td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; width: 35px; min-width: 35px; text-align: center; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
         .tabla-clasif th:nth-child(2), .tabla-clasif td:nth-child(2) { position: sticky; left: 35px; z-index: 5; background: #111827; width: 100px; min-width: 100px; text-align: left; padding-left: 10px; border-right: 1px solid rgba(255,255,255,0.1); box-shadow: 2px 0 4px rgba(0,0,0,0.3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        /* Intersección */
         .tabla-clasif thead th:nth-child(1), .tabla-clasif thead th:nth-child(2) { z-index: 15; background: #111827; }
         .tabla-clasif tbody td { padding: 8px 10px; text-align: center; }
 
@@ -120,7 +129,6 @@
 </head>
 <body>
 
-<!-- PANTALLA DE ACCESO (LOGIN) -->
 <div id="pantallaLogin">
     <div class="login-card">
         <div style="text-align: center; margin-bottom: 20px;">
@@ -160,11 +168,9 @@
     </div>
 </div>
 
-<!-- APLICACIÓN PRINCIPAL -->
 <div id="pantallaApp" style="display:none;">
     <div class="contenedor usuario">
       
-      <!-- CABECERA -->
       <div class="top-header">
            <div style="text-align: center; width: 45px;">
              <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="Mundial" style="width:100%; height:auto;">
@@ -177,7 +183,6 @@
 
       <div id="cargandoPlantillaMsg" style="text-align:center; font-weight:bold; padding:20px; color:var(--accent-gold);">Sincronizando Estado... ⏳</div>
 
-      <!-- VISTA 0: INICIO -->
       <div id="vistaInicio" style="display:none;">
           <div class="tarjeta clean">
               <div class="profile-header">
@@ -203,21 +208,18 @@
               </div>
           </div>
           
-          <!-- TARJETA CLICKABLE ESPECIALES -->
           <div id="tarjetaEspecialesInicio" class="tarjeta" style="background:rgba(255,255,255,0.05) !important; cursor:pointer; display:none; border-left:4px solid var(--accent-green) !important;" title="Ir a Apuestas Especiales">
               <h2 style="color:var(--accent-green) !important; font-size:14px; margin-bottom:10px;">⭐ APUESTAS ESPECIALES</h2>
               <div style="font-size:16px; font-weight:bold; color:white;">¡Periodo Abierto!</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para enviar tus respuestas ➡️</div>
           </div>
 
-          <!-- TARJETA CLICKABLE JORNADA -->
           <div class="tarjeta" id="btnIrJornada" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" title="Ir a rellenar jornada">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">ESTADO DE LA JORNADA</h2>
               <div id="infoEstadoJornada" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para ir a la Jornada ➡️</div>
           </div>
 
-          <!-- TARJETA CLICKABLE VALERINHA -->
           <div class="tarjeta" id="btnIrValerinha" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" title="Ir a votar Valerinha">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">EL SALSEO (VALERINHA)</h2>
               <div id="infoEstadoValerinha" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
@@ -225,7 +227,6 @@
           </div>
       </div>
 
-      <!-- VISTA 1: HACER JORNADA -->
       <div id="vistaQuiniela" style="display:none;">
         <h2 id="tituloJornadaEnJuegoQ" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
         <div id="relojQuiniela" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -279,7 +280,6 @@
         </div>
       </div>
 
-      <!-- VISTA 2: VOTAR VALERINHA -->
       <div id="vistaValerinha" style="display: none;">
         <h2 id="tituloJornadaEnJuegoV" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
         <div id="relojValerinha" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -318,13 +318,11 @@
         </div>
       </div>
 
-      <!-- VISTA 3: JORNADA EN JUEGO -->
       <div id="vistaEnJuego" style="display:none;">
          <div id="renderMátrixCandadoBloqueo"></div>
          <div id="zonaTableroEnJuego" style="display:none; margin-top:20px;"></div>
       </div>
 
-      <!-- VISTA 4: RANKING -->
       <div id="vistaResultados" style="display: none;">
         <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important;">
           <h2 style="color:white !important; font-size:16px; margin-bottom:15px;">🏆 Histórico del Mundial</h2>
@@ -357,7 +355,6 @@
         </div>
       </div>
 
-      <!-- VISTA 5: ESPECIALES Y CLASIF PURA -->
       <div id="vistaEspeciales" style="display:none;">
         <div class="tarjeta" style="background: linear-gradient(135deg, #0d5f49 0%, #06382a 100%) !important;">
           <h2 style="margin-top:0; color:white !important; font-size:22px; font-weight:900;">⭐ APUESTAS ESPECIALES</h2>
@@ -388,14 +385,12 @@
            <div id="renderMatrixEspeciales"></div>
         </div>
 
-        <!-- SALÓN DE LA FAMA -->
         <div id="zonaMiniRankings" style="display:none; margin-top: 40px; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1);">
             <h2 style="text-align: center; color: var(--accent-gold); margin-bottom:5px; margin-top:0;">🏆 SALÓN DE LA FAMA</h2>
             <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Top 3 jugadores con más puntos en apartados de salseo.</p>
             <div id="gridMiniRankings" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:15px;"></div>
         </div>
 
-        <!-- CLASIFICACIÓN SIN HISTORIAS -->
         <div id="zonaClasificacionPuraJugador" style="width:100%; margin-top: 40px; display: none; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); box-sizing:border-box;">
             <h2 style="text-align: center; color: white; margin-bottom:5px; margin-top:0;">📊 CLASIFICACIÓN SIN HISTORIAS</h2>
             <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Solo puntos de partidos exactos y signos.</p>
@@ -403,7 +398,6 @@
         </div>
       </div>
 
-      <!-- VISTA 6: REGLAS -->
       <div id="vistaReglas" style="display: none;">
         <div class="tarjeta clean" style="border-left:none !important;">
           <h2 style="color: white !important; margin-top:0; text-align:center; font-size: 20px;">📖 REGLAS OFICIALES</h2>
@@ -412,7 +406,7 @@
             <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">1️⃣ Fases de la Jornada</h3>
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
               <li><strong>Hacer Jornada:</strong> Introduce los marcadores antes de la fecha límite. Puedes modificarlos todas las veces que quieras mientras el plazo esté abierto. Si no envías a tiempo, se rellena con 1-1 automático.</li>
-              <li><strong>Votar Valerinha:</strong> Tras los partidos, el Administrador publica la Clasificación Provisional. Si has acertado la pregunta de la Valerinha, se te abrirá el derecho a voto (Ataque o Blindaje).</li>
+              <li><strong>Votar Valerinha:</strong> Tras los partidos, el Administrador publica la Clasificación Provisional. Solo si has acertado la pregunta especial de tu Valerinha, se te abrirá el derecho a voto (Ataque o Blindaje). El administrador abre esta veda manualmente.</li>
               <li><strong>Definitiva:</strong> Una vez finalizan las votaciones, se calculan las sumas, restas y desvíos, generando la clasificación definitiva de la jornada y repartiendo el premio.</li>
             </ul>
           </div>
@@ -429,19 +423,28 @@
             <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">3️⃣ Apuestas Extra de Jornada</h3>
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
               <li><strong>💣 Bomba Garnacha:</strong> Es un partido destacado. Si aciertas el resultado Exacto: <strong>+3 pts</strong>. Solo el Signo: <strong>+1 pt</strong>. Si fallas el Signo: <strong>-1 pt</strong>.</li>
-              <li><strong>🌩️ La TroNpá!:</strong> Apuestas 1, 2 o 3 puntos a un evento (ej. goles en propia puerta). Si aciertas el número exacto, <strong>sumas</strong> lo apostado. Si fallas, lo <strong>restas</strong>.</li>
+              <li><strong>🌩️ La TroNpá!:</strong> Apuestas 1, 2 o 3 puntos a un evento numérico (ej. goles en propia puerta). Si aciertas el número exacto, <strong>sumas</strong> lo apostado. Si fallas, lo <strong>restas</strong>.</li>
             </ul>
           </div>
 
-          <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:8px;">
+          <div style="margin-bottom: 20px; background:rgba(0,0,0,0.3); padding:15px; border-radius:8px;">
             <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">4️⃣ El Salseo</h3>
             <p style="font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:10px;"><em>Nota: Todas las opciones de salseo valen <strong>1 punto en Fase de Grupos (J1-J3)</strong> y <strong>1.5 puntos en Fase Final (J4-J8)</strong>.</em></p>
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
-              <li><strong>🔮 Valerinha:</strong> Si aciertas la pregunta, ganas el derecho a votar. Puedes sumar los puntos a tu marcador (Blindaje) o restárselos a un rival (Ataque).
+              <li><strong>🔮 Valerinha:</strong> Si aciertas la pregunta, ganas el derecho a votar en la fase provisional. Puedes sumar los puntos a tu marcador (Blindaje) o restárselos a un rival (Ataque).
                   <br><br>🛡️ <em>Escudo Anti-Bullying:</em> Un jugador solo puede recibir un máximo de <strong>4 ataques</strong> por jornada. Si le atacan 5 o más personas, el sistema interviene: desvía el ataque de quien tenga a su "2ª opción" mejor clasificada en la general.
               </li>
               <li style="margin-top:8px;"><strong>🏃‍♂️ Irlinha:</strong> Solo se aplica si estás en la "zona baja" (a 4 puntos o menos del colista). Si aciertas la pregunta, sumas los puntos.</li>
               <li style="margin-top:8px;"><strong>🇪🇸 Santinha:</strong> Solo se aplica si estás en la "zona alta" (a 4 puntos o menos del líder). ¡Cuidado! Si <strong>fallas</strong> la pregunta, restas los puntos.</li>
+            </ul>
+          </div>
+          
+          <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:8px;">
+            <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">5️⃣ Premios y Especiales</h3>
+            <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
+              <li><strong>Premios por Jornada:</strong> El ganador de la Clasificación Provisional se lleva <strong>5.80€</strong> y el ganador de la Clasificación Definitiva (tras el salseo) se lleva <strong>29€</strong>. En caso de empate, el premio se divide entre los ganadores.</li>
+              <li><strong>Apuestas Especiales:</strong> Se lanzan antes del inicio del torneo. La evaluación de estos puntos extra se publicará al final del Mundial y se sumará a los puntos que tengas en la Jornada 8.</li>
+              <li><strong>Premios del Mundial:</strong> El ganador de la "General Definitiva" (con salseos y especiales) y el ganador de la clasificación "Sin Historias" (solo puntos de partidos) se reparten los botes acumulados de la liga.</li>
             </ul>
           </div>
 
@@ -629,12 +632,9 @@
       listaOficialNombres.forEach(n => optJug += `<option value="${n}">${n}</option>`);
       
       if(document.getElementById('esp1_a')) {
-          document.getElementById('esp1_a').innerHTML = optSel; 
-          document.getElementById('esp1_b').innerHTML = optSel; 
-          document.getElementById('esp2').innerHTML = optSel; 
-          document.getElementById('esp7').innerHTML = optSel;
-          document.getElementById('esp8').innerHTML = optJug; 
-          document.getElementById('esp9').innerHTML = optJug;
+          document.getElementById('esp1_a').innerHTML = optSel; document.getElementById('esp1_b').innerHTML = optSel; 
+          document.getElementById('esp2').innerHTML = optSel; document.getElementById('esp7').innerHTML = optSel;
+          document.getElementById('esp8').innerHTML = optJug; document.getElementById('esp9').innerHTML = optJug;
       }
   }
 
@@ -675,12 +675,16 @@
   });
 
   // ========================================================
-  // ⚙️ INICIO DEL MOTOR
+  // ⚙️ INICIO DEL MOTOR (CON PROTECCIÓN ANTI-ERRORES)
   // ========================================================
   async function iniciarMotorInteligente() {
     llenarDesplegablesEspeciales();
+    document.getElementById('cargandoPlantillaMsg').innerText = "Cargando liga...";
+    
+    let jorCerrada = 0; let isDefinitiva = false; let lista = [];
+    
+    // 1. CARGAMOS LA GENERAL (CON TRY/CATCH)
     try {
-      let jorCerrada = 0; let isDefinitiva = false;
       const snapFinal = await getDocs(collection(db, "clasificacion_general_FINAL_MUNDIAL"));
       if(!snapFinal.empty) { 
           jorCerrada = "FINAL_MUNDIAL"; 
@@ -699,7 +703,6 @@
       } else {
           let colName = isDefinitiva ? "clasificacion_general_FINAL_MUNDIAL" : "clasificacion_general_jornada_" + jorCerrada;
           const snapshot = await getDocs(collection(db, colName)); 
-          let lista = [];
           snapshot.forEach(doc => { 
               let d = doc.data(); 
               if(d.jugador && doc.id !== "GANADORES_JORNADA" && doc.id !== "RESULTADOS_REALES") {
@@ -732,39 +735,35 @@
           if(myIndex !== -1) {
               document.getElementById('uiPosicion').innerText = (myIndex + 1) + "º";
               document.getElementById('uiPuntos').innerText = isDefinitiva ? lista[myIndex].puntosFinalesMundial : lista[myIndex].totalGeneral;
-              document.getElementById('uiSaldo').innerText = lista[myIndex].gananciasTotales.toFixed(2) + " €";
+              document.getElementById('uiSaldo').innerText = Number(lista[myIndex].gananciasTotales).toFixed(2) + " €";
           }
           if(lista.length > 0) { renderMiniRankings(lista); }
       }
+    } catch (e) { console.warn("Aviso: No se pudo cargar el histórico", e); }
 
-      // ESTADO ESPECIALES
-      try {
-          const snapEsp = await getDoc(doc(db, "config_especiales", "general"));
-          let estadoEsp = "oculto";
-          if (snapEsp.exists()) { estadoEsp = snapEsp.data().estado || "oculto"; }
-          
-          let btnEsp = document.getElementById('btnVerEspeciales');
-          let txtEsp = document.getElementById('textoEstadoEspeciales');
-          let tarjetaInicioEsp = document.getElementById('tarjetaEspecialesInicio');
+    // 2. CARGAMOS ESPECIALES (CON TRY/CATCH)
+    try {
+        const snapEsp = await getDoc(doc(db, "config_especiales", "general"));
+        let estadoEsp = "oculto";
+        if (snapEsp.exists()) { estadoEsp = snapEsp.data().estado || "oculto"; }
+        
+        let btnEsp = document.getElementById('btnVerEspeciales');
+        let txtEsp = document.getElementById('textoEstadoEspeciales');
+        let tarjetaInicioEsp = document.getElementById('tarjetaEspecialesInicio');
 
-          if (estadoEsp === "oculto") {
-              btnEsp.style.display = "none"; 
-              txtEsp.style.display = "block"; 
-              tarjetaInicioEsp.style.display = "none";
-          } else if (estadoEsp === "abierto") {
-              btnEsp.style.display = "block"; 
-              btnEsp.innerText = "APUESTAS ESPECIALES DISPONIBLES";
-              txtEsp.style.display = "none"; 
-              tarjetaInicioEsp.style.display = "block";
-          } else if (estadoEsp === "cerrado") {
-              btnEsp.style.display = "block"; 
-              btnEsp.innerText = "COMPROBAR APUESTAS ESPECIALES";
-              txtEsp.style.display = "none"; 
-              tarjetaInicioEsp.style.display = "none";
-          }
-      } catch(e) {}
+        if (estadoEsp === "oculto") {
+            btnEsp.style.display = "none"; txtEsp.style.display = "block"; tarjetaInicioEsp.style.display = "none";
+        } else if (estadoEsp === "abierto") {
+            btnEsp.style.display = "block"; btnEsp.innerText = "APUESTAS ESPECIALES DISPONIBLES";
+            txtEsp.style.display = "none"; tarjetaInicioEsp.style.display = "block";
+        } else if (estadoEsp === "cerrado") {
+            btnEsp.style.display = "block"; btnEsp.innerText = "COMPROBAR APUESTAS ESPECIALES";
+            txtEsp.style.display = "none"; tarjetaInicioEsp.style.display = "none";
+        }
+    } catch(e) { console.warn("Aviso: No se pudo cargar estado especiales", e); }
 
-      // ESTADO JORNADA
+    // 3. CARGAMOS JORNADA ACTUAL (CON TRY/CATCH)
+    try {
       const snapConfig = await getDocs(collection(db, "config_jornadas"));
       let configs = []; 
       snapConfig.forEach(doc => { 
@@ -775,7 +774,12 @@
       });
       configs.sort((a,b) => a.num - b.num);
       
-      if(configs.length === 0) { document.getElementById('cargandoPlantillaMsg').innerText = "⚠️ La liga aún no ha comenzado."; return; }
+      if(configs.length === 0) { 
+          document.getElementById('cargandoPlantillaMsg').innerText = "⚠️ La liga aún no ha comenzado."; 
+          document.getElementById('cargandoPlantillaMsg').style.display = "none"; 
+          switchTabJugador('Inicio');
+          return; 
+      }
 
       let ahora = new Date(); 
       let configQ = configs.find(c => c.fechaLimite && new Date(c.fechaLimite) > ahora);
@@ -807,63 +811,71 @@
           if(snapProno.exists() && snapProno.data().fechaEnvio && !snapProno.data().fechaEnvio.includes("(Auto)")) {
               yaEnviado = true; pData = snapProno.data();
           }
-      } catch(e) {}
+      } catch(e) { console.warn("Aviso: Pronóstico previo no encontrado."); }
 
       let htmlPartidos = "";
-      configQ_Data.partidos.forEach((p, i) => { 
-        let flagL = seleccionesMundial[p.local] || ""; 
-        let flagV = seleccionesMundial[p.visita] || ""; 
-        let codL = codigosMundial[p.local] || p.local.substring(0,3).toUpperCase(); 
-        let codV = codigosMundial[p.visita] || p.visita.substring(0,3).toUpperCase();
-        
-        let valL = yaEnviado ? pData.partidos[i].local : 0; 
-        let valV = yaEnviado ? pData.partidos[i].visita : 0;
-        let btnStyle = esJornadaQuinielaCerrada ? "display:none;" : "display:flex;";
-        
-        htmlPartidos += `
-        <div class="fila" style="margin-bottom:15px; padding:12px 10px; background:rgba(0,0,0,0.25); border-radius:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid rgba(255,255,255,0.05);">
-            <div style="flex:1; text-align:right; font-weight:900; font-size:15px; padding-right:12px; white-space:nowrap;">${flagL} ${codL}</div>
+      if(configQ_Data && configQ_Data.partidos) {
+          configQ_Data.partidos.forEach((p, i) => { 
+            let flagL = seleccionesMundial[p.local] || ""; 
+            let flagV = seleccionesMundial[p.visita] || ""; 
+            let codL = codigosMundial[p.local] || p.local.substring(0,3).toUpperCase(); 
+            let codV = codigosMundial[p.visita] || p.visita.substring(0,3).toUpperCase();
             
-            <div style="display:flex; gap:10px; align-items:center; justify-content:center;">
-               <div style="display:flex; flex-direction:column; align-items:center; gap:3px;">
-                  <button type="button" class="btn-step step-btn-gen" data-target="playPL_${i}" data-val="1" style="${btnStyle}">+</button>
-                  <input type="number" id="playPL_${i}" value="${valL}" readonly style="width:40px; height:40px; text-align:center; padding:0; font-size:18px; border-radius:6px; background:rgba(0,0,0,0.6) !important; color:white; border:1px solid var(--accent-gold) !important; margin:0;">
-                  <button type="button" class="btn-step step-btn-gen" data-target="playPL_${i}" data-val="-1" style="${btnStyle}">-</button>
-               </div>
-               <span style="font-weight:bold; color:var(--text-muted);">-</span>
-               <div style="display:flex; flex-direction:column; align-items:center; gap:3px;">
-                  <button type="button" class="btn-step step-btn-gen" data-target="playPV_${i}" data-val="1" style="${btnStyle}">+</button>
-                  <input type="number" id="playPV_${i}" value="${valV}" readonly style="width:40px; height:40px; text-align:center; padding:0; font-size:18px; border-radius:6px; background:rgba(0,0,0,0.6) !important; color:white; border:1px solid var(--accent-gold) !important; margin:0;">
-                  <button type="button" class="btn-step step-btn-gen" data-target="playPV_${i}" data-val="-1" style="${btnStyle}">-</button>
-               </div>
-            </div>
+            let valL = (yaEnviado && pData && pData.partidos && pData.partidos[i]) ? pData.partidos[i].local : 0; 
+            let valV = (yaEnviado && pData && pData.partidos && pData.partidos[i]) ? pData.partidos[i].visita : 0;
+            let btnStyle = esJornadaQuinielaCerrada ? "display:none;" : "display:flex;";
+            
+            htmlPartidos += `
+            <div class="fila" style="margin-bottom:15px; padding:12px 10px; background:rgba(0,0,0,0.25); border-radius:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid rgba(255,255,255,0.05);">
+                <div style="flex:1; text-align:right; font-weight:900; font-size:15px; padding-right:12px; white-space:nowrap;">${flagL} ${codL}</div>
+                
+                <div style="display:flex; gap:10px; align-items:center; justify-content:center;">
+                   <div style="display:flex; flex-direction:column; align-items:center; gap:3px;">
+                      <button type="button" class="btn-step step-btn-gen" data-target="playPL_${i}" data-val="1" style="${btnStyle}">+</button>
+                      <input type="number" id="playPL_${i}" value="${valL}" readonly style="width:40px; height:40px; text-align:center; padding:0; font-size:18px; border-radius:6px; background:rgba(0,0,0,0.6) !important; color:white; border:1px solid var(--accent-gold) !important; margin:0;">
+                      <button type="button" class="btn-step step-btn-gen" data-target="playPL_${i}" data-val="-1" style="${btnStyle}">-</button>
+                   </div>
+                   <span style="font-weight:bold; color:var(--text-muted);">-</span>
+                   <div style="display:flex; flex-direction:column; align-items:center; gap:3px;">
+                      <button type="button" class="btn-step step-btn-gen" data-target="playPV_${i}" data-val="1" style="${btnStyle}">+</button>
+                      <input type="number" id="playPV_${i}" value="${valV}" readonly style="width:40px; height:40px; text-align:center; padding:0; font-size:18px; border-radius:6px; background:rgba(0,0,0,0.6) !important; color:white; border:1px solid var(--accent-gold) !important; margin:0;">
+                      <button type="button" class="btn-step step-btn-gen" data-target="playPV_${i}" data-val="-1" style="${btnStyle}">-</button>
+                   </div>
+                </div>
 
-            <div style="flex:1; text-align:left; font-weight:900; font-size:15px; padding-left:12px; white-space:nowrap;">${codV} ${flagV}</div>
-            
-            <div style="width:40px; display:flex; justify-content:flex-end;">
-                <button type="button" onclick="window.abrirEstadisticas(${i})" title="Ver Estadísticas" style="background:linear-gradient(135deg, #3b82f6, #2563eb); border:none; border-radius:6px; color:white; cursor:pointer; padding:8px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 10px rgba(37,99,235,0.4); height:40px; width:40px; transition:0.2s;">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                </button>
-            </div>
-        </div>`;
-      });
-      document.getElementById('cajasPartidosJugador').innerHTML = htmlPartidos;
+                <div style="flex:1; text-align:left; font-weight:900; font-size:15px; padding-left:12px; white-space:nowrap;">${codV} ${flagV}</div>
+                
+                <div style="width:40px; display:flex; justify-content:flex-end;">
+                    <button type="button" onclick="window.abrirEstadisticas(${i})" title="Ver Estadísticas" style="background:linear-gradient(135deg, #3b82f6, #2563eb); border:none; border-radius:6px; color:white; cursor:pointer; padding:8px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 10px rgba(37,99,235,0.4); height:40px; width:40px; transition:0.2s;">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                    </button>
+                </div>
+            </div>`;
+          });
+          document.getElementById('cajasPartidosJugador').innerHTML = htmlPartidos;
+      }
       
-      document.getElementById('lblValerinha').innerText = configQ_Data.pregValerinha; 
-      document.getElementById('lblIrlinha').innerText = configQ_Data.pregIrlinha; 
-      document.getElementById('spanSantinha').innerText = configQ_Data.pregSantinha; 
-      document.getElementById('spanTronpa').innerText = configQ_Data.pregTronpa; 
-      document.getElementById('spanBomba').innerText = configQ_Data.pregBomba;
+      document.getElementById('lblValerinha').innerText = configQ_Data.pregValerinha || "Cargando..."; 
+      document.getElementById('lblIrlinha').innerText = configQ_Data.pregIrlinha || "Cargando..."; 
+      document.getElementById('spanSantinha').innerText = configQ_Data.pregSantinha || "Cargando..."; 
+      document.getElementById('lblTronpa').innerText = configQ_Data.pregTronpa || "Cargando..."; 
+      document.getElementById('lblBomba').innerText = configQ_Data.pregBomba || "Cargando...";
 
       if(yaEnviado || esJornadaQuinielaCerrada) {
-          if(yaEnviado) {
-              document.getElementById('valerinhaRespuesta').value = pData.preguntasAbiertas.valerinha;
-              document.getElementById('irlinhaRespuesta').value = pData.preguntasAbiertas.irlinha;
-              document.getElementById('santinhaRespuesta').value = pData.preguntasAbiertas.santinha;
-              document.getElementById('tronpaApuesta').value = pData.tronpa.puntosJugados;
-              document.getElementById('tronpaRespuesta').value = pData.tronpa.respuesta;
-              document.getElementById('bombaLocal').value = pData.bombaGarnacha.local; 
-              document.getElementById('bombaVisita').value = pData.bombaGarnacha.visita;
+          if(yaEnviado && pData) {
+              if(pData.preguntasAbiertas) {
+                  document.getElementById('valerinhaRespuesta').value = pData.preguntasAbiertas.valerinha || "";
+                  document.getElementById('irlinhaRespuesta').value = pData.preguntasAbiertas.irlinha || "";
+                  document.getElementById('santinhaRespuesta').value = pData.preguntasAbiertas.santinha || "";
+              }
+              if(pData.tronpa) {
+                  document.getElementById('tronpaApuesta').value = pData.tronpa.puntosJugados || 1;
+                  document.getElementById('tronpaRespuesta').value = pData.tronpa.respuesta || "";
+              }
+              if(pData.bombaGarnacha) {
+                  document.getElementById('bombaLocal').value = pData.bombaGarnacha.local || 0; 
+                  document.getElementById('bombaVisita').value = pData.bombaGarnacha.visita || 0;
+              }
           }
           if (esJornadaQuinielaCerrada) {
               document.querySelectorAll('#vistaQuiniela .btn-step').forEach(b => b.style.display = 'none');
@@ -914,10 +926,14 @@
       if(selJ.value === "1") selJ.value = jorCerrada === 0 ? 1 : jorCerrada; 
       selJ.dispatchEvent(new Event('change'));
       
-      document.getElementById('cargandoPlantillaMsg').style.display = "none"; 
-      switchTabJugador('Inicio');
-      
-    } catch(e) { document.getElementById('cargandoPlantillaMsg').innerText = "⚠️ Error de conexión. Revisa tu internet."; }
+    } catch(e) { 
+        console.warn("Aviso general:", e); 
+        // No bloqueamos la UI aunque haya algún fallo
+    }
+    
+    // Finalizamos la carga y mostramos
+    document.getElementById('cargandoPlantillaMsg').style.display = "none"; 
+    switchTabJugador('Inicio');
   }
 
   // ========================================================
