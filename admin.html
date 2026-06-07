@@ -52,7 +52,6 @@
     <button id="btnTabAdmin5" class="pestana" style="background:#e84393; color:white;">⭐ 6. Especiales</button>
   </div>
 
-  <!-- PESTAÑA 0: CONFIGURAR JORNADA -->
   <div id="vistaAdmin0">
     <div class="tarjeta" style="background: #fffaf0; border-left: 5px solid #f39c12;">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 15px;">
@@ -77,11 +76,11 @@
         </div>
         <div style="background: #fdfefe; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
           <h3 style="margin-top:0; color:#27ae60; font-size:14px; border-bottom:1px solid #eee; padding-bottom:5px;">💰 Premios de Jornada</h3>
-          <div class="fila"><label>Ganador Provisional:</label><input type="number" id="premioProv" value="5.8" step="0.1" style="width:60px;"> €</div>
-          <div class="fila"><label>Ganador Definitiva:</label><input type="number" id="premioDef" value="29" step="0.1" style="width:60px;"> €</div>
+          <div class="fila"><label>Ganador Provisional:</label><input type="number" id="premioProv" value="5.80" step="0.10" style="width:70px;"> €</div>
+          <div class="fila"><label>Ganador Definitiva:</label><input type="number" id="premioDef" value="29.00" step="0.10" style="width:70px;"> €</div>
           <h3 style="margin-top:15px; color:#8e44ad; font-size:14px; border-bottom:1px solid #eee; padding-bottom:5px;">🏆 Botes Globales</h3>
-          <div class="fila"><label>Ganador General Definitiva:</label><input type="number" id="premioGenDef" value="0" step="1" style="width:60px;"> <span id="lblSavedGenDef" style="font-size:11px; color:#7f8c8d; font-weight:bold; margin-left:5px;">(Guardado: 0€)</span></div>
-          <div class="fila"><label>Ganador General Sin Historias:</label><input type="number" id="premioGenPura" value="0" step="1" style="width:60px;"> <span id="lblSavedGenPura" style="font-size:11px; color:#7f8c8d; font-weight:bold; margin-left:5px;">(Guardado: 0€)</span></div>
+          <div class="fila"><label>Ganador General Definitiva:</label><input type="number" id="premioGenDef" value="261.00" step="0.10" style="width:70px;"> <span id="lblSavedGenDef" style="font-size:11px; color:#7f8c8d; font-weight:bold; margin-left:5px;">(Guardado: 0€)</span></div>
+          <div class="fila"><label>Ganador General Sin Historias:</label><input type="number" id="premioGenPura" value="98.60" step="0.10" style="width:70px;"> <span id="lblSavedGenPura" style="font-size:11px; color:#7f8c8d; font-weight:bold; margin-left:5px;">(Guardado: 0€)</span></div>
         </div>
       </div>
       <div id="cajasPartidosConfig" style="margin-top:20px;"></div>
@@ -97,7 +96,6 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 1: PROVISIONAL -->
   <div id="vistaAdmin1" style="display: none;">
     <div class="tarjeta" style="background: #e8f4f8; border-left: 5px solid #2980b9;">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 15px;">
@@ -133,7 +131,6 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 2: DEFINITIVA -->
   <div id="vistaAdmin2" style="display: none;">
     <div class="tarjeta" style="background: #e8f8f5; border-left: 5px solid #27ae60;">
       <div class="fila">
@@ -154,7 +151,6 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 3: HISTÓRICO -->
   <div id="vistaAdmin3" style="display: none;">
     <div class="tarjeta" style="background: #f4ecf8; border-left: 5px solid #8e44ad;">
       <h2 style="margin-top:0; color:#8e44ad; font-size:18px;">🏆 Histórico de Jornadas Oficiales</h2>
@@ -170,7 +166,6 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 4: CONTROL Y RESET -->
   <div id="vistaAdmin4" style="display:none;">
     <div class="tarjeta" style="background: #ebf5fb; border-left: 5px solid #2c3e50;">
       <h2 style="color: #2c3e50; margin-top:0;">📡 Panel de Control y Envíos</h2>
@@ -226,16 +221,22 @@
     </div>
   </div>
 
-  <!-- PESTAÑA 5: ESPECIALES -->
   <div id="vistaAdmin5" style="display:none;">
     <div class="tarjeta" style="background: #fce4ec; border-left: 5px solid #e84393;">
       <h2 style="color: #e84393; margin-top:0;">⭐ Configurar Apuestas Especiales (Pre-Mundial)</h2>
-      <p style="font-size:13px; color:#7f8c8d;">Las 9 preguntas ya están preconfiguradas y automatizadas. Solo decide cuándo abrir y cerrar el plazo para los jugadores.</p>
+      <p style="font-size:13px; color:#7f8c8d;">Las 9 preguntas ya están preconfiguradas y automatizadas. Decide cuándo abrir y cerrar el plazo para los jugadores.</p>
+      
+      <div class="fila" style="margin-top:15px; background:white; padding:10px; border-radius:5px; border:1px solid #ddd;">
+          <label style="font-weight:bold; color:#e84393;">⏰ Fecha Límite Especiales:</label>
+          <input type="datetime-local" id="limiteEspecialesConfig" style="width:auto; padding:5px;">
+      </div>
+      
       <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap;">
         <button id="btnAbrirEspeciales" class="btn-secundario" style="background:#27ae60; color:white; padding:12px; font-size:14px;">👁️ Abrir Plazo Jugadores</button>
         <button id="btnCerrarPublicarEspeciales" class="btn-secundario" style="background:#c0392b; color:white; padding:12px; font-size:14px;">🔒 Cerrar Plazo</button>
       </div>
     </div>
+    
     <div class="tarjeta" style="background: #ebf5fb; border-left: 5px solid #2980b9;">
       <h2 style="color: #2980b9; margin-top:0;">📊 Evaluación Final (Cierre del Mundial)</h2>
       <button id="btnCargarControlEspeciales" class="btn-secundario" style="background:#2980b9; color:white;">Cargar Respuestas de Jugadores</button>
@@ -283,7 +284,9 @@
   const db = getFirestore(app);
 
   const seleccionesMundial = { "Alemania": "🇩🇪", "Arabia Saudita": "🇸🇦", "Argentina": "🇦🇷", "Argelia": "🇩🇿", "Australia": "🇦🇺", "Austria": "🇦🇹", "Bélgica": "🇧🇪", "Bosnia y Herzegovina": "🇧🇦", "Brasil": "🇧🇷", "Cabo Verde": "🇨🇻", "Canadá": "🇨🇦", "Catar": "🇶🇦", "Colombia": "🇨🇴", "Corea del Sur": "🇰🇷", "Costa de Marfil": "🇨🇮", "Croacia": "🇭🇷", "Curazao": "🇨🇼", "Ecuador": "🇪🇨", "Egipto": "🇪🇬", "El Salvador": "🇸🇻", "Escocia": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "España": "🇪🇸", "Estados Unidos": "🇺🇸", "Francia": "🇫🇷", "Ghana": "🇬🇭", "Haití": "🇭🇹", "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Irak": "🇮🇶", "Irán": "🇮🇷", "Japón": "🇯🇵", "Jordania": "🇯🇴", "Marruecos": "🇲🇦", "México": "🇲🇽", "Noruega": "🇳🇴", "Nueva Zelanda": "🇳🇿", "Países Bajos": "🇳🇱", "Panamá": "🇵🇦", "Paraguay": "🇵🇾", "Portugal": "🇵🇹", "RD Congo": "🇨🇩", "República Checa": "🇨🇿", "Senegal": "🇸🇳", "Sudáfrica": "🇿🇦", "Suecia": "🇸🇪", "Suiza": "🇨🇭", "Túnez": "🇹🇳", "Turquía": "🇹🇷", "Uzbekistán": "🇺🇿" };
-  const listaOficialNombres = ["Alberto","Anto","Gonxi","Martos","Santos","Licos","Espy","Tron","Pampli","Jaime","Fran","Ayala","Salva","Genu","Bicho","Dardos","Bambino","Hector","Mazon","Ximo","Txus"];
+  
+  // NUEVA LISTA DE 29 JUGADORES
+  const listaOficialNombres = ["L'Ant", "Barri", "Alberto", "Gonxi", "Héctor", "Irles", "Bambino", "Tron", "Sants", "Valer", "Víctor", "Dardos", "Bicho", "Vinxi", "Mazon", "Junior", "Txus", "Ors", "Pech", "Manolo", "Gil", "Pampli", "Jaime", "Martos", "Raúl", "Boque", "Isi", "Fran", "Kevin"];
   
   const preguntasEspecialesGlobal = [
       "Adivinar selecciones que jugarán la final",
@@ -304,11 +307,21 @@
   window.addEventListener('DOMContentLoaded', async () => {
     try {
       const prizeSnap = await getDoc(doc(db, "config_premios", "globales"));
-      if (prizeSnap.exists()) { let pd = prizeSnap.data(); document.getElementById('premioGenDef').value = pd.genDef || 0; document.getElementById('premioGenPura').value = pd.genPura || 0; document.getElementById('lblSavedGenDef').innerText = `(Guardado: ${pd.genDef || 0}€)`; document.getElementById('lblSavedGenPura').innerText = `(Guardado: ${pd.genPura || 0}€)`; }
+      if (prizeSnap.exists()) { let pd = prizeSnap.data(); document.getElementById('premioGenDef').value = pd.genDef || 261.00; document.getElementById('premioGenPura').value = pd.genPura || 98.60; document.getElementById('lblSavedGenDef').innerText = `(Guardado: ${pd.genDef || 261.00}€)`; document.getElementById('lblSavedGenPura').innerText = `(Guardado: ${pd.genPura || 98.60}€)`; }
+      
+      const espSnap = await getDoc(doc(db, "config_especiales", "general"));
+      if (espSnap.exists() && espSnap.data().fechaLimite) { document.getElementById('limiteEspecialesConfig').value = espSnap.data().fechaLimite; }
+
       const snapConfig = await getDocs(collection(db, "config_jornadas")); let maxJor = 0; snapConfig.forEach(doc => { let parts = doc.id.split("_"); if(parts.length === 2 && !isNaN(parts[1])) { let num = parseInt(parts[1]); if(num > maxJor) maxJor = num; } });
       if(maxJor > 0) { document.getElementById('lblUltimaConfig').innerText = maxJor; ['jorConfig', 'numJornadaCorregir', 'numJornadaFinal', 'numJornadaControl', 'numJornadaPlazos'].forEach(id => { if(document.getElementById(id)) { document.getElementById(id).value = maxJor < 8 && id === 'jorConfig' ? maxJor + 1 : maxJor; } }); }
-      let jorCerrada = 0; for(let i = 8; i >= 1; i--) { const snapGen = await getDocs(collection(db, "clasificacion_general_jornada_" + i)); if(!snapGen.empty) { jorCerrada = i; break; } }
-      if(jorCerrada > 0) { document.getElementById('lblUltimaCerrada').innerText = jorCerrada; let selAdmin = document.getElementById('jorConsultaAdmin'); if(selAdmin && selAdmin.value === "1") selAdmin.value = jorCerrada; }
+      
+      let jorCerrada = 0; 
+      const snapFinal = await getDocs(collection(db, "clasificacion_general_FINAL_MUNDIAL"));
+      if(!snapFinal.empty) { jorCerrada = "DEFINITIVA"; }
+      else {
+          for(let i = 8; i >= 1; i--) { const snapGen = await getDocs(collection(db, "clasificacion_general_jornada_" + i)); if(!snapGen.empty) { jorCerrada = i; break; } }
+      }
+      if(jorCerrada !== 0) { document.getElementById('lblUltimaCerrada').innerText = jorCerrada; let selAdmin = document.getElementById('jorConsultaAdmin'); if(selAdmin) { selAdmin.value = jorCerrada; } }
     } catch(e) {}
   });
 
@@ -791,7 +804,12 @@
 
   // ================= PESTAÑA 5 (ESPECIALES FIJADOS) =================
   document.getElementById('btnAbrirEspeciales').addEventListener('click', async () => { 
-      try { await setDoc(doc(db, "config_especiales", "general"), { numPreguntas: 9, preguntas: preguntasEspecialesGlobal, estado: "abierto" }, { merge: true }); alert("¡Abiertas para los jugadores!"); } catch(e){} 
+      let limite = document.getElementById('limiteEspecialesConfig').value;
+      if(!limite) return alert("⚠️ Debes indicar una Fecha Límite para las Especiales.");
+      try { 
+          await setDoc(doc(db, "config_especiales", "general"), { numPreguntas: 9, preguntas: preguntasEspecialesGlobal, estado: "abierto", fechaLimite: limite }, { merge: true }); 
+          alert("¡Abiertas para los jugadores!"); 
+      } catch(e){} 
   });
   document.getElementById('btnCerrarPublicarEspeciales').addEventListener('click', async () => { 
       try { await setDoc(doc(db, "config_especiales", "general"), { estado: "cerrado" }, { merge: true }); alert("¡Cerradas y publicadas para visualización!"); } catch(e){} 
