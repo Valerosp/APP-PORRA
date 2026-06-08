@@ -283,9 +283,7 @@
   const app = initializeApp(firebaseConfig); 
   const db = getFirestore(app);
 
-  const seleccionesMundial = { "Alemania": "🇩🇪", "Arabia Saudita": "🇸🇦", "Argentina": "🇦🇷", "Argelia": "🇩🇿", "Australia": "🇦🇺", "Austria": "🇦🇹", "Bélgica": "🇧🇪", "Bosnia y Herzegovina": "🇧🇦", "Brasil": "🇧🇷", "Cabo Verde": "🇨🇻", "Canadá": "🇨🇦", "Catar": "🇶🇦", "Colombia": "🇨🇴", "Corea del Sur": "🇰🇷", "Costa de Marfil": "🇨🇮", "Croacia": "🇭🇷", "Curazao": "🇨🇼", "Ecuador": "🇪🇨", "Egipto": "🇪🇬", "El Salvador": "🇸🇻", "Escocia": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "España": "🇪🇸", "Estados Unidos": "🇺🇸", "Francia": "🇫🇷", "Ghana": "🇬🇭", "Haití": "🇭🇹", "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Irak": "🇮🇶", "Irán": "🇮🇷", "Japón": "🇯🇵", "Jordania": "🇯🇴", "Marruecos": "🇲🇦", "México": "🇲🇽", "Noruega": "🇳🇴", "Nueva Zelanda": "🇳🇿", "Países Bajos": "🇳🇱", "Panamá": "🇵🇦", "Paraguay": "🇵🇾", "Portugal": "🇵🇹", "RD Congo": "🇨🇩", "República Checa": "🇨🇿", "Senegal": "🇸🇳", "Sudáfrica": "🇿🇦", "Suecia": "🇸🇪", "Suiza": "🇨🇭", "Túnez": "🇹🇳", "Turquía": "🇹🇷", "Uzbekistán": "🇺🇿" };
-  
-  // NUEVA LISTA DE 29 JUGADORES
+  const seleccionesMundial = { "Alemania": "🇩🇪", "Arabia Saudita": "🇸🇦", "Argentina": "🇦🇷", "Argelia": "🇩🇿", "Australia": "🇦🇺", "Austria": "🇦🇹", "Bélgica": "🇧🇪", "Bosnia y Herzegovina": "🇧🇦", "Brasil": "🇧🇷", "Cabo Verde": "🇨🇻", "Canadá": "🇨🇦", "Catar": "🇶🇦", "Colombia": "🇨🇴", "Corea del Sur": "🇰🇷", "Costa de Marfil": "🇨🇮", "Croacia": "🇭🇷", "Curazao": "🇨🇼", "Ecuador": "🇪🇨", "Egipto": "🇪🇬", "El Salvador": "🇸🇻", "Escocia": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "España": "🇪🇸", "Estados Unidos": "🇺🇸", "Francia": "🇫🇷", "Ghana": "🇬🇭", "Haití": "🇭🇹", "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Irak": "🇮🇶", "Irán": "🇮🇷", "Japón": "🇯🇵", "Jordania": "🇯🇴", "Marruecos": "🇲🇦", "México": "🇲🇽", "Noruega": "🇳🇴", "Nueva Zelanda": "🇳🇿", "Países Bajos": "🇳🇱", "Panamá": "🇵🇦", "Paraguay": "🇵🇾", "Portugal": "🇵🇹", "RD Congo": "🇨🇩", "República Checa": "🇨🇿", "Senegal": "🇸🇳", "Sudáfrica": "🇿🇦", "Suecia": "🇸🇪", "Suiza": "🇨🇭", "Túnez": "🇹🇳", "Turquía": "🇹🇷", "Uruguay": "🇺🇾", "Uzbekistán": "🇺🇿" };
   const listaOficialNombres = ["L'Ant", "Barri", "Alberto", "Gonxi", "Héctor", "Irles", "Bambino", "Tron", "Sants", "Valer", "Víctor", "Dardos", "Bicho", "Vinxi", "Mazon", "Junior", "Txus", "Ors", "Pech", "Manolo", "Gil", "Pampli", "Jaime", "Martos", "Raúl", "Boque", "Isi", "Fran", "Kevin"];
   
   const preguntasEspecialesGlobal = [
@@ -342,6 +340,8 @@
 
   function obtenerGanadoresGeneral(jugadores, campoPuntos) {
     if(jugadores.length === 0) return [];
+    
+    // Convertimos todos los valores a número para evitar que Firebase los compare como texto
     let maxPts = Math.max(...jugadores.map(j => Number(j[campoPuntos]) || 0)); 
     let emps = jugadores.filter(j => (Number(j[campoPuntos]) || 0) === maxPts); 
     if(emps.length === 1) return emps.map(j => j.jugador || j.nombre);
@@ -403,6 +403,7 @@
       const snap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor)); if(!snap.exists()){ return alert("La jornada no tiene plantilla."); }
       configJornadaActual = snap.data(); 
 
+      // Comprobar si ya hay resultados guardados antes
       let prevReales = null;
       try {
          const snapReal = await getDoc(doc(db, "provisional_jornada_" + jor, "RESULTADOS_REALES"));
@@ -444,6 +445,7 @@
 
       historicoGeneral = {}; if (jor > 1) { try { const genSnapshot = await getDocs(collection(db, "clasificacion_general_jornada_" + (jor - 1))); genSnapshot.forEach((docSnap) => { let data = docSnap.data(); if (data.jugador) { historicoGeneral[String(data.jugador).trim().toLowerCase()] = { puntosAcumulados: Number(data.puntosAcumulados)||0, puntosPurosAcumulados: Number(data.puntosPurosAcumulados)||0, resultadosAcertados: Number(data.resultadosAcertados)||0, pronosticosAcertados: Number(data.pronosticosAcertados)||0, puntosBombaGarnacha: Number(data.puntosBombaGarnacha)||0, puntosValerinhas: Number(data.puntosValerinhas)||0, puntosIrlinhas: Number(data.puntosIrlinhas)||0, puntosSantinhas: Number(data.puntosSantinhas)||0, puntosTronpa: Number(data.puntosTronpa)||0 }; } }); } catch(e) {} }
 
+      // Recuperar evaluaciones previas si es guardado incremental
       let evalsPrevias = {};
       try { const provSnap = await getDocs(collection(db, "provisional_jornada_" + jor)); provSnap.forEach(d => { if(d.id !== "RESULTADOS_REALES" && d.id !== "GANADORES_JORNADA") evalsPrevias[d.id] = d.data(); }); } catch(e) {}
 
@@ -458,6 +460,7 @@
       });
       document.getElementById('listaCorreccionesTextos').innerHTML = htmlCorreccion; document.getElementById('zonaPaso1').style.display = "block"; btn.innerText = "📥 Base Cargada ✅";
       
+      // Mostrar botón de Paso 3 si no está abierto aún
       let isVotAbierta = configJornadaActual.votacionesAbiertas === true;
       let btnPaso3 = document.getElementById('btnPaso3_AbrirVotos');
       btnPaso3.style.display = 'block';
@@ -466,7 +469,7 @@
     } catch (error) { btn.innerText = "📥 Paso 1"; console.error(error); }
   });
 
-  // PASO 2: GUARDAR Y PUBLICAR PROVISIONAL
+  // PASO 2: GUARDAR Y PUBLICAR PROVISIONAL (SIN ABRIR VOTACIONES)
   document.getElementById('btnPaso2').addEventListener('click', async function() {
     let jor = parseInt(document.getElementById('numJornadaCorregir').value);
     
@@ -514,6 +517,7 @@
     pintarTablas(configPintar, "PROVISIONAL", configJornadaActual);
   });
 
+  // PASO 3: ABRIR VOTACIONES VALERINHA
   document.getElementById('btnPaso3_AbrirVotos').addEventListener('click', async function() {
       let jor = parseInt(document.getElementById('numJornadaCorregir').value);
       if(!confirm("¿Abrir votaciones Valerinha para la Jornada " + jor + "?")) return;
@@ -527,10 +531,10 @@
   });
 
 
-  // FASE 3/4 DEFINITIVA Y LÓGICA DE VALERINHA
+  // FASE 3/4 DEFINITIVA Y LÓGICA DE VALERINHA (MÁXIMO 4 Y DESVÍOS)
   document.getElementById('btnPaso3').addEventListener('click', async function() {
     let jor = parseInt(document.getElementById('numJornadaFinal').value);
-    let multiVS = (jor <= 3) ? 1 : 1.5; 
+    let multiVS = (jor <= 3) ? 1 : 1.5; // ESCALADO DE PUNTOS
     try {
       const provSnap = await getDocs(collection(db, "provisional_jornada_" + jor)); jugadoresProvisionales = [];
       provSnap.forEach(doc => { if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); else jugadoresProvisionales.push(doc.data()); });
@@ -542,6 +546,7 @@
       
       jugadoresProvisionales.forEach(j => { j.val_ganados = 0; j.val_perdidos = 0; j.dec_val = "-"; });
       
+      // LÓGICA ANTI-BULLYING (Límite 4 ataques y Desvíos)
       let redirigidos = {};
       let changed = true;
       while(changed) {
@@ -580,6 +585,7 @@
           }
       }
 
+      // APLICAR VOTOS FINALES CON MULTIPLICADOR
       jugadoresProvisionales.forEach(j => {
           if (j.statVal === "exacto" && votos[j.nombre]) {
               let miVoto = votos[j.nombre];
@@ -596,6 +602,7 @@
           }
       });
 
+      // Asegurar el tope matemático y aplicar el multiplicador
       jugadoresProvisionales.forEach(j => { 
           if (j.val_perdidos < -4) j.val_perdidos = -4; 
           j.p_val = (j.val_ganados + j.val_perdidos) * multiVS; 
@@ -1003,7 +1010,7 @@
        document.getElementById('zonaTablero').innerHTML = `<h2 style="text-align: center; color: #8e44ad;">📊 RESULTADOS JORNADA ${jorStr}</h2><div style="overflow-x:auto; width:100%;"><table><thead><tr><th>Partido</th><th style="background:#ecf0f1; color:#333;">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:#f4f6f6; color:#2c3e50;">${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:#f4f6f6; color:#2c3e50;">${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdVa1} </tr><tr><td><strong>Resultado Valerinha</strong></td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdVa2} </tr><tr><td><strong>Decisión Valerinha</strong></td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdVaDec} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdSa} </tr><tr><td><strong>TOTAL JORNADA</strong></td><td style="background:#e5e7e9; font-weight:bold; color:#2c3e50;">-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdNomRow} </tr></tbody></table></div>`; document.getElementById('zonaTablero').style.display = "block";
     } else { document.getElementById('zonaTablero').style.display = "none"; }
 
-    let sortBy = isDef ? "puntosFinalesMundial" : "totalGeneral"; let tablaGeneral = [...listaJugadores].sort((a, b) => { if(b[sortBy] !== a[sortBy]) return b[sortBy] - a[sortBy]; if(b.c_exactos_gen !== a.c_exactos_gen) return b.c_exactos_gen - a.c_exactos_gen; if(b.c_signos_gen !== a.c_signos_gen) return b.c_signos_gen - a.c_signos_gen; return ((b.puntosFinalesMundial||b.totalGeneral) - b.puntosPurosAcumulados) - ((a.puntosFinalesMundial||a.totalGeneral) - a.puntosPurosAcumulados); });
+    let sortBy = isDef ? "puntosFinalesMundial" : "totalGeneral"; let tablaGeneral = [...listaJugadores].sort((a, b) => { if(Number(b[sortBy]) !== Number(a[sortBy])) return Number(b[sortBy]) - Number(a[sortBy]); if(Number(b.c_exactos_gen) !== Number(a.c_exactos_gen)) return Number(b.c_exactos_gen) - Number(a.c_exactos_gen); if(Number(b.c_signos_gen) !== Number(a.c_signos_gen)) return Number(b.c_signos_gen) - Number(a.c_signos_gen); return ((Number(b.puntosFinalesMundial)||Number(b.totalGeneral)) - Number(b.puntosPurosAcumulados)) - ((Number(a.puntosFinalesMundial)||Number(a.totalGeneral)) - Number(a.puntosPurosAcumulados)); });
     
     let htmlClasif = `<table><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:#d35400;">TOTAL GENERAL</th><th>EXACTOS ACUM.</th><th>PRONÓSTICOS ACUM.</th><th>BOMBA ACUM.</th><th>VALERINHAS ACUM.</th><th>IRLINHAS ACUM.</th><th>SANTINHAS ACUM.</th><th>TroNpá! ACUM.</th>`;
     if(isDef) htmlClasif += `<th style="background:#e84393; color:white;">Pts. ESPECIALES</th>`;
@@ -1012,7 +1019,7 @@
     htmlClasif += `</tbody></table>`; document.getElementById('tituloClasificacion').innerText = isDef ? `🏆 CLASIFICACIÓN DEFINITIVA DEL MUNDIAL` : `🏆 CLASIFICACIÓN GENERAL ACUMULADA (${titulo})`; document.getElementById('tablaClasificacion').innerHTML = htmlClasif; document.getElementById('zonaClasificacion').style.display = "block";
 
     if(listaJugadores[0].purosAcumulados !== undefined || listaJugadores[0].puntosPurosAcumulados !== undefined) {
-        let tablaPura = [...listaJugadores].sort((a, b) => { let ptsA = a.purosAcumulados !== undefined ? a.purosAcumulados : a.puntosPurosAcumulados; let ptsB = b.purosAcumulados !== undefined ? b.purosAcumulados : b.puntosPurosAcumulados; if(ptsB !== ptsA) return ptsB - ptsA; return (b.c_exactos_gen || 0) - (a.c_exactos_gen || 0); });
+        let tablaPura = [...listaJugadores].sort((a, b) => { let ptsA = a.purosAcumulados !== undefined ? Number(a.purosAcumulados) : Number(a.puntosPurosAcumulados); let ptsB = b.purosAcumulados !== undefined ? Number(b.purosAcumulados) : Number(b.puntosPurosAcumulados); if(ptsB !== ptsA) return ptsB - ptsA; return (Number(b.c_exactos_gen) || 0) - (Number(a.c_exactos_gen) || 0); });
         let htmlPura = `<table style="width:70%; margin:auto;"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:#2980b9;">PUNTOS (Solo Partidos)</th><th>RESULT. EXACTOS</th><th>PRONÓSTICOS ACERT.</th></tr></thead><tbody>`;
         tablaPura.forEach((j, idx) => { let pts = j.purosAcumulados !== undefined ? j.purosAcumulados : j.puntosPurosAcumulados; htmlPura += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td style="font-weight:bold; font-size:16px; color:#2980b9;">${pts} pts</td><td>${j.c_exactos_gen||0}</td><td>${j.c_signos_gen||0}</td></tr>`; });
         htmlPura += `</tbody></table>`; document.getElementById('tablaClasificacionPura').innerHTML = htmlPura; document.getElementById('zonaClasificacionPura').style.display = "block";
