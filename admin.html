@@ -224,7 +224,7 @@
   <div id="vistaAdmin5" style="display:none;">
     <div class="tarjeta" style="background: #fce4ec; border-left: 5px solid #e84393;">
       <h2 style="color: #e84393; margin-top:0;">⭐ Configurar Apuestas Especiales (Pre-Mundial)</h2>
-      <p style="font-size:13px; color:#7f8c8d;">Las 9 preguntas ya están preconfiguradas y automatizadas. Decide cuándo abrir y cerrar el plazo para los jugadores.</p>
+      <p style="font-size:13px; color:#7f8c8d;">Las 9 preguntas ya están preconfiguradas y automatizadas. Solo decide cuándo abrir y cerrar el plazo para los jugadores.</p>
       
       <div class="fila" style="margin-top:15px; background:white; padding:10px; border-radius:5px; border:1px solid #ddd;">
           <label style="font-weight:bold; color:#e84393;">⏰ Fecha Límite Especiales:</label>
@@ -342,8 +342,6 @@
 
   function obtenerGanadoresGeneral(jugadores, campoPuntos) {
     if(jugadores.length === 0) return [];
-    
-    // Convertimos todos los valores a número para evitar que Firebase los compare como texto
     let maxPts = Math.max(...jugadores.map(j => Number(j[campoPuntos]) || 0)); 
     let emps = jugadores.filter(j => (Number(j[campoPuntos]) || 0) === maxPts); 
     if(emps.length === 1) return emps.map(j => j.jugador || j.nombre);
@@ -405,7 +403,6 @@
       const snap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor)); if(!snap.exists()){ return alert("La jornada no tiene plantilla."); }
       configJornadaActual = snap.data(); 
 
-      // Comprobar si ya hay resultados guardados antes
       let prevReales = null;
       try {
          const snapReal = await getDoc(doc(db, "provisional_jornada_" + jor, "RESULTADOS_REALES"));
@@ -447,7 +444,6 @@
 
       historicoGeneral = {}; if (jor > 1) { try { const genSnapshot = await getDocs(collection(db, "clasificacion_general_jornada_" + (jor - 1))); genSnapshot.forEach((docSnap) => { let data = docSnap.data(); if (data.jugador) { historicoGeneral[String(data.jugador).trim().toLowerCase()] = { puntosAcumulados: Number(data.puntosAcumulados)||0, puntosPurosAcumulados: Number(data.puntosPurosAcumulados)||0, resultadosAcertados: Number(data.resultadosAcertados)||0, pronosticosAcertados: Number(data.pronosticosAcertados)||0, puntosBombaGarnacha: Number(data.puntosBombaGarnacha)||0, puntosValerinhas: Number(data.puntosValerinhas)||0, puntosIrlinhas: Number(data.puntosIrlinhas)||0, puntosSantinhas: Number(data.puntosSantinhas)||0, puntosTronpa: Number(data.puntosTronpa)||0 }; } }); } catch(e) {} }
 
-      // Recuperar evaluaciones previas si es guardado incremental
       let evalsPrevias = {};
       try { const provSnap = await getDocs(collection(db, "provisional_jornada_" + jor)); provSnap.forEach(d => { if(d.id !== "RESULTADOS_REALES" && d.id !== "GANADORES_JORNADA") evalsPrevias[d.id] = d.data(); }); } catch(e) {}
 
@@ -462,7 +458,6 @@
       });
       document.getElementById('listaCorreccionesTextos').innerHTML = htmlCorreccion; document.getElementById('zonaPaso1').style.display = "block"; btn.innerText = "📥 Base Cargada ✅";
       
-      // Mostrar botón de Paso 3 si no está abierto aún
       let isVotAbierta = configJornadaActual.votacionesAbiertas === true;
       let btnPaso3 = document.getElementById('btnPaso3_AbrirVotos');
       btnPaso3.style.display = 'block';
@@ -471,7 +466,7 @@
     } catch (error) { btn.innerText = "📥 Paso 1"; console.error(error); }
   });
 
-  // PASO 2: GUARDAR Y PUBLICAR PROVISIONAL (SIN ABRIR VOTACIONES)
+  // PASO 2: GUARDAR Y PUBLICAR PROVISIONAL
   document.getElementById('btnPaso2').addEventListener('click', async function() {
     let jor = parseInt(document.getElementById('numJornadaCorregir').value);
     
@@ -519,7 +514,6 @@
     pintarTablas(configPintar, "PROVISIONAL", configJornadaActual);
   });
 
-  // PASO 3: ABRIR VOTACIONES VALERINHA
   document.getElementById('btnPaso3_AbrirVotos').addEventListener('click', async function() {
       let jor = parseInt(document.getElementById('numJornadaCorregir').value);
       if(!confirm("¿Abrir votaciones Valerinha para la Jornada " + jor + "?")) return;
@@ -533,10 +527,10 @@
   });
 
 
-  // FASE 3/4 DEFINITIVA Y LÓGICA DE VALERINHA (MÁXIMO 4 Y DESVÍOS)
+  // FASE 3/4 DEFINITIVA Y LÓGICA DE VALERINHA
   document.getElementById('btnPaso3').addEventListener('click', async function() {
     let jor = parseInt(document.getElementById('numJornadaFinal').value);
-    let multiVS = (jor <= 3) ? 1 : 1.5; // ESCALADO DE PUNTOS
+    let multiVS = (jor <= 3) ? 1 : 1.5; 
     try {
       const provSnap = await getDocs(collection(db, "provisional_jornada_" + jor)); jugadoresProvisionales = [];
       provSnap.forEach(doc => { if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); else jugadoresProvisionales.push(doc.data()); });
@@ -548,7 +542,6 @@
       
       jugadoresProvisionales.forEach(j => { j.val_ganados = 0; j.val_perdidos = 0; j.dec_val = "-"; });
       
-      // LÓGICA ANTI-BULLYING (Límite 4 ataques y Desvíos)
       let redirigidos = {};
       let changed = true;
       while(changed) {
@@ -587,7 +580,6 @@
           }
       }
 
-      // APLICAR VOTOS FINALES CON MULTIPLICADOR
       jugadoresProvisionales.forEach(j => {
           if (j.statVal === "exacto" && votos[j.nombre]) {
               let miVoto = votos[j.nombre];
@@ -604,7 +596,6 @@
           }
       });
 
-      // Asegurar el tope matemático y aplicar el multiplicador
       jugadoresProvisionales.forEach(j => { 
           if (j.val_perdidos < -4) j.val_perdidos = -4; 
           j.p_val = (j.val_ganados + j.val_perdidos) * multiVS; 
@@ -786,20 +777,40 @@
       if(!confirm("⚠️ ADVERTENCIA 1/3: Vas a BORRAR POR COMPLETO toda la base de datos de la liga. Los saldos, los puntos, todo. ¿Estás seguro?")) return;
       if(!confirm("🚨 ADVERTENCIA 2/3: Esto es irreversible y no hay copia de seguridad. ¿Continuar?")) return;
       if(!confirm("💀 ADVERTENCIA 3/3: ÚLTIMA OPORTUNIDAD. Dale a Aceptar para iniciar la Purga.")) return;
+      
+      document.getElementById('btnResetLiga').innerText = "🔥 PURGANDO DATOS... ⏳";
+      document.getElementById('btnResetLiga').disabled = true;
+
       try {
-          for(let i=1; i<=8; i++) {
-              let cols = ["pronosticos_jornada_", "provisional_jornada_", "votos_valerinha_jornada_", "clasificacion_general_jornada_"];
-              for(let c of cols) { let qs = await getDocs(collection(db, c+i)); for(let d of qs.docs) await deleteDoc(doc(db, c+i, d.id)); }
-              await deleteDoc(doc(db, "config_jornadas", "jornada_"+i));
-          }
-          let colsF = ["clasificacion_general_FINAL_MUNDIAL", "pronosticos_especiales"];
-          for(let c of colsF) { let qs = await getDocs(collection(db, c)); for(let d of qs.docs) await deleteDoc(doc(db, c, d.id)); }
-          await deleteDoc(doc(db, "config_especiales", "general"));
-          await deleteDoc(doc(db, "config_especiales", "evaluacion"));
-          await deleteDoc(doc(db, "config_premios", "globales"));
+          let colecciones = [
+              "config_premios", 
+              "config_jornadas", 
+              "config_especiales", 
+              "pronosticos_especiales", 
+              "clasificacion_general_FINAL_MUNDIAL"
+          ];
           
-          alert("🔥 PURGA COMPLETADA. La liga está vacía.");
-      } catch(e) { alert("Error durante el borrado masivo."); }
+          for(let i=1; i<=10; i++) { 
+              colecciones.push("pronosticos_jornada_" + i);
+              colecciones.push("provisional_jornada_" + i);
+              colecciones.push("votos_valerinha_jornada_" + i);
+              colecciones.push("clasificacion_general_jornada_" + i);
+          }
+
+          for(let c of colecciones) { 
+              let qs = await getDocs(collection(db, c)); 
+              for(let d of qs.docs) {
+                  await deleteDoc(doc(db, c, d.id)); 
+              }
+          }
+          
+          alert("🔥 PURGA COMPLETADA. La base de datos está inmaculada.");
+          window.location.reload(); 
+      } catch(e) { 
+          alert("Error durante el borrado masivo: " + e.message); 
+          document.getElementById('btnResetLiga').innerText = "🔥 RESETEAR LIGA DESDE CERO 🔥";
+          document.getElementById('btnResetLiga').disabled = false;
+      }
   });
 
   // ================= PESTAÑA 5 (ESPECIALES FIJADOS) =================
