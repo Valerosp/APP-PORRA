@@ -120,6 +120,7 @@
 </head>
 <body>
 
+<!-- PANTALLA DE ACCESO (LOGIN) -->
 <div id="pantallaLogin">
     <div class="login-card">
         <div style="text-align: center; margin-bottom: 20px;">
@@ -167,9 +168,11 @@
     </div>
 </div>
 
+<!-- APLICACIÓN PRINCIPAL -->
 <div id="pantallaApp" style="display:none;">
     <div class="contenedor usuario">
       
+      <!-- CABECERA -->
       <div class="top-header">
            <div style="text-align: center; width: 45px;">
              <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="Mundial" style="width:100%; height:auto;">
@@ -182,6 +185,7 @@
 
       <div id="cargandoPlantillaMsg" style="text-align:center; font-weight:bold; padding:20px; color:var(--accent-gold);">Sincronizando Estado... ⏳</div>
 
+      <!-- VISTA 0: INICIO -->
       <div id="vistaInicio" style="display:none;">
           <div class="tarjeta clean">
               <div class="profile-header">
@@ -207,18 +211,21 @@
               </div>
           </div>
           
+          <!-- TARJETA CLICKABLE ESPECIALES -->
           <div id="tarjetaEspecialesInicio" class="tarjeta" style="background:rgba(255,255,255,0.05) !important; cursor:pointer; display:none; border-left:4px solid var(--accent-green) !important;" title="Ir a Apuestas Especiales">
               <h2 style="color:var(--accent-green) !important; font-size:14px; margin-bottom:10px;">⭐ APUESTAS ESPECIALES</h2>
               <div id="infoEstadoEspeciales" style="font-size:16px; font-weight:bold; color:white;">¡Periodo Abierto!</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para enviar tus respuestas ➡️</div>
           </div>
 
+          <!-- TARJETA CLICKABLE JORNADA -->
           <div class="tarjeta" id="btnIrJornada" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" title="Ir a rellenar jornada">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">ESTADO DE LA JORNADA</h2>
               <div id="infoEstadoJornada" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para ir a la Jornada ➡️</div>
           </div>
 
+          <!-- TARJETA CLICKABLE VALERINHA -->
           <div class="tarjeta" id="btnIrValerinha" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" title="Ir a votar Valerinha">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">EL SALSEO (VALERINHA)</h2>
               <div id="infoEstadoValerinha" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
@@ -226,6 +233,7 @@
           </div>
       </div>
 
+      <!-- VISTA 1: HACER JORNADA -->
       <div id="vistaQuiniela" style="display:none;">
         <h2 id="tituloJornadaEnJuegoQ" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
         <div id="relojQuiniela" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -279,6 +287,7 @@
         </div>
       </div>
 
+      <!-- VISTA 2: VOTAR VALERINHA -->
       <div id="vistaValerinha" style="display: none;">
         <h2 id="tituloJornadaEnJuegoV" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
         <div id="relojValerinha" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -317,11 +326,28 @@
         </div>
       </div>
 
+      <!-- VISTA 3: JORNADA EN JUEGO CON SELECTOR -->
       <div id="vistaEnJuego" style="display:none;">
+         <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important; margin-bottom:15px; padding:15px !important;">
+             <div style="display:flex; justify-content:space-between; align-items:center;">
+                 <h2 style="color:white !important; font-size:16px; margin:0;">⚽ Estado de la Jornada</h2>
+                 <select id="jorConsultaEnJuego" style="width:130px; padding:8px; margin:0;">
+                   <option value="1">Jornada 1</option>
+                   <option value="2">Jornada 2</option>
+                   <option value="3">Jornada 3</option>
+                   <option value="4">Jornada 4</option>
+                   <option value="5">Jornada 5</option>
+                   <option value="6">Jornada 6</option>
+                   <option value="7">Jornada 7</option>
+                   <option value="8">Jornada 8</option>
+                 </select>
+             </div>
+         </div>
          <div id="renderMátrixCandadoBloqueo"></div>
          <div id="zonaTableroEnJuego" style="display:none; margin-top:20px;"></div>
       </div>
 
+      <!-- VISTA 4: RANKING -->
       <div id="vistaResultados" style="display: none;">
         <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important;">
           <h2 style="color:white !important; font-size:16px; margin-bottom:15px;">🏆 Histórico del Mundial</h2>
@@ -354,6 +380,7 @@
         </div>
       </div>
 
+      <!-- VISTA 5: ESPECIALES Y CLASIF PURA -->
       <div id="vistaEspeciales" style="display:none;">
         <div class="tarjeta" style="background: linear-gradient(135deg, #0d5f49 0%, #06382a 100%) !important;">
           <h2 style="margin-top:0; color:white !important; font-size:22px; font-weight:900;">⭐ APUESTAS ESPECIALES</h2>
@@ -384,12 +411,14 @@
            <div id="renderMatrixEspeciales"></div>
         </div>
 
+        <!-- SALÓN DE LA FAMA -->
         <div id="zonaMiniRankings" style="display:none; margin-top: 40px; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1);">
             <h2 style="text-align: center; color: var(--accent-gold); margin-bottom:5px; margin-top:0;">🏆 SALÓN DE LA FAMA</h2>
             <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Top 3 jugadores en apartados de salseo.</p>
             <div id="gridMiniRankings" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:15px;"></div>
         </div>
 
+        <!-- CLASIFICACIÓN SIN HISTORIAS -->
         <div id="zonaClasificacionPuraJugador" style="width:100%; margin-top: 40px; display: none; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); box-sizing:border-box;">
             <h2 style="text-align: center; color: white; margin-bottom:5px; margin-top:0;">📊 CLASIFICACIÓN SIN HISTORIAS</h2>
             <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Solo puntos de partidos exactos y signos.</p>
@@ -397,6 +426,7 @@
         </div>
       </div>
 
+      <!-- VISTA 6: REGLAS AMPLIADAS Y DETALLADAS -->
       <div id="vistaReglas" style="display: none;">
         <div class="tarjeta clean" style="border-left:none !important;">
           <h2 style="color: white !important; margin-top:0; text-align:center; font-size: 20px;">📖 REGLAS OFICIALES</h2>
@@ -524,6 +554,9 @@
   document.getElementById('btnIrValerinha').addEventListener('click', () => switchTabJugador('Valerinha'));
   document.getElementById('btnCerrarModal').addEventListener('click', () => { document.getElementById('modalEstadisticas').style.display = 'none'; });
 
+  // Escucha del selector de Jornadas
+  document.getElementById('jorConsultaEnJuego').addEventListener('change', renderPestañaEnJuegoCompleta);
+
   // Evento dinámico para botones +/- generados por JS
   document.addEventListener('click', function(e) {
       if(e.target && e.target.classList.contains('step-btn-gen')) {
@@ -631,12 +664,9 @@
       listaOficialNombres.forEach(n => optJug += `<option value="${n}">${n}</option>`);
       
       if(document.getElementById('esp1_a')) {
-          document.getElementById('esp1_a').innerHTML = optSel; 
-          document.getElementById('esp1_b').innerHTML = optSel; 
-          document.getElementById('esp2').innerHTML = optSel; 
-          document.getElementById('esp7').innerHTML = optSel;
-          document.getElementById('esp8').innerHTML = optJug; 
-          document.getElementById('esp9').innerHTML = optJug;
+          document.getElementById('esp1_a').innerHTML = optSel; document.getElementById('esp1_b').innerHTML = optSel; 
+          document.getElementById('esp2').innerHTML = optSel; document.getElementById('esp7').innerHTML = optSel;
+          document.getElementById('esp8').innerHTML = optJug; document.getElementById('esp9').innerHTML = optJug;
       }
   }
 
@@ -741,6 +771,18 @@
           }
           if(lista.length > 0) { renderMiniRankings(lista); }
       }
+
+      // 1.5 AUTO-SELECCIÓN DE LA JORNADA EN JUEGO
+      let jorEnJuegoDefecto = 1;
+      if (jorCerrada === "FINAL_MUNDIAL") {
+          jorEnJuegoDefecto = 8;
+      } else {
+          jorEnJuegoDefecto = jorCerrada + 1;
+          if (jorEnJuegoDefecto > 8) jorEnJuegoDefecto = 8;
+      }
+      let selEnJuego = document.getElementById('jorConsultaEnJuego');
+      if (selEnJuego) selEnJuego.value = jorEnJuegoDefecto;
+
     } catch (e) { console.warn("Aviso: No se pudo cargar el histórico", e); }
 
     // 2. CARGAMOS ESPECIALES (CON TRY/CATCH)
@@ -1191,7 +1233,7 @@
   });
 
   // ========================================================
-  // ⚽ RENDER TABLAS
+  // ⚽ RENDER TABLAS Y JORNADA EN JUEGO
   // ========================================================
   async function obtenerMapaRankingAnterior(jorStr) {
       if(jorStr === "1") return {}; 
@@ -1216,10 +1258,10 @@
   }
 
   async function renderPestañaEnJuegoCompleta() {
-     let jor = window.jorQuinielaActual; 
+     let jor = document.getElementById('jorConsultaEnJuego').value; 
      document.getElementById('renderMátrixCandadoBloqueo').style.display = "block"; 
      document.getElementById('zonaTableroEnJuego').style.display = "none"; 
-     document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<div style="text-align:center; font-weight:bold; padding:20px; color:var(--accent-gold);">Sincronizando jornada... ⏳</div>`;
+     document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<div style="text-align:center; font-weight:bold; padding:20px; color:var(--accent-gold);">Sincronizando jornada ${jor}... ⏳</div>`;
      
      try {
         const defSnap = await getDocs(collection(db, "clasificacion_general_jornada_" + jor));
@@ -1253,10 +1295,15 @@
         }
         
         const configSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor)); 
-        let estaPublicado = configSnap.exists() ? (configSnap.data().pronosticosPublicados || false) : false;
+        if(!configSnap.exists()) {
+             document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<div class="tarjeta" style="text-align:center;"><h2 style="color:var(--text-muted) !important;">🚧 JORNADA NO INICIADA</h2><p>El administrador aún no ha configurado esta jornada para poder jugar.</p></div>`;
+             return;
+        }
+
+        let estaPublicado = configSnap.data().pronosticosPublicados || false;
         
         if(!estaPublicado) {
-           document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<div class="tarjeta" style="text-align:center;"><h2 style="color:var(--text-muted) !important;">🔒 Jornada Protegida</h2><p>Las respuestas de los rivales están ocultas hasta el pitido inicial.</p></div>`;
+           document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<div class="tarjeta" style="text-align:center;"><h2 style="color:var(--text-muted) !important;">🔒 JORNADA PROTEGIDA</h2><p>Las respuestas de los rivales están ocultas hasta el pitido inicial.</p></div>`;
         } else {
            const pronosSnap = await getDocs(collection(db, "pronosticos_jornada_" + jor));
            if(pronosSnap.empty) { document.getElementById('renderMátrixCandadoBloqueo').innerHTML = `<p style="text-align:center;">No hay respuestas registradas.</p>`; return; }
@@ -1332,7 +1379,7 @@
   });
 
   function pintarTablas(listaJugadores, titulo, configJor = {}, containerPrefix = "Jugador", prevRankingMap = {}) {
-    let jorStr = (containerPrefix === "Jugador") ? document.getElementById('jorConsulta').value : window.jorQuinielaActual; 
+    let jorStr = (containerPrefix === "Jugador") ? document.getElementById('jorConsulta').value : (containerPrefix === "EnJuego" ? document.getElementById('jorConsultaEnJuego').value : window.jorQuinielaActual);
     let isDef = (jorStr === "DEFINITIVA" || containerPrefix === "Jugador" || containerPrefix === "EnJuego");
 
     let qTr = configJor.pregTronpa ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${configJor.pregTronpa}</span>` : ''; 
@@ -1459,7 +1506,7 @@
     let htmlGanancias = `<table class="tabla-clasif" style="border-collapse:collapse;"><thead><tr><th style="text-align:left;">JUGADOR</th><th style="text-align:right;">GANANCIAS (€)</th></tr></thead><tbody>`;
     let rankingGanancias = [...listaJugadores].sort((a, b) => Number(b.gananciasTotales) - Number(a.gananciasTotales));
     rankingGanancias.forEach(g => { 
-        htmlGanancias += `<tr><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); text-align:left;"><strong>${g.nombre}</strong></td><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); text-align:right; color:${Number(g.dinero) > 0 ? 'var(--accent-green)':'var(--text-muted)'}; font-weight:bold; font-size:15px;">${Number(g.dinero).toFixed(2)} €</td></tr>`; 
+        htmlGanancias += `<tr><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); text-align:left;"><strong>${g.nombre}</strong></td><td style="padding:12px; border-bottom:1px solid rgba(255,255,255,0.05); text-align:right; color:${Number(g.gananciasTotales) > 0 ? 'var(--accent-green)':'var(--text-muted)'}; font-weight:bold; font-size:15px;">${Number(g.gananciasTotales).toFixed(2)} €</td></tr>`; 
     });
     htmlGanancias += `</tbody></table>`; 
     document.getElementById('tablaGananciasTotales' + containerPrefix).innerHTML = htmlGanancias; 
