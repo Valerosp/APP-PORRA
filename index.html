@@ -129,6 +129,7 @@
 </head>
 <body>
 
+<!-- PANTALLA DE ACCESO (LOGIN) -->
 <div id="pantallaLogin">
     <div class="login-card">
         <div style="text-align: center; margin-bottom: 20px;">
@@ -176,9 +177,11 @@
     </div>
 </div>
 
+<!-- APLICACIÓN PRINCIPAL -->
 <div id="pantallaApp" style="display:none;">
     <div class="contenedor usuario">
       
+      <!-- CABECERA -->
       <div class="top-header">
            <div style="text-align: center; width: 45px;">
              <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="Mundial" style="width:100%; height:auto;">
@@ -191,6 +194,7 @@
 
       <div id="cargandoPlantillaMsg" style="text-align:center; font-weight:bold; padding:20px; color:var(--accent-gold);">Sincronizando Estado... ⏳</div>
 
+      <!-- VISTA 0: INICIO -->
       <div id="vistaInicio" style="display:none;">
           <div class="tarjeta clean">
               <div class="profile-header">
@@ -216,18 +220,21 @@
               </div>
           </div>
           
+          <!-- TARJETA CLICKABLE ESPECIALES -->
           <div id="tarjetaEspecialesInicio" class="tarjeta" style="background:rgba(255,255,255,0.05) !important; cursor:pointer; display:none; border-left:4px solid var(--accent-green) !important;" title="Ir a Apuestas Especiales">
               <h2 style="color:var(--accent-green) !important; font-size:14px; margin-bottom:10px;">⭐ APUESTAS ESPECIALES</h2>
               <div id="infoEstadoEspeciales" style="font-size:16px; font-weight:bold; color:white;">¡Periodo Abierto!</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para enviar tus respuestas ➡️</div>
           </div>
 
+          <!-- TARJETA CLICKABLE JORNADA -->
           <div class="tarjeta" id="btnIrJornada" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" title="Ir a rellenar jornada">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">ESTADO DE LA JORNADA</h2>
               <div id="infoEstadoJornada" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para ir a la Jornada ➡️</div>
           </div>
 
+          <!-- TARJETA CLICKABLE VALERINHA -->
           <div class="tarjeta" id="btnIrValerinha" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" title="Ir a votar Valerinha">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">EL SALSEO (VALERINHA)</h2>
               <div id="infoEstadoValerinha" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
@@ -235,6 +242,7 @@
           </div>
       </div>
 
+      <!-- VISTA 1: HACER JORNADA -->
       <div id="vistaQuiniela" style="display:none;">
         <h2 id="tituloJornadaEnJuegoQ" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
         <div id="relojQuiniela" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -288,6 +296,7 @@
         </div>
       </div>
 
+      <!-- VISTA 2: VOTAR VALERINHA -->
       <div id="vistaValerinha" style="display: none;">
         <h2 id="tituloJornadaEnJuegoV" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
         <div id="relojValerinha" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -326,6 +335,7 @@
         </div>
       </div>
 
+      <!-- VISTA 3: JORNADA EN JUEGO CON SELECTOR -->
       <div id="vistaEnJuego" style="display:none;">
          <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important; margin-bottom:15px; padding:15px !important;">
              <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -350,6 +360,7 @@
          </div>
       </div>
 
+      <!-- VISTA 4: RANKING -->
       <div id="vistaResultados" style="display: none;">
         <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important;">
           <h2 style="color:white !important; font-size:16px; margin-bottom:15px;">🏆 Histórico del Mundial</h2>
@@ -382,6 +393,7 @@
         </div>
       </div>
 
+      <!-- VISTA 5: ESPECIALES Y CLASIF PURA -->
       <div id="vistaEspeciales" style="display:none;">
         <div class="tarjeta" style="background: linear-gradient(135deg, #0d5f49 0%, #06382a 100%) !important;">
           <h2 style="margin-top:0; color:white !important; font-size:22px; font-weight:900;">⭐ APUESTAS ESPECIALES</h2>
@@ -412,12 +424,14 @@
            <div id="renderMatrixEspeciales"></div>
         </div>
 
+        <!-- SALÓN DE LA FAMA -->
         <div id="zonaMiniRankings" style="display:none; margin-top: 40px; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1);">
             <h2 style="text-align: center; color: var(--accent-gold); margin-bottom:5px; margin-top:0;">🏆 SALÓN DE LA FAMA</h2>
             <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Top 3 jugadores en apartados de salseo.</p>
             <div id="gridMiniRankings" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:15px;"></div>
         </div>
 
+        <!-- CLASIFICACIÓN SIN HISTORIAS -->
         <div id="zonaClasificacionPuraJugador" style="width:100%; margin-top: 40px; display: none; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); box-sizing:border-box;">
             <h2 style="text-align: center; color: white; margin-bottom:5px; margin-top:0;">📊 CLASIFICACIÓN SIN HISTORIAS</h2>
             <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Solo puntos de partidos exactos y signos.</p>
@@ -425,6 +439,7 @@
         </div>
       </div>
 
+      <!-- VISTA 6: REGLAS AMPLIADAS Y DETALLADAS -->
       <div id="vistaReglas" style="display: none;">
         <div class="tarjeta clean" style="border-left:none !important;">
           <h2 style="color: white !important; margin-top:0; text-align:center; font-size: 20px;">📖 REGLAS OFICIALES</h2>
@@ -498,7 +513,14 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
   import { doc, getFirestore, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-  const firebaseConfig = { apiKey: "AIzaSyD_agcptTd-HPxMYHWU5damUk6gF0M5aoE", authDomain: "liga-fila-fila.firebaseapp.com", projectId: "liga-fila-fila", storageBucket: "liga-fila-fila.firebasestorage.app", messagingSenderId: "825473276982", appId: "1:825473276982:web:0a5645fdb9d8faf3110c97", measurementId: "G-31J4EH2MCD" };
+  const firebaseConfig = { 
+      apiKey: "AIzaSyBCdtNGGhQQuiIcyJodYpmswfH7Y7CFKsY", 
+      authDomain: "prueba-liga-b749c.firebaseapp.com", 
+      projectId: "prueba-liga-b749c", 
+      storageBucket: "prueba-liga-b749c.firebasestorage.app", 
+      messagingSenderId: "829985009590", 
+      appId: "1:829985009590:web:f4a60a1817c2f2f1a21b17" 
+  };
   const app = initializeApp(firebaseConfig); 
   const db = getFirestore(app);
 
@@ -624,9 +646,9 @@
 
   function renderMiniRankings(lista) {
       const cats = [
-          { id: 'p_val_gen', title: '👑 Reyes Valerinha', color: 'var(--accent-gold)', sort: 'asc' }, // Más negativos
-          { id: 'p_irl_gen', title: '🏃‍♂️ Paquetes de la Irlinha', color: '#34d399', sort: 'desc' }, // Más positivos
-          { id: 'p_san_gen', title: '🇪🇸 Villanos Santinha', color: '#f87171', sort: 'asc' }, // Más negativos
+          { id: 'p_val_gen', title: '👑 Reyes Valerinha', color: 'var(--accent-gold)', sort: 'asc' }, 
+          { id: 'p_irl_gen', title: '🏃‍♂️ Paquetes de la Irlinha', color: '#34d399', sort: 'desc' }, 
+          { id: 'p_san_gen', title: '🇪🇸 Villanos Santinha', color: '#f87171', sort: 'asc' }, 
           { id: 'p_bomba_gen', title: '💣 Expertos en Bombas', color: '#f43f5e', sort: 'desc' },
           { id: 'p_tronpa_gen', title: '🌩️ Gurús TroNpá!', color: '#60a5fa', sort: 'desc' }
       ];
@@ -750,8 +772,7 @@
               }
           });
           
-          // 🚨 CRITERIO ESTRICTO DE ORDENACIÓN (Puntos -> Exactos -> Signos)
-          let sortBy = (jorCerrada === "FINAL_MUNDIAL") ? "puntosFinalesMundial" : "totalGeneral";
+          let sortBy = isDefinitiva ? "puntosFinalesMundial" : "totalGeneral";
           lista.sort((a, b) => { 
               if(Number(b[sortBy] || 0) !== Number(a[sortBy] || 0)) return Number(b[sortBy] || 0) - Number(a[sortBy] || 0); 
               if(Number(b.c_exactos_gen || 0) !== Number(a.c_exactos_gen || 0)) return Number(b.c_exactos_gen || 0) - Number(a.c_exactos_gen || 0); 
@@ -762,7 +783,7 @@
           let myIndex = lista.findIndex(j => j.nombre === window.jugadorLogueado);
           if(myIndex !== -1) {
               document.getElementById('uiPosicion').innerText = (myIndex + 1) + "º";
-              document.getElementById('uiPuntos').innerText = (jorCerrada === "FINAL_MUNDIAL") ? lista[myIndex].puntosFinalesMundial : lista[myIndex].totalGeneral;
+              document.getElementById('uiPuntos').innerText = isDefinitiva ? lista[myIndex].puntosFinalesMundial : lista[myIndex].totalGeneral;
               document.getElementById('uiSaldo').innerText = Number(lista[myIndex].gananciasTotales).toFixed(2) + " €";
           }
           if(lista.length > 0) { renderMiniRankings(lista); }
@@ -1139,8 +1160,7 @@
     let jorStr = (containerPrefix === "Jugador") ? document.getElementById('jorConsulta').value : (containerPrefix === "EnJuego" ? document.getElementById('jorConsultaEnJuego').value : window.jorQuinielaActual);
     let isDef = (jorStr === "DEFINITIVA" || containerPrefix === "Jugador" || containerPrefix === "EnJuego");
 
-    // 🚨 ARREGLO DE ORDENACIÓN MÁXIMA EN FRONTEND (Puntos -> Exactos -> Signos)
-    let isHistorialDefinitivoGlobal = (jorStr === "DEFINITIVA");
+    let isHistorialDefinitivoGlobal = (containerPrefix === "Jugador" && jorStr === "DEFINITIVA");
     let sortBy = isHistorialDefinitivoGlobal ? "puntosFinalesMundial" : "totalGeneral";
     
     let tablaGeneral = [...listaJugadores].sort((a, b) => { 
@@ -1150,7 +1170,12 @@
         return (Number(b[sortBy] || 0) - Number(b.puntosPurosAcumulados || 0)) - (Number(a[sortBy] || 0) - Number(a.puntosPurosAcumulados || 0)); 
     });
 
-    let tablaJornada = [...tablaGeneral]; 
+    // 🚨 REGLA APLICADA: MATRIZ DE RESULTADOS ORDENADA POR LOS PUNTOS DE LA JORNADA 🚨
+    let tablaJornada = [...tablaGeneral].sort((a, b) => {
+        let diff = (Number(b.totalJornada) || 0) - (Number(a.totalJornada) || 0);
+        return diff !== 0 ? diff : a.nombre.localeCompare(b.nombre);
+    });
+
     let thNom = ""; 
     let numPartidosVisuales = tablaJornada[0].partidosVisuales.length; 
     let filasPartidos = Array(numPartidosVisuales).fill(""); 
@@ -1202,16 +1227,21 @@
     
     document.getElementById('zonaTablero' + containerPrefix).innerHTML = tabHTML; document.getElementById('zonaTablero' + containerPrefix).style.display = "block";
     
-    // TABLA CLASIFICACIÓN GENERAL
+    // TABLA CLASIFICACIÓN GENERAL (Mantiene el orden absoluto del Ranking)
     let htmlClasif = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS ACUM.</th><th class="th-clasif">PRONÓSTICOS ACUM.</th><th class="th-clasif">BOMBA ACUM.</th><th class="th-clasif">VALERINHAS ACUM.</th><th class="th-clasif">IRLINHAS ACUM.</th><th class="th-clasif">SANTINHAS ACUM.</th><th class="th-clasif">TroNpá! ACUM.</th>`;
     if(isHistorialDefinitivoGlobal) htmlClasif += `<th style="color:#f472b6;">Pts. EXTRA</th>`; 
     htmlClasif += `</tr></thead><tbody>`;
     
     tablaGeneral.forEach((j, idx) => { 
-        let tGen = isHistorialDefinitivoGlobal ? (j.puntosFinalesMundial || j.totalGeneral) : j.totalGeneral; let arrow = ""; 
-        if (prevRankingMap?.[j.nombre]) { let p = prevRankingMap[j.nombre], c = idx + 1; if (c < p) arrow = " <span style='color:var(--accent-green);'>▲</span>"; else if (c > p) arrow = " <span style='color:#e74c3c;'>▼</span>"; }
+        let tGen = isHistorialDefinitivoGlobal ? (j.puntosFinalesMundial || j.totalGeneral) : j.totalGeneral; 
+        let arrow = ""; 
+        if (isDef && prevRankingMap && prevRankingMap[j.nombre]) { 
+            let p = prevRankingMap[j.nombre], c = idx + 1; 
+            if (c < p) arrow = " <span style='color:var(--accent-green); font-size:12px; font-weight:900;'>▲</span>"; 
+            else if (c > p) arrow = " <span style='color:#e74c3c; font-size:12px; font-weight:900;'>▼</span>"; 
+        }
         htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}${arrow}</td><td class="td-total-gen">${tGen} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td>`; 
-        if(isHistorialDefinitivoGlobal) htmlClasif += `<td style="color:#f472b6; font-weight:bold;">${j.puntosEspecialesExtra || 0}</td>`; 
+        if(isHistorialDefinitivoGlobal) htmlClasif += `<td style="font-weight:bold; color:#f472b6;">${j.puntosEspecialesExtra || 0}</td>`; 
         htmlClasif += `</tr>`; 
     }); 
     htmlClasif += `</tbody></table></div>`; 
@@ -1226,17 +1256,21 @@
         document.getElementById('zonaClasificacionEnJuego').style.display = "block"; 
     }
 
-    // CLASIFICACIÓN PURA (SIN HISTORIAS)
-    if(containerPrefix === "Jugador") {
-        let tablaPura = [...listaJugadores].sort((a, b) => {
-            let ptsA = Number(a.puntosPurosAcumulados) || 0;
-            let ptsB = Number(b.puntosPurosAcumulados) || 0;
-            if(ptsB !== ptsA) return ptsB - ptsA;
-            return (Number(b.c_exactos_gen) || 0) - (Number(a.c_exactos_gen) || 0);
+    if(containerPrefix === "Jugador" && document.getElementById('zonaClasificacionPura' + containerPrefix) && (listaJugadores[0].purosAcumulados !== undefined || listaJugadores[0].puntosPurosAcumulados !== undefined)) {
+        let tablaPura = [...listaJugadores].sort((a, b) => { 
+            let ptsA = a.purosAcumulados !== undefined ? Number(a.purosAcumulados) : Number(a.puntosPurosAcumulados); 
+            let ptsB = b.purosAcumulados !== undefined ? Number(b.purosAcumulados) : Number(b.puntosPurosAcumulados); 
+            if(ptsB !== ptsA) return ptsB - ptsA; 
+            return (Number(b.c_exactos_gen) || 0) - (Number(a.c_exactos_gen) || 0); 
         });
         let htmlPura = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-blue);">PUNTOS PUROS</th><th>EXACTOS</th><th>SIGNOS</th></tr></thead><tbody>`;
-        tablaPura.forEach((j, idx) => { htmlPura += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td style="font-weight:bold; color:var(--accent-blue);">${j.puntosPurosAcumulados} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td></tr>`; });
-        htmlPura += `</tbody></table></div>`; document.getElementById('tablaClasificacionPuraJugador').innerHTML = htmlPura; document.getElementById('zonaClasificacionPuraJugador').style.display = "block";
+        tablaPura.forEach((j, idx) => { 
+            let pts = j.purosAcumulados !== undefined ? j.purosAcumulados : j.puntosPurosAcumulados; 
+            htmlPura += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td style="font-weight:bold; font-size:16px; color:var(--accent-blue);">${pts} pts</td><td>${j.c_exactos_gen||0}</td><td>${j.c_signos_gen||0}</td></tr>`; 
+        });
+        htmlPura += `</tbody></table></div>`; 
+        document.getElementById('tablaClasificacionPura' + containerPrefix).innerHTML = htmlPura; 
+        document.getElementById('zonaClasificacionPura' + containerPrefix).style.display = "block";
     }
   }
 
@@ -1251,11 +1285,19 @@
 
   function pintarProvisionalJugador(listaJugadores, jor, configJor = {}, containerPrefix = "Prov") {
     let qTr = configJor.pregTronpa ? `<br><span>${configJor.pregTronpa}</span>` : '', qBm = configJor.pregBomba ? `<br><span>${configJor.pregBomba}</span>` : '', qVa = configJor.pregValerinha ? `<br><span>${configJor.pregValerinha}</span>` : '', qIr = configJor.pregIrlinha ? `<br><span>${configJor.pregIrlinha}</span>` : '', qSa = configJor.pregSantinha ? `<br><span>${configJor.pregSantinha}</span>` : '';
+    
     let tablaGeneral = [...listaJugadores].sort((a, b) => b.totalGeneral - a.totalGeneral); 
-    let thNom = ""; let numPartidosVisuales = tablaGeneral[0].partidosVisuales.length; let filasPartidos = Array(numPartidosVisuales).fill("");
+    
+    // 🚨 REGLA APLICADA: MATRIZ DE RESULTADOS ORDENADA POR LOS PUNTOS DE LA JORNADA 🚨
+    let tablaJornada = [...tablaGeneral].sort((a, b) => {
+        let diff = (Number(b.totalJornada) || 0) - (Number(a.totalJornada) || 0);
+        return diff !== 0 ? diff : a.nombre.localeCompare(b.nombre);
+    });
+
+    let thNom = ""; let numPartidosVisuales = tablaJornada[0].partidosVisuales.length; let filasPartidos = Array(numPartidosVisuales).fill("");
     let tdTr = "", tdBm = "", tdVa1 = "", tdVa2 = "", tdIr = "", tdSa = "", tdTot = "";
     
-    tablaGeneral.forEach(j => { 
+    tablaJornada.forEach(j => { 
         thNom += `<th>${j.nombre.substring(0,6)}</th>`; 
         j.partidosVisuales.forEach((p, idx) => { filasPartidos[idx] += `<td><span class="${p.stat}">${p.texto}</span></td>`; }); 
         tdTr += `<td><span class="${j.statTronpa}">${j.trT}</span></td>`; tdBm += `<td><span class="${j.statBomba}">${j.bmT}</span></td>`; tdVa1 += `<td><span class="${j.statVal}">${j.valT}</span></td>`; tdVa2 += `<td></td>`; 
@@ -1268,15 +1310,18 @@
         let lbl = `${seleccionesMundial[lLoc]||''} - ${seleccionesMundial[lVis]||''}`;
         return `<tr><td><strong>${lbl}</strong></td><td>${resPartidos[i] || "-"}</td>${f}</tr>`; 
     }).join("");
-    let tdNomRow = tablaGeneral.map(j => `<td>${j.nombre}</td>`).join("");
+    let tdNomRow = tablaJornada.map(j => `<td>${j.nombre}</td>`).join("");
 
     let tabHTML = `<h2>📊 RESULTADOS JORNADA ${jor} (Provisional)</h2><div class="table-container-matriz"><table class="tabla-matriz"><thead><tr><th>Partido</th><th>R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td>${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba</strong>${qBm}</td><td>${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td>-</td> ${tdVa1} </tr><tr><td><strong>Ptos Valerinha</strong></td><td>-</td> ${tdVa2} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td>-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td>-</td> ${tdSa} </tr><tr><td><strong>TOTAL</strong></td><td>-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td>-</td> ${tdNomRow} </tr></tbody></table></div>`;
     
     if(containerPrefix === "Prov") { 
         document.getElementById('tableroProvJugador').innerHTML = tabHTML; 
+        
         let htmlClasif = `<h2>🏆 CLASIFICACIÓN PROVISIONAL</h2><div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-gold);">PUNTOS TOTALES</th><th>EXACTOS</th><th>SIGNOS</th><th>BOMBA</th><th>VALERINHAS</th><th>IRLINHAS</th><th>SANTINHAS</th><th>TroNpá!</th></tr></thead><tbody>`; 
         tablaGeneral.forEach((j, idx) => { htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td class="td-total-gen">${j.totalGeneral} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td></tr>`; }); 
-        htmlClasif += `</tbody></table></div>`; document.getElementById('clasifProvJugador').innerHTML = htmlClasif; document.getElementById('zonaTablasProvisionalesJugador').style.display = "block"; 
+        htmlClasif += `</tbody></table></div>`; 
+        
+        document.getElementById('clasifProvJugador').innerHTML = htmlClasif; document.getElementById('zonaTablasProvisionalesJugador').style.display = "block"; 
     } else { 
         document.getElementById('zonaTableroEnJuego').innerHTML = tabHTML; document.getElementById('zonaTableroEnJuego').style.display = "block"; 
     }
