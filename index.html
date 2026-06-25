@@ -101,7 +101,7 @@
         .tabla-clasif thead th:nth-child(1), .tabla-clasif thead th:nth-child(2) { z-index: 15; background: #111827; }
         .tabla-clasif tbody td { padding: 8px 10px; text-align: center; }
 
-        /* TABLA ESPECIALES (SOLO FIJA 1 COLUMNA) */
+        /* SISTEMA EXCLUSIVO PARA ESPECIALES (CONGELADO STICKY - SOLO 1 COLUMNA) */
         .table-container-especiales { max-height: 65vh; overflow: auto; width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-dark); position: relative; }
         .tabla-especiales { width: max-content; min-width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 0; font-size: 12px; }
         .tabla-especiales th, .tabla-especiales td { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.05); }
@@ -197,7 +197,7 @@
                   <div class="avatar" id="uiAvatarInicial">⚽</div>
                   <div class="profile-info">
                       <h2 id="uiNombre">-</h2>
-                      <p id="uiSubtitulo">Liga Filà Filá - Mundial 2026</p>
+                      <p>Liga Filà Filá - Mundial 2026</p>
                   </div>
               </div>
               <div class="profile-stats">
@@ -498,14 +498,7 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
   import { doc, getFirestore, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-  const firebaseConfig = { 
-      apiKey: "AIzaSyBCdtNGGhQQuiIcyJodYpmswfH7Y7CFKsY", 
-      authDomain: "prueba-liga-b749c.firebaseapp.com", 
-      projectId: "prueba-liga-b749c", 
-      storageBucket: "prueba-liga-b749c.firebasestorage.app", 
-      messagingSenderId: "829985009590", 
-      appId: "1:829985009590:web:f4a60a1817c2f2f1a21b17" 
-  };
+  const firebaseConfig = { apiKey: "AIzaSyD_agcptTd-HPxMYHWU5damUk6gF0M5aoE", authDomain: "liga-fila-fila.firebaseapp.com", projectId: "liga-fila-fila", storageBucket: "liga-fila-fila.firebasestorage.app", messagingSenderId: "825473276982", appId: "1:825473276982:web:0a5645fdb9d8faf3110c97", measurementId: "G-31J4EH2MCD" };
   const app = initializeApp(firebaseConfig); 
   const db = getFirestore(app);
 
@@ -539,16 +532,16 @@
       ['vistaInicio', 'vistaQuiniela', 'vistaValerinha', 'vistaResultados', 'vistaReglas', 'vistaEnJuego', 'vistaEspeciales'].forEach(v => { 
           let el = document.getElementById(v); if(el) el.style.display = 'none'; 
       });
-      document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.remove('activa'));
+      document.querySelectorAll('.pestana').forEach(b => b.classList.remove('activa'));
       
       let vista = document.getElementById('vista' + tabName); if(vista) vista.style.display = 'block';
-      let btn = document.getElementById('btnTab' + tabName); if(btn) btn.classList.add('activa');
+      let btn = document.querySelector(`.pestana[data-tab="${tabName}"]`); if(btn) btn.classList.add('activa');
       
       if(tabName === 'EnJuego') { renderPestañaEnJuegoCompleta(); }
   }
 
   // Asignar eventos de navegación
-  document.querySelectorAll('.bottom-nav button').forEach(btn => {
+  document.querySelectorAll('.pestana').forEach(btn => {
       btn.addEventListener('click', (e) => {
           let tab = e.currentTarget.getAttribute('data-tab');
           switchTabJugador(tab);
@@ -712,52 +705,15 @@
   });
 
   // ========================================================
-  // 🛠️ MOTOR DE MERGE DINÁMICO (SUMA HISTÓRICO + PROVISIONAL)
-  // ========================================================
-  async function getProvisionalDinamica(jorStr) {
-      const provSnap = await getDocs(collection(db, "provisional_jornada_" + jorStr));
-      if (provSnap.empty) return [];
-      
-      let raw = []; window.realResultsActuales = null;
-      provSnap.forEach(doc => { 
-          if (doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); 
-          else raw.push(doc.data()); 
-      });
-
-      let prevJor = parseInt(jorStr) - 1;
-      let prevMapData = {};
-      if(prevJor > 0) {
-          const genSnap = await getDocs(collection(db, "clasificacion_general_jornada_" + prevJor));
-          genSnap.forEach(d => { if(d.data().jugador) prevMapData[d.data().jugador] = d.data(); });
-      }
-
-      return raw.map(j => {
-          let p = prevMapData[j.nombre] || {};
-          let p_val = Number(j.p_val) || 0; let p_irl = Number(j.p_irl) || 0; let p_san = Number(j.p_san) || 0;
-          let totJ = (Number(j.base) || 0) + p_val + p_irl + p_san;
-          return {
-              ...j,
-              totalJornada: totJ,
-              totalGeneral: (Number(p.puntosAcumulados) || 0) + totJ,
-              purosAcumulados: (Number(p.puntosPurosAcumulados) || 0) + (Number(j.puntosPurosJornada) || 0),
-              c_exactos_gen: (Number(p.resultadosAcertados) || 0) + (Number(j.c_exactos) || 0),
-              c_signos_gen: (Number(p.pronosticosAcertados) || 0) + (Number(j.c_signos) || 0),
-              p_bomba_gen: (Number(p.puntosBombaGarnacha) || 0) + (Number(j.p_bomba) || 0),
-              p_tronpa_gen: (Number(p.puntosTronpa) || 0) + (Number(j.p_tronpa) || 0),
-              p_val_gen: (Number(p.puntosValerinhas) || 0) + p_val,
-              p_irl_gen: (Number(p.puntosIrlinhas) || 0) + p_irl,
-              p_san_gen: (Number(p.puntosSantinhas) || 0) + p_san
-          };
-      });
-  }
-
-  // ========================================================
   // ⚙️ INICIO DEL MOTOR (CON PROTECCIÓN ANTI-ERRORES)
   // ========================================================
   async function iniciarMotorInteligente() {
-    let jorCerrada = 0; let isDefinitiva = false; let lista = [];
     llenarDesplegablesEspeciales();
+    document.getElementById('cargandoPlantillaMsg').innerText = "Cargando liga...";
     
+    let jorCerrada = 0; let isDefinitiva = false; let lista = [];
+    
+    // 1. CARGAMOS LA GENERAL (CON TRY/CATCH)
     try {
       const snapFinal = await getDocs(collection(db, "clasificacion_general_FINAL_MUNDIAL"));
       if(!snapFinal.empty) { 
@@ -799,10 +755,10 @@
           
           let sortBy = isDefinitiva ? "puntosFinalesMundial" : "totalGeneral";
           lista.sort((a, b) => { 
-              if(Number(b[sortBy] || 0) !== Number(a[sortBy] || 0)) return Number(b[sortBy] || 0) - Number(a[sortBy] || 0); 
-              if(Number(b.c_exactos_gen || 0) !== Number(a.c_exactos_gen || 0)) return Number(b.c_exactos_gen || 0) - Number(a.c_exactos_gen || 0); 
-              if(Number(b.c_signos_gen || 0) !== Number(a.c_signos_gen || 0)) return Number(b.c_signos_gen || 0) - Number(a.c_signos_gen || 0); 
-              return ((Number(b[sortBy] || 0)) - Number(b.puntosPurosAcumulados || 0)) - ((Number(a[sortBy] || 0)) - Number(a.puntosPurosAcumulados || 0)); 
+              if(Number(b[sortBy]) !== Number(a[sortBy])) return Number(b[sortBy]) - Number(a[sortBy]); 
+              if(Number(b.c_exactos_gen) !== Number(a.c_exactos_gen)) return Number(b.c_exactos_gen) - Number(a.c_exactos_gen); 
+              if(Number(b.c_signos_gen) !== Number(a.c_signos_gen)) return Number(b.c_signos_gen) - Number(a.c_signos_gen); 
+              return ((Number(b.puntosFinalesMundial)||Number(b.totalGeneral)) - Number(b.puntosPurosAcumulados)) - ((Number(a.puntosFinalesMundial)||Number(a.totalGeneral)) - Number(a.puntosPurosAcumulados)); 
           });
           
           let myIndex = lista.findIndex(j => j.nombre === window.jugadorLogueado);
@@ -825,41 +781,9 @@
       let selEnJuego = document.getElementById('jorConsultaEnJuego');
       if (selEnJuego) selEnJuego.value = jorEnJuegoDefecto;
 
-      // 🌟 IMPACTO EN LA PANTALLA DE INICIO (PROVISIONAL) CON MERGE DINÁMICO 🌟
-      let closedRankingMap = {};
-      lista.forEach((j, i) => { closedRankingMap[j.nombre] = i + 1; });
-      
-      if (jorCerrada !== "FINAL_MUNDIAL") {
-          try {
-              let provListHome = await getProvisionalDinamica(jorEnJuegoDefecto.toString());
-              if (provListHome && provListHome.length > 0) {
-                  provListHome.sort((a, b) => {
-                      if(Number(b.totalGeneral || 0) !== Number(a.totalGeneral || 0)) return Number(b.totalGeneral || 0) - Number(a.totalGeneral || 0); 
-                      if(Number(b.c_exactos_gen || 0) !== Number(a.c_exactos_gen || 0)) return Number(b.c_exactos_gen || 0) - Number(a.c_exactos_gen || 0); 
-                      if(Number(b.c_signos_gen || 0) !== Number(a.c_signos_gen || 0)) return Number(b.c_signos_gen || 0) - Number(a.c_signos_gen || 0); 
-                      return ((Number(b.totalGeneral || 0)) - Number(b.purosAcumulados || 0)) - ((Number(a.totalGeneral || 0)) - Number(a.purosAcumulados || 0)); 
-                  });
-                  let myProvIdx = provListHome.findIndex(j => j.nombre === window.jugadorLogueado);
-                  if (myProvIdx !== -1) {
-                      let cPos = myProvIdx + 1;
-                      let pPos = closedRankingMap[window.jugadorLogueado] || cPos;
-                      let arrow = "";
-                      if (cPos < pPos) arrow = " <span style='color:var(--accent-green); font-size:16px;'>▲</span>";
-                      else if (cPos > pPos) arrow = " <span style='color:#e74c3c; font-size:16px;'>▼</span>";
-                      else arrow = " <span style='color:var(--text-muted); font-size:16px;'>=</span>";
-
-                      document.getElementById('uiPosicion').innerHTML = cPos + "º" + arrow;
-                      document.getElementById('uiPuntos').innerText = provListHome[myProvIdx].totalGeneral;
-                      let uiSub = document.getElementById('uiSubtitulo');
-                      if(uiSub) uiSub.innerHTML = "Liga Filà Filá - Mundial 2026<br><span style='color:var(--accent-gold); font-size:11px; font-weight:bold;'>🏆 PROVISIONAL (J" + jorEnJuegoDefecto + ")</span>";
-                  }
-              }
-          } catch(e) { console.warn("Error cargando home provisional", e); }
-      }
-
     } catch (e) { console.warn("Aviso: No se pudo cargar el histórico", e); }
 
-    // CARGAR ESTADO ESPECIALES
+    // 2. CARGAMOS ESPECIALES (CON TRY/CATCH)
     try {
         const snapEsp = await getDoc(doc(db, "config_especiales", "general"));
         let estadoEsp = "oculto";
@@ -1036,7 +960,7 @@
              esJornadaValerinhaCerrada = true; 
              document.getElementById('relojValerinha').innerText = "⏳ ESPERANDO APERTURA DE VOTACIONES"; 
              document.getElementById('relojValerinha').style.color = "var(--accent-gold)"; 
-             document.getElementById('infoEstadoValerinha').innerHTML = `Periodo Valerinha (J${configV.num}) en espera.<br><span style="font-size:13px; color:var(--accent-gold); font-weight:normal;">Esperando activación del admin.</span>`; 
+             document.getElementById('infoEstadoValerinha').innerHTML = `Periodo Valerinha (J${configV.num}) en espera.<br><span style="font-size:13px; color:var(--accent-gold); font-weight:normal;">El administrador aún no ha abierto la veda.</span>`; 
          }
       } else {
          let ultimaV = configs[configs.length-1]; 
@@ -1125,16 +1049,25 @@
           mBox.style.color = "var(--accent-green)"; 
           mBox.style.display = "block";
           
-          let listaProvisional = await getProvisionalDinamica(window.jorValerinhaActual.toString());
+          const provSnap = await getDocs(collection(db, "provisional_jornada_" + window.jorValerinhaActual)); 
+          let listaProvisional = []; 
+          provSnap.forEach(doc => { 
+              if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); 
+              else listaProvisional.push(doc.data()); 
+          }); 
           const cfgSnapV = await getDoc(doc(db, "config_jornadas", "jornada_" + window.jorValerinhaActual)); 
-          let prevMap = await obtenerMapaRankingAnterior(window.jorValerinhaActual.toString());
-          pintarProvisionalJugador(listaProvisional, window.jorValerinhaActual, cfgSnapV.data() || {}, "Prov", prevMap); 
+          pintarProvisionalJugador(listaProvisional, window.jorValerinhaActual, cfgSnapV.data() || {}, "Prov"); 
           
           document.getElementById('btnComprobarVoto').innerText = "Comprueba si tengo Valerinha ⚖️"; 
           return;
       }
       
-      let listaProvisional = await getProvisionalDinamica(window.jorValerinhaActual.toString());
+      const provSnap = await getDocs(collection(db, "provisional_jornada_" + window.jorValerinhaActual)); 
+      let listaProvisional = []; 
+      provSnap.forEach(doc => { 
+          if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); 
+          else listaProvisional.push(doc.data()); 
+      });
       if (listaProvisional.length === 0) return alert("Aún no hay resultados provisionales.");
 
       let miDato = listaProvisional.find(j => j.nombre === window.jugadorLogueado);
@@ -1153,8 +1086,7 @@
       }
       
       const cfgSnapV = await getDoc(doc(db, "config_jornadas", "jornada_" + window.jorValerinhaActual)); 
-      let prevMap = await obtenerMapaRankingAnterior(window.jorValerinhaActual.toString());
-      pintarProvisionalJugador(listaProvisional, window.jorValerinhaActual, cfgSnapV.data() || {}, "Prov", prevMap);
+      pintarProvisionalJugador(listaProvisional, window.jorValerinhaActual, cfgSnapV.data() || {}, "Prov");
       
     } catch (e) {} 
     document.getElementById('btnComprobarVoto').innerText = "Comprueba si tengo Valerinha ⚖️";
@@ -1201,7 +1133,7 @@
           let resultados = evalSnap.data().resultados; 
           let pregs = preguntasEspecialesGlobal;
           
-          // 🚨 CLASE .tabla-especiales PARA FIJAR SOLO LA 1ª COLUMNA (NOMBRE)
+          // APLICANDO CLASE CORRECTA PARA CSS STICKY SOLO COLUMNA NOMBRE
           let htmlM = `<div class="table-container-especiales"><table class="tabla-especiales"><thead><tr><th>Jugador</th>`; 
           pregs.forEach((p, i) => htmlM += `<th>Q${i+1}</th>`); 
           htmlM += `<th>Aciertos</th><th>Pts Extra</th></tr></thead><tbody>`;
@@ -1258,7 +1190,7 @@
          const allRespSnap = await getDocs(collection(db, "pronosticos_especiales"));
          
          if(!allRespSnap.empty) {
-            // 🚨 CLASE .tabla-especiales PARA FIJAR SOLO LA 1ª COLUMNA EN MODO LECTURA
+            // APLICANDO CLASE CORRECTA PARA CSS STICKY SOLO COLUMNA NOMBRE
             let htmlM = `<h3 style="color:white; text-align:center; margin-top:0;">📋 Apuestas Especiales Públicas</h3><div class="table-container-especiales"><table class="tabla-especiales"><thead><tr><th>Jugador</th>`;
             let arrayResp = []; 
             allRespSnap.forEach(d => arrayResp.push({jugador: d.id, resp: d.data().respuestas})); 
@@ -1347,13 +1279,12 @@
             pintarTablas(listaJugadores, "DEFINITIVA", cfgSnap.exists() ? cfgSnap.data() : {}, "EnJuego", prevMap); return;
         }
         
-        // 🌟 MERGE DINÁMICO HISTÓRICO + PROVISIONAL
-        let listaJugadoresProv = await getProvisionalDinamica(jor);
-        if (listaJugadoresProv.length > 0) {
-            container.style.display = "none";
+        const provSnap = await getDocs(collection(db, "provisional_jornada_" + jor));
+        if (!provSnap.empty) {
+            container.style.display = "none"; let listaJugadores = []; window.realResultsActuales = null;
+            provSnap.forEach(doc => { if (doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); else listaJugadores.push(doc.data()); });
             const cfgSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor)); 
-            let prevMap = await obtenerMapaRankingAnterior(jor.toString());
-            pintarProvisionalJugador(listaJugadoresProv, jor, cfgSnap.exists() ? cfgSnap.data() : {}, "EnJuego", prevMap); return;
+            pintarProvisionalJugador(listaJugadores, jor, cfgSnap.exists() ? cfgSnap.data() : {}, "EnJuego"); return;
         }
         
         const configSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor)); 
@@ -1362,8 +1293,6 @@
         if(!(configSnap.data().pronosticosPublicados || false)) { container.innerHTML = `<div class="tarjeta" style="text-align:center;"><h2>🔒 JORNADA PROTEGIDA</h2></div>`; } 
         else {
            const pronosSnap = await getDocs(collection(db, "pronosticos_jornada_" + jor));
-           if(pronosSnap.empty) { container.innerHTML = `<p style="text-align:center;">No hay respuestas registradas.</p>`; return; }
-           
            let ths = "<th>Partido</th>"; let arrayPronos = []; pronosSnap.forEach(d => arrayPronos.push(d.data())); arrayPronos.sort((a, b) => a.jugador.localeCompare(b.jugador));
            let numPartidos = arrayPronos[0].partidos.length, filasPartidosBlank = Array(numPartidos).fill("");
            let tdsTronpa = "", tdsBomba = "", tdsVal = "", tdsIrl = "", tdsSan = "";
@@ -1374,7 +1303,7 @@
                tdsVal += `<td><span class="blanco">${p.preguntasAbiertas?.valerinha || '-'}</span></td>`; tdsIrl += `<td><span class="blanco">${p.preguntasAbiertas?.irlinha || '-'}</span></td>`; tdsSan += `<td><span class="blanco">${p.preguntasAbiertas?.santinha || '-'}</span></td>`; 
            });
            
-           let cfgD = configSnap.data() || {}, qTr = cfgD.pregTronpa ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregTronpa}</span>` : '', qBm = cfgD.pregBomba ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregBomba}</span>` : '', qVa = cfgD.pregValerinha ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregValerinha}</span>` : '', qIr = cfgD.pregIrlinha ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregIrlinha}</span>` : '', qSa = cfgD.pregSantinha ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregSantinha}</span>` : '';
+           let cfgD = configSnap.data() || {}, qTr = cfgD.pregTronpa ? `<br><span>${cfgD.pregTronpa}</span>` : '', qBm = cfgD.pregBomba ? `<br><span>${cfgD.pregBomba}</span>` : '', qVa = cfgD.pregValerinha ? `<br><span>${cfgD.pregValerinha}</span>` : '', qIr = cfgD.pregIrlinha ? `<br><span>${cfgD.pregIrlinha}</span>` : '', qSa = cfgD.pregSantinha ? `<br><span>${cfgD.pregSantinha}</span>` : '';
            let htmlMatrix = `<h2>📋 PRONÓSTICOS JORNADA ${jor}</h2><div class="table-container-matriz"><table class="tabla-matriz"><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05); color:white;">R</th>${ths.replace("<th>Partido</th>", "")}</tr></thead><tbody>`;
            let plantilla = configSnap.data().partidos || [];
            
@@ -1414,7 +1343,7 @@
         if(Number(b[sortBy] || 0) !== Number(a[sortBy] || 0)) return Number(b[sortBy] || 0) - Number(a[sortBy] || 0); 
         if(Number(b.c_exactos_gen || 0) !== Number(a.c_exactos_gen || 0)) return Number(b.c_exactos_gen || 0) - Number(a.c_exactos_gen || 0); 
         if(Number(b.c_signos_gen || 0) !== Number(a.c_signos_gen || 0)) return Number(b.c_signos_gen || 0) - Number(a.c_signos_gen || 0); 
-        return ((Number(b[sortBy] || 0)) - Number(b.puntosPurosAcumulados || 0)) - ((Number(a[sortBy] || 0)) - Number(a.puntosPurosAcumulados || 0)); 
+        return (Number(b[sortBy] || 0) - Number(b.puntosPurosAcumulados || 0)) - (Number(a[sortBy] || 0) - Number(a.puntosPurosAcumulados || 0)); 
     });
 
     // 🌟 ORDENACIÓN MATRIZ RESULTADOS JORNADA (Izquierda a Derecha por puntos de la Jornada)
@@ -1457,7 +1386,7 @@
     
     let htmlPartidosTerminado = filasPartidos.map((f, i) => { 
         let lLoc = configJor.partidos?.[i]?.local || "", lVis = configJor.partidos?.[i]?.visita || "";
-        let lbl = configJor.partidos ? `<span style="white-space:nowrap">${seleccionesMundial[lLoc]||''} ${codigosMundial[lLoc]||''} - ${seleccionesMundial[lVis]||''} ${codigosMundial[lVis]||''}</span>` : `Partido ${i+1}`;
+        let lbl = configJor.partidos ? `<span style="white-space:nowrap">${seleccionesMundial[lLoc]||''} ${codigosMundial[lLoc]||lLoc.substring(0,3).toUpperCase()}</span> - <span style="white-space:nowrap">${seleccionesMundial[lVis]||''} ${codigosMundial[lVis]||lVis.substring(0,3).toUpperCase()}</span>` : nombresPartidos[i];
         return `<tr><td><strong>${lbl}</strong></td><td style="background:rgba(0,0,0,0.5);">${resPartidos[i] || "-"}</td>${f}</tr>`; 
     }).join("");
 
@@ -1474,7 +1403,7 @@
     
     document.getElementById('zonaTablero' + containerPrefix).innerHTML = tabHTML; document.getElementById('zonaTablero' + containerPrefix).style.display = "block";
     
-    // TABLA CLASIFICACIÓN GENERAL (Mantiene el orden absoluto del Ranking)
+    // TABLA CLASIFICACIÓN GENERAL
     let htmlClasif = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS ACUM.</th><th class="th-clasif">PRONÓSTICOS ACUM.</th><th class="th-clasif">BOMBA ACUM.</th><th class="th-clasif">VALERINHAS ACUM.</th><th class="th-clasif">IRLINHAS ACUM.</th><th class="th-clasif">SANTINHAS ACUM.</th><th class="th-clasif">TroNpá! ACUM.</th>`;
     if(isHistorialDefinitivoGlobal) htmlClasif += `<th style="color:#f472b6;">Pts. EXTRA</th>`; 
     htmlClasif += `</tr></thead><tbody>`;
@@ -1483,10 +1412,9 @@
         let tGen = isHistorialDefinitivoGlobal ? (j.puntosFinalesMundial || j.totalGeneral) : j.totalGeneral; 
         let arrow = ""; 
         if (isDef && prevRankingMap && prevRankingMap[j.nombre]) { 
-            let p = prevRankingMap[j.nombre]; let c = idx + 1; 
+            let p = prevRankingMap[j.nombre], c = idx + 1; 
             if (c < p) arrow = " <span style='color:var(--accent-green); font-size:12px; font-weight:900;'>▲</span>"; 
             else if (c > p) arrow = " <span style='color:#e74c3c; font-size:12px; font-weight:900;'>▼</span>"; 
-            else arrow = " <span style='color:var(--text-muted); font-size:12px; font-weight:900;'>=</span>"; 
         }
         htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}${arrow}</td><td class="td-total-gen">${tGen} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td>`; 
         if(isHistorialDefinitivoGlobal) htmlClasif += `<td style="font-weight:bold; color:#f472b6;">${j.puntosEspecialesExtra || 0}</td>`; 
@@ -1511,7 +1439,7 @@
             if(ptsB !== ptsA) return ptsB - ptsA; 
             return (Number(b.c_exactos_gen) || 0) - (Number(a.c_exactos_gen) || 0); 
         });
-        let htmlPura = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-blue);">PUNTOS (Solo Partidos)</th><th>EXACTOS</th><th>SIGNOS</th></tr></thead><tbody>`;
+        let htmlPura = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-blue);">PUNTOS PUROS</th><th>EXACTOS</th><th>SIGNOS</th></tr></thead><tbody>`;
         tablaPura.forEach((j, idx) => { 
             let pts = j.purosAcumulados !== undefined ? j.purosAcumulados : j.puntosPurosAcumulados; 
             htmlPura += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td style="font-weight:bold; font-size:16px; color:var(--accent-blue);">${pts} pts</td><td>${j.c_exactos_gen||0}</td><td>${j.c_signos_gen||0}</td></tr>`; 
@@ -1531,15 +1459,13 @@
     htmlGanancias += `</tbody></table>`; document.getElementById('tablaGananciasTotales' + containerPrefix).innerHTML = htmlGanancias; document.getElementById('zonaGanancias' + containerPrefix).style.display = "block";
   }
 
-  function pintarProvisionalJugador(listaJugadores, jor, configJor = {}, containerPrefix = "Prov", prevRankingMap = {}) {
+  function pintarProvisionalJugador(listaJugadores, jor, configJor = {}, containerPrefix = "Prov") {
     let qTr = configJor.pregTronpa ? `<br><span>${configJor.pregTronpa}</span>` : '', qBm = configJor.pregBomba ? `<br><span>${configJor.pregBomba}</span>` : '', qVa = configJor.pregValerinha ? `<br><span>${configJor.pregValerinha}</span>` : '', qIr = configJor.pregIrlinha ? `<br><span>${configJor.pregIrlinha}</span>` : '', qSa = configJor.pregSantinha ? `<br><span>${configJor.pregSantinha}</span>` : '';
     
-    // ORDENACIÓN CLASIFICACIÓN GENERAL (Histórica)
     let tablaGeneral = [...listaJugadores].sort((a, b) => {
-        if(Number(b.totalGeneral || 0) !== Number(a.totalGeneral || 0)) return Number(b.totalGeneral || 0) - Number(a.totalGeneral || 0); 
-        if(Number(b.c_exactos_gen || 0) !== Number(a.c_exactos_gen || 0)) return Number(b.c_exactos_gen || 0) - Number(a.c_exactos_gen || 0); 
-        if(Number(b.c_signos_gen || 0) !== Number(a.c_signos_gen || 0)) return Number(b.c_signos_gen || 0) - Number(a.c_signos_gen || 0); 
-        return ((Number(b.totalGeneral || 0)) - Number(b.purosAcumulados || 0)) - ((Number(a.totalGeneral || 0)) - Number(a.purosAcumulados || 0));
+        if(Number(b.totalGeneral) !== Number(a.totalGeneral)) return Number(b.totalGeneral) - Number(a.totalGeneral);
+        if(Number(b.c_exactos_gen) !== Number(a.c_exactos_gen)) return Number(b.c_exactos_gen) - Number(a.c_exactos_gen);
+        return Number(b.c_signos_gen) - Number(a.c_signos_gen);
     }); 
     
     // 🌟 ORDENACIÓN MATRIZ RESULTADOS PROVISIONAL (Izquierda a Derecha por puntos de la Jornada)
@@ -1568,32 +1494,16 @@
 
     let tabHTML = `<h2>📊 RESULTADOS JORNADA ${jor} (Provisional)</h2><div class="table-container-matriz"><table class="tabla-matriz"><thead><tr><th>Partido</th><th>R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td>${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba</strong>${qBm}</td><td>${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td>-</td> ${tdVa1} </tr><tr><td><strong>Ptos Valerinha</strong></td><td>-</td> ${tdVa2} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td>-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td>-</td> ${tdSa} </tr><tr><td><strong>TOTAL</strong></td><td>-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td>-</td> ${tdNomRow} </tr></tbody></table></div>`;
     
-    // 🌟 NUEVA: CLASIFICACIÓN PROVISIONAL COMPLETA
-    let htmlClasif = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-gold);">PUNTOS TOTALES</th><th>EXACTOS</th><th>SIGNOS</th><th>BOMBA</th><th>VALERINHAS</th><th>IRLINHAS</th><th>SANTINHAS</th><th>TroNpá!</th></tr></thead><tbody>`; 
-    tablaGeneral.forEach((j, idx) => { 
-        let arrow = ""; 
-        if (prevRankingMap && prevRankingMap[j.nombre]) { 
-            let p = prevRankingMap[j.nombre]; let c = idx + 1; 
-            if (c < p) arrow = " <span style='color:var(--accent-green); font-size:12px; font-weight:900;'>▲</span>"; 
-            else if (c > p) arrow = " <span style='color:#e74c3c; font-size:12px; font-weight:900;'>▼</span>"; 
-            else arrow = " <span style='color:var(--text-muted); font-size:12px; font-weight:900;'>=</span>"; 
-        }
-        htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}${arrow}</td><td class="td-total-gen">${j.totalGeneral} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td></tr>`; 
-    }); 
-    htmlClasif += `</tbody></table></div>`; 
-
     if(containerPrefix === "Prov") { 
         document.getElementById('tableroProvJugador').innerHTML = tabHTML; 
-        document.getElementById('clasifProvJugador').innerHTML = `<h2>🏆 CLASIFICACIÓN PROVISIONAL</h2>` + htmlClasif; 
-        document.getElementById('zonaTablasProvisionalesJugador').style.display = "block"; 
-    } else { 
-        document.getElementById('zonaTableroEnJuego').innerHTML = tabHTML; 
-        document.getElementById('zonaTableroEnJuego').style.display = "block"; 
         
-        // --- 🌟 AHORA MUESTRA LA CLASIFICACIÓN PROVISIONAL TAMBIÉN EN "EN JUEGO" ---
-        document.getElementById('tituloClasificacionEnJuego').innerText = `🏆 CLASIFICACIÓN PROVISIONAL J${jor}`;
-        document.getElementById('tablaClasificacionEnJuego').innerHTML = htmlClasif;
-        document.getElementById('zonaClasificacionEnJuego').style.display = "block";
+        let htmlClasif = `<h2>🏆 CLASIFICACIÓN PROVISIONAL</h2><div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-gold);">PUNTOS TOTALES</th><th>EXACTOS</th><th>SIGNOS</th><th>BOMBA</th><th>VALERINHAS</th><th>IRLINHAS</th><th>SANTINHAS</th><th>TroNpá!</th></tr></thead><tbody>`; 
+        tablaGeneral.forEach((j, idx) => { htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td class="td-total-gen">${j.totalGeneral} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td></tr>`; }); 
+        htmlClasif += `</tbody></table></div>`; 
+        
+        document.getElementById('clasifProvJugador').innerHTML = htmlClasif; document.getElementById('zonaTablasProvisionalesJugador').style.display = "block"; 
+    } else { 
+        document.getElementById('zonaTableroEnJuego').innerHTML = tabHTML; document.getElementById('zonaTableroEnJuego').style.display = "block"; 
     }
   }
 </script>
