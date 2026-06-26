@@ -27,578 +27,88 @@
             min-height: 100vh;
         }
 
-        .contenedor.usuario {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            padding-bottom: 90px;
-        }
+        .contenedor.usuario { max-width: 600px; margin: 0 auto; padding: 20px; padding-bottom: 90px; }
 
         /* PANTALLA DE LOGIN */
-        #pantallaLogin {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .login-card {
-            background: rgba(13, 17, 23, 0.85);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 40px 30px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            text-align: center;
-        }
+        #pantallaLogin { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
+        .login-card { background: rgba(13, 17, 23, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px 30px; width: 100%; max-width: 400px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); text-align: center; }
         
         /* HEADER CON TÍTULO */
-        .top-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            padding: 15px;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+        .top-header { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); padding: 15px; border-radius: 16px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1); }
+        .titulo-header { color: var(--accent-gold); font-size: 20px; margin: 0; text-transform: uppercase; font-weight: 900; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        #btnLogout { background: rgba(238, 82, 83, 0.2); color: #ff7675; border: none; width: 35px; height: 35px; border-radius: 50%; font-weight: bold; cursor: pointer; font-size: 16px; display: flex; justify-content: center; align-items: center; }
 
-        .titulo-header {
-            color: var(--accent-gold);
-            font-size: 20px;
-            margin: 0;
-            text-transform: uppercase;
-            font-weight: 900;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
+        select, input[type="password"], input[type="text"], input[type="number"] { background: rgba(0,0,0,0.5) !important; border: 1px solid rgba(255,255,255,0.2) !important; color: white !important; border-radius: 8px; padding: 12px; font-family: 'Inter', sans-serif; font-weight: 600; width: 100%; box-sizing: border-box; font-size: 15px; }
+        input:focus, select:focus { outline: none; border-color: var(--accent-gold) !important; }
 
-        #btnLogout {
-            background: rgba(238, 82, 83, 0.2);
-            color: #ff7675;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 16px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        .tarjeta { background: var(--penka-grad) !important; border: 1px solid rgba(255,255,255,0.1) !important; border-radius: 16px !important; padding: 20px !important; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.5) !important; position: relative; overflow: hidden; }
+        .tarjeta.clean { background: rgba(13, 17, 23, 0.8) !important; }
+        .tarjeta::before { content: '🏆'; position: absolute; right: -15px; top: -15px; font-size: 80px; opacity: 0.05; transform: rotate(15deg); pointer-events: none; }
 
-        select, input[type="password"], input[type="text"], input[type="number"] {
-            background: rgba(0,0,0,0.5) !important;
-            border: 1px solid rgba(255,255,255,0.2) !important;
-            color: white !important;
-            border-radius: 8px;
-            padding: 12px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            width: 100%;
-            box-sizing: border-box;
-            font-size: 15px;
-        }
+        .profile-header { display: flex; align-items: center; gap: 15px; }
+        .avatar { width: 60px; height: 60px; border-radius: 50%; background: var(--accent-gold); display: flex; justify-content: center; align-items: center; font-size: 30px; font-weight: bold; color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid white; }
+        .profile-info h2 { font-size: 22px; margin: 0; color: white !important; letter-spacing: 0; text-transform: none; }
+        .profile-info p { font-size: 13px; margin: 2px 0 0 0; color: var(--text-muted) !important; }
+        .profile-stats { display: flex; justify-content: space-between; align-items: center; text-align: center; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .stat-box { flex: 1; overflow: hidden; }
+        .stat-box:not(:last-child) { border-right: 1px solid rgba(255,255,255,0.1); }
+        .stat-value { display: block; font-size: clamp(16px, 5vw, 24px); font-weight: 900; color: white; line-height: 1; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .stat-value.money { color: #10ac84; }
+        .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
 
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--accent-gold) !important;
-        }
+        h2, h3 { color: white !important; margin-top: 0; font-weight: 800; font-size: 18px; text-transform: uppercase; letter-spacing: 0.5px; }
+        p, label { color: #d1d5db !important; }
 
-        .tarjeta {
-            background: var(--penka-grad) !important;
-            border: 1px solid rgba(255,255,255,0.1) !important;
-            border-radius: 16px !important;
-            padding: 20px !important;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5) !important;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tarjeta.clean {
-            background: rgba(13, 17, 23, 0.8) !important;
-        }
-
-        .tarjeta::before {
-            content: '🏆';
-            position: absolute;
-            right: -15px;
-            top: -15px;
-            font-size: 80px;
-            opacity: 0.05;
-            transform: rotate(15deg);
-            pointer-events: none;
-        }
-
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--accent-gold);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 30px;
-            font-weight: bold;
-            color: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            border: 2px solid white;
-        }
-
-        .profile-info h2 {
-            font-size: 22px;
-            margin: 0;
-            color: white !important;
-            letter-spacing: 0;
-            text-transform: none;
-        }
-
-        .profile-info p {
-            font-size: 13px;
-            margin: 2px 0 0 0;
-            color: var(--text-muted) !important;
-        }
-
-        .profile-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-            margin-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-        }
-
-        .stat-box {
-            flex: 1;
-            overflow: hidden;
-        }
-
-        .stat-box:not(:last-child) {
-            border-right: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .stat-value {
-            display: block;
-            font-size: clamp(16px, 5vw, 24px);
-            font-weight: 900;
-            color: white;
-            line-height: 1;
-            margin-bottom: 5px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .stat-value.money {
-            color: #10ac84;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        h2, h3 {
-            color: white !important;
-            margin-top: 0;
-            font-weight: 800;
-            font-size: 18px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        p, label {
-            color: #d1d5db !important;
-        }
-
-        .btn-principal {
-            background: linear-gradient(135deg, var(--accent-gold), #ea580c) !important;
-            color: white !important;
-            border: none;
-            border-radius: 12px;
-            padding: 15px;
-            font-weight: 800;
-            font-size: 15px;
-            width: 100%;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4);
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-principal:hover:not(:disabled) {
-            filter: brightness(1.1);
-            transform: translateY(-2px);
-        }
-
-        .btn-principal:disabled {
-            opacity: 0.8;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
+        .btn-principal { background: linear-gradient(135deg, var(--accent-gold), #ea580c) !important; color: white !important; border: none; border-radius: 12px; padding: 15px; font-weight: 800; font-size: 15px; width: 100%; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4); cursor: pointer; transition: 0.2s; }
+        .btn-principal:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-2px); }
+        .btn-principal:disabled { opacity: 0.8; cursor: not-allowed; transform: none; box-shadow: none; }
 
         /* BOTONES + Y - */
-        .btn-step {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            width: 36px;
-            height: 26px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            transition: 0.1s;
-        }
-
-        .btn-step:active {
-            background: var(--accent-gold);
-            border-color: var(--accent-gold);
-            transform: scale(0.95);
-        }
+        .btn-step { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 36px; height: 26px; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3); transition: 0.1s; }
+        .btn-step:active { background: var(--accent-gold); border-color: var(--accent-gold); transform: scale(0.95); }
 
         /* BARRA INFERIOR */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(13, 17, 23, 0.95);
-            backdrop-filter: blur(15px);
-            border-top: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-end;
-            padding: 10px 5px 20px 5px;
-            z-index: 1000;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
-        }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(13, 17, 23, 0.95); backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; align-items: flex-end; padding: 10px 5px 20px 5px; z-index: 1000; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
+        .bottom-nav button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; background: transparent; color: #6b7280; border: none; font-size: 9px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; padding: 0; }
+        .bottom-nav button i { font-size: 20px; font-style: normal; filter: grayscale(100%); opacity: 0.6; transition: 0.3s; }
+        .bottom-nav button.activa { color: white; }
+        .bottom-nav button.activa i { filter: grayscale(0%); opacity: 1; transform: translateY(-3px); }
+        #btnTabQuiniela { position: relative; top: -20px; background: radial-gradient(circle, var(--accent-gold) 0%, #d97706 100%); width: 60px; height: 60px; border-radius: 50%; justify-content: center; box-shadow: 0 0 20px rgba(245, 158, 11, 0.6); border: 4px solid var(--bg-dark); color: white !important; flex: none; margin: 0 5px; }
+        #btnTabQuiniela i { font-size: 26px; filter: grayscale(0%); opacity: 1; transform: none !important; }
+        #btnTabQuiniela span { display: none; }
 
-        .bottom-nav button {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            background: transparent;
-            color: #6b7280;
-            border: none;
-            font-size: 9px;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.3s;
-            padding: 0;
-        }
-
-        .bottom-nav button i {
-            font-size: 20px;
-            font-style: normal;
-            filter: grayscale(100%);
-            opacity: 0.6;
-            transition: 0.3s;
-        }
-
-        .bottom-nav button.activa {
-            color: white;
-        }
-
-        .bottom-nav button.activa i {
-            filter: grayscale(0%);
-            opacity: 1;
-            transform: translateY(-3px);
-        }
-
-        #btnTabQuiniela {
-            position: relative;
-            top: -20px;
-            background: radial-gradient(circle, var(--accent-gold) 0%, #d97706 100%);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            justify-content: center;
-            box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
-            border: 4px solid var(--bg-dark);
-            color: white !important;
-            flex: none;
-            margin: 0 5px;
-        }
-
-        #btnTabQuiniela i {
-            font-size: 26px;
-            filter: grayscale(0%);
-            opacity: 1;
-            transform: none !important;
-        }
-
-        #btnTabQuiniela span {
-            display: none;
-        }
-
-        #relojQuiniela, #relojValerinha {
-            background: rgba(0,0,0,0.6) !important;
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--accent-gold) !important;
-            font-size: 14px;
-            padding: 12px !important;
-            letter-spacing: 1px;
-        }
+        #relojQuiniela, #relojValerinha { background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.1); color: var(--accent-gold) !important; font-size: 14px; padding: 12px !important; letter-spacing: 1px; }
 
         /* SISTEMA MATRICIAL ESTRICTO (CONGELADO STICKY) */
-        .table-container-matriz {
-            max-height: 65vh;
-            overflow: auto;
-            width: 100%;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: var(--bg-dark);
-            position: relative;
-        }
-
-        .tabla-matriz {
-            width: max-content;
-            min-width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-top: 0;
-            font-size: 11px;
-            table-layout: fixed;
-        }
-
-        .tabla-matriz th, .tabla-matriz td {
-            background: var(--bg-dark);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+        .table-container-matriz { max-height: 65vh; overflow: auto; width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-dark); position: relative; }
+        .tabla-matriz { width: max-content; min-width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 0; font-size: 11px; table-layout: fixed; }
+        .tabla-matriz th, .tabla-matriz td { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.05); }
         
-        .tabla-matriz thead th {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: #111827;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            color: var(--text-muted);
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 6px 4px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: 10px;
-        }
+        .tabla-matriz thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 6px 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 10px; }
+        .tabla-matriz th:nth-child(1), .tabla-matriz td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; width: 85px !important; min-width: 85px !important; max-width: 85px !important; white-space: normal !important; word-wrap: break-word; text-align: left; padding-left: 5px; font-size: 9px; line-height: 1.2; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
+        .tabla-matriz th:nth-child(2), .tabla-matriz td:nth-child(2) { position: sticky; left: 85px; z-index: 5; background: #111827; width: 22px !important; min-width: 22px !important; max-width: 22px !important; border-right: 1px solid rgba(255,255,255,0.1); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
+        .tabla-matriz thead th:nth-child(1), .tabla-matriz thead th:nth-child(2) { z-index: 15; background: #111827; }
+        .tabla-matriz th:not(:nth-child(1)):not(:nth-child(2)) { width: 45px !important; min-width: 45px !important; max-width: 45px !important; }
+        .tabla-matriz tbody td { padding: 2px; text-align: center; height: 45px; vertical-align: middle; overflow: hidden; }
 
-        .tabla-matriz th:nth-child(1), .tabla-matriz td:nth-child(1) {
-            position: sticky;
-            left: 0;
-            z-index: 5;
-            background: #111827;
-            width: 85px !important;
-            min-width: 85px !important;
-            max-width: 85px !important;
-            white-space: normal !important;
-            word-wrap: break-word;
-            text-align: left;
-            padding-left: 5px;
-            font-size: 9px;
-            line-height: 1.2;
-            border-right: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 2px 0 4px rgba(0,0,0,0.3);
-        }
+        /* SISTEMA FLEXIBLE PARA CLASIFICACIONES (CONGELADO STICKY - 2 COLUMNAS) */
+        .table-container-clasif { max-height: 65vh; overflow: auto; width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-dark); position: relative; }
+        .tabla-clasif { width: max-content; min-width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 0; font-size: 12px; }
+        .tabla-clasif th, .tabla-clasif td { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .tabla-clasif thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 8px 10px; white-space: nowrap; }
+        .tabla-clasif th:nth-child(1), .tabla-clasif td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; width: 35px; min-width: 35px; text-align: center; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 2px 0 4px rgba(0,0,0,0.3); }
+        .tabla-clasif th:nth-child(2), .tabla-clasif td:nth-child(2) { position: sticky; left: 35px; z-index: 5; background: #111827; width: 100px; min-width: 100px; text-align: left; padding-left: 10px; border-right: 1px solid rgba(255,255,255,0.1); box-shadow: 2px 0 4px rgba(0,0,0,0.3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tabla-clasif thead th:nth-child(1), .tabla-clasif thead th:nth-child(2) { z-index: 15; background: #111827; }
+        .tabla-clasif tbody td { padding: 8px 10px; text-align: center; }
 
-        .tabla-matriz th:nth-child(2), .tabla-matriz td:nth-child(2) {
-            position: sticky;
-            left: 85px;
-            z-index: 5;
-            background: #111827;
-            width: 22px !important;
-            min-width: 22px !important;
-            max-width: 22px !important;
-            border-right: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 2px 0 4px rgba(0,0,0,0.3);
-        }
-
-        .tabla-matriz thead th:nth-child(1), .tabla-matriz thead th:nth-child(2) {
-            z-index: 15;
-            background: #111827;
-        }
-
-        .tabla-matriz th:not(:nth-child(1)):not(:nth-child(2)) {
-            width: 45px !important;
-            min-width: 45px !important;
-            max-width: 45px !important;
-        }
-
-        .tabla-matriz tbody td {
-            padding: 2px;
-            text-align: center;
-            height: 45px;
-            vertical-align: middle;
-            overflow: hidden;
-        }
-
-        /* SISTEMA FLEXIBLE PARA CLASIFICACIONES (CONGELADO STICKY) */
-        .table-container-clasif {
-            max-height: 65vh;
-            overflow: auto;
-            width: 100%;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: var(--bg-dark);
-            position: relative;
-        }
-
-        .tabla-clasif {
-            width: max-content;
-            min-width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-top: 0;
-            font-size: 12px;
-        }
-
-        .tabla-clasif th, .tabla-clasif td {
-            background: var(--bg-dark);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .tabla-clasif thead th {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: #111827;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            color: var(--text-muted);
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 8px 10px;
-            white-space: nowrap;
-        }
-
-        .tabla-clasif th:nth-child(1), .tabla-clasif td:nth-child(1) {
-            position: sticky;
-            left: 0;
-            z-index: 5;
-            background: #111827;
-            width: 35px;
-            min-width: 35px;
-            text-align: center;
-            border-right: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 2px 0 4px rgba(0,0,0,0.3);
-        }
-
-        .tabla-clasif th:nth-child(2), .tabla-clasif td:nth-child(2) {
-            position: sticky;
-            left: 35px;
-            z-index: 5;
-            background: #111827;
-            width: 100px;
-            min-width: 100px;
-            text-align: left;
-            padding-left: 10px;
-            border-right: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 2px 0 4px rgba(0,0,0,0.3);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .tabla-clasif thead th:nth-child(1), .tabla-clasif thead th:nth-child(2) {
-            z-index: 15;
-            background: #111827;
-        }
-
-        .tabla-clasif tbody td {
-            padding: 8px 10px;
-            text-align: center;
-        }
-
-        /* 🚨 NUEVO: CONTENEDOR EXCLUSIVO PARA EXTRA ESPECIALES 🚨 */
-        .table-container-especiales {
-            max-height: 65vh;
-            overflow: auto;
-            width: 100%;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: var(--bg-dark);
-            position: relative;
-        }
-
-        .tabla-especiales {
-            width: max-content;
-            min-width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-top: 0;
-            font-size: 12px;
-        }
-
-        .tabla-especiales th, .tabla-especiales td {
-            background: var(--bg-dark);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .tabla-especiales thead th {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: #111827;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            color: var(--text-muted);
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 8px 10px;
-            white-space: nowrap;
-        }
-
-        /* FIJAR ÚNICAMENTE LA PRIMERA COLUMNA (NOMBRE DEL JUGADOR) */
-        .tabla-especiales th:nth-child(1), .tabla-especiales td:nth-child(1) {
-            position: sticky;
-            left: 0;
-            z-index: 5;
-            background: #111827;
-            width: 100px;
-            min-width: 100px;
-            text-align: left;
-            padding-left: 10px;
-            border-right: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 2px 0 4px rgba(0,0,0,0.3);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .tabla-especiales thead th:nth-child(1) {
-            z-index: 15;
-            background: #111827;
-        }
-
-        .tabla-especiales tbody td {
-            padding: 8px 10px;
-            text-align: center;
-        }
+        /* TABLA ESPECIALES (SOLO FIJA 1 COLUMNA) */
+        .table-container-especiales { max-height: 65vh; overflow: auto; width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-dark); position: relative; }
+        .tabla-especiales { width: max-content; min-width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 0; font-size: 12px; }
+        .tabla-especiales th, .tabla-especiales td { background: var(--bg-dark); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .tabla-especiales thead th { position: sticky; top: 0; z-index: 10; background: #111827; box-shadow: 0 2px 4px rgba(0,0,0,0.5); color: var(--text-muted); font-weight: 700; text-transform: uppercase; padding: 8px 10px; white-space: nowrap; }
+        .tabla-especiales th:nth-child(1), .tabla-especiales td:nth-child(1) { position: sticky; left: 0; z-index: 5; background: #111827; width: 100px; min-width: 100px; text-align: left; padding-left: 10px; border-right: 1px solid rgba(255,255,255,0.1); box-shadow: 2px 0 4px rgba(0,0,0,0.3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tabla-especiales thead th:nth-child(1) { z-index: 15; background: #111827; }
+        .tabla-especiales tbody td { padding: 8px 10px; text-align: center; }
 
         .exacto { background-color: var(--accent-green) !important; color: white !important; font-weight: bold; border-radius:4px; display:flex; justify-content:center; align-items:center; height:28px; width:90%; margin:0 auto; font-size:10px; }
         .signo { background-color: var(--accent-gold) !important; color: black !important; font-weight: bold; border-radius:4px; display:flex; justify-content:center; align-items:center; height:28px; width:90%; margin:0 auto; font-size:10px; }
@@ -619,6 +129,7 @@
 </head>
 <body>
 
+<!-- PANTALLA DE ACCESO (LOGIN) -->
 <div id="pantallaLogin">
     <div class="login-card">
         <div style="text-align: center; margin-bottom: 20px;">
@@ -666,9 +177,11 @@
     </div>
 </div>
 
+<!-- APLICACIÓN PRINCIPAL -->
 <div id="pantallaApp" style="display:none;">
     <div class="contenedor usuario">
       
+      <!-- CABECERA -->
       <div class="top-header">
            <div style="text-align: center; width: 45px;">
              <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="Mundial" style="width:100%; height:auto;">
@@ -681,6 +194,7 @@
 
       <div id="cargandoPlantillaMsg" style="text-align:center; font-weight:bold; padding:20px; color:var(--accent-gold);">Sincronizando Estado... ⏳</div>
 
+      <!-- VISTA 0: INICIO -->
       <div id="vistaInicio" style="display:none;">
           <div class="tarjeta clean">
               <div class="profile-header">
@@ -706,18 +220,21 @@
               </div>
           </div>
           
+          <!-- TARJETA CLICKABLE ESPECIALES -->
           <div id="tarjetaEspecialesInicio" class="tarjeta" style="background:rgba(255,255,255,0.05) !important; cursor:pointer; display:none; border-left:4px solid var(--accent-green) !important;" title="Ir a Apuestas Especiales">
               <h2 style="color:var(--accent-green) !important; font-size:14px; margin-bottom:10px;">⭐ APUESTAS ESPECIALES</h2>
               <div id="infoEstadoEspeciales" style="font-size:16px; font-weight:bold; color:white;">¡Periodo Abierto!</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para enviar tus respuestas ➡️</div>
           </div>
 
+          <!-- TARJETA CLICKABLE JORNADA -->
           <div class="tarjeta" id="btnIrJornada" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" title="Ir a rellenar jornada">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">ESTADO DE LA JORNADA</h2>
               <div id="infoEstadoJornada" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
               <div style="font-size:11px; color:var(--accent-gold); margin-top:8px;">Toca aquí para ir a la Jornada ➡️</div>
           </div>
 
+          <!-- TARJETA CLICKABLE VALERINHA -->
           <div class="tarjeta" id="btnIrValerinha" style="background:rgba(255,255,255,0.05) !important; cursor:pointer;" title="Ir a votar Valerinha">
               <h2 style="color:var(--text-muted) !important; font-size:14px; margin-bottom:10px;">EL SALSEO (VALERINHA)</h2>
               <div id="infoEstadoValerinha" style="font-size:16px; font-weight:bold; color:white;">Calculando...</div>
@@ -725,6 +242,7 @@
           </div>
       </div>
 
+      <!-- VISTA 1: HACER JORNADA -->
       <div id="vistaQuiniela" style="display:none;">
         <h2 id="tituloJornadaEnJuegoQ" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
         <div id="relojQuiniela" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -778,6 +296,7 @@
         </div>
       </div>
 
+      <!-- VISTA 2: VOTAR VALERINHA -->
       <div id="vistaValerinha" style="display: none;">
         <h2 id="tituloJornadaEnJuegoV" style="text-align:center; color:white; font-size:20px; margin-top:0; margin-bottom:10px;"></h2>
         <div id="relojValerinha" style="text-align:center; font-weight:bold; padding:8px; border-radius:8px; margin-bottom:20px;"></div>
@@ -816,6 +335,7 @@
         </div>
       </div>
 
+      <!-- VISTA 3: JORNADA EN JUEGO CON SELECTOR -->
       <div id="vistaEnJuego" style="display:none;">
          <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important; margin-bottom:15px; padding:15px !important;">
              <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -840,6 +360,7 @@
          </div>
       </div>
 
+      <!-- VISTA 4: RANKING -->
       <div id="vistaResultados" style="display: none;">
         <div class="tarjeta" style="background:rgba(255,255,255,0.05) !important;">
           <h2 style="color:white !important; font-size:16px; margin-bottom:15px;">🏆 Histórico del Mundial</h2>
@@ -872,6 +393,7 @@
         </div>
       </div>
 
+      <!-- VISTA 5: ESPECIALES Y CLASIF PURA -->
       <div id="vistaEspeciales" style="display:none;">
         <div class="tarjeta" style="background: linear-gradient(135deg, #0d5f49 0%, #06382a 100%) !important;">
           <h2 style="margin-top:0; color:white !important; font-size:22px; font-weight:900;">⭐ APUESTAS ESPECIALES</h2>
@@ -902,12 +424,14 @@
            <div id="renderMatrixEspeciales"></div>
         </div>
 
+        <!-- SALÓN DE LA FAMA -->
         <div id="zonaMiniRankings" style="display:none; margin-top: 40px; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1);">
             <h2 style="text-align: center; color: var(--accent-gold); margin-bottom:5px; margin-top:0;">🏆 SALÓN DE LA FAMA</h2>
             <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Top 3 jugadores en apartados de salseo.</p>
             <div id="gridMiniRankings" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:15px;"></div>
         </div>
 
+        <!-- CLASIFICACIÓN SIN HISTORIAS -->
         <div id="zonaClasificacionPuraJugador" style="width:100%; margin-top: 40px; display: none; background: rgba(0,0,0,0.3); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); box-sizing:border-box;">
             <h2 style="text-align: center; color: white; margin-bottom:5px; margin-top:0;">📊 CLASIFICACIÓN SIN HISTORIAS</h2>
             <p style="text-align: center; font-size:12px; color:var(--text-muted); margin-top:0; margin-bottom:15px;">Solo puntos de partidos exactos y signos.</p>
@@ -915,6 +439,7 @@
         </div>
       </div>
 
+      <!-- VISTA 6: REGLAS AMPLIADAS Y DETALLADAS -->
       <div id="vistaReglas" style="display: none;">
         <div class="tarjeta clean" style="border-left:none !important;">
           <h2 style="color: white !important; margin-top:0; text-align:center; font-size: 20px;">📖 REGLAS OFICIALES</h2>
@@ -923,7 +448,7 @@
             <h3 style="color: var(--accent-gold) !important; font-size:14px; margin-bottom:10px;">1️⃣ Fases de la Jornada</h3>
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
               <li><strong>Hacer Jornada:</strong> Introduce los marcadores antes de la fecha límite. Puedes modificarlos todas las veces que quieras mientras el plazo esté abierto. Si no envías a tiempo, se rellena con 1-1 automático.</li>
-              <li><strong>Votar Valerinha:</strong> Tras los partidos, el Administrator publica la Clasificación Provisional. Solo si has acertado la pregunta especial de tu Valerinha, se te abrirá el derecho a voto (Ataque o Blindaje). El administrator abre esta veda manualmente.</li>
+              <li><strong>Votar Valerinha:</strong> Tras los partidos, el Administrador publica la Clasificación Provisional. Solo si has acertado la pregunta especial de tu Valerinha, se te abrirá el derecho a voto (Ataque o Blindaje). El administrador abre esta veda manualmente.</li>
               <li><strong>Definitiva:</strong> Una vez finalizan las votaciones, se calculan las sumas, restas y desvíos, generando la clasificación definitiva de la jornada y repartiendo el premio.</li>
             </ul>
           </div>
@@ -961,7 +486,7 @@
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
               <li><strong>Premios por Jornada:</strong> El ganador de la Clasificación Provisional se lleva <strong>5.80€</strong> y el ganador de la Clasificación Definitiva (tras el salseo) se lleva <strong>29.00€</strong>. En caso de empate, el premio se divide equitativamente.</li>
               <li><strong>Apuestas Especiales:</strong> Se lanzan antes del inicio del torneo. La evaluación de estos puntos extra se publicará al final del Mundial y se sumará a los puntos que tengas en la Jornada 8.</li>
-              <li><strong>Premios del Mundial:</strong> El ganador de la "General Definitiva" (con salseos y especiales) se lleva el gran bote de <strong>261.00€</strong>. El ganador de la clasificación "Sin Historias" (solo puntos de partidos) se lleva <strong>98.60€</strong>. These premios se sumarán directamente a la Cartera Virtual.</li>
+              <li><strong>Premios del Mundial:</strong> El ganador de la "General Definitiva" (con salseos y especiales) se lleva el gran bote de <strong>261.00€</strong>. El ganador de la clasificación "Sin Historias" (solo puntos de partidos) se lleva <strong>98.60€</strong>. Estos premios se sumarán directamente a la Cartera Virtual.</li>
             </ul>
           </div>
 
@@ -998,6 +523,18 @@
   const codigosMundial = { "Alemania": "GER", "Arabia Saudita": "KSA", "Argentina": "ARG", "Argelia": "ALG", "Australia": "AUS", "Austria": "AUT", "Bélgica": "BEL", "Bosnia y Herzegovina": "BIH", "Brasil": "BRA", "Cabo Verde": "CPV", "Canadá": "CAN", "Catar": "QAT", "Colombia": "COL", "Corea del Sur": "KOR", "Costa de Marfil": "CIV", "Croacia": "CRO", "Curazao": "CUW", "Ecuador": "ECU", "Egipto": "EGY", "El Salvador": "SLV", "Escocia": "SCO", "España": "ESP", "Estados Unidos": "USA", "Francia": "FRA", "Ghana": "GHA", "Haití": "HAI", "Inglaterra": "ENG", "Irak": "IRQ", "Irán": "IRN", "Japón": "JPN", "Jordania": "JOR", "Marruecos": "MAR", "México": "MEX", "Noruega": "NOR", "Nueva Zelanda": "NZL", "Países Bajos": "NED", "Panamá": "PAN", "Paraguay": "PAR", "Portugal": "POR", "RD Congo": "COD", "República Checa": "CZE", "Senegal": "SEN", "Sudáfrica": "RSA", "Suecia": "SWE", "Suiza": "SUI", "Túnez": "TUN", "Turquía": "TUR", "Uruguay": "URU", "Uzbekistán": "UZB" };
   const puntosFIFA = { "Alemania": 1730, "Arabia Saudita": 1421, "Argentina": 1875, "Argelia": 1564, "Australia": 1581, "Austria": 1593, "Bélgica": 1735, "Bosnia y Herzegovina": 1386, "Brasil": 1761, "Cabo Verde": 1366, "Canadá": 1556, "Catar": 1455, "Colombia": 1693, "Corea del Sur": 1589, "Costa de Marfil": 1533, "Croacia": 1717, "Curazao": 1295, "Ecuador": 1595, "Egipto": 1563, "El Salvador": 1380, "Escocia": 1498, "España": 1876, "Estados Unidos": 1673, "Francia": 1877, "Ghana": 1346, "Haití": 1292, "Inglaterra": 1826, "Irak": 1447, "Irán": 1615, "Japón": 1660, "Jordania": 1391, "Marruecos": 1756, "México": 1681, "Noruega": 1551, "Nueva Zelanda": 1282, "Países Bajos": 1758, "Panamá": 1541, "Paraguay": 1504, "Portugal": 1764, "RD Congo": 1478, "República Checa": 1501, "Senegal": 1689, "Sudáfrica": 1430, "Suecia": 1515, "Suiza": 1649, "Túnez": 1483, "Turquía": 1599, "Uruguay": 1675, "Uzbekistán": 1465 };
   
+  const preguntasEspecialesGlobal = [ 
+      "Adivinar selecciones que jugarán la final", 
+      "Adivinar ganador del Mundial", 
+      "Adivinar máximo goleador", 
+      "Adivinar mejor jugador", 
+      "Adivinar mejor portero", 
+      "Adivinar mejor jugador joven", 
+      "Adivinar premio juego limpio", 
+      "¿Quién sumará más Puntos Puros?", 
+      "¿Quién sumará menos Puntos Puros?" 
+  ];
+
   window.jorQuinielaActual = 1; 
   window.jorValerinhaActual = 1; 
   window.jugadorLogueado = null;
@@ -1010,16 +547,16 @@
       ['vistaInicio', 'vistaQuiniela', 'vistaValerinha', 'vistaResultados', 'vistaReglas', 'vistaEnJuego', 'vistaEspeciales'].forEach(v => { 
           let el = document.getElementById(v); if(el) el.style.display = 'none'; 
       });
-      document.querySelectorAll('.pestana').forEach(b => b.classList.remove('activa'));
+      document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.remove('activa'));
       
       let vista = document.getElementById('vista' + tabName); if(vista) vista.style.display = 'block';
-      let btn = document.querySelector(`.pestana[data-tab="${tabName}"]`); if(btn) btn.classList.add('activa');
+      let btn = document.querySelector(`.bottom-nav button[data-tab="${tabName}"]`); if(btn) btn.classList.add('activa');
       
       if(tabName === 'EnJuego') { renderPestañaEnJuegoCompleta(); }
   }
 
   // Asignar eventos de navegación
-  document.querySelectorAll('.pestana').forEach(btn => {
+  document.querySelectorAll('.bottom-nav button').forEach(btn => {
       btn.addEventListener('click', (e) => {
           let tab = e.currentTarget.getAttribute('data-tab');
           switchTabJugador(tab);
@@ -1102,9 +639,9 @@
 
   function renderMiniRankings(lista) {
       const cats = [
-          { id: 'p_val_gen', title: '👑 Reyes Valerinha', color: 'var(--accent-gold)', sort: 'asc' }, 
-          { id: 'p_irl_gen', title: '🏃‍♂️ Paquetes de la Irlinha', color: '#34d399', sort: 'desc' }, 
-          { id: 'p_san_gen', title: '🇪🇸 Villanos Santinha', color: '#f87171', sort: 'asc' }, 
+          { id: 'p_val_gen', title: '👑 Reyes Valerinha', color: 'var(--accent-gold)', sort: 'asc' }, // Más negativos
+          { id: 'p_irl_gen', title: '🏃‍♂️ Paquetes de la Irlinha', color: '#34d399', sort: 'desc' }, // Más positivos
+          { id: 'p_san_gen', title: '🇪🇸 Villanos Santinha', color: '#f87171', sort: 'asc' }, // Más negativos
           { id: 'p_bomba_gen', title: '💣 Expertos en Bombas', color: '#f43f5e', sort: 'desc' },
           { id: 'p_tronpa_gen', title: '🌩️ Gurús TroNpá!', color: '#60a5fa', sort: 'desc' }
       ];
@@ -1183,18 +720,34 @@
   });
 
   // ========================================================
-  // 🛠️ MOTOR DE MERGE PROVISIONAL ACUMULATIVO REAL 🛠️
+  // 🛠️ MOTOR DE MERGE PROVISIONAL ACUMULATIVO REAL
   // ========================================================
-  async function mergeProvisionalConHistorico(listaProvisional, jorActual) {
-      if (Number(jorActual) <= 1) return listaProvisional;
-      let jorAnterior = parseInt(jorActual) - 1;
-      try {
-          const snapAnt = await getDocs(collection(db, "clasificacion_general_jornada_" + jorAnterior));
-          let mapaAnterior = {};
-          snapAnt.forEach(doc => { let d = doc.data(); if (d.jugador) mapaAnterior[d.jugador] = d; });
+  async function fetchAndMergeProvisional(jor) {
+      const provSnap = await getDocs(collection(db, "provisional_jornada_" + jor));
+      if (provSnap.empty) return [];
 
-          return listaProvisional.map(j => {
-              let ant = mapaAnterior[j.nombre];
+      let listaProv = [];
+      window.realResultsActuales = null;
+      provSnap.forEach(doc => {
+          if (doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data();
+          else if (doc.id !== "GANADORES_JORNADA") listaProv.push(doc.data());
+      });
+
+      if (Number(jor) <= 1) return listaProv;
+
+      try {
+          let jorAnt = Number(jor) - 1;
+          const antSnap = await getDocs(collection(db, "clasificacion_general_jornada_" + jorAnt));
+          if(antSnap.empty) return listaProv;
+
+          let mapAnt = {};
+          antSnap.forEach(d => {
+              let data = d.data();
+              if (data.jugador) mapAnt[data.jugador] = data;
+          });
+
+          return listaProv.map(j => {
+              let ant = mapAnt[j.nombre];
               if (!ant) return j;
 
               let p_val = Number(j.p_val) || 0; let p_irl = Number(j.p_irl) || 0; let p_san = Number(j.p_san) || 0;
@@ -1216,12 +769,12 @@
           });
       } catch(e) {
           console.warn("Fallo merge provisional", e);
-          return listaProvisional;
+          return listaProv;
       }
   }
 
   // ========================================================
-  // ⚙️ INICIO DEL MOTOR INTELIGENTE COMPLETO
+  // ⚙️ INICIO DEL MOTOR (CON PROTECCIÓN ANTI-ERRORES)
   // ========================================================
   async function iniciarMotorInteligente() {
     llenarDesplegablesEspeciales();
@@ -1229,6 +782,7 @@
     
     let jorCerrada = 0; let isDefinitiva = false; let lista = [];
     
+    // 1. CARGAMOS LA GENERAL (CON TRY/CATCH)
     try {
       const snapFinal = await getDocs(collection(db, "clasificacion_general_FINAL_MUNDIAL"));
       if(!snapFinal.empty) { 
@@ -1296,43 +850,33 @@
       let selEnJuego = document.getElementById('jorConsultaEnJuego');
       if (selEnJuego) selEnJuego.value = jorEnJuegoDefecto;
 
-      // 🌟 INTEGRACIÓN DE LA PROVISIONAL EN LA HOME PANTALLA 🌟
+      // 🌟 IMPACTO EN LA PANTALLA DE INICIO (PROVISIONAL) CON MERGE DINÁMICO 🌟
       let closedRankingMap = {};
       lista.forEach((j, i) => { closedRankingMap[j.nombre] = i + 1; });
       
       if (jorCerrada !== "FINAL_MUNDIAL") {
           try {
-              const provSnapHome = await getDocs(collection(db, "provisional_jornada_" + jorEnJuegoDefecto));
-              if (!provSnapHome.empty) {
-                  let provListHome = [];
-                  provSnapHome.forEach(doc => {
-                      if (doc.id !== "RESULTADOS_REALES" && doc.id !== "GANADORES_JORNADA") provListHome.push(doc.data());
+              let provListHome = await fetchAndMergeProvisional(jorEnJuegoDefecto);
+              if (provListHome && provListHome.length > 0) {
+                  provListHome.sort((a, b) => {
+                      if(Number(b.totalGeneral || 0) !== Number(a.totalGeneral || 0)) return Number(b.totalGeneral || 0) - Number(a.totalGeneral || 0); 
+                      if(Number(b.c_exactos_gen || 0) !== Number(a.c_exactos_gen || 0)) return Number(b.c_exactos_gen || 0) - Number(a.c_exactos_gen || 0); 
+                      if(Number(b.c_signos_gen || 0) !== Number(a.c_signos_gen || 0)) return Number(b.c_signos_gen || 0) - Number(a.c_signos_gen || 0); 
+                      return ((Number(b.totalGeneral || 0)) - Number(b.purosAcumulados || 0)) - ((Number(a.totalGeneral || 0)) - Number(a.purosAcumulados || 0)); 
                   });
-                  
-                  // Invocamos el módulo de suma acumulada histórico + en vivo
-                  provListHome = await mergeProvisionalConHistorico(provListHome, jorEnJuegoDefecto);
-                  
-                  if (provListHome.length > 0) {
-                      provListHome.sort((a, b) => {
-                          if(Number(b.totalGeneral || 0) !== Number(a.totalGeneral || 0)) return Number(b.totalGeneral || 0) - Number(a.totalGeneral || 0); 
-                          if(Number(b.c_exactos_gen || 0) !== Number(a.c_exactos_gen || 0)) return Number(b.c_exactos_gen || 0) - Number(a.c_exactos_gen || 0); 
-                          if(Number(b.c_signos_gen || 0) !== Number(a.c_signos_gen || 0)) return Number(b.c_signos_gen || 0) - Number(a.c_signos_gen || 0); 
-                          return ((Number(b.totalGeneral || 0)) - Number(b.purosAcumulados || 0)) - ((Number(a.totalGeneral || 0)) - Number(a.purosAcumulados || 0)); 
-                      });
-                      let myProvIdx = provListHome.findIndex(j => j.nombre === window.jugadorLogueado);
-                      if (myProvIdx !== -1) {
-                          let cPos = myProvIdx + 1;
-                          let pPos = closedRankingMap[window.jugadorLogueado] || cPos;
-                          let arrow = "";
-                          if (cPos < pPos) arrow = " <span style='color:var(--accent-green); font-size:16px;'>▲</span>";
-                          else if (cPos > pPos) arrow = " <span style='color:#e74c3c; font-size:16px;'>▼</span>";
-                          else arrow = " <span style='color:var(--text-muted); font-size:16px;'>=</span>";
+                  let myProvIdx = provListHome.findIndex(j => j.nombre === window.jugadorLogueado);
+                  if (myProvIdx !== -1) {
+                      let cPos = myProvIdx + 1;
+                      let pPos = closedRankingMap[window.jugadorLogueado] || cPos;
+                      let arrow = "";
+                      if (cPos < pPos) arrow = " <span style='color:var(--accent-green); font-size:16px;'>▲</span>";
+                      else if (cPos > pPos) arrow = " <span style='color:#e74c3c; font-size:16px;'>▼</span>";
+                      else arrow = " <span style='color:var(--text-muted); font-size:16px;'>=</span>";
 
-                          document.getElementById('uiPosicion').innerHTML = cPos + "º" + arrow;
-                          document.getElementById('uiPuntos').innerText = provListHome[myProvIdx].totalGeneral;
-                          let uiSub = document.getElementById('uiSubtitulo');
-                          if(uiSub) uiSub.innerHTML = "Liga Filà Filá - Mundial 2026<br><span style='color:var(--accent-gold); font-size:11px; font-weight:bold;'>🏆 PROVISIONAL (J" + jorEnJuegoDefecto + ")</span>";
-                      }
+                      document.getElementById('uiPosicion').innerHTML = cPos + "º" + arrow;
+                      document.getElementById('uiPuntos').innerText = provListHome[myProvIdx].totalGeneral;
+                      let uiSub = document.getElementById('uiSubtitulo');
+                      if(uiSub) uiSub.innerHTML = "Liga Filà Filá - Mundial 2026<br><span style='color:var(--accent-gold); font-size:11px; font-weight:bold;'>🏆 PROVISIONAL (J" + jorEnJuegoDefecto + ")</span>";
                   }
               }
           } catch(e) { console.warn("Error cargando home provisional", e); }
@@ -1340,7 +884,7 @@
 
     } catch (e) { console.warn("Aviso: No se pudo cargar el histórico", e); }
 
-    // 2. CARGAMOS ESPECIALES
+    // 2. CARGAMOS ESPECIALES (CON TRY/CATCH)
     try {
         const snapEsp = await getDoc(doc(db, "config_especiales", "general"));
         let estadoEsp = "oculto";
@@ -1370,7 +914,7 @@
         }
     } catch(e) { console.warn("Aviso: No se pudo cargar estado especiales", e); }
 
-    // 3. CARGAMOS JORNADA ACTUAL
+    // 3. CARGAMOS JORNADA ACTUAL (CON TRY/CATCH)
     try {
       const snapConfig = await getDocs(collection(db, "config_jornadas"));
       let configs = []; 
@@ -1517,7 +1061,7 @@
              esJornadaValerinhaCerrada = true; 
              document.getElementById('relojValerinha').innerText = "⏳ ESPERANDO APERTURA DE VOTACIONES"; 
              document.getElementById('relojValerinha').style.color = "var(--accent-gold)"; 
-             document.getElementById('infoEstadoValerinha').innerHTML = `Periodo Valerinha (J${configV.num}) en espera.<br><span style="font-size:13px; color:var(--accent-gold); font-weight:normal;">El administrador aún no ha abierto la veda.</span>`; 
+             document.getElementById('infoEstadoValerinha').innerHTML = `Periodo Valerinha (J${configV.num}) en espera.<br><span style="font-size:13px; color:var(--accent-gold); font-weight:normal;">Esperando activación del admin.</span>`; 
          }
       } else {
          let ultimaV = configs[configs.length-1]; 
@@ -1543,7 +1087,7 @@
   }
 
   // ========================================================
-  // ✍️ ENVIAR PRONÓSTICOS
+  // ✍️ ENVIAR JORNADA Y VALERINHA
   // ========================================================
   document.getElementById('btnEnviar').addEventListener('click', async function() {
     if(esJornadaQuinielaCerrada) return alert("Acción denegada. Jornada cerrada.");
@@ -1605,7 +1149,7 @@
           mBox.style.color = "var(--accent-green)"; 
           mBox.style.display = "block";
           
-          let listaProvisional = await getProvisionalDinamica(window.jorValerinhaActual.toString());
+          let listaProvisional = await fetchAndMergeProvisional(window.jorValerinhaActual.toString());
           const cfgSnapV = await getDoc(doc(db, "config_jornadas", "jornada_" + window.jorValerinhaActual)); 
           let prevMap = await obtenerMapaRankingAnterior(window.jorValerinhaActual.toString());
           pintarProvisionalJugador(listaProvisional, window.jorValerinhaActual, cfgSnapV.data() || {}, "Prov", prevMap); 
@@ -1614,7 +1158,7 @@
           return;
       }
       
-      let listaProvisional = await getProvisionalDinamica(window.jorValerinhaActual.toString());
+      let listaProvisional = await fetchAndMergeProvisional(window.jorValerinhaActual.toString());
       if (listaProvisional.length === 0) return alert("Aún no hay resultados provisionales.");
 
       let miDato = listaProvisional.find(j => j.nombre === window.jugadorLogueado);
@@ -1681,7 +1225,7 @@
           let resultados = evalSnap.data().resultados; 
           let pregs = preguntasEspecialesGlobal;
           
-          // 🚨 CLASE .tabla-especiales PARA FIJAR SOLO LA 1ª COLUMNA (NOMBRE) 🚨
+          // 🚨 CLASE .tabla-especiales PARA FIJAR SOLO LA 1ª COLUMNA (NOMBRE)
           let htmlM = `<div class="table-container-especiales"><table class="tabla-especiales"><thead><tr><th>Jugador</th>`; 
           pregs.forEach((p, i) => htmlM += `<th>Q${i+1}</th>`); 
           htmlM += `<th>Aciertos</th><th>Pts Extra</th></tr></thead><tbody>`;
@@ -1738,7 +1282,7 @@
          const allRespSnap = await getDocs(collection(db, "pronosticos_especiales"));
          
          if(!allRespSnap.empty) {
-            // 🚨 CLASE .tabla-especiales PARA FIJAR SOLO LA 1ª COLUMNA EN MODO LECTURA 🚨
+            // 🚨 CLASE .tabla-especiales PARA FIJAR SOLO LA 1ª COLUMNA EN MODO LECTURA
             let htmlM = `<h3 style="color:white; text-align:center; margin-top:0;">📋 Apuestas Especiales Públicas</h3><div class="table-container-especiales"><table class="tabla-especiales"><thead><tr><th>Jugador</th>`;
             let arrayResp = []; 
             allRespSnap.forEach(d => arrayResp.push({jugador: d.id, resp: d.data().respuestas})); 
@@ -1759,8 +1303,6 @@
     } catch(e) {}
     btnEsp.innerText = originalText;
   });
-
-  document.getElementById('btnVerEspeciales').addEventListener('click', () => {}); // Respeto del listener secundario original
 
   document.getElementById('btnEnviarEspeciales').addEventListener('click', async () => {
      let ans = [];
@@ -1784,8 +1326,30 @@
   });
 
   // ========================================================
-  // ⚽ RENDERS DINÁMICOS DE TABLAS
+  // ⚽ RENDER TABLAS Y JORNADA EN JUEGO
   // ========================================================
+  async function obtenerMapaRankingAnterior(jorStr) {
+      if(jorStr === "1") return {}; 
+      let prevJor = jorStr === "DEFINITIVA" ? 8 : (parseInt(jorStr) - 1); 
+      let prevColName = "clasificacion_general_jornada_" + prevJor; 
+      let map = {};
+      try { 
+          const snap = await getDocs(collection(db, prevColName)); 
+          let pList = []; 
+          snap.forEach(doc => { let d = doc.data(); if(d.jugador && doc.id !== "GANADORES_JORNADA" && doc.id !== "RESULTADOS_REALES") pList.push(d); }); 
+          
+          pList.sort((a, b) => { 
+              let ptsA = Number(a.puntosAcumulados) || 0; let ptsB = Number(b.puntosAcumulados) || 0; 
+              if(ptsB !== ptsA) return ptsB - ptsA; 
+              if(Number(b.resultadosAcertados) !== Number(a.resultadosAcertados)) return (Number(b.resultadosAcertados)||0) - (Number(a.resultadosAcertados)||0); 
+              return (Number(b.pronosticosAcertados)||0) - (Number(a.pronosticosAcertados)||0); 
+          }); 
+          
+          pList.forEach((j, i) => { map[j.jugador] = i + 1; }); 
+      } catch(e) {}
+      return map;
+  }
+
   async function renderPestañaEnJuegoCompleta() {
      let jor = document.getElementById('jorConsultaEnJuego').value; 
      let container = document.getElementById('renderMátrixCandadoBloqueo');
@@ -1808,21 +1372,12 @@
         }
         
         // 🌟 MERGE PROVISIONAL ACUMULATIVO REAL 🌟
-        const provSnap = await getDocs(collection(db, "provisional_jornada_" + jor));
-        if (!provSnap.empty) {
+        let listaJugadoresProv = await fetchAndMergeProvisional(jor);
+        if (listaJugadoresProv && listaJugadoresProv.length > 0) {
             container.style.display = "none";
-            let listaJugadores = []; window.realResultsActuales = null;
-            provSnap.forEach(doc => { 
-                if (doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); 
-                else if (doc.id !== "GANADORES_JORNADA") listaJugadores.push(doc.data()); 
-            });
-            
-            // Inyectamos el cálculo de suma en vivo con el histórico definitivo anterior
-            listaJugadores = await mergeProvisionalConHistorico(listaJugadores, jor);
-            
             const cfgSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor)); 
             let prevMap = await obtenerMapaRankingAnterior(jor.toString());
-            pintarProvisionalJugador(listaJugadores, jor, cfgSnap.exists() ? cfgSnap.data() : {}, "EnJuego", prevMap); 
+            pintarProvisionalJugador(listaJugadoresProv, jor, cfgSnap.exists() ? cfgSnap.data() : {}, "EnJuego", prevMap); 
             return;
         }
         
@@ -1844,7 +1399,7 @@
                tdsVal += `<td><span class="blanco">${p.preguntasAbiertas?.valerinha || '-'}</span></td>`; tdsIrl += `<td><span class="blanco">${p.preguntasAbiertas?.irlinha || '-'}</span></td>`; tdsSan += `<td><span class="blanco">${p.preguntasAbiertas?.santinha || '-'}</span></td>`; 
            });
            
-           let cfgD = configSnap.data() || {}, qTr = cfgD.pregTronpa ? `<br><span>${cfgD.pregTronpa}</span>` : '', qBm = cfgD.pregBomba ? `<br><span>${cfgD.pregBomba}</span>` : '', qVa = cfgD.pregValerinha ? `<br><span>${cfgD.pregValerinha}</span>` : '', qIr = cfgD.pregIrlinha ? `<br><span>${cfgD.pregIrlinha}</span>` : '', qSa = cfgD.pregSantinha ? `<br><span>${cfgD.pregSantinha}</span>` : '';
+           let cfgD = configSnap.data() || {}, qTr = cfgD.pregTronpa ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregTronpa}</span>` : '', qBm = cfgD.pregBomba ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregBomba}</span>` : '', qVa = cfgD.pregValerinha ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregValerinha}</span>` : '', qIr = cfgD.pregIrlinha ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregIrlinha}</span>` : '', qSa = cfgD.pregSantinha ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${cfgD.pregSantinha}</span>` : '';
            let htmlMatrix = `<h2>📋 PRONÓSTICOS JORNADA ${jor}</h2><div class="table-container-matriz"><table class="tabla-matriz"><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05); color:white;">R</th>${ths.replace("<th>Partido</th>", "")}</tr></thead><tbody>`;
            let plantilla = configSnap.data().partidos || [];
            
@@ -1881,13 +1436,13 @@
     
     // ORDENACIÓN CLASIFICACIÓN GENERAL
     let tablaGeneral = [...listaJugadores].sort((a, b) => { 
-        if(Number(b[sortBy] || 0) !== Number(a[sortBy] || 0)) return Number(b[sortBy] - a[sortBy]); 
-        if(Number(b.c_exactos_gen || 0) !== Number(a.c_exactos_gen || 0)) return Number(b.c_exactos_gen - a.c_exactos_gen); 
-        if(Number(b.c_signos_gen || 0) !== Number(a.c_signos_gen || 0)) return Number(b.c_signos_gen - a.c_signos_gen); 
+        if(Number(b[sortBy] || 0) !== Number(a[sortBy] || 0)) return Number(b[sortBy] || 0) - Number(a[sortBy] || 0); 
+        if(Number(b.c_exactos_gen || 0) !== Number(a.c_exactos_gen || 0)) return Number(b.c_exactos_gen || 0) - Number(a.c_exactos_gen || 0); 
+        if(Number(b.c_signos_gen || 0) !== Number(a.c_signos_gen || 0)) return Number(b.c_signos_gen || 0) - Number(a.c_signos_gen || 0); 
         return ((Number(b[sortBy] || 0)) - Number(b.puntosPurosAcumulados || 0)) - ((Number(a[sortBy] || 0)) - Number(a.puntosPurosAcumulados || 0)); 
     });
 
-    // ORDENACIÓN MATRIZ RESULTADOS JORNADA (Izquierda a Derecha por puntos de la Jornada)
+    // 🌟 ORDENACIÓN MATRIZ RESULTADOS JORNADA (Izquierda a Derecha por puntos de la Jornada)
     let tablaJornada = [...tablaGeneral].sort((a, b) => {
         let diff = (Number(b.totalJornada) || 0) - (Number(a.totalJornada) || 0);
         return diff !== 0 ? diff : a.nombre.localeCompare(b.nombre);
@@ -1927,7 +1482,7 @@
     
     let htmlPartidosTerminado = filasPartidos.map((f, i) => { 
         let lLoc = configJor.partidos?.[i]?.local || "", lVis = configJor.partidos?.[i]?.visita || "";
-        let lbl = configJor.partidos ? `<span style="white-space:nowrap">${seleccionesMundial[lLoc]||''} ${codigosMundial[lLoc]||lLoc.substring(0,3).toUpperCase()}</span> - <span style="white-space:nowrap">${seleccionesMundial[lVis]||''} ${codigosMundial[lVis]||lVis.substring(0,3).toUpperCase()}</span>` : `Partido ${i+1}`;
+        let lbl = configJor.partidos ? `<span style="white-space:nowrap">${seleccionesMundial[lLoc]||''} ${codigosMundial[lLoc]||''} - ${seleccionesMundial[lVis]||''} ${codigosMundial[lVis]||''}</span>` : `Partido ${i+1}`;
         return `<tr><td><strong>${lbl}</strong></td><td style="background:rgba(0,0,0,0.5);">${resPartidos[i] || "-"}</td>${f}</tr>`; 
     }).join("");
 
@@ -1944,7 +1499,7 @@
     
     document.getElementById('zonaTablero' + containerPrefix).innerHTML = tabHTML; document.getElementById('zonaTablero' + containerPrefix).style.display = "block";
     
-    // TABLA CLASIFICACIÓN GENERAL
+    // TABLA CLASIFICACIÓN GENERAL (Mantiene el orden absoluto del Ranking)
     let htmlClasif = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS ACUM.</th><th class="th-clasif">PRONÓSTICOS ACUM.</th><th class="th-clasif">BOMBA ACUM.</th><th class="th-clasif">VALERINHAS ACUM.</th><th class="th-clasif">IRLINHAS ACUM.</th><th class="th-clasif">SANTINHAS ACUM.</th><th class="th-clasif">TroNpá! ACUM.</th>`;
     if(isHistorialDefinitivoGlobal) htmlClasif += `<th style="color:#f472b6;">Pts. EXTRA</th>`; 
     htmlClasif += `</tr></thead><tbody>`;
@@ -1981,7 +1536,7 @@
             if(ptsB !== ptsA) return ptsB - ptsA; 
             return (Number(b.c_exactos_gen) || 0) - (Number(a.c_exactos_gen) || 0); 
         });
-        let htmlPura = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-blue);">PUNTOS (Solo Partidos)</th><th>EXACTOS</th><th>SIGNOS</th></tr></thead><tbody>`;
+        let htmlPura = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-blue);">PUNTOS PUROS</th><th>EXACTOS</th><th>SIGNOS</th></tr></thead><tbody>`;
         tablaPura.forEach((j, idx) => { 
             let pts = j.purosAcumulados !== undefined ? j.purosAcumulados : j.puntosPurosAcumulados; 
             htmlPura += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td style="font-weight:bold; font-size:16px; color:var(--accent-blue);">${pts} pts</td><td>${j.c_exactos_gen||0}</td><td>${j.c_signos_gen||0}</td></tr>`; 
@@ -2059,6 +1614,8 @@
     } else { 
         document.getElementById('zonaTableroEnJuego').innerHTML = tabHTML; 
         document.getElementById('zonaTableroEnJuego').style.display = "block"; 
+        
+        // --- 🌟 AHORA MUESTRA LA CLASIFICACIÓN PROVISIONAL TAMBIÉN EN "EN JUEGO" ---
         document.getElementById('tituloClasificacionEnJuego').innerText = `🏆 CLASIFICACIÓN PROVISIONAL J${jor}`;
         document.getElementById('tablaClasificacionEnJuego').innerHTML = htmlClasif;
         document.getElementById('zonaClasificacionEnJuego').style.display = "block";
