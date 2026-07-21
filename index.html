@@ -500,7 +500,7 @@
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
               <li><strong>🔮 Valerinha:</strong> Si aciertas la pregunta, ganas el derecho a votar en la fase provisional. Puedes sumar los puntos a tu marcador (Blindaje) o restárselos a un rival (Ataque).
                   <br><br>🛡️ <em>Escudo Anti-Bullying:</em> Un jugador solo puede recibir un máximo de <strong>4 ataques</strong> por jornada. Si le atacan 5 o más personas, el sistema interviene: desvía el ataque de quien tenga a su "2ª opción" mejor clasificada en la general.
-                  <br><br>❌ <em>Castigo de Inactividad:</em> Si aciertas la pregunta de la Valerinha pero te olvidas de votar durante el plazo, se te restará 1 punto a ti mismo de forma automática.
+                  <br><br>❌ <em>Castigo de Inactividad:</em> Si aciertas la pregunta de la Valerinha pero te olvidas de votar durante el plazo, se te restará 1 punto a ti mismo de forma automática al cerrar la jornada.
               </li>
               <li style="margin-top:8px;"><strong>🏃‍♂️ Irlinha & 🇪🇸 Santinha:</strong> Solo se aplican si estás en la zona baja o alta. <strong>Sus puntos afectan únicamente a la Clasificación General</strong>, no al total de la jornada en curso.</li>
             </ul>
@@ -771,7 +771,7 @@
           else if (doc.id !== "GANADORES_JORNADA") listaProv.push(doc.data());
       });
 
-      // Recalcular lógica Valerinha (Votos y Castigos) en tiempo real
+      // Recalcular lógica Valerinha en tiempo real (SÓLO para saber si suman/restan)
       let votos = {};
       try {
           const vSnap = await getDocs(collection(db, "votos_valerinha_jornada_" + jorActualStr));
@@ -810,8 +810,8 @@
                       j.dec_val = `⚔️ Resta -1 a ${finalTarget}` + (isDiverted ? " (Desvío)" : "");
                   }
               } else {
-                  j.val_perdidos -= 1;
-                  j.dec_val = `❌ Castigo (No votó)`;
+                  // AQUÍ NO HAY CASTIGO AÚN (eso se hace en Definitiva del Admin)
+                  j.dec_val = `⏳ Pendiente de voto`;
               }
           }
       });
@@ -832,9 +832,14 @@
 
       if (Number(jorActualStr) <= 1) {
           return listaProv.map(j => {
-              let p_val = Number(j.p_val) || 0; let p_irl = Number(j.p_irl) || 0; let p_san = Number(j.p_san) || 0;
+              let p_val = Number(j.p_val) || 0; 
+              let p_irl = Number(j.p_irl) || 0; 
+              let p_san = Number(j.p_san) || 0;
+              
               let totJornada = (Number(j.base) || 0) + p_val;
-              return { ...j, totalJornada: totJornada, totalGeneral: totJornada + p_irl + p_san };
+              let totGeneral = totJornada + p_irl + p_san;
+              
+              return { ...j, totalJornada: totJornada, totalGeneral: totGeneral };
           });
       }
 
@@ -853,11 +858,11 @@
               let ant = mapAnt[j.nombre];
               if (!ant) return j;
 
-              // REGLA LIGA: Irlinha y Santinha no afectan a totalJornada, pero sí a totalGeneral.
               let p_val = Number(j.p_val) || 0; 
               let p_irl = Number(j.p_irl) || 0; 
               let p_san = Number(j.p_san) || 0;
-              
+
+              // REGLA LIGA: Irlinha y Santinha NO afectan a la Jornada, pero SÍ a la General
               let totJornada = (Number(j.base) || 0) + p_val;
               let totGeneral = (Number(ant.puntosAcumulados) || 0) + totJornada + p_irl + p_san;
               
@@ -915,7 +920,7 @@
                   lista.push({ 
                       nombre: d.jugador, 
                       totalGeneral: d.puntosAcumulados||0, 
-                      puntosFinalesMundial: d.puntosFinalesMundial||0, 
+                      puntosFinalesMundial: d.puntosFinalesMundial||d.puntosFinalesLiga||0, 
                       puntosPurosAcumulados: d.puntosPurosAcumulados||0, 
                       c_exactos_gen: d.resultadosAcertados||0, 
                       c_signos_gen: d.pronosticosAcertados||0, 
@@ -991,7 +996,7 @@
 
     } catch (e) { console.warn("Aviso: No se pudo cargar el histórico", e); }
 
-    // 2. CARGAMOS ESPECIALES
+    // CARGAR ESTADO ESPECIALES
     try {
         const snapEsp = await getDoc(doc(db, "config_especiales", "general"));
         let estadoEsp = "oculto";
@@ -1021,7 +1026,7 @@
         }
     } catch(e) { console.warn("Aviso: No se pudo cargar estado especiales", e); }
 
-    // 3. CARGAMOS JORNADA ACTUAL
+    // CARGAR JORNADA ACTUAL
     try {
       const snapConfig = await getDocs(collection(db, "config_jornadas"));
       let configs = []; 
@@ -1474,7 +1479,7 @@
                 let data = doc.data(); 
                 if (doc.id === "RESULTADOS_REALES") window.realResultsActuales = data; 
                 else if (data.jugador && doc.id !== "GANADORES_JORNADA") { 
-                    listaJugadores.push({ nombre: data.jugador, c_exactos_gen: data.resultadosAcertados || 0, c_signos_gen: data.pronosticosAcertados || 0, p_bomba_gen: data.puntosBombaGarnacha || 0, p_val_gen: data.puntosValerinhas || 0, p_irl_gen: data.puntosIrlinhas || 0, p_san_gen: data.puntosSantinhas || 0, p_tronpa_gen: data.puntosTronpa || 0, puntosPurosAcumulados: data.puntosPurosAcumulados || 0, puntosEspecialesExtra: data.puntosEspecialesExtra || 0, puntosFinalesMundial: data.puntosFinalesMundial || 0, totalJornada: data.puntosTotalesJornada || 0, totalGeneral: data.puntosAcumulados || 0, gananciasTotales: data.gananciasAcumuladas || 0, partidosVisuales: data.partidosVisuales || [], trT: data.trT || "-", statTronpa: data.statTronpa || "", bmT: data.bmT || "-", statBomba: data.statBomba || "", valT: data.valT || "-", statVal: data.statVal || "", irlT: data.irlT || "-", statIrl: data.statIrl || "", sanT: data.sanT || "-", statSan: data.statSan || "", p_val: data.p_val || 0, p_irl: data.p_irl || 0, p_san: data.p_san || 0, dec_val: data.dec_val || "-" }); 
+                    listaJugadores.push({ nombre: data.jugador, c_exactos_gen: data.resultadosAcertados || 0, c_signos_gen: data.pronosticosAcertados || 0, p_bomba_gen: data.puntosBombaGarnacha || 0, p_val_gen: data.puntosValerinhas || 0, p_irl_gen: data.puntosIrlinhas || 0, p_san_gen: data.puntosSantinhas || 0, p_tronpa_gen: data.puntosTronpa || 0, puntosPurosAcumulados: data.puntosPurosAcumulados || 0, puntosEspecialesExtra: data.puntosEspecialesExtra || 0, puntosFinalesMundial: data.puntosFinalesMundial || data.puntosFinalesLiga || 0, totalJornada: data.puntosTotalesJornada || 0, totalGeneral: data.puntosAcumulados || 0, gananciasTotales: data.gananciasAcumuladas || 0, partidosVisuales: data.partidosVisuales || [], trT: data.trT || "-", statTronpa: data.statTronpa || "", bmT: data.bmT || "-", statBomba: data.statBomba || "", valT: data.valT || "-", statVal: data.statVal || "", irlT: data.irlT || "-", statIrl: data.statIrl || "", sanT: data.sanT || "-", statSan: data.statSan || "", p_val: data.p_val || 0, p_irl: data.p_irl || 0, p_san: data.p_san || 0, dec_val: data.dec_val || "-" }); 
                 } 
             });
             const cfgSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor)); let prevMap = await obtenerMapaRankingAnterior(jor.toString()); 
@@ -1528,7 +1533,7 @@
     let jorStr = e.target.value; let colName = (jorStr === "DEFINITIVA") ? "clasificacion_general_FINAL_LIGA" : "clasificacion_general_jornada_" + jorStr;
     try {
       const snapshot = await getDocs(collection(db, colName)); let listaJugadores = [], ganadoresAislados = []; window.realResultsActuales = null;
-      snapshot.forEach((doc) => { if (doc.id === "GANADORES_JORNADA") ganadoresAislados = doc.data().textos || []; else if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); else if (doc.data().jugador) listaJugadores.push({ nombre: doc.data().jugador, c_exactos_gen: doc.data().resultadosAcertados || 0, c_signos_gen: doc.data().pronosticosAcertados || 0, p_bomba_gen: doc.data().puntosBombaGarnacha || 0, p_val_gen: doc.data().puntosValerinhas || 0, p_irl_gen: doc.data().puntosIrlinhas || 0, p_san_gen: doc.data().puntosSantinhas || 0, p_tronpa_gen: doc.data().puntosTronpa || 0, puntosPurosAcumulados: doc.data().puntosPurosAcumulados || 0, puntosEspecialesExtra: doc.data().puntosEspecialesExtra || 0, puntosFinalesMundial: doc.data().puntosFinalesMundial || 0, totalJornada: doc.data().puntosTotalesJornada || 0, totalGeneral: doc.data().puntosAcumulados || 0, gananciasTotales: doc.data().gananciasAcumuladas || 0, partidosVisuales: doc.data().partidosVisuales || [], trT: doc.data().trT || "-", statTronpa: doc.data().statTronpa || "", bmT: doc.data().bmT || "-", statBomba: doc.data().statBomba || "", valT: doc.data().valT || "-", statVal: doc.data().statVal || "", irlT: doc.data().irlT || "-", statIrl: doc.data().statIrl || "", sanT: doc.data().sanT || "-", statSan: doc.data().statSan || "", p_val: doc.data().p_val || 0, p_irl: doc.data().p_irl || 0, p_san: doc.data().p_san || 0, dec_val: doc.data().dec_val || "-" }); });
+      snapshot.forEach((doc) => { if (doc.id === "GANADORES_JORNADA") ganadoresAislados = doc.data().textos || []; else if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); else if (doc.data().jugador) listaJugadores.push({ nombre: doc.data().jugador, c_exactos_gen: doc.data().resultadosAcertados || 0, c_signos_gen: doc.data().pronosticosAcertados || 0, p_bomba_gen: doc.data().puntosBombaGarnacha || 0, p_val_gen: doc.data().puntosValerinhas || 0, p_irl_gen: doc.data().puntosIrlinhas || 0, p_san_gen: doc.data().puntosSantinhas || 0, p_tronpa_gen: doc.data().puntosTronpa || 0, puntosPurosAcumulados: doc.data().puntosPurosAcumulados || 0, puntosEspecialesExtra: doc.data().puntosEspecialesExtra || 0, puntosFinalesMundial: doc.data().puntosFinalesMundial || data.puntosFinalesLiga || 0, totalJornada: doc.data().puntosTotalesJornada || 0, totalGeneral: doc.data().puntosAcumulados || 0, gananciasTotales: doc.data().gananciasAcumuladas || 0, partidosVisuales: doc.data().partidosVisuales || [], trT: doc.data().trT || "-", statTronpa: doc.data().statTronpa || "", bmT: doc.data().bmT || "-", statBomba: doc.data().statBomba || "", valT: doc.data().valT || "-", statVal: doc.data().statVal || "", irlT: doc.data().irlT || "-", statIrl: doc.data().statIrl || "", sanT: doc.data().sanT || "-", statSan: doc.data().statSan || "", p_val: doc.data().p_val || 0, p_irl: doc.data().p_irl || 0, p_san: doc.data().p_san || 0, dec_val: doc.data().dec_val || "-" }); });
       
       if(listaJugadores.length === 0) { ['zonaTableroJugador', 'zonaClasificacionJugador', 'zonaClasificacionPuraJugador', 'zonaGananciasJugador'].forEach(id => document.getElementById(id).style.display = "none"); return; }
       const cfgSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jorStr)); let prevMap = await obtenerMapaRankingAnterior(jorStr); 
@@ -1543,7 +1548,6 @@
     let isHistorialDefinitivoGlobal = (containerPrefix === "Jugador" && jorStr === "DEFINITIVA");
     let sortBy = isHistorialDefinitivoGlobal ? "puntosFinalesMundial" : "totalGeneral";
     
-    // ORDENACIÓN CLASIFICACIÓN GENERAL
     let tablaGeneral = [...listaJugadores].sort((a, b) => { 
         if(Number(b[sortBy] || 0) !== Number(a[sortBy] || 0)) return Number(b[sortBy] || 0) - Number(a[sortBy] || 0); 
         if(Number(b.c_exactos_gen || 0) !== Number(a.c_exactos_gen || 0)) return Number(b.c_exactos_gen || 0) - Number(a.c_exactos_gen || 0); 
