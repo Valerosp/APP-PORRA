@@ -39,7 +39,7 @@
 <body>
 <div class="contenedor admin">
   <div style="text-align: center; margin-bottom: 10px;">
-    <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="Mundial" style="max-height: 100px; width: auto; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2));">
+    <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="La Liga" style="max-height: 100px; width: auto; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2));">
   </div>
   <h1>👑 Panel de Administrador - La Liga</h1>
 
@@ -321,7 +321,7 @@
   let puntosPrimeroGenTrasVal = 0; let puntosUltimoGenTrasVal = 0; let evaluacionEspecialesMemoria = {};
 
   // ==========================================
-  // INICIALIZACIÓN
+  // INICIALIZACIÓN Y CARGA DE SELECTORES
   // ==========================================
   window.addEventListener('DOMContentLoaded', async () => {
     try {
@@ -381,14 +381,13 @@
           if(selAdmin) selAdmin.value = jorCerrada; 
       }
       
-      // Auto-generar cajas de partidos la primera vez
       document.getElementById('btnGenerarCajasPartidos').click();
       
     } catch(e) { console.warn("Aviso carga inicial:", e); }
   });
 
   // ==========================================
-  // UTILIDADES MATEMÁTICAS
+  // FUNCIONES MATEMÁTICAS NÚCLEO
   // ==========================================
   function obtenerSigno(gL, gV) { if (gL > gV) return "1"; if (gL < gV) return "2"; return "X"; }
   function getStatus(rL, rV, pL, pV) { 
@@ -442,6 +441,9 @@
     return emps.filter(j => j.esp_acertadas === maxEsp).map(j => j.nombre);
   }
 
+  // ==========================================
+  // CONTROL DE PESTAÑAS
+  // ==========================================
   function switchTab(id) {
     ['vistaAdmin0', 'vistaAdmin1', 'vistaAdmin2', 'vistaAdmin3', 'vistaAdmin4', 'vistaAdmin5'].forEach(v => document.getElementById(v).style.display = 'none');
     ['btnTabAdmin0', 'btnTabAdmin1', 'btnTabAdmin2', 'btnTabAdmin3', 'btnTabAdmin4', 'btnTabAdmin5'].forEach(b => { document.getElementById(b).classList.remove('activa'); document.getElementById(b).style.background = "#bdc3c7"; document.getElementById(b).style.color = "#2c3e50"; });
@@ -520,7 +522,6 @@
     let premios = { prov: parseFloat(document.getElementById('premioProv').value), def: parseFloat(document.getElementById('premioDef').value) };
     let pG_def = parseFloat(document.getElementById('premioGenDef').value); let pG_pura = parseFloat(document.getElementById('premioGenPura').value);
     
-    // IMPORTANTE: En el Menú 1, nunca sobrescribimos a true los estados de publicación si ya existían a true, por defecto los creamos a false si es nueva.
     const existSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor));
     let pub = false; let vot = false;
     if(existSnap.exists()) { pub = existSnap.data().pronosticosPublicados || false; vot = existSnap.data().votacionesAbiertas || false; }
@@ -596,7 +597,6 @@
       const querySnapshot = await getDocs(pronosRef); datosGlobales = []; querySnapshot.forEach((doc) => { datosGlobales.push(doc.data()); });
       if(datosGlobales.length === 0) { btn.innerText = "📥 Paso 1: Autocompletar faltantes y Evaluar Textos"; return alert("No hay apuestas."); }
 
-      // Cargar Histórico para sumarlo en el Paso 2
       historicoGeneral = {}; 
       if (jor > 1) { 
           try { 
@@ -620,7 +620,6 @@
           } catch(e) {} 
       }
 
-      // Recuperar evaluaciones previas si es guardado incremental
       let evalsPrevias = {};
       try { const provSnap = await getDocs(collection(db, "provisional_jornada_" + jor)); provSnap.forEach(d => { if(d.id !== "RESULTADOS_REALES" && d.id !== "GANADORES_JORNADA") evalsPrevias[d.id] = d.data(); }); } catch(e) {}
 
@@ -644,7 +643,6 @@
     } catch (error) { btn.innerText = "📥 Paso 1: Autocompletar faltantes y Evaluar Textos"; console.error(error); }
   });
 
-  // PASO 2: GUARDAR Y PUBLICAR PROVISIONAL
   document.getElementById('btnPaso2').addEventListener('click', async function() {
     let jor = parseInt(document.getElementById('numJornadaCorregir').value);
     
@@ -660,7 +658,7 @@
     let realResultsDoc = { partidos: resultadosReales.map(r => `${r.l}-${r.v}`), tronpa: rTronpa === "" ? "" : String(rTronpa), bomba: `${rBombaL}-${rBombaV}` };
     await setDoc(doc(db, "provisional_jornada_" + jor, "RESULTADOS_REALES"), realResultsDoc); window.realResultsActuales = realResultsDoc;
 
-    let ptEx = 5; let ptSig = 2; // Normativa La Liga Uniforme
+    let ptEx = 5; let ptSig = 2;
     jugadoresProvisionales = [];
     
     datosGlobales.forEach((j, i) => {
@@ -682,8 +680,7 @@
       let claveBuscada = String(j.jugador).trim().toLowerCase();
       let prev = historicoGeneral[claveBuscada] || { puntosAcumulados: 0, puntosPurosAcumulados: 0, resultadosAcertados: 0, pronosticosAcertados: 0, puntosBombaGarnacha: 0, puntosValerinhas: 0, puntosIrlinhas: 0, puntosSantinhas: 0, puntosTronpa: 0 };
 
-      // OJO: En Provisional la valerinha no da puntos. Irlinha y Santinha SÍ sumarán pero en la vista del Jugador. 
-      // Para el Admin lo guardaremos con valores 0 temporales y se calculará en vivo o en la definitiva.
+      // En Provisional la valerinha no da puntos. Irlinha y Santinha SÍ sumarán pero en la vista del Jugador. 
       jugadoresProvisionales.push({ nombre: j.jugador, base: puntosBaseJornada, prev: prev, puntosPurosJornada: puntosPurosJornada, c_exactos, c_signos, p_bomba, p_tronpa, statVal: document.getElementById(`est_val_${i}`).value, statIrl: document.getElementById(`est_irl_${i}`).value, statSan: document.getElementById(`est_san_${i}`).value, valT: j.preguntasAbiertas ? j.preguntasAbiertas.valerinha : "-", irlT: j.preguntasAbiertas ? j.preguntasAbiertas.irlinha : "-", sanT: j.preguntasAbiertas ? j.preguntasAbiertas.santinha : "-", partidosVisuales: partidosGuardados, trT: `${j.tronpa.respuesta}/${j.tronpa.puntosJugados}`, statTronpa, bmT: `${j.bombaGarnacha.local}-${j.bombaGarnacha.visita}`, statBomba, p_val: 0, p_irl: 0, p_san: 0, dec_val: "-" });
     });
 
@@ -695,7 +692,6 @@
     pintarTablas(configPintar, "PROVISIONAL", configJornadaActual);
   });
 
-  // PASO 3: ABRIR VOTACIONES VALERINHA
   document.getElementById('btnPaso3_AbrirVotos').addEventListener('click', async function() {
       let jor = parseInt(document.getElementById('numJornadaCorregir').value);
       if(!confirm("¿Abrir votaciones Valerinha para la Jornada " + jor + "? Asegúrate de que todos los partidos han acabado.")) return;
@@ -722,7 +718,6 @@
       
       const votosSnap = await getDocs(collection(db, "votos_valerinha_jornada_" + jor)); let votos = {}; votosSnap.forEach(doc => { votos[doc.id] = doc.data(); });
       
-      // Pintar visual de votos
       let htmlV = `<table style="width:100%;"><thead><tr><th>Atacante</th><th>Tipo</th><th>Objetivo 1</th><th>Objetivo 2</th></tr></thead><tbody>`;
       Object.keys(votos).forEach(id => {
           let v = votos[id]; let icon = v.tipo === "sumar" ? "🛡️ Escudo (+)" : "⚔️ Ataque (-)";
@@ -764,17 +759,23 @@
           }
       }
 
-      // APLICAR VOTOS FINALES
+      // APLICAR VOTOS FINALES Y CASTIGOS POR NO VOTAR
       jugadoresProvisionales.forEach(j => {
-          if (j.statVal === "exacto" && votos[j.nombre]) {
-              let miVoto = votos[j.nombre];
-              if (miVoto.tipo === "sumar") { 
-                  j.val_ganados += 1; j.dec_val = "🛡️ Se suma +" + multiVS; 
-              } else if (miVoto.tipo === "restar" && miVoto.objetivo !== "") {
-                  let isDiverted = redirigidos[j.nombre]; let finalTarget = isDiverted ? miVoto.objetivo2 : miVoto.objetivo;
-                  j.dec_val = `⚔️ Resta -${multiVS} a ${finalTarget}` + (isDiverted ? " (Desvío)" : "");
-                  let target = jugadoresProvisionales.find(p => p.nombre === finalTarget);
-                  if (target) target.val_perdidos -= 1;
+          if (j.statVal === "exacto") {
+              if (votos[j.nombre]) {
+                  let miVoto = votos[j.nombre];
+                  if (miVoto.tipo === "sumar") { 
+                      j.val_ganados += 1; j.dec_val = "🛡️ Se suma +" + multiVS; 
+                  } else if (miVoto.tipo === "restar" && miVoto.objetivo !== "") {
+                      let isDiverted = redirigidos[j.nombre]; let finalTarget = isDiverted ? miVoto.objetivo2 : miVoto.objetivo;
+                      j.dec_val = `⚔️ Resta -${multiVS} a ${finalTarget}` + (isDiverted ? " (Desvío)" : "");
+                      let target = jugadoresProvisionales.find(p => p.nombre === finalTarget);
+                      if (target) target.val_perdidos -= 1;
+                  }
+              } else {
+                  // NUEVO: Castigo si acierta y no vota
+                  j.val_perdidos -= 1;
+                  j.dec_val = `❌ Castigo (No votó)`;
               }
           }
       });
@@ -782,8 +783,8 @@
       jugadoresProvisionales.forEach(j => { 
           if (j.val_perdidos < -4) j.val_perdidos = -4; 
           j.p_val = (j.val_ganados + j.val_perdidos) * multiVS; 
-          j.totalJornada = j.base + j.p_val; 
-          j.generalTrasVal = j.prev.puntosAcumulados + j.totalJornada; 
+          j.totalJornada = j.base + j.p_val; // SOLO suma base + valerinha
+          j.generalTrasVal = j.prev.puntosAcumulados + j.totalJornada; // La general suma todo
       });
 
       puntosPrimeroGenTrasVal = Math.max(...jugadoresProvisionales.map(j => j.generalTrasVal)); puntosUltimoGenTrasVal = Math.min(...jugadoresProvisionales.map(j => j.generalTrasVal));
@@ -800,8 +801,10 @@
       if (j.statIrl === "exacto" && j.generalTrasVal <= puntosUltimoGenTrasVal + 4) j.p_irl = multiVS; 
       if (j.statSan === "fallo" && j.generalTrasVal >= puntosPrimeroGenTrasVal - 4) j.p_san = -multiVS;
       
-      j.totalJornada = j.base + j.p_val + j.p_irl + j.p_san; 
+      // LA REGLA APLICADA: Irlinha y Santinha NO suman en la Jornada, SÍ en la General
+      j.totalJornada = j.base + j.p_val; 
       j.totalGeneral = j.generalTrasVal + j.p_irl + j.p_san; 
+      
       j.p_irl_gen = j.prev.puntosIrlinhas + j.p_irl; j.p_san_gen = j.prev.puntosSantinhas + j.p_san; j.p_val_gen = j.prev.puntosValerinhas + j.p_val; 
       return j;
     });
@@ -824,7 +827,7 @@
       let nombreColeccion = "clasificacion_general_jornada_" + jor;
       for (let j of jugadoresProvisionales) { await setDoc(doc(db, nombreColeccion, j.nombre), { jugador: j.nombre, resultadosAcertados: Number(j.c_exactos_gen), pronosticosAcertados: Number(j.c_signos_gen), puntosBombaGarnacha: Number(j.p_bomba_gen), puntosValerinhas: Number(j.p_val_gen), puntosIrlinhas: Number(j.p_irl_gen), puntosSantinhas: Number(j.p_san_gen), puntosTronpa: Number(j.p_tronpa_gen), puntosPurosJornada: Number(j.puntosPurosJornada), puntosPurosAcumulados: Number(j.purosAcumulados), puntosTotalesJornada: Number(j.totalJornada), puntosAcumulados: Number(j.totalGeneral), gananciasAcumuladas: Number(j.gananciasTotales), partidosVisuales: j.partidosVisuales, trT: j.trT, statTronpa: j.statTronpa, bmT: j.bmT, statBomba: j.statBomba, valT: j.valT, statVal: j.statVal, irlT: j.irlT, statIrl: j.statIrl, sanT: j.sanT, statSan: j.statSan, p_val: j.p_val, p_irl: j.p_irl, p_san: j.p_san, dec_val: j.dec_val }); }
       if(window.realResultsActuales) { await setDoc(doc(db, nombreColeccion, "RESULTADOS_REALES"), window.realResultsActuales); }
-      await setDoc(doc(db, nombreColeccion, "GANADORES_JORNADA"), { textos: window.textosEstaJornada }); document.getElementById('lblUltimaCerrada').innerText = jor; alert("¡Cierre de jornada guardado en base de datos!");
+      await setDoc(doc(db, nombreColeccion, "GANADORES_JORNADA"), { textos: window.textosEstaJornada }); document.getElementById('lblUltimaCerrada').innerText = jor; alert("¡Cierre guardado!");
       pintarTablas(jugadoresProvisionales, "DEFINITIVA", cfgSnap.data()||{}); pintarGanancias(jugadoresProvisionales, window.textosEstaJornada);
     } catch(e) {}
   });
@@ -842,7 +845,7 @@
   }
   document.getElementById('btnConsultarAdmin').addEventListener('click', cargarTablasDefinitivasAdmin);
 
-  // ================= PESTAÑA 5 (CONTROL) =================
+  // ================= PESTAÑA 5 (CONTROL Y RESET) =================
   document.getElementById('btnCargarControl').addEventListener('click', async () => {
      let jor = parseInt(document.getElementById('numJornadaControl').value); document.getElementById('txtCabeceraControl').innerText = "📊 Sincronización de Envíos | Jornada " + jor;
      try {
@@ -928,7 +931,7 @@
       } catch(e) { alert("Error en borrado masivo."); document.getElementById('btnResetLiga').innerText = "🔥 RESETEAR LIGA DESDE CERO 🔥"; document.getElementById('btnResetLiga').disabled = false; }
   });
 
-  // ================= PESTAÑA 6 (ESPECIALES) =================
+  // ================= PESTAÑA 6 (ESPECIALES FIN DE LIGA) =================
   document.getElementById('btnAbrirEspeciales').addEventListener('click', async () => { 
       let limite = document.getElementById('limiteEspecialesConfig').value;
       if(!limite) return alert("⚠️ Indica una Fecha Límite.");
@@ -972,7 +975,6 @@
       } catch(e){}
   });
 
-  // EVALUACIÓN MANUAL ESPECIALES (FIN DE LIGA)
   document.getElementById('btnEvaluarEspecialesMenu').addEventListener('click', async () => {
       let pregs = preguntasEspecialesGlobal; 
       const respSnap = await getDocs(collection(db, "pronosticos_especiales")); 
@@ -986,9 +988,9 @@
               let ansText = dicResp[nom].map((r, x) => `<span style="font-size:10px;">Q${x+1}: ${r}</span>`).join("<br>");
               htmlEval += `<tr>
                   <td><strong>${nom}</strong></td>
-                  <td style="text-align:left; color:var(--text-muted);">${ansText}</td>
+                  <td style="text-align:left; color:#7f8c8d;">${ansText}</td>
                   <td><input type="number" id="espAci_${i}" data-jug="${nom}" value="0" style="width:60px;"></td>
-                  <td><input type="number" id="espPts_${i}" value="0" style="width:60px; border:2px solid var(--accent-gold);"> pts</td>
+                  <td><input type="number" id="espPts_${i}" value="0" style="width:60px; border:2px solid #f39c12;"> pts</td>
               </tr>`;
           }
       });
@@ -1009,7 +1011,7 @@
               let jug = iptAci.getAttribute('data-jug');
               let aci = parseInt(iptAci.value) || 0;
               let pts = parseInt(iptPts.value) || 0;
-              evaluacionEspecialesMemoria[jug] = { aciertos: aci, puntos: pts, evaluaciones: [] }; // Vacío evaluaciones para vista genérica
+              evaluacionEspecialesMemoria[jug] = { aciertos: aci, puntos: pts, evaluaciones: [] }; 
               htmlTable += `<tr><td><strong>${jug}</strong></td><td>${aci}</td><td style="color:#d35400; font-weight:bold;">+${pts}</td></tr>`;
           }
       });
@@ -1026,7 +1028,7 @@
           const j38Snap = await getDocs(collection(db, "clasificacion_general_jornada_38")); 
           if(j38Snap.empty) return alert("Primero debes calcular la Definitiva de la Jornada 38 en el Menú 3.");
           
-          let cJ38 = []; j38Snap.forEach(d => { if(d.data().jugador) cJ8.push(d.data()); });
+          let cJ38 = []; j38Snap.forEach(d => { if(d.data().jugador) cJ38.push(d.data()); });
           let cierreTotal = [];
           
           let premioGenDef = 0; let premioGenPura = 0; 
@@ -1086,7 +1088,10 @@
     let qTr = configJor.pregTronpa ? `<br><span style="font-size:10px; font-weight:normal; color:#7f8c8d;">${configJor.pregTronpa}</span>` : ''; let qBm = configJor.pregBomba ? `<br><span style="font-size:10px; font-weight:normal; color:#7f8c8d;">${configJor.pregBomba}</span>` : ''; let qVa = configJor.pregValerinha ? `<br><span style="font-size:10px; font-weight:normal; color:#7f8c8d;">${configJor.pregValerinha}</span>` : ''; let qIr = configJor.pregIrlinha ? `<br><span style="font-size:10px; font-weight:normal; color:#7f8c8d;">${configJor.pregIrlinha}</span>` : ''; let qSa = configJor.pregSantinha ? `<br><span style="font-size:10px; font-weight:normal; color:#7f8c8d;">${configJor.pregSantinha}</span>` : '';
 
     if(!isDef) {
-       let tablaJornada = [...listaJugadores].sort((a, b) => a.nombre.localeCompare(b.nombre));
+       let tablaJornada = [...listaJugadores].sort((a, b) => {
+           let diff = (Number(b.totalJornada) || 0) - (Number(a.totalJornada) || 0);
+           return diff !== 0 ? diff : a.nombre.localeCompare(b.nombre);
+       });
        let thNom = ""; let numPartidosVisuales = tablaJornada[0].partidosVisuales.length; let filasPartidos = Array(numPartidosVisuales).fill(""); let tdTr = "", tdBm = "", tdVa1 = "", tdVa2 = "", tdVaDec = "", tdIr = "", tdSa = "", tdTot = ""; let nombresPartidos = [];
        tablaJornada.forEach(j => {
          thNom += `<th>${j.nombre}</th>`; j.partidosVisuales.forEach((p, idx) => { if(nombresPartidos.length <= idx) nombresPartidos.push(p.matchText || `Partido ${idx+1}`); filasPartidos[idx] += `<td class="${p.stat}">${p.texto}</td>`; });
@@ -1103,23 +1108,13 @@
        document.getElementById('zonaTablero').innerHTML = `<h2 style="text-align: center; color: #8e44ad;">📊 RESULTADOS JORNADA ${jorStr}</h2><div style="overflow-x:auto; width:100%;"><table><thead><tr><th>Partido</th><th style="background:#ecf0f1; color:#333;">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:#f4f6f6; color:#2c3e50;">${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:#f4f6f6; color:#2c3e50;">${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdVa1} </tr><tr><td><strong>Resultado Valerinha</strong></td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdVa2} </tr><tr><td><strong>Decisión Valerinha</strong></td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdVaDec} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdSa} </tr><tr><td><strong>TOTAL JORNADA</strong></td><td style="background:#e5e7e9; font-weight:bold; color:#2c3e50;">-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdNomRow} </tr></tbody></table></div>`; document.getElementById('zonaTablero').style.display = "block";
     } else { document.getElementById('zonaTablero').style.display = "none"; }
 
-    let sortBy = isDef ? "puntosFinalesMundial" : "totalGeneral"; 
-    let tablaGeneral = [...listaJugadores].sort((a, b) => { 
-        if(Number(b[sortBy] || 0) !== Number(a[sortBy] || 0)) return Number(b[sortBy] || 0) - Number(a[sortBy] || 0); 
-        if(Number(b.c_exactos_gen || 0) !== Number(a.c_exactos_gen || 0)) return Number(b.c_exactos_gen || 0) - Number(a.c_exactos_gen || 0); 
-        if(Number(b.c_signos_gen || 0) !== Number(a.c_signos_gen || 0)) return Number(b.c_signos_gen || 0) - Number(a.c_signos_gen || 0); 
-        return ((Number(b[sortBy] || 0)) - Number(b.puntosPurosAcumulados || 0)) - ((Number(a[sortBy] || 0)) - Number(a.puntosPurosAcumulados || 0)); 
-    });
+    let sortBy = isDef ? "puntosFinalesMundial" : "totalGeneral"; let tablaGeneral = [...listaJugadores].sort((a, b) => { if(Number(b[sortBy]) !== Number(a[sortBy])) return Number(b[sortBy]) - Number(a[sortBy]); if(Number(b.c_exactos_gen) !== Number(a.c_exactos_gen)) return Number(b.c_exactos_gen) - Number(a.c_exactos_gen); if(Number(b.c_signos_gen) !== Number(a.c_signos_gen)) return Number(b.c_signos_gen) - Number(a.c_signos_gen); return ((Number(b.puntosFinalesMundial)||Number(b.totalGeneral)) - Number(b.puntosPurosAcumulados)) - ((Number(a.puntosFinalesMundial)||Number(a.totalGeneral)) - Number(a.puntosPurosAcumulados)); });
     
     let htmlClasif = `<table><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:#d35400;">TOTAL GENERAL</th><th>EXACTOS ACUM.</th><th>PRONÓSTICOS ACUM.</th><th>BOMBA ACUM.</th><th>VALERINHAS ACUM.</th><th>IRLINHAS ACUM.</th><th>SANTINHAS ACUM.</th><th>TroNpá! ACUM.</th>`;
-    if(isDef) htmlClasif += `<th style="background:#e84393; color:white;">Pts. EXTRA ESPECIALES</th>`;
+    if(isDef) htmlClasif += `<th style="background:#e84393; color:white;">Pts. ESPECIALES</th>`;
     htmlClasif += `</tr></thead><tbody>`;
-    tablaGeneral.forEach((j, idx) => { 
-        htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td class="td-total-gen">${isDef ? (j.puntosFinalesMundial||j.totalGeneral):j.totalGeneral} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td>`; 
-        if(isDef) htmlClasif += `<td style="font-weight:bold; color:#e84393;">${j.puntosEspecialesExtra || 0}</td>`; 
-        htmlClasif += `</tr>`; 
-    });
-    htmlClasif += `</tbody></table>`; document.getElementById('tituloClasificacion').innerText = isDef ? `🏆 CLASIFICACIÓN DEFINITIVA DEL MUNDIAL` : `🏆 CLASIFICACIÓN GENERAL ACUMULADA (${titulo})`; document.getElementById('tablaClasificacion').innerHTML = htmlClasif; document.getElementById('zonaClasificacion').style.display = "block";
+    tablaGeneral.forEach((j, idx) => { htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td class="td-total-gen">${isDef ? (j.puntosFinalesMundial||j.totalGeneral):j.totalGeneral} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td>`; if(isDef) htmlClasif += `<td style="font-weight:bold; color:#e84393;">${j.puntosEspecialesExtra || 0}</td>`; htmlClasif += `</tr>`; });
+    htmlClasif += `</tbody></table>`; document.getElementById('tituloClasificacion').innerText = isDef ? `🏆 CLASIFICACIÓN DEFINITIVA DE LA LIGA` : `🏆 CLASIFICACIÓN GENERAL ACUMULADA (${titulo})`; document.getElementById('tablaClasificacion').innerHTML = htmlClasif; document.getElementById('zonaClasificacion').style.display = "block";
 
     if(listaJugadores[0].purosAcumulados !== undefined || listaJugadores[0].puntosPurosAcumulados !== undefined) {
         let tablaPura = [...listaJugadores].sort((a, b) => { let ptsA = a.purosAcumulados !== undefined ? Number(a.purosAcumulados) : Number(a.puntosPurosAcumulados); let ptsB = b.purosAcumulados !== undefined ? Number(b.purosAcumulados) : Number(b.puntosPurosAcumulados); if(ptsB !== ptsA) return ptsB - ptsA; return (Number(b.c_exactos_gen) || 0) - (Number(a.c_exactos_gen) || 0); });
@@ -1133,7 +1128,10 @@
     if(!ganadoresDeLaJornada) ganadoresDeLaJornada = []; document.getElementById('historialGanadores').innerHTML = ganadoresDeLaJornada.map(txt => `<p style="margin: 5px 0; border-bottom: 1px dashed #eee; padding-bottom: 5px;">${txt}</p>`).join("");
     
     let lbl = document.getElementById('lblTituloGanadores');
-    if(lbl) { let isDef = document.getElementById('jorConsultaAdmin').value === "DEFINITIVA"; lbl.innerText = isDef ? "🏆 Campeones de La Liga" : "🏆 Campeones de Jornada"; }
+    if(lbl) {
+        let isDef = document.getElementById('jorConsultaAdmin').value === "DEFINITIVA";
+        lbl.innerText = isDef ? "🏆 Campeones de La Liga" : "🏆 Campeones de Jornada";
+    }
 
     let htmlGanancias = `<table style="width: 100%; border-collapse: collapse; text-align: left;"><thead><tr><th>JUGADOR</th><th style="text-align:right;">GANANCIAS (€)</th></tr></thead><tbody>`;
     let listaGanancias = listaJugadores.map(j => ({nombre: j.nombre, dinero: Number(j.gananciasTotales)})); listaGanancias.sort((a,b) => b.dinero - a.dinero);
