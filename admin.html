@@ -1,1 +1,1113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - La Liga 26/27</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --panel-bg: #1e293b;
+            --accent-gold: #f59e0b;
+            --accent-green: #10ac84;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 20px 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .header h1 {
+            margin: 0;
+            color: var(--accent-gold);
+            font-weight: 900;
+            letter-spacing: 1px;
+            font-size: 24px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #334155;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-blue);
+            border-color: #60a5fa;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #475569;
+        }
+
+        .section-panel {
+            background: var(--panel-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none;
+            margin-bottom: 50px;
+        }
+
+        .section-panel.active {
+            display: block;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: white;
+            font-size: 20px;
+            border-bottom: 2px solid rgba(255,255,255,0.05);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: var(--accent-gold);
+            font-size: 16px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        input[type="text"], input[type="number"], input[type="datetime-local"], select {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: 0.2s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .partido-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .partido-row span {
+            font-weight: bold;
+            color: var(--text-muted);
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, var(--accent-green), #059669);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(16, 172, 132, 0.4);
+            transition: 0.2s;
+            text-transform: uppercase;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .btn-action.blue { background: linear-gradient(135deg, var(--accent-blue), #2563eb); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
+        .btn-action.gold { background: linear-gradient(135deg, var(--accent-gold), #ea580c); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); }
+        .btn-action.danger { background: linear-gradient(135deg, var(--accent-red), #b91c1c); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-group input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* TABLAS DE ADMIN */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        th {
+            background: #0f172a;
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        td {
+            color: white;
+        }
+
+        .calificacion-select {
+            padding: 6px;
+            font-size: 12px;
+            border-radius: 4px;
+            width: 100px;
+        }
+
+        .status-msg {
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .status-msg.success { background: rgba(16, 172, 132, 0.1); color: var(--accent-green); border: 1px solid var(--accent-green); }
+        .status-msg.error { background: rgba(239, 68, 68, 0.1); color: var(--accent-red); border: 1px solid var(--accent-red); }
+
+        #logConsole {
+            background: #000;
+            color: #10ac84;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            height: 200px;
+            overflow-y: auto;
+            margin-top: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>⚙️ PANEL ADMIN - LA LIGA</h1>
+        <div style="color: var(--text-muted); font-size: 14px; font-weight:bold;">Temporada 26/27</div>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="tab-btn active" data-target="panel-config">1. Configurar Jornada</button>
+        <button class="tab-btn" data-target="panel-provisional">2. Evaluar y Provisional</button>
+        <button class="tab-btn" data-target="panel-definitiva">3. Votos y Definitiva</button>
+        <button class="tab-btn" data-target="panel-especiales">4. Apuestas Especiales</button>
+        <button class="tab-btn" data-target="panel-reset" style="border-color: #ef4444; color: #ef4444;">5. Zona Peligro</button>
+    </div>
+
+    <!-- PANEL 1: CONFIGURAR JORNADA -->
+    <div id="panel-config" class="section-panel active">
+        <h2>🛠️ Crear / Editar Jornada Oficial</h2>
+        
+        <div class="form-group">
+            <label>Selecciona la Jornada a Configurar</label>
+            <select id="cfgJornadaSelector">
+                <!-- Se llenará de J1 a J38 con JS -->
+            </select>
+        </div>
+        
+        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+            <div class="form-group" style="flex:1; min-width: 250px;">
+                <label>Límite Envío Pronósticos</label>
+                <input type="datetime-local" id="cfgFechaLimite">
+            </div>
+            <div class="form-group" style="flex:1; min-width: 250px;">
+                <label>Límite Votación Valerinha</label>
+                <input type="datetime-local" id="cfgFechaValerinha">
+            </div>
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="cfgPronosticosPublicados">
+            <label for="cfgPronosticosPublicados">👁️ Hacer públicos los pronósticos de los jugadores (Pitido Inicial)</label>
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="cfgVotacionesAbiertas">
+            <label for="cfgVotacionesAbiertas">🗳️ Abrir fase de Votación Valerinha (Solo si ya hay Provisional)</label>
+        </div>
+
+        <h3>⚽ 10 Partidos de la Jornada</h3>
+        <div id="cfgPartidosContainer">
+            <!-- Los 10 partidos se generarán con JS -->
+        </div>
+
+        <h3>🍿 Salseo de la Jornada (Textos)</h3>
+        <div class="form-group">
+            <label>Pregunta Valerinha (Escudo/Ataque)</label>
+            <input type="text" id="cfgTxtValerinha" placeholder="Ej: ¿Marcará Lewandowski de penalti?">
+        </div>
+        <div class="form-group">
+            <label>Pregunta Irlinha (+1 pt)</label>
+            <input type="text" id="cfgTxtIrlinha" placeholder="Ej: ¿Habrá más de 5 tarjetas amarillas en el derbi?">
+        </div>
+        <div class="form-group">
+            <label>Pregunta Santinha (-1 pt si falla)</label>
+            <input type="text" id="cfgTxtSantinha" placeholder="Ej: ¿Ganará el Barça por más de 2 goles?">
+        </div>
+        <div class="form-group">
+            <label>Pregunta La TroNpá! (Numérico)</label>
+            <input type="text" id="cfgTxtTronpa" placeholder="Ej: Minuto del primer gol del Real Madrid">
+        </div>
+        <div class="form-group">
+            <label>Partido Bomba Garnacha (Doble valor)</label>
+            <input type="text" id="cfgTxtBomba" placeholder="Ej: Real Sociedad - Athletic Club">
+        </div>
+
+        <button id="btnGuardarConfig" class="btn-action blue">Guardar Configuración 💾</button>
+        <div id="msgConfig" class="status-msg"></div>
+    </div>
+
+    <!-- PANEL 2: RESULTADOS REALES Y PROVISIONAL -->
+    <div id="panel-provisional" class="section-panel">
+        <h2>⚖️ Evaluar Jornada y Clasificación Provisional</h2>
+        <p style="color:var(--text-muted); font-size:13px; margin-bottom:20px;">Introduce los marcadores reales y evalúa el salseo. Esto generará la primera tabla sin votos.</p>
+
+        <div class="form-group">
+            <label>Selecciona la Jornada</label>
+            <select id="provJornadaSelector"></select>
+            <button id="btnCargarProv" class="btn-action" style="margin-top:10px; padding:10px;">Cargar Datos de esta Jornada ⬇️</button>
+        </div>
+
+        <div id="zonaEvaluacionProvisional" style="display:none; margin-top:30px; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;">
+            <h3>⚽ Resultados Reales Oficiales</h3>
+            <div id="provPartidosRealesContainer"></div>
+
+            <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:20px;">
+                <div class="form-group" style="flex:1;">
+                    <label>Resultado Real Bomba Garnacha</label>
+                    <input type="text" id="provResBomba" placeholder="Ej: 2-1">
+                </div>
+                <div class="form-group" style="flex:1;">
+                    <label>Respuesta Real TroNpá (Número)</label>
+                    <input type="number" id="provResTronpa" placeholder="Ej: 45">
+                </div>
+            </div>
+
+            <h3>✅ Evaluación Manual del Salseo</h3>
+            <p style="font-size:12px; color:var(--accent-gold);">Marca quién ha acertado (Exacto) o fallado. Las respuestas de los jugadores están a la derecha.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Jugador</th>
+                            <th>Valerinha (Derecho Voto)</th>
+                            <th>Irlinha (+1 pt)</th>
+                            <th>Santinha (-1 pt fallo)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaEvaluacionManual">
+                        <!-- Llenado con JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <button id="btnGenerarProvisional" class="btn-action gold" style="margin-top:30px;">Calcular y Generar Provisional 📊</button>
+            <div id="msgProv" class="status-msg"></div>
+        </div>
+    </div>
+
+    <!-- PANEL 3: VOTACIONES Y DEFINITIVA -->
+    <div id="panel-definitiva" class="section-panel">
+        <h2>🏁 Cierre de Jornada y Tabla Definitiva</h2>
+        <p style="color:var(--text-muted); font-size:13px; margin-bottom:20px;">Este proceso suma los puntos provisionales, procesa los ataques/escudos de la Valerinha y calcula los premios de la jornada.</p>
+
+        <div class="form-group">
+            <label>Selecciona la Jornada a Cerrar</label>
+            <select id="defJornadaSelector"></select>
+            <button id="btnCargarVotos" class="btn-action" style="margin-top:10px; padding:10px;">Ver Votos Emitidos 👁️</button>
+        </div>
+
+        <div id="zonaVotosEmitidos" style="display:none; margin-top:30px;">
+            <h3>🗳️ Votos Registrados en la Base de Datos</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Atacante</th>
+                            <th>Tipo</th>
+                            <th>Objetivo 1</th>
+                            <th>Objetivo 2 (Fallback)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaVotosEmitidos">
+                        <!-- Llenado con JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="background:rgba(245, 158, 11, 0.1); border:1px solid var(--accent-gold); padding:15px; border-radius:8px; margin-top:20px;">
+                <h4 style="color:var(--accent-gold); margin-top:0;">⚠️ Advertencia de Cierre</h4>
+                <p style="font-size:13px; color:white; margin:0;">Al hacer clic en el botón inferior, el sistema calculará automáticamente la barrera anti-bullying (máximo 4 ataques), sumará las bases al histórico de la jornada anterior y guardará la Clasificación Definitiva Inmutable.</p>
+            </div>
+
+            <button id="btnGenerarDefinitiva" class="btn-action danger" style="margin-top:20px;">Cerrar Jornada y Crear Definitiva 🔒</button>
+            <div id="msgDef" class="status-msg"></div>
+        </div>
+    </div>
+
+    <!-- PANEL 4: ESPECIALES -->
+    <div id="panel-especiales" class="section-panel">
+        <h2>⭐ Evaluación de Apuestas Especiales (Fin Temporada)</h2>
+        <p style="color:var(--text-muted); font-size:13px; margin-bottom:20px;">Aquí se activan/desactivan las apuestas globales y se evalúan a final de año para sumar al bote final.</p>
+
+        <div class="form-group">
+            <label>Estado del Formulario de Especiales (Para Jugadores)</label>
+            <select id="espEstadoForm">
+                <option value="oculto">Oculto (Nadie lo ve)</option>
+                <option value="abierto">Abierto (Pueden enviar)</option>
+                <option value="cerrado">Cerrado (Solo lectura pública)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Fecha Límite de Especiales</label>
+            <input type="datetime-local" id="espFechaLimite">
+        </div>
+        <button id="btnGuardarEstadoEsp" class="btn-action blue" style="padding:10px; margin-bottom:30px;">Actualizar Acceso 🔑</button>
+
+        <hr style="border-color: rgba(255,255,255,0.1); margin: 30px 0;">
+
+        <h3>✅ Corrección Manual de Especiales</h3>
+        <p style="font-size:12px; color:var(--text-muted);">Asigna manualmente los aciertos y puntos extra totales a cada jugador en base a la realidad de La Liga.</p>
+        
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jugador</th>
+                        <th>Ver sus 11 Respuestas</th>
+                        <th>Aciertos (Num)</th>
+                        <th>Puntos Extra Totales</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaEvaluacionEspeciales">
+                    <!-- Llenado con JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <button id="btnPublicarEspeciales" class="btn-action gold" style="margin-top:30px;">Publicar Resultados Especiales 🏆</button>
+        <div id="msgEsp" class="status-msg"></div>
+    </div>
+
+    <!-- PANEL 5: ZONA PELIGRO -->
+    <div id="panel-reset" class="section-panel" style="border-color: #ef4444;">
+        <h2 style="color:#ef4444; border-bottom-color: rgba(239, 68, 68, 0.2);">⚠️ Destrucción de Datos</h2>
+        <p style="color:var(--text-muted); font-size:13px;">Esta acción borrará todas las clasificaciones, pronósticos y configuraciones de la base de datos `liga-2627`. No se puede deshacer.</p>
+        
+        <div class="form-group">
+            <label>Escribe "CONFIRMAR" para habilitar el botón</label>
+            <input type="text" id="txtConfirmReset">
+        </div>
+        <button id="btnResetDB" class="btn-action danger" disabled>Borrar Todo y Empezar de Cero 🗑️</button>
+        <div id="msgReset" class="status-msg"></div>
+    </div>
+
+    <h3>🖥️ Consola de Operaciones</h3>
+    <div id="logConsole">Esperando órdenes, Administrador...</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { doc, getFirestore, setDoc, getDoc, collection, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+    // 🌟 NUEVAS CREDENCIALES LA LIGA 26/27 🌟
+    const firebaseConfig = { 
+      apiKey: "AIzaSyAYN3eKnIYfLNyzqbS1b0cCxYCro-nktlw", 
+      authDomain: "liga-2627.firebaseapp.com", 
+      projectId: "liga-2627", 
+      storageBucket: "liga-2627.firebasestorage.app", 
+      messagingSenderId: "1083204329263", 
+      appId: "1:1083204329263:web:d18ad21127f4a963df0bda",
+      measurementId: "G-T6P4CDY3QT"
+    };
+
+    const app = initializeApp(firebaseConfig); 
+    const db = getFirestore(app);
+
+    const listaOficialNombres = ["L'Ant", "Barri", "Alberto", "Gonxi", "Héctor", "Irles", "Bambino", "Tron", "Sants", "Valer", "Víctor", "Dardos", "Bicho", "Vinxi", "Mazon", "Junior", "Txus", "Ors", "Pech", "Manolo", "Gil", "Pampli", "Jaime", "Martos", "Raúl", "Boque", "Isi", "Fran", "Kevin"];
+    
+    // 🌟 LOS 20 EQUIPOS DE LA LIGA 🌟
+    const equiposLiga = { "Deportivo Alavés": "🔵⚪", "Atlético de Madrid": "🔴⚪", "FC Barcelona": "🔵🔴", "RC Celta": "🩵", "RC Deportivo de A Coruña": "💙🤍", "Elche CF": "🌴", "RCD Espanyol": "🦜", "Getafe CF": "✈️", "Levante UD": "🐸", "Málaga CF": "⚓", "CA Osasuna": "🐂", "Real Racing Club": "🟢⚪", "Rayo Vallecano": "⚡", "Real Betis": "💚🤍", "Real Madrid": "👑", "Real Sociedad": "Tx", "Sevilla FC": "🔴⚪", "Valencia CF": "🦇", "Villarreal CF": "💛", "Athletic Club": "🦁" };
+
+    let cachePronosticosParaEvaluar = [];
+
+    // ==========================================
+    // UTILIDADES UI Y CONSOLA
+    // ==========================================
+    function log(msg) {
+        const consoleEl = document.getElementById('logConsole');
+        let time = new Date().toLocaleTimeString();
+        consoleEl.innerHTML += `<br>[${time}] > ${msg}`;
+        consoleEl.scrollTop = consoleEl.scrollHeight;
+    }
+
+    function showMsg(id, text, type) {
+        let el = document.getElementById(id);
+        el.innerText = text;
+        el.className = 'status-msg ' + type;
+        el.style.display = 'block';
+        setTimeout(() => el.style.display = 'none', 5000);
+    }
+
+    // TABS
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            document.getElementById(e.currentTarget.getAttribute('data-target')).classList.add('active');
+        });
+    });
+
+    // LLENAR SELECTORES DE JORNADAS (1 A 38)
+    function poblarSelectoresJornada() {
+        let opts = "";
+        for(let i=1; i<=38; i++) opts += `<option value="${i}">Jornada ${i}</option>`;
+        document.getElementById('cfgJornadaSelector').innerHTML = opts;
+        document.getElementById('provJornadaSelector').innerHTML = opts;
+        document.getElementById('defJornadaSelector').innerHTML = opts;
+    }
+
+    // CREAR 10 SELECTORES DE PARTIDOS
+    function generarCajasPartidosConfig() {
+        let html = "";
+        let optEquipos = `<option value="">- Selecciona Equipo -</option>`;
+        Object.keys(equiposLiga).sort().forEach(eq => optEquipos += `<option value="${eq}">${equiposLiga[eq]} ${eq}</option>`);
+
+        for(let i=0; i<10; i++) {
+            html += `
+            <div class="partido-row">
+                <span style="width:25px;">${i+1}.</span>
+                <select id="cfgLocal_${i}" style="flex:1;">${optEquipos}</select>
+                <span>VS</span>
+                <select id="cfgVisita_${i}" style="flex:1;">${optEquipos}</select>
+            </div>`;
+        }
+        document.getElementById('cfgPartidosContainer').innerHTML = html;
+    }
+
+    // INICIALIZACIÓN
+    poblarSelectoresJornada();
+    generarCajasPartidosConfig();
+    log("Sistema Admin Inicializado y Conectado a La Liga 26/27.");
+
+    // ==========================================
+    // PANEL 1: CONFIGURAR JORNADA
+    // ==========================================
+    document.getElementById('cfgJornadaSelector').addEventListener('change', async (e) => {
+        let jor = e.target.value;
+        log(`Cargando configuración guardada de Jornada ${jor}...`);
+        const snap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor));
+        if(snap.exists()) {
+            let d = snap.data();
+            document.getElementById('cfgFechaLimite').value = d.fechaLimite || "";
+            document.getElementById('cfgFechaValerinha').value = d.fechaLimiteValerinha || "";
+            document.getElementById('cfgPronosticosPublicados').checked = d.pronosticosPublicados || false;
+            document.getElementById('cfgVotacionesAbiertas').checked = d.votacionesAbiertas || false;
+            
+            document.getElementById('cfgTxtValerinha').value = d.pregValerinha || "";
+            document.getElementById('cfgTxtIrlinha').value = d.pregIrlinha || "";
+            document.getElementById('cfgTxtSantinha').value = d.pregSantinha || "";
+            document.getElementById('cfgTxtTronpa').value = d.pregTronpa || "";
+            document.getElementById('cfgTxtBomba').value = d.pregBomba || "";
+
+            if(d.partidos) {
+                d.partidos.forEach((p, i) => {
+                    if(document.getElementById(`cfgLocal_${i}`)) document.getElementById(`cfgLocal_${i}`).value = p.local;
+                    if(document.getElementById(`cfgVisita_${i}`)) document.getElementById(`cfgVisita_${i}`).value = p.visita;
+                });
+            }
+            log(`Configuración Jornada ${jor} cargada con éxito.`);
+        } else {
+            // Limpiar si no existe
+            document.getElementById('cfgFechaLimite').value = ""; document.getElementById('cfgFechaValerinha').value = "";
+            document.getElementById('cfgPronosticosPublicados').checked = false; document.getElementById('cfgVotacionesAbiertas').checked = false;
+            document.getElementById('cfgTxtValerinha').value = ""; document.getElementById('cfgTxtIrlinha').value = ""; document.getElementById('cfgTxtSantinha').value = ""; document.getElementById('cfgTxtTronpa').value = ""; document.getElementById('cfgTxtBomba').value = "";
+            for(let i=0; i<10; i++) { document.getElementById(`cfgLocal_${i}`).value = ""; document.getElementById(`cfgVisita_${i}`).value = ""; }
+            log(`No hay configuración previa para la Jornada ${jor}. Listo para crear nueva.`);
+        }
+    });
+
+    document.getElementById('btnGuardarConfig').addEventListener('click', async () => {
+        let jor = document.getElementById('cfgJornadaSelector').value;
+        let pArr = [];
+        for(let i=0; i<10; i++) {
+            let loc = document.getElementById(`cfgLocal_${i}`).value;
+            let vis = document.getElementById(`cfgVisita_${i}`).value;
+            if(loc && vis) pArr.push({local: loc, visita: vis});
+        }
+        
+        let data = {
+            num: parseInt(jor),
+            fechaLimite: document.getElementById('cfgFechaLimite').value,
+            fechaLimiteValerinha: document.getElementById('cfgFechaValerinha').value,
+            pronosticosPublicados: document.getElementById('cfgPronosticosPublicados').checked,
+            votacionesAbiertas: document.getElementById('cfgVotacionesAbiertas').checked,
+            pregValerinha: document.getElementById('cfgTxtValerinha').value,
+            pregIrlinha: document.getElementById('cfgTxtIrlinha').value,
+            pregSantinha: document.getElementById('cfgTxtSantinha').value,
+            pregTronpa: document.getElementById('cfgTxtTronpa').value,
+            pregBomba: document.getElementById('cfgTxtBomba').value,
+            partidos: pArr
+        };
+
+        try {
+            await setDoc(doc(db, "config_jornadas", "jornada_" + jor), data);
+            log(`✅ Configuración Jornada ${jor} guardada en BD.`);
+            showMsg('msgConfig', 'Jornada guardada y publicada.', 'success');
+        } catch(e) {
+            log(`❌ Error guardando Jornada ${jor}: ${e}`);
+            showMsg('msgConfig', 'Error al guardar.', 'error');
+        }
+    });
+
+    // ==========================================
+    // PANEL 2: EVALUACIÓN Y PROVISIONAL
+    // ==========================================
+    document.getElementById('btnCargarProv').addEventListener('click', async () => {
+        let jor = document.getElementById('provJornadaSelector').value;
+        log(`Cargando datos para evaluar Provisional J${jor}...`);
+        
+        // 1. Cargar Partidos para meter goles reales
+        const cfgSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor));
+        if(!cfgSnap.exists()) return alert("No hay configuración para esta jornada.");
+        
+        let htmlP = "";
+        cfgSnap.data().partidos.forEach((p, i) => {
+            htmlP += `<div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
+                <span style="width:20px; color:var(--text-muted);">${i+1}.</span>
+                <span style="width:200px; text-align:right;">${p.local}</span>
+                <input type="text" id="prov_R_${i}" placeholder="Ej: 2-1" style="width:100px; text-align:center;">
+                <span style="width:200px;">${p.visita}</span>
+            </div>`;
+        });
+        document.getElementById('provPartidosRealesContainer').innerHTML = htmlP;
+
+        // 2. Cargar Respuestas de Jugadores
+        const pSnap = await getDocs(collection(db, "pronosticos_jornada_" + jor));
+        if(pSnap.empty) return alert("Nadie ha enviado pronósticos para esta jornada.");
+        
+        cachePronosticosParaEvaluar = [];
+        pSnap.forEach(d => cachePronosticosParaEvaluar.push(d.data()));
+        cachePronosticosParaEvaluar.sort((a,b) => a.jugador.localeCompare(b.jugador));
+
+        let htmlTr = "";
+        cachePronosticosParaEvaluar.forEach((p, idx) => {
+            let vAns = p.preguntasAbiertas?.valerinha || "-";
+            let iAns = p.preguntasAbiertas?.irlinha || "-";
+            let sAns = p.preguntasAbiertas?.santinha || "-";
+            
+            let selOptions = `<option value="blanco">Blanco</option><option value="exacto">Acertó (+)</option><option value="fallo">Falló (-)</option>`;
+            
+            htmlTr += `<tr>
+                <td><strong>${p.jugador}</strong></td>
+                <td><div style="font-size:11px; color:#94a3b8; margin-bottom:5px;">R: ${vAns}</div><select id="eval_val_${idx}" class="calificacion-select">${selOptions}</select></td>
+                <td><div style="font-size:11px; color:#94a3b8; margin-bottom:5px;">R: ${iAns}</div><select id="eval_irl_${idx}" class="calificacion-select">${selOptions}</select></td>
+                <td><div style="font-size:11px; color:#94a3b8; margin-bottom:5px;">R: ${sAns}</div><select id="eval_san_${idx}" class="calificacion-select">${selOptions}</select></td>
+            </tr>`;
+        });
+        
+        document.getElementById('tablaEvaluacionManual').innerHTML = htmlTr;
+        document.getElementById('zonaEvaluacionProvisional').style.display = "block";
+        log(`Datos de ${cachePronosticosParaEvaluar.length} jugadores cargados.`);
+    });
+
+    document.getElementById('btnGenerarProvisional').addEventListener('click', async () => {
+        let jor = document.getElementById('provJornadaSelector').value;
+        let rPartidos = [];
+        for(let i=0; i<10; i++) {
+            let el = document.getElementById(`prov_R_${i}`);
+            if(el) rPartidos.push(el.value.trim() || "-");
+        }
+        let rTronpa = parseInt(document.getElementById('provResTronpa').value);
+        let rBomba = document.getElementById('provResBomba').value.trim() || "-";
+
+        if(isNaN(rTronpa) || rBomba === "") return alert("Faltan resultados reales de Tronpa o Bomba.");
+
+        log(`Calculando puntuaciones para Provisional J${jor}...`);
+
+        // Array maestro de la provisional
+        let tablaProv = [];
+
+        // REGLAS MATEMÁTICAS LIGA 26/27: Normal Exacto=5, Normal Signo=2. Bomba Exact=3, Signo=1, Fail=-1.
+        
+        // Helper Signo (1X2)
+        function getSigno(str) {
+            if(!str || !str.includes("-")) return null;
+            let parts = str.split("-"); let l = parseInt(parts[0]); let v = parseInt(parts[1]);
+            if(isNaN(l) || isNaN(v)) return null;
+            if(l > v) return '1'; if(l < v) return '2'; return 'X';
+        }
+
+        cachePronosticosParaEvaluar.forEach((prono, idx) => {
+            let ptsPuros = 0; let cx = 0; let cs = 0;
+            let objVisuales = [];
+
+            // 1. Partidos Normales
+            prono.partidos.forEach((p, i) => {
+                let prRes = `${p.local}-${p.visita}`;
+                let reRes = rPartidos[i];
+                let stat = "blanco";
+                
+                if(reRes && reRes !== "-") {
+                    if(prRes === reRes) { ptsPuros += 5; cx++; stat = "exacto"; }
+                    else if(getSigno(prRes) === getSigno(reRes)) { ptsPuros += 2; cs++; stat = "signo"; }
+                    else { stat = "fallo"; }
+                }
+                objVisuales.push({ matchText: `P${i+1}`, texto: prRes, stat: stat });
+            });
+
+            // 2. Bomba Garnacha
+            let p_bomba = 0; let bmStat = "blanco";
+            let bmProno = `${prono.bombaGarnacha.local}-${prono.bombaGarnacha.visita}`;
+            if(rBomba && rBomba !== "-") {
+                if(bmProno === rBomba) { p_bomba = 3; cx++; bmStat = "exacto"; }
+                else if(getSigno(bmProno) === getSigno(rBomba)) { p_bomba = 1; cs++; bmStat = "signo"; }
+                else { p_bomba = -1; bmStat = "fallo"; }
+            }
+            ptsPuros += p_bomba; // Sumamos la bomba a los puntos puros de jornada.
+
+            // 3. TroNpá!
+            let p_tronpa = 0; let trStat = "blanco";
+            let trBet = prono.tronpa.puntosJugados || 1;
+            let trAns = prono.tronpa.respuesta;
+            if(!isNaN(rTronpa)) {
+                if(trAns === rTronpa) { p_tronpa = trBet; trStat = "exacto"; }
+                else { p_tronpa = -trBet; trStat = "fallo"; }
+            }
+
+            // 4. Salseo Manual
+            let vEval = document.getElementById(`eval_val_${idx}`).value;
+            let iEval = document.getElementById(`eval_irl_${idx}`).value;
+            let sEval = document.getElementById(`eval_san_${idx}`).value;
+
+            // En provisional la valerinha da derecho a voto, NO da puntos directos todavía (eso es en la def).
+            let p_val = 0; 
+            
+            // Regla Irlinha: Acertar = +1
+            let p_irl = (iEval === "exacto") ? 1 : 0;
+            // Regla Santinha: Fallar = -1
+            let p_san = (sEval === "fallo") ? -1 : 0;
+
+            let baseScore = ptsPuros + p_tronpa; 
+            // total prov = base + salseo de la J actual (val = 0, irl, san)
+            let totalJ = baseScore + p_val + p_irl + p_san;
+
+            tablaProv.push({
+                nombre: prono.jugador,
+                c_exactos: cx,
+                c_signos: cs,
+                puntosPurosJornada: ptsPuros,
+                p_bomba: p_bomba,
+                p_tronpa: p_tronpa,
+                p_val: p_val,
+                p_irl: p_irl,
+                p_san: p_san,
+                base: baseScore,
+                totalJornadaProv: totalJ, // Para uso temporal
+                partidosVisuales: objVisuales,
+                trT: trAns, statTronpa: trStat,
+                bmT: bmProno, statBomba: bmStat,
+                valT: prono.preguntasAbiertas?.valerinha || "-", statVal: vEval,
+                irlT: prono.preguntasAbiertas?.irlinha || "-", statIrl: iEval,
+                sanT: prono.preguntasAbiertas?.santinha || "-", statSan: sEval
+            });
+        });
+
+        // Escribimos a Firebase
+        try {
+            const batchCol = collection(db, "provisional_jornada_" + jor);
+            await setDoc(doc(batchCol, "RESULTADOS_REALES"), {
+                partidos: rPartidos,
+                tronpa: rTronpa,
+                bomba: rBomba
+            });
+
+            for(let j of tablaProv) {
+                await setDoc(doc(batchCol, j.nombre), j);
+            }
+
+            log(`✅ Clasificación Provisional J${jor} generada en BD.`);
+            showMsg('msgProv', 'Provisional Publicada con Éxito.', 'success');
+        } catch(e) {
+            log(`❌ Error generando Provisional: ${e}`);
+            showMsg('msgProv', 'Error al publicar.', 'error');
+        }
+    });
+
+    // ==========================================
+    // PANEL 3: DEFINITIVA Y VOTOS
+    // ==========================================
+    let cacheProvisionalParaDefinitiva = [];
+    
+    document.getElementById('btnCargarVotos').addEventListener('click', async () => {
+        let jor = document.getElementById('defJornadaSelector').value;
+        log(`Cargando votos y provisional para J${jor}...`);
+
+        // Cargar votos
+        const vSnap = await getDocs(collection(db, "votos_valerinha_jornada_" + jor));
+        let htmlV = "";
+        vSnap.forEach(d => {
+            let v = d.data();
+            let icon = v.tipo === "sumar" ? "🛡️ Escudo (+)" : "⚔️ Ataque (-)";
+            htmlV += `<tr>
+                <td><strong>${d.id}</strong></td>
+                <td style="color:${v.tipo==='sumar'?'var(--accent-green)':'var(--accent-red)'}">${icon}</td>
+                <td>${v.objetivo || "-"}</td>
+                <td>${v.objetivo2 || "-"}</td>
+            </tr>`;
+        });
+        if(htmlV === "") htmlV = "<tr><td colspan='4' style='text-align:center;'>Nadie ha votado aún.</td></tr>";
+        document.getElementById('tablaVotosEmitidos').innerHTML = htmlV;
+        
+        // Pre-cargar provisional para tener la base matemática
+        cacheProvisionalParaDefinitiva = [];
+        const pSnap = await getDocs(collection(db, "provisional_jornada_" + jor));
+        pSnap.forEach(d => {
+            if(d.id !== "RESULTADOS_REALES" && d.id !== "GANADORES_JORNADA") {
+                cacheProvisionalParaDefinitiva.push(d.data());
+            }
+        });
+
+        document.getElementById('zonaVotosEmitidos').style.display = "block";
+        log(`Listo para calcular definitiva J${jor}.`);
+    });
+
+    document.getElementById('btnGenerarDefinitiva').addEventListener('click', async () => {
+        let jor = document.getElementById('defJornadaSelector').value;
+        if(cacheProvisionalParaDefinitiva.length === 0) return alert("Carga los votos primero o asegúrate de que hay provisional generada.");
+
+        if(!confirm("⚠️ VAS A CERRAR LA JORNADA. ¿Estás absolutamente seguro?")) return;
+        
+        log(`Iniciando cierre definitivo J${jor}...`);
+
+        // 1. Obtener los votos
+        let votosList = [];
+        const vSnap = await getDocs(collection(db, "votos_valerinha_jornada_" + jor));
+        vSnap.forEach(d => votosList.push({jugador: d.id, ...d.data()}));
+
+        // Convertir array provisional a un mapa para manipular fácil
+        let dictJugadores = {};
+        cacheProvisionalParaDefinitiva.forEach(j => { dictJugadores[j.nombre] = {...j}; });
+
+        // 2. ESCUDO ANTI-BULLYING (Matemática Valerinha)
+        let attacksCount = {};
+        listaOficialNombres.forEach(k => attacksCount[k] = 0);
+
+        // a) Procesar primero los que se blindan (+1 pt)
+        votosList.forEach(v => {
+            if(v.tipo === "sumar" && dictJugadores[v.jugador]) {
+                dictJugadores[v.jugador].p_val = 1;
+                dictJugadores[v.jugador].dec_val = "🛡️ +1 pt";
+            }
+        });
+
+        // b) Procesar ataques (-1 pt al objetivo, tope de 4)
+        votosList.forEach(v => {
+            if(v.tipo === "restar" && dictJugadores[v.jugador]) {
+                let t1 = v.objetivo;
+                let t2 = v.objetivo2;
+
+                if(t1 && attacksCount[t1] < 4 && dictJugadores[t1]) {
+                    attacksCount[t1]++;
+                    dictJugadores[t1].p_val = (dictJugadores[t1].p_val || 0) - 1;
+                    dictJugadores[v.jugador].dec_val = "⚔️ a " + t1;
+                } else if (t2 && attacksCount[t2] < 4 && dictJugadores[t2]) {
+                    attacksCount[t2]++;
+                    dictJugadores[t2].p_val = (dictJugadores[t2].p_val || 0) - 1;
+                    dictJugadores[v.jugador].dec_val = "⚔️ a " + t2 + " (Desvío)";
+                } else {
+                    dictJugadores[v.jugador].dec_val = "❌ Ataque bloqueado";
+                }
+            }
+        });
+
+        // 3. Histórico de la Jornada Anterior para sumar acumulados
+        let prevMap = {};
+        let jorAnt = parseInt(jor) - 1;
+        if(jorAnt > 0) {
+            const hSnap = await getDocs(collection(db, "clasificacion_general_jornada_" + jorAnt));
+            hSnap.forEach(d => { if(d.data().jugador) prevMap[d.data().jugador] = d.data(); });
+        }
+
+        // 4. Calcular Array Final Definitivo
+        let arrayDefinitivo = [];
+        Object.keys(dictJugadores).forEach(nom => {
+            let j = dictJugadores[nom];
+            let p = prevMap[nom] || {};
+            
+            // Recalcular total de jornada ahora con los votos valerinha aplicados
+            let p_val = Number(j.p_val) || 0; let p_irl = Number(j.p_irl) || 0; let p_san = Number(j.p_san) || 0;
+            let totJ = (Number(j.base) || 0) + p_val + p_irl + p_san;
+            
+            let obj = {
+                jugador: nom,
+                resultadosAcertados: (Number(p.resultadosAcertados) || 0) + (Number(j.c_exactos) || 0),
+                pronosticosAcertados: (Number(p.pronosticosAcertados) || 0) + (Number(j.c_signos) || 0),
+                puntosPurosAcumulados: (Number(p.puntosPurosAcumulados) || 0) + (Number(j.puntosPurosJornada) || 0),
+                puntosBombaGarnacha: (Number(p.puntosBombaGarnacha) || 0) + (Number(j.p_bomba) || 0),
+                puntosTronpa: (Number(p.puntosTronpa) || 0) + (Number(j.p_tronpa) || 0),
+                puntosValerinhas: (Number(p.puntosValerinhas) || 0) + p_val,
+                puntosIrlinhas: (Number(p.puntosIrlinhas) || 0) + p_irl,
+                puntosSantinhas: (Number(p.puntosSantinhas) || 0) + p_san,
+                puntosTotalesJornada: totJ,
+                puntosAcumulados: (Number(p.puntosAcumulados) || 0) + totJ,
+                gananciasAcumuladas: Number(p.gananciasAcumuladas) || 0, // Se actualizará abajo
+                
+                // Visuals carry over for UI
+                partidosVisuales: j.partidosVisuales || [],
+                trT: j.trT, statTronpa: j.statTronpa,
+                bmT: j.bmT, statBomba: j.statBomba,
+                valT: j.valT, statVal: j.statVal,
+                irlT: j.irlT, statIrl: j.statIrl,
+                sanT: j.sanT, statSan: j.statSan,
+                p_val: p_val, p_irl: p_irl, p_san: p_san,
+                dec_val: j.dec_val || "-"
+            };
+            arrayDefinitivo.push(obj);
+        });
+
+        // 5. CÁLCULO DE PREMIOS (5.80 Prov / 29.00 Def)
+        // Ganadores Provisionales (Basado en el totalProv que venía de caché, sin votos)
+        let maxProvPts = Math.max(...cacheProvisionalParaDefinitiva.map(j => Number(j.totalJornadaProv) || 0));
+        let ganadoresProv = cacheProvisionalParaDefinitiva.filter(j => (Number(j.totalJornadaProv) || 0) === maxProvPts).map(j => j.nombre);
+        let premioProv = 5.80 / ganadoresProv.length;
+
+        // Ganadores Definitivos (Con votos aplicados)
+        let maxDefPts = Math.max(...arrayDefinitivo.map(j => j.puntosTotalesJornada));
+        let ganadoresDef = arrayDefinitivo.filter(j => j.puntosTotalesJornada === maxDefPts).map(j => j.jugador);
+        let premioDef = 29.00 / ganadoresDef.length;
+
+        // Repartir dinero
+        arrayDefinitivo.forEach(j => {
+            if(ganadoresProv.includes(j.jugador)) j.gananciasAcumuladas += premioProv;
+            if(ganadoresDef.includes(j.jugador)) j.gananciasAcumuladas += premioDef;
+        });
+
+        // Crear Strings de ganadores para la UI
+        let textosGanadores = [];
+        let tAnt = prevMap["L'Ant"] ? (prevMap["GANADORES_JORNADA"]?.textos || []) : []; // Si quieres heredar, o puedes simplemente generar el de esta J. Mejor leer el doc GANADORES anterior si quieres histórico.
+        
+        let gpStr = ganadoresProv.join(', ');
+        let gdStr = ganadoresDef.join(', ');
+        let curWinStr = `J${jor}: Prov (${gpStr} +${premioProv.toFixed(2)}€) | Def (${gdStr} +${premioDef.toFixed(2)}€)`;
+
+        // Para mantener el histórico de textos, busco el de J-1
+        let textHistory = [];
+        if(jorAnt > 0) {
+            const winSnap = await getDoc(doc(db, "clasificacion_general_jornada_" + jorAnt, "GANADORES_JORNADA"));
+            if(winSnap.exists()) textHistory = winSnap.data().textos || [];
+        }
+        textHistory.push(curWinStr);
+
+        // 6. GUARDAR A BD
+        try {
+            const batchColD = collection(db, "clasificacion_general_jornada_" + jor);
+            await setDoc(doc(batchColD, "GANADORES_JORNADA"), { textos: textHistory });
+            
+            // Copiar los resultados reales de prov a def para que la UI no rompa
+            const rRealSnap = await getDoc(doc(db, "provisional_jornada_" + jor, "RESULTADOS_REALES"));
+            if(rRealSnap.exists()) await setDoc(doc(batchColD, "RESULTADOS_REALES"), rRealSnap.data());
+
+            for(let j of arrayDefinitivo) {
+                await setDoc(doc(batchColD, j.jugador), j);
+            }
+
+            log(`✅ CLASIFICACIÓN DEFINITIVA J${jor} CERRADA Y GUARDADA.`);
+            showMsg('msgDef', 'Jornada Cerrada y Premios Repartidos.', 'success');
+        } catch(e) {
+            log(`❌ Error generando Definitiva: ${e}`);
+            showMsg('msgDef', 'Error crítico al cerrar.', 'error');
+        }
+    });
+
+    // ==========================================
+    // PANEL 4: ESPECIALES
+    // ==========================================
+    document.getElementById('btnGuardarEstadoEsp').addEventListener('click', async () => {
+        let est = document.getElementById('espEstadoForm').value;
+        let dLim = document.getElementById('espFechaLimite').value;
+        try {
+            await setDoc(doc(db, "config_especiales", "general"), { estado: est, fechaLimite: dLim });
+            log(`Especiales configuradas a: ${est}`);
+        } catch(e) {}
+    });
+
+    document.querySelectorAll('.tab-btn[data-target="panel-especiales"]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            // Cargar respuestas de jugadores
+            const snap = await getDocs(collection(db, "pronosticos_especiales"));
+            if(snap.empty) {
+                document.getElementById('tablaEvaluacionEspeciales').innerHTML = "<tr><td colspan='4'>Nadie ha apostado aún.</td></tr>";
+                return;
+            }
+            let html = "";
+            let dataArr = [];
+            snap.forEach(d => dataArr.push({jug: d.id, ...d.data()}));
+            dataArr.sort((a,b) => a.jug.localeCompare(b.jug));
+
+            dataArr.forEach((d, idx) => {
+                let ansList = (d.respuestas || []).map((r, i) => `Q${i+1}: ${r}`).join(" | ");
+                html += `<tr>
+                    <td><strong>${d.jug}</strong></td>
+                    <td style="font-size:10px; color:var(--text-muted); max-width:300px; overflow-x:auto;">${ansList}</td>
+                    <td><input type="number" id="esp_aci_${idx}" data-jug="${d.jug}" value="0" style="width:60px; padding:5px;"></td>
+                    <td><input type="number" id="esp_pts_${idx}" value="0" style="width:60px; padding:5px; border-color:var(--accent-gold);"> pts</td>
+                </tr>`;
+            });
+            document.getElementById('tablaEvaluacionEspeciales').innerHTML = html;
+        });
+    });
+
+    document.getElementById('btnPublicarEspeciales').addEventListener('click', async () => {
+        if(!confirm("Esto publicará la resolución final de las Apuestas Especiales. ¿Proceder?")) return;
+        
+        let rows = document.querySelectorAll('#tablaEvaluacionEspeciales tr');
+        let resultados = {};
+        
+        rows.forEach((tr, i) => {
+            let iptAci = document.getElementById(`esp_aci_${i}`);
+            let iptPts = document.getElementById(`esp_pts_${i}`);
+            if(iptAci && iptPts) {
+                let jug = iptAci.getAttribute('data-jug');
+                // Al ser manual, no guardo evaluación por pregunta, solo el global
+                resultados[jug] = {
+                    aciertos: parseInt(iptAci.value) || 0,
+                    puntos: parseInt(iptPts.value) || 0,
+                    evaluaciones: [] // Para compatibilidad en index.html si itera
+                };
+            }
+        });
+
+        try {
+            await setDoc(doc(db, "config_especiales", "evaluacion"), { publicado: true, resultados: resultados });
+            log("✅ Apuestas Especiales Evaluadas y Publicadas.");
+            showMsg('msgEsp', 'Publicadas con éxito.', 'success');
+
+            // ⚠️ Opcional: Sumar a la tabla "FINAL_LIGA" si se requiere automatizar el sumatorio en bd.
+            log("Nota: Recuerda que los puntos de Especiales se suman visualmente en index.html si generas un script FINAL_LIGA.");
+        } catch(e) {
+            log("❌ Error publicando especiales: " + e);
+        }
+    });
+
+    // ==========================================
+    // PANEL 5: RESET
+    // ==========================================
+    document.getElementById('txtConfirmReset').addEventListener('input', (e) => {
+        document.getElementById('btnResetDB').disabled = (e.target.value !== "CONFIRMAR");
+    });
+
+    document.getElementById('btnResetDB').addEventListener('click', async () => {
+        if(!confirm("ÚLTIMO AVISO. SE BORRARÁN TODOS LOS DATOS.")) return;
+        log("Iniciando purga de la Base de Datos...");
+        
+        // Purga manual (Borrar colecciones en firebase web SDK es complejo por lotes,
+        // esto es una simulación de borrado de configuraciones clave para reiniciar app)
+        try {
+            for(let i=1; i<=38; i++) {
+                await deleteDoc(doc(db, "config_jornadas", "jornada_"+i));
+                await deleteDoc(doc(db, "clasificacion_general_jornada_"+i, "RESULTADOS_REALES"));
+                await deleteDoc(doc(db, "clasificacion_general_jornada_"+i, "GANADORES_JORNADA"));
+                await deleteDoc(doc(db, "provisional_jornada_"+i, "RESULTADOS_REALES"));
+            }
+            await deleteDoc(doc(db, "config_especiales", "general"));
+            await deleteDoc(doc(db, "config_especiales", "evaluacion"));
+            log("✅ Reset Completado Parcialmente (Colecciones principales limpias).");
+        } catch(e) {
+            log("❌ Error en reset: " + e);
+        }
+    });
+
+</script>
+</body>
+</html>
