@@ -133,7 +133,7 @@
 <div id="pantallaLogin">
     <div class="login-card">
         <div style="text-align: center; margin-bottom: 20px;">
-            <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="Mundial 2026" style="max-height: 120px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.5));">
+            <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="La Liga 26/27" style="max-height: 120px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.5));">
         </div>
         <h2 style="color:var(--accent-gold) !important; font-size:24px; margin-bottom: 5px;">LA LIGA 26/27</h2>
         <p style="margin-bottom: 25px; color:var(--text-muted) !important;">Identifícate para entrar a la liga</p>
@@ -184,7 +184,7 @@
       <!-- CABECERA -->
       <div class="top-header">
            <div style="text-align: center; width: 45px;">
-             <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="Mundial" style="width:100%; height:auto;">
+             <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="Liga" style="width:100%; height:auto;">
            </div>
            <h1 class="titulo-header">LA LIGA 26/27</h1>
           <div class="right-actions">
@@ -211,7 +211,7 @@
                   </div>
                   <div class="stat-box">
                       <span class="stat-value" id="uiPuntos">-</span>
-                      <span class="stat-label">Puntos</span>
+                      <span class="stat-label">Puntos Generales</span>
                   </div>
                   <div class="stat-box">
                       <span class="stat-value money" id="uiSaldo">0,00 €</span>
@@ -500,9 +500,9 @@
             <ul style="line-height: 1.6; font-size:13px; padding-left:20px; color:#d1d5db;">
               <li><strong>🔮 Valerinha:</strong> Si aciertas la pregunta, ganas el derecho a votar en la fase provisional. Puedes sumar los puntos a tu marcador (Blindaje) o restárselos a un rival (Ataque).
                   <br><br>🛡️ <em>Escudo Anti-Bullying:</em> Un jugador solo puede recibir un máximo de <strong>4 ataques</strong> por jornada. Si le atacan 5 o más personas, el sistema interviene: desvía el ataque de quien tenga a su "2ª opción" mejor clasificada en la general.
+                  <br><br>❌ <em>Castigo de Inactividad:</em> Si aciertas la pregunta de la Valerinha pero te olvidas de votar durante el plazo, se te restará 1 punto a ti mismo de forma automática.
               </li>
-              <li style="margin-top:8px;"><strong>🏃‍♂️ Irlinha:</strong> Solo se aplica si estás en la "zona baja" (a 4 puntos o menos del colista). Si aciertas la pregunta, sumas los puntos.</li>
-              <li style="margin-top:8px;"><strong>🇪🇸 Santinha:</strong> Solo se aplica si estás en la "zona alta" (a 4 puntos o menos del líder). ¡Cuidado! Si <strong>fallas</strong> la pregunta, restas los puntos.</li>
+              <li style="margin-top:8px;"><strong>🏃‍♂️ Irlinha & 🇪🇸 Santinha:</strong> Solo se aplican si estás en la zona baja o alta. <strong>Sus puntos afectan únicamente a la Clasificación General</strong>, no al total de la jornada en curso.</li>
             </ul>
           </div>
           
@@ -771,7 +771,13 @@
           else if (doc.id !== "GANADORES_JORNADA") listaProv.push(doc.data());
       });
 
-      if (Number(jorActualStr) <= 1) return listaProv;
+      if (Number(jorActualStr) <= 1) {
+          return listaProv.map(j => {
+              let p_val = Number(j.p_val) || 0; let p_irl = Number(j.p_irl) || 0; let p_san = Number(j.p_san) || 0;
+              let totJornada = (Number(j.base) || 0) + p_val;
+              return { ...j, totalJornada: totJornada, totalGeneral: totJornada + p_irl + p_san };
+          });
+      }
 
       try {
           let jorAnt = Number(jorActualStr) - 1;
@@ -788,13 +794,18 @@
               let ant = mapAnt[j.nombre];
               if (!ant) return j;
 
-              let p_val = Number(j.p_val) || 0; let p_irl = Number(j.p_irl) || 0; let p_san = Number(j.p_san) || 0;
-              let totJornada = (Number(j.base) || 0) + p_val + p_irl + p_san;
+              // REGLA LIGA: Irlinha y Santinha no afectan a totalJornada, pero sí a totalGeneral.
+              let p_val = Number(j.p_val) || 0; 
+              let p_irl = Number(j.p_irl) || 0; 
+              let p_san = Number(j.p_san) || 0;
+              
+              let totJornada = (Number(j.base) || 0) + p_val;
+              let totGeneral = (Number(ant.puntosAcumulados) || 0) + totJornada + p_irl + p_san;
               
               return {
                   ...j,
                   totalJornada: totJornada,
-                  totalGeneral: (Number(ant.puntosAcumulados) || 0) + totJornada,
+                  totalGeneral: totGeneral,
                   purosAcumulados: (Number(ant.puntosPurosAcumulados) || 0) + (Number(j.puntosPurosJornada) || 0),
                   c_exactos_gen: (Number(ant.resultadosAcertados) || 0) + (Number(j.c_exactos) || 0),
                   c_signos_gen: (Number(ant.pronosticosAcertados) || 0) + (Number(j.c_signos) || 0),
@@ -1124,7 +1135,7 @@
   }
 
   // ========================================================
-  // ✍️ ENVIAR PRONÓSTICOS
+  // ✍️ ENVIAR JORNADA Y VALERINHA
   // ========================================================
   document.getElementById('btnEnviar').addEventListener('click', async function() {
     if(esJornadaQuinielaCerrada) return alert("Acción denegada. Jornada cerrada.");
@@ -1265,7 +1276,6 @@
           let resultados = evalSnap.data().resultados; 
           let pregs = preguntasEspecialesGlobal;
           
-          // 🚨 CLASE .tabla-especiales PARA FIJAR SOLO LA 1ª COLUMNA (NOMBRE) 🚨
           let htmlM = `<div class="table-container-especiales"><table class="tabla-especiales"><thead><tr><th>Jugador</th>`; 
           pregs.forEach((p, i) => htmlM += `<th>Q${i+1}</th>`); 
           htmlM += `<th>Aciertos</th><th>Pts Extra</th></tr></thead><tbody>`;
@@ -1322,7 +1332,6 @@
          const allRespSnap = await getDocs(collection(db, "pronosticos_especiales"));
          
          if(!allRespSnap.empty) {
-            // 🚨 CLASE .tabla-especiales PARA FIJAR SOLO LA 1ª COLUMNA EN MODO LECTURA 🚨
             let htmlM = `<h3 style="color:white; text-align:center; margin-top:0;">📋 Apuestas Especiales Públicas</h3><div class="table-container-especiales"><table class="tabla-especiales"><thead><tr><th>Jugador</th>`;
             let arrayResp = []; 
             allRespSnap.forEach(d => arrayResp.push({jugador: d.id, resp: d.data().respuestas})); 
@@ -1413,7 +1422,6 @@
             pintarTablas(listaJugadores, "DEFINITIVA", cfgSnap.exists() ? cfgSnap.data() : {}, "EnJuego", prevMap); return;
         }
         
-        // 🌟 MERGE PROVISIONAL ACUMULATIVO REAL 🌟
         let listaJugadoresProv = await fetchAndMergeProvisional(jor);
         if (listaJugadoresProv && listaJugadoresProv.length > 0) {
             container.style.display = "none";
@@ -1484,7 +1492,6 @@
         return ((Number(b[sortBy] || 0)) - Number(b.puntosPurosAcumulados || 0)) - ((Number(a[sortBy] || 0)) - Number(a.puntosPurosAcumulados || 0)); 
     });
 
-    // 🌟 ORDENACIÓN MATRIZ RESULTADOS JORNADA (Izquierda a Derecha por puntos de la Jornada)
     let tablaJornada = [...tablaGeneral].sort((a, b) => {
         let diff = (Number(b.totalJornada) || 0) - (Number(a.totalJornada) || 0);
         return diff !== 0 ? diff : a.nombre.localeCompare(b.nombre);
@@ -1511,7 +1518,7 @@
       tdVa2 += `<td><span class="${valClass}">${valText}</span></td>`;
       
       let dVal = j.dec_val || "-"; 
-      let decClass = dVal.includes("🛡️") ? "exacto" : (dVal.includes("⚔️") ? "fallo" : ""); 
+      let decClass = dVal.includes("🛡️") ? "exacto" : (dVal.includes("⚔️") || dVal.includes("❌") ? "fallo" : ""); 
       tdVaDec += `<td><span class="${decClass}">${dVal}</span></td>`;
       tdIr += `<td><span class="${j.statIrl}">${j.irlT} (${j.p_irl})</span></td>`; 
       tdSa += `<td><span class="${j.statSan}">${j.sanT} (${j.p_san})</span></td>`; 
@@ -1537,11 +1544,10 @@
     let qSa = configJor.pregSantinha ? `<br><span style="font-size:8px; font-weight:normal; color:var(--text-muted); display:block; line-height:1; margin-top:2px;">${configJor.pregSantinha}</span>` : '';
 
     let txtTituloMatriz = containerPrefix === "EnJuego" ? `JORNADA ${jorStr} (Definitiva)` : `JORNADA ${jorStr}`;
-    let tabHTML = `<h2>📊 RESULTADOS ${txtTituloMatriz}</h2><div class="table-container-matriz"><table class="tabla-matriz"><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05);">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td>${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba Garnacha</strong>${qBm}</td><td>${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td>-</td> ${tdVa1} </tr><tr><td><strong>Ptos Valerinha</strong></td><td>-</td> ${tdVa2} </tr><tr><td><strong>Acción</strong></td><td>-</td> ${tdVaDec} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td>-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td>-</td> ${tdSa} </tr><tr><td><strong>TOTAL</strong></td><td>-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td>-</td> ${tdNomRow} </tr></tbody></table></div>`;
+    let tabHTML = `<h2>📊 RESULTADOS ${txtTituloMatriz}</h2><div class="table-container-matriz"><table class="tabla-matriz"><thead><tr><th>Partido</th><th style="background:rgba(255,255,255,0.05);">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td>${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba Garnacha</strong>${qBm}</td><td>${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td>-</td> ${tdVa1} </tr><tr><td><strong>Ptos Valerinha</strong></td><td>-</td> ${tdVa2} </tr><tr><td><strong>Acción</strong></td><td>-</td> ${tdVaDec} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td>-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td>-</td> ${tdSa} </tr><tr><td><strong>TOTAL JORNADA</strong></td><td>-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td>-</td> ${tdNomRow} </tr></tbody></table></div>`;
     
     document.getElementById('zonaTablero' + containerPrefix).innerHTML = tabHTML; document.getElementById('zonaTablero' + containerPrefix).style.display = "block";
     
-    // TABLA CLASIFICACIÓN GENERAL
     let htmlClasif = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th class="th-clasif">POS</th><th class="th-clasif">JUGADOR</th><th class="th-clasif" style="color:var(--accent-gold);">TOTAL GENERAL</th><th class="th-clasif">EXACTOS ACUM.</th><th class="th-clasif">PRONÓSTICOS ACUM.</th><th class="th-clasif">BOMBA ACUM.</th><th class="th-clasif">VALERINHAS ACUM.</th><th class="th-clasif">IRLINHAS ACUM.</th><th class="th-clasif">SANTINHAS ACUM.</th><th class="th-clasif">TroNpá! ACUM.</th>`;
     if(isHistorialDefinitivoGlobal) htmlClasif += `<th style="color:#f472b6;">Pts. EXTRA</th>`; 
     htmlClasif += `</tr></thead><tbody>`;
@@ -1562,7 +1568,7 @@
     htmlClasif += `</tbody></table></div>`; 
     
     if(containerPrefix === "Jugador") { 
-        document.getElementById('tituloClasificacionJugador').innerText = (jorStr === "DEFINITIVA") ? `🏆 CLASIFICACIÓN DEFINITIVA DEL MUNDIAL` : `🏆 CLASIFICACIÓN GENERAL ACUMULADA`; 
+        document.getElementById('tituloClasificacionJugador').innerText = (jorStr === "DEFINITIVA") ? `🏆 CLASIFICACIÓN DEFINITIVA DE LA LIGA` : `🏆 CLASIFICACIÓN GENERAL ACUMULADA`; 
         document.getElementById('tablaClasificacionJugador').innerHTML = htmlClasif; 
         document.getElementById('zonaClasificacionJugador').style.display = "block";
     } else if (containerPrefix === "EnJuego") { 
@@ -1578,7 +1584,7 @@
             if(ptsB !== ptsA) return ptsB - ptsA; 
             return (Number(b.c_exactos_gen) || 0) - (Number(a.c_exactos_gen) || 0); 
         });
-        let htmlPura = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-blue);">PUNTOS PUROS</th><th>EXACTOS</th><th>SIGNOS</th></tr></thead><tbody>`;
+        let htmlPura = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-blue);">PUNTOS (Solo Partidos)</th><th>EXACTOS</th><th>SIGNOS</th></tr></thead><tbody>`;
         tablaPura.forEach((j, idx) => { 
             let pts = j.purosAcumulados !== undefined ? j.purosAcumulados : j.puntosPurosAcumulados; 
             htmlPura += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td style="font-weight:bold; font-size:16px; color:var(--accent-blue);">${pts} pts</td><td>${j.c_exactos_gen||0}</td><td>${j.c_signos_gen||0}</td></tr>`; 
@@ -1601,7 +1607,6 @@
   function pintarProvisionalJugador(listaJugadores, jor, configJor = {}, containerPrefix = "Prov", prevRankingMap = {}) {
     let qTr = configJor.pregTronpa ? `<br><span>${configJor.pregTronpa}</span>` : '', qBm = configJor.pregBomba ? `<br><span>${configJor.pregBomba}</span>` : '', qVa = configJor.pregValerinha ? `<br><span>${configJor.pregValerinha}</span>` : '', qIr = configJor.pregIrlinha ? `<br><span>${configJor.pregIrlinha}</span>` : '', qSa = configJor.pregSantinha ? `<br><span>${configJor.pregSantinha}</span>` : '';
     
-    // ORDENACIÓN CLASIFICACIÓN GENERAL (Histórica acumulada tras el merge)
     let tablaGeneral = [...listaJugadores].sort((a, b) => {
         if(Number(b.totalGeneral || 0) !== Number(a.totalGeneral || 0)) return Number(b.totalGeneral || 0) - Number(a.totalGeneral || 0); 
         if(Number(b.c_exactos_gen || 0) !== Number(a.c_exactos_gen || 0)) return Number(b.c_exactos_gen || 0) - Number(a.c_exactos_gen || 0); 
@@ -1609,7 +1614,6 @@
         return ((Number(b.totalGeneral || 0)) - Number(b.purosAcumulados || 0)) - ((Number(a.totalGeneral || 0)) - Number(a.purosAcumulados || 0));
     }); 
     
-    // ORDENACIÓN MATRIZ RESULTADOS PROVISIONAL (Izquierda a Derecha por puntos de la Jornada)
     let tablaJornada = [...tablaGeneral].sort((a, b) => {
         let diff = (Number(b.totalJornada) || 0) - (Number(a.totalJornada) || 0);
         return diff !== 0 ? diff : a.nombre.localeCompare(b.nombre);
@@ -1628,14 +1632,13 @@
     let resPartidos = window.realResultsActuales?.partidos || [], resTronpa = window.realResultsActuales?.tronpa || "-", resBomba = window.realResultsActuales?.bomba || "-";
     let htmlPartidosTerminado = filasPartidos.map((f, i) => { 
         let lLoc = configJor.partidos?.[i]?.local || "", lVis = configJor.partidos?.[i]?.visita || "";
-        let lbl = configJor.partidos ? `<span style="white-space:nowrap">${equiposLiga[lLoc]||''} ${codigosLiga[lLoc]||lLoc.substring(0,3).toUpperCase()}</span> - <span style="white-space:nowrap">${equiposLiga[lVis]||''} ${codigosLiga[lVis]||lVis.substring(0,3).toUpperCase()}</span>` : `Partido ${i+1}`;
-        return `<tr><td><strong>${lbl}</strong></td><td style="background:rgba(0,0,0,0.5);">${resPartidos[i] || "-"}</td>${f}</tr>`; 
+        let lbl = `${equiposLiga[lLoc]||''} - ${equiposLiga[lVis]||''}`;
+        return `<tr><td><strong>${lbl}</strong></td><td>${resPartidos[i] || "-"}</td>${f}</tr>`; 
     }).join("");
     let tdNomRow = tablaJornada.map(j => `<td>${j.nombre}</td>`).join("");
 
-    let tabHTML = `<h2>📊 RESULTADOS JORNADA ${jor} (Provisional)</h2><div class="table-container-matriz"><table class="tabla-matriz"><thead><tr><th>Partido</th><th>R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td>${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba</strong>${qBm}</td><td>${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td>-</td> ${tdVa1} </tr><tr><td><strong>Ptos Valerinha</strong></td><td>-</td> ${tdVa2} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td>-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td>-</td> ${tdSa} </tr><tr><td><strong>TOTAL</strong></td><td>-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td>-</td> ${tdNomRow} </tr></tbody></table></div>`;
+    let tabHTML = `<h2>📊 RESULTADOS JORNADA ${jor} (Provisional)</h2><div class="table-container-matriz"><table class="tabla-matriz"><thead><tr><th>Partido</th><th>R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td>${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba</strong>${qBm}</td><td>${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td>-</td> ${tdVa1} </tr><tr><td><strong>Ptos Valerinha</strong></td><td>-</td> ${tdVa2} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td>-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td>-</td> ${tdSa} </tr><tr><td><strong>TOTAL JORNADA</strong></td><td>-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td>-</td> ${tdNomRow} </tr></tbody></table></div>`;
     
-    // CLASIFICACIÓN PROVISIONAL COMPLETA ACUMULADA
     let htmlClasif = `<div class="table-container-clasif"><table class="tabla-clasif"><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:var(--accent-gold);">TOTAL GENERAL</th><th>EXACTOS ACUM.</th><th>PRONÓSTICOS ACUM.</th><th>BOMBA ACUM.</th><th>VALERINHAS ACUM.</th><th>IRLINHAS ACUM.</th><th>SANTINHAS ACUM.</th><th>TroNpá! ACUM.</th></tr></thead><tbody>`; 
     tablaGeneral.forEach((j, idx) => { 
         let arrow = ""; 
