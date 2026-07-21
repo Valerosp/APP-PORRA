@@ -39,9 +39,9 @@
 <body>
 <div class="contenedor admin">
   <div style="text-align: center; margin-bottom: 10px;">
-    <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="La Liga" style="max-height: 100px; width: auto; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2));">
+    <img src="https://img.icons8.com/color/240/000000/trophy.png" alt="La Liga" style="max-height: 100px; width: auto; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2));">
   </div>
-  <h1>👑 Panel de Administrador - La Liga</h1>
+  <h1>👑 Panel de Administrador - La Liga 26/27</h1>
 
   <div class="menu-pestanas">
     <button id="btnTabAdmin0" class="pestana activa" style="background:#f39c12; color:white;">⚙️ 1. Preparar</button>
@@ -63,33 +63,34 @@
       <div class="fila" style="margin-bottom:15px;">
         <label style="font-weight:bold; color:#2c3e50;">Jornada a preparar:</label>
         <select id="jorConfig" style="width: 120px;">
-          <!-- JS llenará de 1 a 38 -->
+          <!-- 38 Jornadas generadas por JS -->
         </select>
+        <span style="font-size:12px; color:#7f8c8d; margin-left:10px;">Val/Irl/San valen los puntos configurados según normativa.</span>
       </div>
       
       <div class="grid-2-columnas">
         <div>
           <div class="fila"><label style="font-weight:bold; color:#2980b9;">⚽ Límite Pronósticos:</label><input type="datetime-local" id="fechaLimiteConfig" style="width: auto; padding: 5px;"></div>
           <div class="fila"><label style="font-weight:bold; color:#f39c12;">👑 Límite Valerinha:</label><input type="datetime-local" id="fechaLimiteValerinhaConfig" style="width: auto; padding: 5px;"></div>
-          <div class="fila" style="margin-top:15px;"><label style="font-weight:bold;">Nº Partidos:</label><input type="number" id="numPartidosConfig" value="10" min="1" max="15" style="width: 60px;"><button id="btnGenerarCajasPartidos" class="btn-secundario" style="background:#d35400; color:white; margin-left:10px;">Generar Partidos</button></div>
+          <div class="fila" style="margin-top:15px;"><label style="font-weight:bold;">Nº Partidos:</label><input type="number" id="numPartidosConfig" value="10" min="1" max="15" style="width: 60px;"><button id="btnGenerarCajasPartidos" class="btn-secundario" style="background:#d35400; color:white; margin-left:10px;">Generar Cajas</button></div>
         </div>
         <div style="background: #fdfefe; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
           <h3 style="margin-top:0; color:#27ae60; font-size:14px; border-bottom:1px solid #eee; padding-bottom:5px;">💰 Premios de la Jornada</h3>
           <div class="fila"><label>Ganador Provisional:</label><input type="number" id="premioProv" value="5.80" step="0.10" style="width:70px;"> €</div>
           <div class="fila"><label>Ganador Definitiva:</label><input type="number" id="premioDef" value="29.00" step="0.10" style="width:70px;"> €</div>
-          <h3 style="margin-top:15px; color:#8e44ad; font-size:14px; border-bottom:1px solid #eee; padding-bottom:5px;">🏆 Botes Globales (Fin de Liga)</h3>
+          <h3 style="margin-top:15px; color:#8e44ad; font-size:14px; border-bottom:1px solid #eee; padding-bottom:5px;">🏆 Botes Globales (Final Temporada)</h3>
           <div class="fila"><label>General Definitiva:</label><input type="number" id="premioGenDef" value="261.00" step="0.10" style="width:70px;"> <span id="lblSavedGenDef" style="font-size:11px; color:#7f8c8d; font-weight:bold; margin-left:5px;">(Guardado: 0€)</span></div>
           <div class="fila"><label>General Sin Historias:</label><input type="number" id="premioGenPura" value="98.60" step="0.10" style="width:70px;"> <span id="lblSavedGenPura" style="font-size:11px; color:#7f8c8d; font-weight:bold; margin-left:5px;">(Guardado: 0€)</span></div>
         </div>
       </div>
       <div id="cajasPartidosConfig" style="margin-top:20px;"></div>
       <div style="margin-top: 20px;">
-        <h3 style="color:#2c3e50; margin-bottom:10px; border-bottom:1px solid #ccc; padding-bottom:5px;">Preguntas de Salseo:</h3>
-        <label style="font-weight:bold;">🌩️ TroNpá!:</label><input type="text" id="pregTronpa" value="¿Cuántos goles en propia puerta habrá en la jornada?" style="width:100%; margin-bottom:10px; padding:6px;">
+        <h3 style="color:#2c3e50; margin-bottom:10px; border-bottom:1px solid #ccc; padding-bottom:5px;">Salseo de la Jornada:</h3>
+        <label style="font-weight:bold;">🌩️ TroNpá!:</label><input type="text" id="pregTronpa" placeholder="¿Cuántos goles habrá de penalti?" style="width:100%; margin-bottom:10px; padding:6px;">
         <label style="font-weight:bold;">💣 Bomba Garnacha (Indica equipos):</label><input type="text" id="pregBomba" placeholder="Ej: Real Madrid - FC Barcelona" style="width:100%; margin-bottom:10px; padding:6px;">
-        <label style="font-weight:bold;">🔮 Valerinha:</label><input type="text" id="pregValerinha" placeholder="Ej: ¿Marcará Iago Aspas?" style="width:100%; margin-bottom:10px; padding:6px;">
-        <label style="font-weight:bold;">🏃‍♂️ Irlinha:</label><input type="text" id="pregIrlinha" placeholder="Ej: ¿Habrá alguna tarjeta roja directa?" style="width:100%; margin-bottom:10px; padding:6px;">
-        <label style="font-weight:bold;">🇪🇸 Santinha:</label><input type="text" id="pregSantinha" placeholder="Ej: ¿Ganará el Athletic por más de 1 gol?" style="width:100%; margin-bottom:10px; padding:6px;">
+        <label style="font-weight:bold;">🔮 Valerinha:</label><input type="text" id="pregValerinha" placeholder="Ej: ¿Marcará Lewandowski?" style="width:100%; margin-bottom:10px; padding:6px;">
+        <label style="font-weight:bold;">🏃‍♂️ Irlinha:</label><input type="text" id="pregIrlinha" placeholder="Ej: ¿Habrá tarjeta roja en el derbi?" style="width:100%; margin-bottom:10px; padding:6px;">
+        <label style="font-weight:bold;">🇪🇸 Santinha:</label><input type="text" id="pregSantinha" placeholder="Ej: ¿Dejará el Atleti la portería a cero?" style="width:100%; margin-bottom:10px; padding:6px;">
       </div>
       <button id="btnGuardarConfig" class="btn-principal" style="background:#f39c12; margin-top:20px;">💾 Guardar Configuración de Jornada</button>
     </div>
@@ -98,7 +99,10 @@
   <!-- MENU 2: PROVISIONAL -->
   <div id="vistaAdmin1" style="display: none;">
     <div class="tarjeta" style="background: #e8f4f8; border-left: 5px solid #2980b9;">
-      <h2 style="color: #2980b9; margin-top:0;">📝 Generar Clasificación Provisional</h2>
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 15px;">
+        <h2 style="color: #2980b9; margin:0;">📝 Generar Provisional</h2>
+        <div style="background:#2980b9; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; font-size:14px;">Última cerrada: J<span id="lblUltimaCerrada">-</span></div>
+      </div>
       <div class="fila">
         <label style="font-weight: bold; color: #2980b9;">📅 Jornada en juego:</label>
         <select id="numJornadaCorregir" style="width: 120px;"></select>
@@ -108,7 +112,7 @@
     
     <div id="zonaResultadosReales" class="tarjeta" style="display:none;">
       <h2 style="color:#2c3e50;">1️⃣ Introducir Resultados Reales</h2>
-      <p style="font-size:13px; color:#7f8c8d;">Introduce los goles que se vayan marcando. Puedes guardar y volver más tarde a cargar los nuevos.</p>
+      <p style="font-size:13px; color:#7f8c8d; margin-top:0;">Puedes introducirlos poco a poco e ir guardando. Si lo dejas en blanco, no computará ese partido.</p>
       <div id="contenedorPartidosReales"></div>
       <div class="fila" style="margin-top:15px; background:#f9f9f9; padding:10px; border-radius:5px;"><label style="font-weight:bold;">🌩️ TroNpá! (Goles PP reales):</label><input type="number" id="realTronpa" min="0" style="width:70px;"></div>
       <div class="fila" style="background:#f9f9f9; padding:10px; border-radius:5px; margin-top:5px;"><label style="font-weight:bold;">💣 Bomba Garnacha (Resultado real):</label><input type="number" id="realBombaL" min="0" style="width:50px;"> - <input type="number" id="realBombaV" min="0" style="width:50px;"></div>
@@ -142,8 +146,8 @@
     
     <div id="zonaPaso4" style="display:none; margin-top: 20px; padding: 20px; border: 3px dashed #27ae60; background: #f0fdf4;">
       <h2 style="color: #27ae60; margin-top:0; text-align:center;">Votos Descargados</h2>
-      <div id="tablaVisualVotosAdmin" style="margin-bottom:20px; background:white; padding:10px; border:1px solid #ccc;"></div>
-      
+      <div id="tablaVisualVotosAdmin" style="margin-bottom:20px; background:white; padding:10px; border:1px solid #ccc; font-size:13px; max-height:200px; overflow-y:auto;"></div>
+      <p style="font-size:13px; color:#2c3e50; font-weight:bold;">⚠️ La Irlinha y Santinha SÓLO sumarán en el Histórico General, sin adulterar los puntos de la jornada.</p>
       <button id="btnPaso4" class="btn-principal" style="background: #27ae60;">🏆 Calcular Clasificación DEFINITIVA (Simulación)</button>
       <button id="btnGuardarGeneral" class="btn-principal" style="margin-top: 15px; background: #e67e22; display: none;">💾 Guardar Cierre Oficial en Firebase</button>
     </div>
@@ -156,8 +160,7 @@
       <div class="fila" style="margin-top: 10px;">
         <label style="font-weight:bold;">Seleccionar Clasificación:</label>
         <select id="jorConsultaAdmin" style="width: 140px; padding:4px;">
-          <!-- JS llenará de 1 a 38 -->
-          <option value="DEFINITIVA" style="font-weight:bold; color:#e84393;">DEFINITIVA (Final de Liga)</option>
+          <!-- JS autocompletará con la de DEFINITIVA FINAL -->
         </select>
         <button id="btnConsultarAdmin" class="btn-secundario" style="background: #8e44ad; color: white;">Cargar Tablas</button>
       </div>
@@ -187,11 +190,17 @@
     <div class="tarjeta" style="background: #ebf5fb; border-left: 5px solid #2c3e50;">
       <h2 style="color: #2c3e50; margin-top:0;">📡 Panel de Control y Envíos</h2>
       <div class="fila">
-        <label style="font-weight:bold;">Monitorear Jornada:</label>
+        <label>Monitorear Jornada:</label>
         <select id="numJornadaControl" style="width: 120px;"></select>
         <button id="btnCargarControl" class="btn-secundario" style="background:#2c3e50; color:white;">Cargar Sincronización</button>
       </div>
-      <div id="txtEstadoPublicacion" style="margin-top:10px; font-weight:bold; font-size:14px; color:#e74c3c;"></div>
+      <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button id="btnPublicarPronosticos" class="btn-secundario" style="background:#27ae60; color:white;">👁️ Publicar Jornada (Abrir Candados)</button>
+        <button id="btnOcultarPronosticos" class="btn-secundario" style="background:#e74c3c; color:white;">🔒 Ocultar Jornada</button>
+        <button id="btnBorrarJornada" class="btn-secundario" style="background:#e67e22; color:white;">🗑️ Borrar Apuestas Recibidas</button>
+        <button id="btnEliminarConfigJornada" class="btn-secundario" style="background:#c0392b; color:white;">❌ Eliminar Configuración Jornada</button>
+      </div>
+      <div id="txtEstadoPublicacion" style="margin-top:10px; font-weight:bold; font-size:14px; color:#2c3e50;"></div>
     </div>
     
     <div id="zonaTablaControl" style="margin-top:20px; display:none; overflow-x:auto;">
@@ -199,38 +208,31 @@
       <table id="tablaChivatosBase"></table>
     </div>
 
-    <!-- ACCIONES MASIVAS -->
-    <div class="tarjeta" style="margin-top:30px; background:#fff; border:1px solid #ccc;">
-        <h3 style="margin-top:0; color:#2c3e50;">Acciones de la Jornada Seleccionada</h3>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button id="btnPublicarPronosticos" class="btn-secundario" style="background:#27ae60; color:white;">👁️ Publicar Pronósticos (Pitido Inicial)</button>
-            <button id="btnOcultarPronosticos" class="btn-secundario" style="background:#e74c3c; color:white;">🔒 Ocultar Pronósticos</button>
-            <button id="btnBorrarJornada" class="btn-secundario" style="background:#e67e22; color:white;">🗑️ Borrar Resultados Enviados</button>
-            <button id="btnEliminarConfigJornada" class="btn-secundario" style="background:#c0392b; color:white;">❌ Eliminar Configuración de Jornada</button>
-        </div>
-    </div>
-
-    <!-- MODIFICAR PLAZOS -->
     <div class="tarjeta" style="background: #fffde7; border-left: 5px solid #f1c40f; margin-top:20px;">
-        <h2 style="color: #d35400; margin-top:0;">⏰ Modificar Plazos</h2>
+        <h2 style="color: #d35400; margin-top:0;">⏰ Modificar Plazos de la Jornada</h2>
         <div class="fila">
-            <label style="font-weight:bold;">Jornada a modificar:</label>
+            <label>Jornada:</label>
             <select id="numJornadaPlazos" style="width: 120px;"></select>
-            <button id="btnCargarPlazos" class="btn-secundario" style="background:#f39c12; color:white;">Cargar Horarios Actuales</button>
+            <button id="btnCargarPlazos" class="btn-secundario" style="background:#f39c12; color:white;">Cargar Plazos</button>
         </div>
         <div id="zonaEditarPlazos" style="display:none; margin-top:15px; border-top:1px solid #ccc; padding-top:15px;">
             <div class="grid-2-columnas">
-                <div><label style="font-weight:bold;">⚽ Nuevo Límite Pronósticos:</label><input type="datetime-local" id="editLimiteJornada"></div>
-                <div><label style="font-weight:bold;">👑 Nuevo Límite Valerinha:</label><input type="datetime-local" id="editLimiteValerinha"></div>
+                <div><label style="font-weight:bold;">⚽ Límite Pronósticos:</label><input type="datetime-local" id="editLimiteJornada"></div>
+                <div><label style="font-weight:bold;">👑 Límite Valerinha:</label><input type="datetime-local" id="editLimiteValerinha"></div>
             </div>
-            <button id="btnGuardarPlazos" class="btn-principal" style="background:#f39c12;">💾 Actualizar Plazos en Vivo</button>
+            <button id="btnGuardarPlazos" class="btn-principal" style="background:#f39c12;">💾 Actualizar Plazos</button>
         </div>
     </div>
+    
+    <div class="tarjeta" style="background: #eafaf1; border-left: 5px solid #2ecc71; text-align:center; margin-top:20px;">
+        <h2 style="color: #27ae60; margin-top:0;">🔓 Apertura de Valerinhas Manual</h2>
+        <p style="font-size:13px; color:#2c3e50;">Abre la veda para que los jugadores puedan lanzar sus Valerinhas si la jornada Provisional ya ha sido publicada.</p>
+        <button id="btnFuerzaAbrirVotos" class="btn-principal" style="background:#27ae60; width:auto; padding:10px 20px;">ABRIR VOTACIONES VALERINHA DE ESTA JORNADA</button>
+    </div>
 
-    <!-- ZONA PELIGRO -->
     <div class="tarjeta" style="background: #fdf2e9; border-left: 5px solid #e74c3c; text-align:center; margin-top:40px;">
         <h2 style="color: #e74c3c; margin-top:0;">☢️ ZONA DE PELIGRO</h2>
-        <p style="font-size:13px; color:#c0392b;">Este botón borrará absolutamente <strong>TODOS</strong> los datos de la liga (Apuestas, usuarios, 38 jornadas y premios). Solo usar al crear una liga nueva.</p>
+        <p style="font-size:13px; color:#c0392b;">Este botón borrará absolutamente <strong>TODOS</strong> los datos de La Liga (Apuestas, usuarios, jornadas y premios). Solo usar al principio de Temporada.</p>
         <button id="btnResetLiga" class="btn-principal" style="background:#c0392b; width:auto; padding:15px 30px;">🔥 RESETEAR LIGA DESDE CERO 🔥</button>
     </div>
   </div>
@@ -238,38 +240,37 @@
   <!-- MENU 6: ESPECIALES -->
   <div id="vistaAdmin5" style="display:none;">
     <div class="tarjeta" style="background: #fce4ec; border-left: 5px solid #e84393;">
-      <h2 style="color: #e84393; margin-top:0;">⭐ Configurar Apuestas Especiales</h2>
-      <p style="font-size:13px; color:#7f8c8d;">Las 11 preguntas de final de temporada ya están listas. Decide el plazo.</p>
-      
+      <h2 style="color: #e84393; margin-top:0;">⭐ Configurar Apuestas Especiales (Pre-Temporada)</h2>
+      <p style="font-size:13px; color:#7f8c8d;">Las 11 preguntas globales ya están integradas. Decide los plazos.</p>
       <div class="fila" style="margin-top:15px; background:white; padding:10px; border-radius:5px; border:1px solid #ddd;">
           <label style="font-weight:bold; color:#e84393;">⏰ Fecha Límite Especiales:</label>
           <input type="datetime-local" id="limiteEspecialesConfig" style="width:auto; padding:5px;">
       </div>
-      
       <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap;">
         <button id="btnAbrirEspeciales" class="btn-secundario" style="background:#27ae60; color:white; padding:12px; font-size:14px;">👁️ Abrir Plazo Jugadores</button>
-        <button id="btnCerrarEspeciales" class="btn-secundario" style="background:#e67e22; color:white; padding:12px; font-size:14px;">🔒 Cerrar Plazo (Forzado)</button>
+        <button id="btnCerrarEspeciales" class="btn-secundario" style="background:#c0392b; color:white; padding:12px; font-size:14px;">🔒 Cerrar Plazo (Forzado)</button>
       </div>
     </div>
     
     <div class="tarjeta" style="background: #ebf5fb; border-left: 5px solid #2980b9;">
       <h2 style="color: #2980b9; margin-top:0;">📊 Respuestas de Jugadores</h2>
       <button id="btnCargarRespuestasEspeciales" class="btn-secundario" style="background:#2980b9; color:white;">Cargar Respuestas Recibidas</button>
-      <button id="btnPublicarVisEspeciales" class="btn-secundario" style="background:#8e44ad; color:white; display:none; margin-left:10px;">👁️ Hacer Respuestas Públicas</button>
-      
       <div id="zonaRespuestasEspeciales" style="margin-top:20px; display:none; overflow-x:auto;">
          <table id="tablaChivatosEspeciales"></table>
-         <button id="btnBorrarTodasEspeciales" class="btn-secundario" style="background:#c0392b; color:white; margin-top:15px;">🗑️ Borrar TODAS las respuestas</button>
+         <div style="margin-top: 15px; display:flex; gap:10px;">
+             <button id="btnPublicarVisEspeciales" class="btn-secundario" style="background:#8e44ad; color:white;">👁️ Hacer Públicas para Lectura</button>
+             <button id="btnBorrarTodasEspeciales" class="btn-secundario" style="background:#c0392b; color:white;">🗑️ Borrar TODAS</button>
+         </div>
       </div>
     </div>
 
     <div class="tarjeta" style="background: #fffaf0; border-left: 5px solid #f39c12; margin-top:20px;">
         <h2 style="color: #d35400; margin-top:0;">⚖️ Evaluación Final (Jornada 38 Terminada)</h2>
         <p style="font-size:13px; color:#7f8c8d;">Solo usa esto cuando haya terminado la Jornada 38 de La Liga.</p>
-        <button id="btnEvaluarEspecialesMenu" class="btn-principal" style="background:#f39c12;">Iniciar Evaluación de Fin de Temporada</button>
+        <button id="btnEvaluarEspecialesMenu" class="btn-principal" style="background:#f39c12;">Iniciar Evaluación Manual de Fin de Temporada</button>
         
         <div id="zonaEvaluacionEspeciales" style="display:none; margin-top:20px; border-top:1px solid #ccc; padding-top:20px;">
-            <p style="font-size:14px; font-weight:bold; color:#e84393;">Para evitar errores ortográficos, evalúa visualmente y asigna los puntos totales manualmente a cada jugador.</p>
+            <p style="font-size:14px; font-weight:bold; color:#e84393;">Revisa visualmente y asigna los Aciertos y Puntos totales a cada jugador para evitar errores de escritura.</p>
             <div id="tablaEvaluacionManualEspeciales" style="overflow-x:auto;"></div>
             
             <button id="btnVisualizarEspeciales" class="btn-secundario" style="background:#2980b9; color:white; margin-top:15px;">🔍 Previsualizar Puntuaciones</button>
@@ -303,92 +304,40 @@
   const listaOficialNombres = ["L'Ant", "Barri", "Alberto", "Gonxi", "Héctor", "Irles", "Bambino", "Tron", "Sants", "Valer", "Víctor", "Dardos", "Bicho", "Vinxi", "Mazon", "Junior", "Txus", "Ors", "Pech", "Manolo", "Gil", "Pampli", "Jaime", "Martos", "Raúl", "Boque", "Isi", "Fran", "Kevin"];
   
   const preguntasEspecialesGlobal = [ 
-      "Campeón de La Liga", 
-      "Equipos de Champions", 
-      "Último clasificado", 
-      "Equipos Descenso", 
-      "Pichichi", 
-      "Zamora", 
-      "Zarra", 
-      "Primer Entrenador Destituido", 
-      "1º Puntos Puros", 
-      "Último Puntos Puros", 
-      "Campeón Copa del Rey" 
+      "Campeón de La Liga", "Equipos de Champions", "Último clasificado", "Equipos Descenso", "Pichichi", "Zamora", "Zarra", "Primer Entrenador Destituido", "1º Puntos Puros", "Último Puntos Puros", "Campeón Copa del Rey" 
   ];
 
   let datosGlobales = []; let jugadoresProvisionales = []; let configJornadaActual = null;
   let historicoGeneral = {}; let historicoGanancias = {}; window.ganadoresProv = []; window.ganadoresDef = []; window.textosEstaJornada = [];
   let puntosPrimeroGenTrasVal = 0; let puntosUltimoGenTrasVal = 0; let evaluacionEspecialesMemoria = {};
 
-  // ==========================================
-  // INICIALIZACIÓN Y CARGA DE SELECTORES
-  // ==========================================
   window.addEventListener('DOMContentLoaded', async () => {
     try {
       const prizeSnap = await getDoc(doc(db, "config_premios", "globales"));
-      if (prizeSnap.exists()) { 
-          let pd = prizeSnap.data(); 
-          document.getElementById('premioGenDef').value = pd.genDef || 261.00; 
-          document.getElementById('premioGenPura').value = pd.genPura || 98.60; 
-          document.getElementById('lblSavedGenDef').innerText = `(Guardado: ${pd.genDef || 261.00}€)`; 
-          document.getElementById('lblSavedGenPura').innerText = `(Guardado: ${pd.genPura || 98.60}€)`; 
-      }
+      if (prizeSnap.exists()) { let pd = prizeSnap.data(); document.getElementById('premioGenDef').value = pd.genDef || 261.00; document.getElementById('premioGenPura').value = pd.genPura || 98.60; document.getElementById('lblSavedGenDef').innerText = `(Guardado: ${pd.genDef || 261.00}€)`; document.getElementById('lblSavedGenPura').innerText = `(Guardado: ${pd.genPura || 98.60}€)`; }
       
       const espSnap = await getDoc(doc(db, "config_especiales", "general"));
-      if (espSnap.exists() && espSnap.data().fechaLimite) { 
-          document.getElementById('limiteEspecialesConfig').value = espSnap.data().fechaLimite; 
-      }
+      if (espSnap.exists() && espSnap.data().fechaLimite) { document.getElementById('limiteEspecialesConfig').value = espSnap.data().fechaLimite; }
 
-      let opts = "";
-      for(let i=1; i<=38; i++) opts += `<option value="${i}">Jornada ${i}</option>`;
-      ['jorConfig', 'numJornadaCorregir', 'numJornadaFinal', 'numJornadaControl', 'numJornadaPlazos'].forEach(id => {
-          if(document.getElementById(id)) document.getElementById(id).innerHTML = opts;
-      });
-      document.getElementById('jorConsultaAdmin').innerHTML = opts + `<option value="DEFINITIVA" style="font-weight:bold; color:#e84393;">DEFINITIVA (Final de Liga)</option>`;
+      let optJor = ""; for(let i=1; i<=38; i++) { optJor += `<option value="${i}">Jornada ${i}</option>`; }
+      ['jorConfig', 'numJornadaCorregir', 'numJornadaFinal', 'numJornadaControl', 'numJornadaPlazos'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).innerHTML = optJor; });
+      document.getElementById('jorConsultaAdmin').innerHTML = optJor + `<option value="DEFINITIVA" style="font-weight:bold; color:#e84393;">DEFINITIVA (Final Liga)</option>`;
 
-      const snapConfig = await getDocs(collection(db, "config_jornadas")); 
-      let maxJor = 0; 
-      snapConfig.forEach(doc => { 
-          let parts = doc.id.split("_"); 
-          if(parts.length === 2 && !isNaN(parts[1])) { 
-              let num = parseInt(parts[1]); 
-              if(num > maxJor) maxJor = num; 
-          } 
-      });
-      
-      if(maxJor > 0) { 
-          document.getElementById('lblUltimaConfig').innerText = maxJor; 
-          ['jorConfig', 'numJornadaCorregir', 'numJornadaFinal', 'numJornadaControl', 'numJornadaPlazos'].forEach(id => { 
-              if(document.getElementById(id)) { 
-                  document.getElementById(id).value = (maxJor < 38 && id === 'jorConfig') ? maxJor + 1 : maxJor; 
-              } 
-          }); 
-      }
+      const snapConfig = await getDocs(collection(db, "config_jornadas")); let maxJor = 0; snapConfig.forEach(doc => { let parts = doc.id.split("_"); if(parts.length === 2 && !isNaN(parts[1])) { let num = parseInt(parts[1]); if(num > maxJor) maxJor = num; } });
+      if(maxJor > 0) { document.getElementById('lblUltimaConfig').innerText = maxJor; ['jorConfig', 'numJornadaCorregir', 'numJornadaFinal', 'numJornadaControl', 'numJornadaPlazos'].forEach(id => { if(document.getElementById(id)) { document.getElementById(id).value = maxJor < 38 && id === 'jorConfig' ? maxJor + 1 : maxJor; } }); }
       
       let jorCerrada = 0; 
       const snapFinal = await getDocs(collection(db, "clasificacion_general_FINAL_LIGA"));
-      if(!snapFinal.empty) { 
-          jorCerrada = "DEFINITIVA"; 
-      } else {
-          for(let i = 38; i >= 1; i--) { 
-              const snapGen = await getDocs(collection(db, "clasificacion_general_jornada_" + i)); 
-              if(!snapGen.empty) { jorCerrada = i; break; } 
-          }
+      if(!snapFinal.empty) { jorCerrada = "DEFINITIVA"; }
+      else {
+          for(let i = 38; i >= 1; i--) { const snapGen = await getDocs(collection(db, "clasificacion_general_jornada_" + i)); if(!snapGen.empty) { jorCerrada = i; break; } }
       }
-      if(jorCerrada !== 0) { 
-          document.getElementById('lblUltimaCerrada').innerText = jorCerrada; 
-          let selAdmin = document.getElementById('jorConsultaAdmin'); 
-          if(selAdmin) selAdmin.value = jorCerrada; 
-      }
+      if(jorCerrada !== 0) { document.getElementById('lblUltimaCerrada').innerText = jorCerrada; let selAdmin = document.getElementById('jorConsultaAdmin'); if(selAdmin) { selAdmin.value = jorCerrada; } }
       
       document.getElementById('btnGenerarCajasPartidos').click();
-      
-    } catch(e) { console.warn("Aviso carga inicial:", e); }
+    } catch(e) {}
   });
 
-  // ==========================================
-  // FUNCIONES MATEMÁTICAS NÚCLEO
-  // ==========================================
   function obtenerSigno(gL, gV) { if (gL > gV) return "1"; if (gL < gV) return "2"; return "X"; }
   function getStatus(rL, rV, pL, pV) { 
       if (rL === "" || rV === "" || isNaN(rL) || isNaN(rV)) return "blanco";
@@ -417,33 +366,20 @@
     emps = emps.filter(j => (Number(j.pronosticosAcertados) || 0) === maxSig); 
     if(emps.length === 1) return emps.map(j => j.jugador || j.nombre);
     
-    let maxResto = Math.max(...emps.map(j => (Number(j.puntosFinalesMundial || j.puntosAcumulados) || 0) - (Number(j.puntosPurosAcumulados) || 0)));
-    emps = emps.filter(j => ((Number(j.puntosFinalesMundial || j.puntosAcumulados) || 0) - (Number(j.puntosPurosAcumulados) || 0)) === maxResto); 
+    let maxResto = Math.max(...emps.map(j => (Number(j.puntosFinalesMundial || j.puntosFinalesLiga || j.puntosAcumulados) || 0) - (Number(j.puntosPurosAcumulados) || 0)));
+    emps = emps.filter(j => ((Number(j.puntosFinalesMundial || j.puntosFinalesLiga || j.puntosAcumulados) || 0) - (Number(j.puntosPurosAcumulados) || 0)) === maxResto); 
     return emps.map(j => j.jugador || j.nombre);
   }
 
   function obtenerGanadoresDesempate(jugadores, campoPuntos) {
     if(jugadores.length === 0) return [];
-    let maxPts = Math.max(...jugadores.map(j => Number(j[campoPuntos]))); 
-    let emps = jugadores.filter(j => Number(j[campoPuntos]) === maxPts); 
-    if(emps.length === 1) return emps.map(j => j.nombre);
-    
-    let maxEx = Math.max(...emps.map(j => Number(j.c_exactos))); 
-    emps = emps.filter(j => Number(j.c_exactos) === maxEx); 
-    if(emps.length === 1) return emps.map(j => j.nombre);
-    
-    let maxSig = Math.max(...emps.map(j => Number(j.c_signos))); 
-    emps = emps.filter(j => Number(j.c_signos) === maxSig); 
-    if(emps.length === 1) return emps.map(j => j.nombre);
-    
+    let maxPts = Math.max(...jugadores.map(j => j[campoPuntos])); let emps = jugadores.filter(j => j[campoPuntos] === maxPts); if(emps.length === 1) return emps.map(j => j.nombre);
+    let maxEx = Math.max(...emps.map(j => j.c_exactos)); emps = emps.filter(j => j.c_exactos === maxEx); if(emps.length === 1) return emps.map(j => j.nombre);
+    let maxSig = Math.max(...emps.map(j => j.c_signos)); emps = emps.filter(j => j.c_signos === maxSig); if(emps.length === 1) return emps.map(j => j.nombre);
     emps.forEach(j => { j.esp_acertadas = (j.statTronpa === "exacto" ? 1 : 0) + (j.p_bomba > 0 ? 1 : 0) + (j.statVal === "exacto" ? 1 : 0) + (j.statIrl === "exacto" ? 1 : 0) + (j.statSan === "exacto" ? 1 : 0); });
-    let maxEsp = Math.max(...emps.map(j => j.esp_acertadas)); 
-    return emps.filter(j => j.esp_acertadas === maxEsp).map(j => j.nombre);
+    let maxEsp = Math.max(...emps.map(j => j.esp_acertadas)); return emps.filter(j => j.esp_acertadas === maxEsp).map(j => j.nombre);
   }
 
-  // ==========================================
-  // CONTROL DE PESTAÑAS
-  // ==========================================
   function switchTab(id) {
     ['vistaAdmin0', 'vistaAdmin1', 'vistaAdmin2', 'vistaAdmin3', 'vistaAdmin4', 'vistaAdmin5'].forEach(v => document.getElementById(v).style.display = 'none');
     ['btnTabAdmin0', 'btnTabAdmin1', 'btnTabAdmin2', 'btnTabAdmin3', 'btnTabAdmin4', 'btnTabAdmin5'].forEach(b => { document.getElementById(b).classList.remove('activa'); document.getElementById(b).style.background = "#bdc3c7"; document.getElementById(b).style.color = "#2c3e50"; });
@@ -454,96 +390,30 @@
   }
   document.getElementById('btnTabAdmin0').addEventListener('click', () => switchTab(0)); document.getElementById('btnTabAdmin1').addEventListener('click', () => switchTab(1)); document.getElementById('btnTabAdmin2').addEventListener('click', () => switchTab(2)); document.getElementById('btnTabAdmin3').addEventListener('click', () => switchTab(3)); document.getElementById('btnTabAdmin4').addEventListener('click', () => switchTab(4)); document.getElementById('btnTabAdmin5').addEventListener('click', () => switchTab(5));
 
-  // ==========================================
-  // MENU 1: PREPARAR JORNADA
-  // ==========================================
   document.getElementById('btnGenerarCajasPartidos').addEventListener('click', () => {
-    let num = parseInt(document.getElementById('numPartidosConfig').value); 
-    if(num < 1 || num > 15) return alert("El número de partidos debe ser entre 1 y 15");
-    let html = ""; let opcionesEquipos = `<option value="">-- Selecciona Equipo --</option>`;
-    Object.keys(equiposLiga).sort().forEach(eq => { opcionesEquipos += `<option value="${eq}">${equiposLiga[eq]} ${eq}</option>`; });
-    for(let i=0; i<num; i++) { 
-        html += `<div class="fila" style="margin-bottom:12px; background:#fdfefe; padding:8px; border-radius:6px; border:1px solid #ddd;">
-        <label style="font-weight:bold; width:80px;">Partido ${i+1}:</label>
-        <select id="confPL_${i}" style="width:200px;">${opcionesEquipos}</select> vs <select id="confPV_${i}" style="width:200px;">${opcionesEquipos}</select>
-        </div>`; 
-    }
+    let num = parseInt(document.getElementById('numPartidosConfig').value); let html = ""; let opcionesPaises = `<option value="">-- Selecciona Equipo --</option>`;
+    Object.keys(equiposLiga).sort().forEach(pais => { opcionesPaises += `<option value="${pais}">${equiposLiga[pais]} ${pais}</option>`; });
+    for(let i=0; i<num; i++) { html += `<div class="fila" style="margin-bottom:12px; background:#fdfefe; padding:8px; border-radius:6px; border:1px solid #ddd;"><label style="font-weight:bold; width:80px;">Partido ${i+1}:</label><select id="confPL_${i}" style="width:200px;">${opcionesPaises}</select> vs <select id="confPV_${i}" style="width:200px;">${opcionesPaises}</select></div>`; }
     document.getElementById('cajasPartidosConfig').innerHTML = html;
-  });
-
-  document.getElementById('jorConfig').addEventListener('change', async (e) => {
-      let jor = e.target.value;
-      const snap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor));
-      if(snap.exists()) {
-          let d = snap.data();
-          document.getElementById('fechaLimiteConfig').value = d.fechaLimite || "";
-          document.getElementById('fechaLimiteValerinhaConfig').value = d.fechaLimiteValerinha || "";
-          document.getElementById('numPartidosConfig').value = d.partidos ? d.partidos.length : 10;
-          document.getElementById('btnGenerarCajasPartidos').click();
-          
-          document.getElementById('pregTronpa').value = d.pregTronpa || "";
-          document.getElementById('pregBomba').value = d.pregBomba || "";
-          document.getElementById('pregValerinha').value = d.pregValerinha || "";
-          document.getElementById('pregIrlinha').value = d.pregIrlinha || "";
-          document.getElementById('pregSantinha').value = d.pregSantinha || "";
-
-          if(d.premios) {
-              document.getElementById('premioProv').value = d.premios.prov || 5.80;
-              document.getElementById('premioDef').value = d.premios.def || 29.00;
-          }
-
-          setTimeout(() => {
-              if(d.partidos) {
-                  d.partidos.forEach((p, i) => {
-                      if(document.getElementById(`confPL_${i}`)) document.getElementById(`confPL_${i}`).value = p.local;
-                      if(document.getElementById(`confPV_${i}`)) document.getElementById(`confPV_${i}`).value = p.visita;
-                  });
-              }
-          }, 100);
-      } else {
-          document.getElementById('fechaLimiteConfig').value = ""; document.getElementById('fechaLimiteValerinhaConfig').value = "";
-          document.getElementById('pregTronpa').value = ""; document.getElementById('pregBomba').value = ""; document.getElementById('pregValerinha').value = ""; document.getElementById('pregIrlinha').value = ""; document.getElementById('pregSantinha').value = "";
-          document.getElementById('numPartidosConfig').value = 10; document.getElementById('btnGenerarCajasPartidos').click();
-      }
   });
 
   document.getElementById('btnGuardarConfig').addEventListener('click', async () => {
     let jor = document.getElementById('jorConfig').value; if(!confirm("⚠️ ¿Guardar la configuración de la jornada " + jor + "?")) return;
     let num = parseInt(document.getElementById('numPartidosConfig').value); let limQ = document.getElementById('fechaLimiteConfig').value; let limV = document.getElementById('fechaLimiteValerinhaConfig').value;
     if(!limQ || !limV) return alert("Por favor, introduce ambos horarios límite.");
-    
-    let partidos = []; 
-    for(let i=0; i<num; i++) { 
-        let l = document.getElementById(`confPL_${i}`).value; let v = document.getElementById(`confPV_${i}`).value; 
-        if(!l || !v) return alert(`Selecciona los equipos del partido ${i+1}.`); 
-        partidos.push({ local: l, visita: v }); 
-    }
-    
+    let partidos = []; for(let i=0; i<num; i++) { let l = document.getElementById(`confPL_${i}`).value; let v = document.getElementById(`confPV_${i}`).value; if(!l || !v) return alert("Selecciona equipos."); partidos.push({ local: l, visita: v }); }
     let premios = { prov: parseFloat(document.getElementById('premioProv').value), def: parseFloat(document.getElementById('premioDef').value) };
     let pG_def = parseFloat(document.getElementById('premioGenDef').value); let pG_pura = parseFloat(document.getElementById('premioGenPura').value);
     
-    const existSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor));
-    let pub = false; let vot = false;
+    // Si ya existe, mantener el estado de publicacion
+    const existSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jor)); let pub = false; let vot = false;
     if(existSnap.exists()) { pub = existSnap.data().pronosticosPublicados || false; vot = existSnap.data().votacionesAbiertas || false; }
 
-    let config = { 
-        partidos: partidos, fechaLimite: limQ, fechaLimiteValerinha: limV, 
-        pregTronpa: document.getElementById('pregTronpa').value, pregBomba: document.getElementById('pregBomba').value, 
-        pregValerinha: document.getElementById('pregValerinha').value, pregIrlinha: document.getElementById('pregIrlinha').value, pregSantinha: document.getElementById('pregSantinha').value, 
-        premios: premios, pronosticosPublicados: pub, votacionesAbiertas: vot 
-    };
-    
-    try { 
-        await setDoc(doc(db, "config_jornadas", "jornada_" + jor), config, { merge: true }); 
-        await setDoc(doc(db, "config_premios", "globales"), { genDef: pG_def, genPura: pG_pura }, { merge: true }); 
-        document.getElementById('lblSavedGenDef').innerText = `(Guardado: ${pG_def}€)`; document.getElementById('lblSavedGenPura').innerText = `(Guardado: ${pG_pura}€)`; 
-        alert("¡Jornada " + jor + " guardada!"); document.getElementById('lblUltimaConfig').innerText = jor; 
-    } catch(e) { alert("Error guardando"); }
+    let config = { partidos: partidos, fechaLimite: limQ, fechaLimiteValerinha: limV, pregTronpa: document.getElementById('pregTronpa').value, pregBomba: document.getElementById('pregBomba').value, pregValerinha: document.getElementById('pregValerinha').value, pregIrlinha: document.getElementById('pregIrlinha').value, pregSantinha: document.getElementById('pregSantinha').value, premios: premios, pronosticosPublicados: pub, votacionesAbiertas: vot };
+    try { await setDoc(doc(db, "config_jornadas", "jornada_" + jor), config, { merge: true }); await setDoc(doc(db, "config_premios", "globales"), { genDef: pG_def, genPura: pG_pura }, { merge: true }); document.getElementById('lblSavedGenDef').innerText = `(Guardado: ${pG_def}€)`; document.getElementById('lblSavedGenPura').innerText = `(Guardado: ${pG_pura}€)`; alert("¡Jornada " + jor + " guardada!"); document.getElementById('lblUltimaConfig').innerText = jor; } catch(e) {}
   });
 
-  // ==========================================
-  // MENU 2: PROVISIONAL
-  // ==========================================
+  // CARGAR PROVISIONAL
   document.getElementById('btnCargarConfigIda').addEventListener('click', async () => {
     let jor = document.getElementById('numJornadaCorregir').value;
     try {
@@ -561,7 +431,7 @@
           let flagL = equiposLiga[p.local] || ""; let flagV = equiposLiga[p.visita] || ""; 
           let valL = prevReales && prevReales.partidos && prevReales.partidos[i] ? prevReales.partidos[i].split("-")[0] : "";
           let valV = prevReales && prevReales.partidos && prevReales.partidos[i] ? prevReales.partidos[i].split("-")[1] : "";
-          html += `<div class="fila" style="margin-bottom:6px;"><label style="width:260px; font-weight:bold; color:#2c3e50;">${flagL} ${p.local} - ${flagV} ${p.visita}:</label><input type="number" id="realPL_${i}" value="${valL}" min="0" style="width:60px; padding:4px;"> - <input type="number" id="realPV_${i}" value="${valV}" min="0" style="width:60px; padding:4px;"></div>`; 
+          html += `<div class="fila" style="margin-bottom:6px;"><label style="width:260px; font-weight:bold;">${flagL} ${p.local} - ${flagV} ${p.visita}:</label><input type="number" id="realPL_${i}" value="${valL}" min="0" style="width:60px; padding:4px;"> - <input type="number" id="realPV_${i}" value="${valV}" min="0" style="width:60px; padding:4px;"></div>`; 
       });
       document.getElementById('contenedorPartidosReales').innerHTML = html; 
 
@@ -581,44 +451,15 @@
   document.getElementById('btnPaso1').addEventListener('click', async function() {
     let btn = document.getElementById('btnPaso1'); let jor = parseInt(document.getElementById('numJornadaCorregir').value); btn.innerText = "Autocompletando... ⏳";
     try {
-      if (!configJornadaActual) { btn.innerText = "📥 Paso 1: Autocompletar faltantes y Evaluar Textos"; return alert("Primero carga partidos oficiales."); }
-      
+      if (!configJornadaActual) { btn.innerText = "📥 Paso 1"; return alert("Primero carga partidos oficiales."); }
       const pronosRef = collection(db, "pronosticos_jornada_" + jor); const queryInit = await getDocs(pronosRef);
       let enviadosInit = []; queryInit.forEach(doc => enviadosInit.push(doc.id));
       let faltantes = listaOficialNombres.filter(nom => !enviadosInit.includes(nom));
-      
-      if(faltantes.length > 0) { 
-          for (let nom of faltantes) { 
-              let defaultData = { jugador: nom, fechaEnvio: new Date().toISOString() + " (Auto)", partidos: configJornadaActual.partidos.map((p, idx) => ({ id: idx+1, local: 1, visita: 1 })), preguntasAbiertas: { valerinha: "-", irlinha: "-", santinha: "-" }, tronpa: { puntosJugados: 1, respuesta: 1 }, bombaGarnacha: { local: 1, visita: 1 } }; 
-              await setDoc(doc(db, "pronosticos_jornada_" + jor, nom), defaultData); 
-          } 
-      }
-      
+      if(faltantes.length > 0) { for (let nom of faltantes) { let defaultData = { jugador: nom, fechaEnvio: new Date().toISOString() + " (Auto)", partidos: configJornadaActual.partidos.map((p, idx) => ({ id: idx+1, local: 1, visita: 1 })), preguntasAbiertas: { valerinha: "-", irlinha: "-", santinha: "-" }, tronpa: { puntosJugados: 1, respuesta: 1 }, bombaGarnacha: { local: 1, visita: 1 } }; await setDoc(doc(db, "pronosticos_jornada_" + jor, nom), defaultData); } }
       const querySnapshot = await getDocs(pronosRef); datosGlobales = []; querySnapshot.forEach((doc) => { datosGlobales.push(doc.data()); });
-      if(datosGlobales.length === 0) { btn.innerText = "📥 Paso 1: Autocompletar faltantes y Evaluar Textos"; return alert("No hay apuestas."); }
+      if(datosGlobales.length === 0) { btn.innerText = "📥 Paso 1"; return alert("No hay apuestas."); }
 
-      historicoGeneral = {}; 
-      if (jor > 1) { 
-          try { 
-              const genSnapshot = await getDocs(collection(db, "clasificacion_general_jornada_" + (jor - 1))); 
-              genSnapshot.forEach((docSnap) => { 
-                  let data = docSnap.data(); 
-                  if (data.jugador) { 
-                      historicoGeneral[String(data.jugador).trim().toLowerCase()] = { 
-                          puntosAcumulados: Number(data.puntosAcumulados)||0, 
-                          puntosPurosAcumulados: Number(data.puntosPurosAcumulados)||0, 
-                          resultadosAcertados: Number(data.resultadosAcertados)||0, 
-                          pronosticosAcertados: Number(data.pronosticosAcertados)||0, 
-                          puntosBombaGarnacha: Number(data.puntosBombaGarnacha)||0, 
-                          puntosValerinhas: Number(data.puntosValerinhas)||0, 
-                          puntosIrlinhas: Number(data.puntosIrlinhas)||0, 
-                          puntosSantinhas: Number(data.puntosSantinhas)||0, 
-                          puntosTronpa: Number(data.puntosTronpa)||0 
-                      }; 
-                  } 
-              }); 
-          } catch(e) {} 
-      }
+      historicoGeneral = {}; if (jor > 1) { try { const genSnapshot = await getDocs(collection(db, "clasificacion_general_jornada_" + (jor - 1))); genSnapshot.forEach((docSnap) => { let data = docSnap.data(); if (data.jugador) { historicoGeneral[String(data.jugador).trim().toLowerCase()] = { puntosAcumulados: Number(data.puntosAcumulados)||0, puntosPurosAcumulados: Number(data.puntosPurosAcumulados)||0, resultadosAcertados: Number(data.resultadosAcertados)||0, pronosticosAcertados: Number(data.pronosticosAcertados)||0, puntosBombaGarnacha: Number(data.puntosBombaGarnacha)||0, puntosValerinhas: Number(data.puntosValerinhas)||0, puntosIrlinhas: Number(data.puntosIrlinhas)||0, puntosSantinhas: Number(data.puntosSantinhas)||0, puntosTronpa: Number(data.puntosTronpa)||0 }; } }); } catch(e) {} }
 
       let evalsPrevias = {};
       try { const provSnap = await getDocs(collection(db, "provisional_jornada_" + jor)); provSnap.forEach(d => { if(d.id !== "RESULTADOS_REALES" && d.id !== "GANADORES_JORNADA") evalsPrevias[d.id] = d.data(); }); } catch(e) {}
@@ -630,7 +471,7 @@
         let prevIrl = evalsPrevias[jug.jugador] ? evalsPrevias[jug.jugador].statIrl : "fallo";
         let prevSan = evalsPrevias[jug.jugador] ? evalsPrevias[jug.jugador].statSan : "fallo";
 
-        htmlCorreccion += `<div style="background: white; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;"><h3 style="margin: 0; color:#2980b9;">👤 ${jug.jugador}</h3><div style="margin-top:5px;"><strong>Valerinha:</strong> "${val}" <select id="est_val_${i}"><option value="fallo" ${prevVal==='fallo'?'selected':''}>Fallo</option><option value="exacto" ${prevVal==='exacto'?'selected':''}>Acierto</option></select></div><div style="margin-top:5px;"><strong>Irlinha:</strong> "${irl}" <select id="est_irl_${i}"><option value="fallo" ${prevIrl==='fallo'?'selected':''}>Fallo</option><option value="exacto" ${prevIrl==='exacto'?'selected':''}>Acierto</option></select></div><div style="margin-top:5px;"><strong>Santinha:</strong> "${san}" <select id="est_san_${i}"><option value="exacto" ${prevSan==='exacto'?'selected':''}>Acierto</option><option value="fallo" ${prevSan==='fallo'?'selected':''}>Fallo</option></select></div></div>`;
+        htmlCorreccion += `<div style="background: white; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;"><h3 style="margin: 0;">👤 ${jug.jugador}</h3><div><strong>Valerinha:</strong> "${val}" <select id="est_val_${i}"><option value="fallo" ${prevVal==='fallo'?'selected':''}>Fallo</option><option value="exacto" ${prevVal==='exacto'?'selected':''}>Acierto</option></select></div><div><strong>Irlinha:</strong> "${irl}" <select id="est_irl_${i}"><option value="fallo" ${prevIrl==='fallo'?'selected':''}>Fallo</option><option value="exacto" ${prevIrl==='exacto'?'selected':''}>Acierto</option></select></div><div><strong>Santinha:</strong> "${san}" <select id="est_san_${i}"><option value="exacto" ${prevSan==='exacto'?'selected':''}>Acierto</option><option value="fallo" ${prevSan==='fallo'?'selected':''}>Fallo</option></select></div></div>`;
       });
       document.getElementById('listaCorreccionesTextos').innerHTML = htmlCorreccion; document.getElementById('zonaPaso1').style.display = "block"; btn.innerText = "📥 Base Cargada ✅";
       
@@ -640,9 +481,10 @@
       if(isVotAbierta) { btnPaso3.innerText = "✅ VOTACIONES ABIERTAS"; btnPaso3.disabled = true; btnPaso3.style.background = "#27ae60"; }
       else { btnPaso3.innerText = "🔓 Paso 3: ABRIR VOTACIONES VALERINHA"; btnPaso3.disabled = false; btnPaso3.style.background = "#27ae60"; }
       
-    } catch (error) { btn.innerText = "📥 Paso 1: Autocompletar faltantes y Evaluar Textos"; console.error(error); }
+    } catch (error) { btn.innerText = "📥 Paso 1"; console.error(error); }
   });
 
+  // PASO 2: GUARDAR Y PUBLICAR PROVISIONAL (SIN ABRIR VOTACIONES, CERO CASTIGOS)
   document.getElementById('btnPaso2').addEventListener('click', async function() {
     let jor = parseInt(document.getElementById('numJornadaCorregir').value);
     
@@ -660,7 +502,6 @@
 
     let ptEx = 5; let ptSig = 2;
     jugadoresProvisionales = [];
-    
     datosGlobales.forEach((j, i) => {
       let c_exactos = 0, c_signos = 0; let partidosGuardados = [];
       j.partidos.forEach((p, idx) => { 
@@ -680,8 +521,8 @@
       let claveBuscada = String(j.jugador).trim().toLowerCase();
       let prev = historicoGeneral[claveBuscada] || { puntosAcumulados: 0, puntosPurosAcumulados: 0, resultadosAcertados: 0, pronosticosAcertados: 0, puntosBombaGarnacha: 0, puntosValerinhas: 0, puntosIrlinhas: 0, puntosSantinhas: 0, puntosTronpa: 0 };
 
-      // En Provisional la valerinha no da puntos. Irlinha y Santinha SÍ sumarán pero en la vista del Jugador. 
-      jugadoresProvisionales.push({ nombre: j.jugador, base: puntosBaseJornada, prev: prev, puntosPurosJornada: puntosPurosJornada, c_exactos, c_signos, p_bomba, p_tronpa, statVal: document.getElementById(`est_val_${i}`).value, statIrl: document.getElementById(`est_irl_${i}`).value, statSan: document.getElementById(`est_san_${i}`).value, valT: j.preguntasAbiertas ? j.preguntasAbiertas.valerinha : "-", irlT: j.preguntasAbiertas ? j.preguntasAbiertas.irlinha : "-", sanT: j.preguntasAbiertas ? j.preguntasAbiertas.santinha : "-", partidosVisuales: partidosGuardados, trT: `${j.tronpa.respuesta}/${j.tronpa.puntosJugados}`, statTronpa, bmT: `${j.bombaGarnacha.local}-${j.bombaGarnacha.visita}`, statBomba, p_val: 0, p_irl: 0, p_san: 0, dec_val: "-" });
+      // EN PROVISIONAL, TODO EL SALSEO VALE 0 Y EL CASTIGO NO EXISTE AÚN
+      jugadoresProvisionales.push({ nombre: j.jugador, base: puntosBaseJornada, prev: prev, puntosPurosJornada: puntosPurosJornada, c_exactos, c_signos, p_bomba, p_tronpa, statVal: document.getElementById(`est_val_${i}`).value, statIrl: document.getElementById(`est_irl_${i}`).value, statSan: document.getElementById(`est_san_${i}`).value, valT: j.preguntasAbiertas ? j.preguntasAbiertas.valerinha : "-", irlT: j.preguntasAbiertas ? j.preguntasAbiertas.irlinha : "-", sanT: j.preguntasAbiertas ? j.preguntasAbiertas.santinha : "-", partidosVisuales: partidosGuardados, trT: `${j.tronpa.respuesta}/${j.tronpa.puntosJugados}`, statTronpa, bmT: `${j.bombaGarnacha.local}-${j.bombaGarnacha.visita}`, statBomba, p_val: 0, p_irl: 0, p_san: 0, dec_val: "⏳ Pendiente de voto" });
     });
 
     let configPintar = jugadoresProvisionales.map(j => ({ ...j, totalJornada: j.base, totalGeneral: j.prev.puntosAcumulados + j.base, purosAcumulados: j.prev.puntosPurosAcumulados + j.puntosPurosJornada, c_exactos_gen: j.prev.resultadosAcertados + j.c_exactos, c_signos_gen: j.prev.pronosticosAcertados + j.c_signos, p_bomba_gen: j.prev.puntosBombaGarnacha + j.p_bomba, p_tronpa_gen: j.prev.puntosTronpa + j.p_tronpa, p_val_gen: j.prev.puntosValerinhas, p_irl_gen: j.prev.puntosIrlinhas, p_san_gen: j.prev.puntosSantinhas }));
@@ -692,6 +533,13 @@
     pintarTablas(configPintar, "PROVISIONAL", configJornadaActual);
   });
 
+  // PASO 3 MANUAL: ABRIR VOTACIONES VALERINHA
+  document.getElementById('btnFuerzaAbrirVotos').addEventListener('click', async function() {
+      let jor = parseInt(document.getElementById('numJornadaControl').value);
+      if(!confirm("¿Abrir votaciones Valerinha para la Jornada " + jor + "?")) return;
+      try { await setDoc(doc(db, "config_jornadas", "jornada_" + jor), { votacionesAbiertas: true }, { merge: true }); alert("¡Votaciones Abiertas!"); } catch(e) { alert("Error"); }
+  });
+  
   document.getElementById('btnPaso3_AbrirVotos').addEventListener('click', async function() {
       let jor = parseInt(document.getElementById('numJornadaCorregir').value);
       if(!confirm("¿Abrir votaciones Valerinha para la Jornada " + jor + "? Asegúrate de que todos los partidos han acabado.")) return;
@@ -703,12 +551,10 @@
       } catch(e) { alert("Error"); }
   });
 
-  // ==========================================
-  // MENU 3: DEFINITIVA
-  // ==========================================
+  // FASE 3 DEFINITIVA Y LÓGICA DE VALERINHA (MÁXIMO 4, DESVÍOS Y CASTIGO)
   document.getElementById('btnPaso3').addEventListener('click', async function() {
     let jor = parseInt(document.getElementById('numJornadaFinal').value);
-    let multiVS = 1; // Puntos fijos de salseo
+    let multiVS = 1;
     try {
       const provSnap = await getDocs(collection(db, "provisional_jornada_" + jor)); jugadoresProvisionales = [];
       provSnap.forEach(doc => { if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); else jugadoresProvisionales.push(doc.data()); });
@@ -718,14 +564,9 @@
       
       const votosSnap = await getDocs(collection(db, "votos_valerinha_jornada_" + jor)); let votos = {}; votosSnap.forEach(doc => { votos[doc.id] = doc.data(); });
       
-      let htmlV = `<table style="width:100%;"><thead><tr><th>Atacante</th><th>Tipo</th><th>Objetivo 1</th><th>Objetivo 2</th></tr></thead><tbody>`;
-      Object.keys(votos).forEach(id => {
-          let v = votos[id]; let icon = v.tipo === "sumar" ? "🛡️ Escudo (+)" : "⚔️ Ataque (-)";
-          htmlV += `<tr><td><strong>${id}</strong></td><td style="color:${v.tipo==='sumar'?'#27ae60':'#e74c3c'}">${icon}</td><td>${v.objetivo || "-"}</td><td>${v.objetivo2 || "-"}</td></tr>`;
-      });
-      if(Object.keys(votos).length === 0) htmlV += "<tr><td colspan='4'>Nadie ha votado</td></tr>";
-      htmlV += "</tbody></table>";
-      document.getElementById('tablaVisualVotosAdmin').innerHTML = htmlV;
+      let htmlV = "";
+      Object.keys(votos).forEach(att => { let v = votos[att]; htmlV += `<div><strong>${att}</strong>: ${v.tipo==="sumar"?"🛡️ Escudo":"⚔️ Ataca a "+v.objetivo}</div>`; });
+      document.getElementById('tablaVisualVotosAdmin').innerHTML = htmlV || "Nadie ha votado.";
 
       jugadoresProvisionales.forEach(j => { j.val_ganados = 0; j.val_perdidos = 0; j.dec_val = "-"; });
       
@@ -733,49 +574,34 @@
       let redirigidos = {}; let changed = true;
       while(changed) {
           changed = false; let counts = {};
-          Object.keys(votos).forEach(att => {
-              let v = votos[att];
-              if (v.tipo === "restar" && v.objetivo) {
-                  let target = redirigidos[att] ? v.objetivo2 : v.objetivo;
-                  if(!counts[target]) counts[target] = []; counts[target].push(att);
-              }
-          });
+          Object.keys(votos).forEach(att => { let v = votos[att]; if (v.tipo === "restar" && v.objetivo) { let target = redirigidos[att] ? v.objetivo2 : v.objetivo; if(!counts[target]) counts[target] = []; counts[target].push(att); } });
           for (let target in counts) {
               if (counts[target].length > 4) {
                   let attackers = counts[target].filter(a => !redirigidos[a]);
                   if (attackers.length > 0) {
-                      attackers.sort((a, b) => {
-                          let a2 = votos[a].objetivo2; let b2 = votos[b].objetivo2;
-                          let a2Data = jugadoresProvisionales.find(p => p.nombre === a2); let b2Data = jugadoresProvisionales.find(p => p.nombre === b2);
-                          let ptsA = a2Data ? a2Data.prev.puntosAcumulados : 0; let ptsB = b2Data ? b2Data.prev.puntosAcumulados : 0;
-                          if (ptsB !== ptsA) return ptsB - ptsA;
-                          let exA = a2Data ? a2Data.prev.resultadosAcertados : 0; let exB = b2Data ? b2Data.prev.resultadosAcertados : 0;
-                          if (exB !== exA) return exB - exA;
-                          return (a2 || "").localeCompare(b2 || "");
-                      });
+                      attackers.sort((a, b) => { let a2 = votos[a].objetivo2; let b2 = votos[b].objetivo2; return (a2 || "").localeCompare(b2 || ""); });
                       redirigidos[attackers[0]] = true; changed = true; break;
                   }
               }
           }
       }
 
-      // APLICAR VOTOS FINALES Y CASTIGOS POR NO VOTAR
+      // APLICAR VOTOS FINALES Y CASTIGOS DE INACTIVIDAD
       jugadoresProvisionales.forEach(j => {
           if (j.statVal === "exacto") {
               if (votos[j.nombre]) {
                   let miVoto = votos[j.nombre];
-                  if (miVoto.tipo === "sumar") { 
-                      j.val_ganados += 1; j.dec_val = "🛡️ Se suma +" + multiVS; 
-                  } else if (miVoto.tipo === "restar" && miVoto.objetivo !== "") {
+                  if (miVoto.tipo === "sumar") { j.val_ganados += 1; j.dec_val = "🛡️ Se suma +" + multiVS; } 
+                  else if (miVoto.tipo === "restar" && miVoto.objetivo !== "") {
                       let isDiverted = redirigidos[j.nombre]; let finalTarget = isDiverted ? miVoto.objetivo2 : miVoto.objetivo;
                       j.dec_val = `⚔️ Resta -${multiVS} a ${finalTarget}` + (isDiverted ? " (Desvío)" : "");
                       let target = jugadoresProvisionales.find(p => p.nombre === finalTarget);
                       if (target) target.val_perdidos -= 1;
                   }
               } else {
-                  // NUEVO: Castigo si acierta y no vota
+                  // AQUÍ SE APLICA EL CASTIGO POR NO VOTAR
                   j.val_perdidos -= 1;
-                  j.dec_val = `❌ Castigo (No votó)`;
+                  j.dec_val = "❌ Castigo (No votó)";
               }
           }
       });
@@ -783,8 +609,8 @@
       jugadoresProvisionales.forEach(j => { 
           if (j.val_perdidos < -4) j.val_perdidos = -4; 
           j.p_val = (j.val_ganados + j.val_perdidos) * multiVS; 
-          j.totalJornada = j.base + j.p_val; // SOLO suma base + valerinha
-          j.generalTrasVal = j.prev.puntosAcumulados + j.totalJornada; // La general suma todo
+          j.totalJornada = j.base + j.p_val; // SÓLO BASE + VALERINHA
+          j.generalTrasVal = j.prev.puntosAcumulados + j.totalJornada; 
       });
 
       puntosPrimeroGenTrasVal = Math.max(...jugadoresProvisionales.map(j => j.generalTrasVal)); puntosUltimoGenTrasVal = Math.min(...jugadoresProvisionales.map(j => j.generalTrasVal));
@@ -801,7 +627,7 @@
       if (j.statIrl === "exacto" && j.generalTrasVal <= puntosUltimoGenTrasVal + 4) j.p_irl = multiVS; 
       if (j.statSan === "fallo" && j.generalTrasVal >= puntosPrimeroGenTrasVal - 4) j.p_san = -multiVS;
       
-      // LA REGLA APLICADA: Irlinha y Santinha NO suman en la Jornada, SÍ en la General
+      // 🔥 REGLA LA LIGA: IRLINHA Y SANTINHA SOLO AFECTAN A LA GENERAL, NO A LA JORNADA
       j.totalJornada = j.base + j.p_val; 
       j.totalGeneral = j.generalTrasVal + j.p_irl + j.p_san; 
       
@@ -837,7 +663,7 @@
     let jorStr = document.getElementById('jorConsultaAdmin').value; let colName = jorStr === "DEFINITIVA" ? "clasificacion_general_FINAL_LIGA" : "clasificacion_general_jornada_" + jorStr;
     try {
       const snapshot = await getDocs(collection(db, colName)); let listaJugadores = []; let ganadoresAislados = []; window.realResultsActuales = null;
-      snapshot.forEach((doc) => { let data = doc.data(); if (doc.id === "GANADORES_JORNADA") ganadoresAislados = data.textos || []; else if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = data; else if (data.jugador) listaJugadores.push({ nombre: data.jugador, c_exactos_gen: data.resultadosAcertados || 0, c_signos_gen: data.pronosticosAcertados || 0, p_bomba_gen: data.puntosBombaGarnacha || 0, p_val_gen: data.puntosValerinhas || 0, p_irl_gen: data.puntosIrlinhas || 0, p_san_gen: data.puntosSantinhas || 0, p_tronpa_gen: data.puntosTronpa || 0, puntosPurosAcumulados: data.puntosPurosAcumulados || 0, puntosEspecialesExtra: data.puntosEspecialesExtra || 0, puntosFinalesMundial: data.puntosFinalesMundial || 0, totalJornada: data.puntosTotalesJornada || 0, totalGeneral: data.puntosAcumulados || 0, gananciasTotales: data.gananciasAcumuladas || 0, partidosVisuales: data.partidosVisuales || [], trT: data.trT || "-", statTronpa: data.statTronpa || "", bmT: data.bmT || "-", statBomba: data.statBomba || "", valT: data.valT || "-", statVal: data.statVal || "", irlT: data.irlT || "-", statIrl: data.statIrl || "", sanT: data.sanT || "-", statSan: data.statSan || "", p_val: data.p_val || 0, p_irl: data.p_irl || 0, p_san: data.p_san || 0, dec_val: data.dec_val || "-" }); });
+      snapshot.forEach((doc) => { let data = doc.data(); if (doc.id === "GANADORES_JORNADA") ganadoresAislados = data.textos || []; else if(doc.id === "RESULTADOS_REALES") window.realResultsActuales = data; else if (data.jugador) listaJugadores.push({ nombre: data.jugador, c_exactos_gen: data.resultadosAcertados || 0, c_signos_gen: data.pronosticosAcertados || 0, p_bomba_gen: data.puntosBombaGarnacha || 0, p_val_gen: data.puntosValerinhas || 0, p_irl_gen: data.puntosIrlinhas || 0, p_san_gen: data.puntosSantinhas || 0, p_tronpa_gen: data.puntosTronpa || 0, puntosPurosAcumulados: data.puntosPurosAcumulados || 0, puntosEspecialesExtra: data.puntosEspecialesExtra || 0, puntosFinalesMundial: data.puntosFinalesMundial || data.puntosFinalesLiga || 0, totalJornada: data.puntosTotalesJornada || 0, totalGeneral: data.puntosAcumulados || 0, gananciasTotales: data.gananciasAcumuladas || 0, partidosVisuales: data.partidosVisuales || [], trT: data.trT || "-", statTronpa: data.statTronpa || "", bmT: data.bmT || "-", statBomba: data.statBomba || "", valT: data.valT || "-", statVal: data.statVal || "", irlT: data.irlT || "-", statIrl: data.statIrl || "", sanT: data.sanT || "-", statSan: data.statSan || "", p_val: data.p_val || 0, p_irl: data.p_irl || 0, p_san: data.p_san || 0, dec_val: data.dec_val || "-" }); });
       if(listaJugadores.length === 0) { document.getElementById('zonaTablero').style.display = "none"; document.getElementById('zonaClasificacion').style.display = "none"; document.getElementById('zonaClasificacionPura').style.display = "none"; document.getElementById('zonaGanancias').style.display = "none"; return alert("No hay datos históricos."); }
       const cfgSnap = await getDoc(doc(db, "config_jornadas", "jornada_" + jorStr));
       pintarTablas(listaJugadores, "DEFINITIVA", cfgSnap.exists() ? cfgSnap.data() : {}); pintarGanancias(listaJugadores, ganadoresAislados);
@@ -878,17 +704,17 @@
   
   document.getElementById('btnPublicarPronosticos').addEventListener('click', async () => { let jor = document.getElementById('numJornadaControl').value; await setDoc(doc(db, "config_jornadas", "jornada_" + jor), { pronosticosPublicados: true }, { merge: true }); alert("¡Jornada publicada!"); document.getElementById('btnCargarControl').click(); });
   document.getElementById('btnOcultarPronosticos').addEventListener('click', async () => { let jor = document.getElementById('numJornadaControl').value; await setDoc(doc(db, "config_jornadas", "jornada_" + jor), { pronosticosPublicados: false }, { merge: true }); alert("¡Ocultado!"); document.getElementById('btnCargarControl').click(); });
-  document.getElementById('btnBorrarJornada').addEventListener('click', async () => { let jor = document.getElementById('numJornadaControl').value; if(!confirm("🚨 Vas a ELIMINAR TODAS las apuestas de los jugadores de la Jornada " + jor + ". ¿Proceder?")) return; try { const qS = await getDocs(collection(db, "pronosticos_jornada_" + jor)); for (let dS of qS.docs) { await deleteDoc(doc(db, "pronosticos_jornada_" + jor, dS.id)); } alert("Apuestas borradas."); document.getElementById('btnCargarControl').click(); } catch(e) {} });
+  document.getElementById('btnBorrarJornada').addEventListener('click', async () => { let jor = document.getElementById('numJornadaControl').value; if(!confirm("🚨 Vas a ELIMINAR TODAS las apuestas de los jugadores de la Jornada " + jor + ". ¿Proceder?")) return; try { const qS = await getDocs(collection(db, "pronosticos_jornada_" + jor)); for (let dS of qS.docs) { await deleteDoc(doc(db, "pronosticos_jornada_" + jor, dS.id)); } alert("Colección vaciada."); document.getElementById('btnCargarControl').click(); } catch(e) {} });
   document.getElementById('btnEliminarConfigJornada').addEventListener('click', async () => { 
      let jor = document.getElementById('numJornadaControl').value; 
-     if(!confirm("⚠️ ¡PELIGRO! Vas a ELIMINAR LA CONFIGURACIÓN de la Jornada " + jor + ".\n\nEsto borrará todos los datos de esa jornada.\n\n¿Seguro?")) return;
+     if(!confirm("⚠️ ¡PELIGRO! Vas a ELIMINAR LA CONFIGURACIÓN COMPLETA de la Jornada " + jor + ".\n\nEsto borrará todos los datos de esa jornada.\n\n¿Estás absolutamente seguro?")) return;
      try { 
         await deleteDoc(doc(db, "config_jornadas", "jornada_" + jor)); 
         const pronosSnap = await getDocs(collection(db, "pronosticos_jornada_" + jor)); for (let docSnap of pronosSnap.docs) { await deleteDoc(doc(db, "pronosticos_jornada_" + jor, docSnap.id)); } 
         const provSnap = await getDocs(collection(db, "provisional_jornada_" + jor)); for (let docSnap of provSnap.docs) { await deleteDoc(doc(db, "provisional_jornada_" + jor, docSnap.id)); } 
         const votosSnap = await getDocs(collection(db, "votos_valerinha_jornada_" + jor)); for (let docSnap of votosSnap.docs) { await deleteDoc(doc(db, "votos_valerinha_jornada_" + jor, docSnap.id)); } 
         const genSnap = await getDocs(collection(db, "clasificacion_general_jornada_" + jor)); for (let docSnap of genSnap.docs) { await deleteDoc(doc(db, "clasificacion_general_jornada_" + jor, docSnap.id)); }
-        alert("Jornada eliminada por completo."); document.getElementById('btnCargarControl').click(); 
+        alert("Jornada eliminada."); document.getElementById('btnCargarControl').click(); 
      } catch(e) {} 
   });
 
@@ -901,19 +727,19 @@
               document.getElementById('editLimiteJornada').value = d.fechaLimite || "";
               document.getElementById('editLimiteValerinha').value = d.fechaLimiteValerinha || "";
               document.getElementById('zonaEditarPlazos').style.display = "block";
-          } else { alert("Jornada no configurada."); document.getElementById('zonaEditarPlazos').style.display = "none"; }
+          } else { alert("Esta jornada aún no ha sido configurada."); document.getElementById('zonaEditarPlazos').style.display = "none"; }
       } catch(e) {}
   });
 
   document.getElementById('btnGuardarPlazos').addEventListener('click', async () => {
       let jor = document.getElementById('numJornadaPlazos').value; let lJor = document.getElementById('editLimiteJornada').value; let lVal = document.getElementById('editLimiteValerinha').value;
-      if(!lJor || !lVal) return alert("Rellena ambos plazos."); if(!confirm("¿Actualizar plazos para la J" + jor + "?")) return;
-      try { await updateDoc(doc(db, "config_jornadas", "jornada_" + jor), { fechaLimite: lJor, fechaLimiteValerinha: lVal }); alert("¡Plazos actualizados!"); } catch(e) {}
+      if(!lJor || !lVal) return alert("Rellena ambos plazos."); if(!confirm("¿Confirmas la modificación de los plazos para la Jornada " + jor + "?")) return;
+      try { await updateDoc(doc(db, "config_jornadas", "jornada_" + jor), { fechaLimite: lJor, fechaLimiteValerinha: lVal }); alert("¡Plazos actualizados con éxito!"); } catch(e) { alert("Error actualizando plazos."); }
   });
 
   // BOTÓN APOCALIPSIS RESET
   document.getElementById('btnResetLiga').addEventListener('click', async () => {
-      if(!confirm("⚠️ ADVERTENCIA 1/3: Vas a BORRAR POR COMPLETO toda la base de datos de la liga. ¿Estás seguro?")) return;
+      if(!confirm("⚠️ ADVERTENCIA 1/3: Vas a BORRAR POR COMPLETO toda la base de datos de la liga. Los saldos, los puntos, todo. ¿Estás seguro?")) return;
       if(!confirm("🚨 ADVERTENCIA 2/3: Esto es irreversible y no hay copia de seguridad. ¿Continuar?")) return;
       if(!confirm("💀 ADVERTENCIA 3/3: ÚLTIMA OPORTUNIDAD. Dale a Aceptar para iniciar la Purga.")) return;
       
@@ -927,47 +753,49 @@
               let qs = await getDocs(collection(db, c)); 
               for(let d of qs.docs) { await deleteDoc(doc(db, c, d.id)); }
           }
-          alert("🔥 PURGA COMPLETADA."); window.location.reload(); 
-      } catch(e) { alert("Error en borrado masivo."); document.getElementById('btnResetLiga').innerText = "🔥 RESETEAR LIGA DESDE CERO 🔥"; document.getElementById('btnResetLiga').disabled = false; }
+          alert("🔥 PURGA COMPLETADA. La base de datos está inmaculada."); window.location.reload(); 
+      } catch(e) { alert("Error durante el borrado masivo: " + e.message); document.getElementById('btnResetLiga').innerText = "🔥 RESETEAR LIGA DESDE CERO 🔥"; document.getElementById('btnResetLiga').disabled = false; }
   });
 
-  // ================= PESTAÑA 6 (ESPECIALES FIN DE LIGA) =================
+  // ================= PESTAÑA 6 (ESPECIALES FIJADOS) =================
   document.getElementById('btnAbrirEspeciales').addEventListener('click', async () => { 
       let limite = document.getElementById('limiteEspecialesConfig').value;
-      if(!limite) return alert("⚠️ Indica una Fecha Límite.");
-      try { await setDoc(doc(db, "config_especiales", "general"), { estado: "abierto", fechaLimite: limite }, { merge: true }); alert("¡Plazo abierto para jugadores!"); } catch(e){} 
+      if(!limite) return alert("⚠️ Debes indicar una Fecha Límite para las Especiales.");
+      try { await setDoc(doc(db, "config_especiales", "general"), { estado: "abierto", fechaLimite: limite }, { merge: true }); alert("¡Abiertas para los jugadores!"); } catch(e){} 
   });
-  
   document.getElementById('btnCerrarEspeciales').addEventListener('click', async () => { 
-      try { await setDoc(doc(db, "config_especiales", "general"), { estado: "cerrado" }, { merge: true }); alert("¡Plazo forzado a CERRADO!"); } catch(e){} 
-  });
-
-  document.getElementById('btnPublicarVisEspeciales').addEventListener('click', async () => { 
-      try { await setDoc(doc(db, "config_especiales", "general"), { estado: "cerrado" }, { merge: true }); alert("¡Respuestas publicadas para la visión de los jugadores!"); } catch(e){} 
+      try { await setDoc(doc(db, "config_especiales", "general"), { estado: "cerrado" }, { merge: true }); alert("¡Plazo cerrado para jugadores!"); } catch(e){} 
   });
   
   document.getElementById('btnCargarRespuestasEspeciales').addEventListener('click', async () => {
+    let btn = document.getElementById('btnCargarRespuestasEspeciales');
+    let originalText = btn.innerText; btn.innerText = "Cargando... ⏳";
     try {
       const respSnap = await getDocs(collection(db, "pronosticos_especiales")); 
       let dicResp = {}; respSnap.forEach(d => dicResp[d.id] = d.data().respuestas);
-      let htmlChiv = `<thead><tr><th>Jugador</th><th>Respuestas Emitidas</th><th>Acción</th></tr></thead><tbody>`;
+      let htmlChiv = `<thead><tr><th>Jugador</th><th>Envío Apuestas Especiales</th><th>Acción</th></tr></thead><tbody>`;
       listaOficialNombres.forEach(nom => { 
           let est = dicResp[nom] ? 'exacto' : 'fallo'; 
           let txt = dicResp[nom] ? 'Enviadas ✅' : 'Faltan ❌'; 
-          let bBorrar = dicResp[nom] ? `<button onclick="window.borrarEspeciales('${nom}')" style="background:#e74c3c; color:white; border:none; padding:5px; border-radius:3px; cursor:pointer;">Borrar</button>` : ''; 
+          let bBorrar = dicResp[nom] ? `<button onclick="window.borrarEspeciales('${nom}')" style="margin-left:8px; background:none; border:none; cursor:pointer;">🗑️</button>` : ''; 
           htmlChiv += `<tr><td><strong>${nom}</strong></td><td class="${est}">${txt}</td><td>${bBorrar}</td></tr>`; 
       });
       htmlChiv += `</tbody>`; 
       document.getElementById('tablaChivatosEspeciales').innerHTML = htmlChiv; 
       document.getElementById('zonaRespuestasEspeciales').style.display = "block";
       document.getElementById('btnPublicarVisEspeciales').style.display = "inline-block";
-    } catch(e) {}
+      btn.innerText = originalText;
+    } catch(e) { alert("Error cargando."); btn.innerText = originalText; }
+  });
+
+  document.getElementById('btnPublicarVisEspeciales').addEventListener('click', async () => { 
+      try { await setDoc(doc(db, "config_especiales", "evaluacion"), { publicadoParaLectura: true }, { merge: true }); alert("¡Respuestas publicadas para la visión de los jugadores!"); } catch(e){} 
   });
 
   window.borrarEspeciales = async function(nom) { if(confirm("¿Borrar respuestas especiales de " + nom + "?")) { await deleteDoc(doc(db, "pronosticos_especiales", nom)); alert("Borrado"); document.getElementById('btnCargarRespuestasEspeciales').click(); } };
-  
+
   document.getElementById('btnBorrarTodasEspeciales').addEventListener('click', async () => {
-      if(!confirm("¿Borrar TODAS las respuestas especiales enviadas por los jugadores?")) return;
+      if(!confirm("¿Seguro que quieres BORRAR TODAS las apuestas especiales enviadas por los jugadores?")) return;
       try {
           const s = await getDocs(collection(db, "pronosticos_especiales"));
           for(let d of s.docs) { await deleteDoc(doc(db, "pronosticos_especiales", d.id)); }
@@ -981,16 +809,16 @@
       if(respSnap.empty) return alert("Nadie ha jugado las Especiales.");
       
       let dicResp = {}; respSnap.forEach(d => dicResp[d.id] = d.data().respuestas);
-      let htmlEval = `<table style="width:100%;"><thead><tr><th>Jugador</th><th>Respuestas (1 a 11)</th><th>Aciertos</th><th>Puntos Extra Totales</th></tr></thead><tbody>`;
+      let htmlEval = `<table style="width:100%;"><thead><tr><th>Jugador</th><th>Respuestas (1 a 11)</th><th>Aciertos Totales</th><th>Puntos Extra (Manual)</th></tr></thead><tbody>`;
       
       listaOficialNombres.forEach((nom, i) => {
           if(dicResp[nom]) {
-              let ansText = dicResp[nom].map((r, x) => `<span style="font-size:10px;">Q${x+1}: ${r}</span>`).join("<br>");
+              let ansText = dicResp[nom].map((r, x) => `<strong>Q${x+1}:</strong> ${r}`).join("<br>");
               htmlEval += `<tr>
                   <td><strong>${nom}</strong></td>
-                  <td style="text-align:left; color:#7f8c8d;">${ansText}</td>
+                  <td style="text-align:left; font-size:11px;">${ansText}</td>
                   <td><input type="number" id="espAci_${i}" data-jug="${nom}" value="0" style="width:60px;"></td>
-                  <td><input type="number" id="espPts_${i}" value="0" style="width:60px; border:2px solid #f39c12;"> pts</td>
+                  <td><input type="number" id="espPts_${i}" value="0" style="width:60px; border:2px solid #e84393;"> pts</td>
               </tr>`;
           }
       });
@@ -1026,7 +854,7 @@
       
       try {
           const j38Snap = await getDocs(collection(db, "clasificacion_general_jornada_38")); 
-          if(j38Snap.empty) return alert("Primero debes calcular la Definitiva de la Jornada 38 en el Menú 3.");
+          if(j38Snap.empty) return alert("Primero debes calcular la Definitiva de la Jornada 38 en el menú 3. Definitiva.");
           
           let cJ38 = []; j38Snap.forEach(d => { if(d.data().jugador) cJ38.push(d.data()); });
           let cierreTotal = [];
@@ -1038,10 +866,10 @@
           cJ38.forEach(j => { 
               let ptE = evaluacionEspecialesMemoria[j.jugador]?.puntos || 0; 
               let ptsFinales = Number(j.puntosAcumulados || 0) + ptE;
-              cierreTotal.push({ ...j, puntosEspecialesExtra: ptE, puntosFinalesMundial: ptsFinales, puntosPurosAcumulados: Number(j.puntosPurosAcumulados || 0) }); 
+              cierreTotal.push({ ...j, puntosEspecialesExtra: ptE, puntosFinalesLiga: ptsFinales, puntosPurosAcumulados: Number(j.puntosPurosAcumulados || 0) }); 
           });
           
-          let ganadoresGenDef = obtenerGanadoresGeneral(cierreTotal, "puntosFinalesMundial"); 
+          let ganadoresGenDef = obtenerGanadoresGeneral(cierreTotal, "puntosFinalesLiga"); 
           let ganadoresGenPura = obtenerGanadoresGeneral(cierreTotal, "puntosPurosAcumulados");
 
           let premiosFinales = {}; cierreTotal.forEach(j => premiosFinales[j.jugador] = 0);
@@ -1060,7 +888,6 @@
 
           for (let j of cierreTotal) { await setDoc(doc(db, "clasificacion_general_FINAL_LIGA", j.jugador), j); }
           await setDoc(doc(db, "clasificacion_general_FINAL_LIGA", "GANADORES_JORNADA"), { textos: textosFinales });
-          
           await setDoc(doc(db, "config_especiales", "evaluacion"), { resultados: evaluacionEspecialesMemoria, publicado: true });
           
           alert("🏆 ¡LIGA FINALIZADA! Clasificación DEFINITIVA generada y botes entregados.");
@@ -1075,9 +902,11 @@
           const snapF = await getDocs(collection(db, "clasificacion_general_FINAL_LIGA"));
           for (let d of snapF.docs) { await deleteDoc(doc(db, "clasificacion_general_FINAL_LIGA", d.id)); }
           
-          document.getElementById('zonaEvaluacionEspeciales').style.display = "none";
+          evaluacionEspecialesMemoria = {};
+          document.getElementById('tablaPrevisualizacionEspeciales').style.display = "none";
+          document.getElementById('btnPublicarEvaluacionEspeciales').style.display = "none";
           alert("🗑️ Evaluación y Clasificación FINAL borradas.");
-      } catch(e) {}
+      } catch(e) { alert("Error al borrar."); }
   });
 
   // ========================================================
@@ -1089,15 +918,14 @@
 
     if(!isDef) {
        let tablaJornada = [...listaJugadores].sort((a, b) => {
-           let diff = (Number(b.totalJornada) || 0) - (Number(a.totalJornada) || 0);
-           return diff !== 0 ? diff : a.nombre.localeCompare(b.nombre);
+           let diff = (Number(b.totalJornada) || 0) - (Number(a.totalJornada) || 0); return diff !== 0 ? diff : a.nombre.localeCompare(b.nombre);
        });
        let thNom = ""; let numPartidosVisuales = tablaJornada[0].partidosVisuales.length; let filasPartidos = Array(numPartidosVisuales).fill(""); let tdTr = "", tdBm = "", tdVa1 = "", tdVa2 = "", tdVaDec = "", tdIr = "", tdSa = "", tdTot = ""; let nombresPartidos = [];
        tablaJornada.forEach(j => {
          thNom += `<th>${j.nombre}</th>`; j.partidosVisuales.forEach((p, idx) => { if(nombresPartidos.length <= idx) nombresPartidos.push(p.matchText || `Partido ${idx+1}`); filasPartidos[idx] += `<td class="${p.stat}">${p.texto}</td>`; });
          tdTr += `<td class="${j.statTronpa}">${j.trT}</td>`; tdBm += `<td class="${j.statBomba}">${j.bmT}</td>`; tdVa1 += `<td class="${j.statVal}">${j.valT}</td>`;
          let valPts = Number(j.p_val) || 0; let valClass = valPts > 0 ? "exacto" : (valPts < 0 ? "fallo" : ""); let valText = valPts > 0 ? `+${valPts}` : (titulo === "PROVISIONAL" ? "" : valPts); tdVa2 += `<td class="${valClass}">${valText}</td>`;
-         let dVal = j.dec_val || "-"; let decClass = dVal.includes("🛡️") ? "exacto" : (dVal.includes("⚔️") ? "fallo" : ""); tdVaDec += `<td class="${decClass}" style="font-size:11px;">${dVal}</td>`;
+         let dVal = j.dec_val || "-"; let decClass = dVal.includes("🛡️") ? "exacto" : (dVal.includes("⚔️") || dVal.includes("❌") ? "fallo" : ""); tdVaDec += `<td class="${decClass}" style="font-size:11px;">${dVal}</td>`;
          tdIr += `<td class="${j.statIrl}">${j.irlT} (${j.p_irl})</td>`; tdSa += `<td class="${j.statSan}">${j.sanT} (${j.p_san})</td>`; tdTot += `<td class="total-pts">${j.totalJornada}</td>`;
        });
 
@@ -1108,12 +936,12 @@
        document.getElementById('zonaTablero').innerHTML = `<h2 style="text-align: center; color: #8e44ad;">📊 RESULTADOS JORNADA ${jorStr}</h2><div style="overflow-x:auto; width:100%;"><table><thead><tr><th>Partido</th><th style="background:#ecf0f1; color:#333;">R</th> ${thNom} </tr></thead><tbody>${htmlPartidosTerminado}<tr><td><strong>TroNpá!</strong>${qTr}</td><td style="font-weight:bold; background:#f4f6f6; color:#2c3e50;">${resTronpa}</td> ${tdTr} </tr><tr><td><strong>Bomba Garnacha</strong>${qBm}</td><td style="font-weight:bold; background:#f4f6f6; color:#2c3e50;">${resBomba}</td> ${tdBm} </tr><tr><td><strong>Valerinha</strong>${qVa}</td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdVa1} </tr><tr><td><strong>Resultado Valerinha</strong></td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdVa2} </tr><tr><td><strong>Decisión Valerinha</strong></td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdVaDec} </tr><tr><td><strong>Irlinha</strong>${qIr}</td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdIr} </tr><tr><td><strong>Santinha</strong>${qSa}</td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdSa} </tr><tr><td><strong>TOTAL JORNADA</strong></td><td style="background:#e5e7e9; font-weight:bold; color:#2c3e50;">-</td> ${tdTot} </tr><tr><td><strong>JUGADOR</strong></td><td style="background:#f4f6f6; color:#7f8c8d;">-</td> ${tdNomRow} </tr></tbody></table></div>`; document.getElementById('zonaTablero').style.display = "block";
     } else { document.getElementById('zonaTablero').style.display = "none"; }
 
-    let sortBy = isDef ? "puntosFinalesMundial" : "totalGeneral"; let tablaGeneral = [...listaJugadores].sort((a, b) => { if(Number(b[sortBy]) !== Number(a[sortBy])) return Number(b[sortBy]) - Number(a[sortBy]); if(Number(b.c_exactos_gen) !== Number(a.c_exactos_gen)) return Number(b.c_exactos_gen) - Number(a.c_exactos_gen); if(Number(b.c_signos_gen) !== Number(a.c_signos_gen)) return Number(b.c_signos_gen) - Number(a.c_signos_gen); return ((Number(b.puntosFinalesMundial)||Number(b.totalGeneral)) - Number(b.puntosPurosAcumulados)) - ((Number(a.puntosFinalesMundial)||Number(a.totalGeneral)) - Number(a.puntosPurosAcumulados)); });
+    let sortBy = isDef ? "puntosFinalesLiga" : "totalGeneral"; let tablaGeneral = [...listaJugadores].sort((a, b) => { if(Number(b[sortBy]) !== Number(a[sortBy])) return Number(b[sortBy]) - Number(a[sortBy]); if(Number(b.c_exactos_gen) !== Number(a.c_exactos_gen)) return Number(b.c_exactos_gen) - Number(a.c_exactos_gen); if(Number(b.c_signos_gen) !== Number(a.c_signos_gen)) return Number(b.c_signos_gen) - Number(a.c_signos_gen); return ((Number(b.puntosFinalesLiga)||Number(b.totalGeneral)) - Number(b.puntosPurosAcumulados)) - ((Number(a.puntosFinalesLiga)||Number(a.totalGeneral)) - Number(a.puntosPurosAcumulados)); });
     
     let htmlClasif = `<table><thead><tr><th>POS</th><th>JUGADOR</th><th style="color:#d35400;">TOTAL GENERAL</th><th>EXACTOS ACUM.</th><th>PRONÓSTICOS ACUM.</th><th>BOMBA ACUM.</th><th>VALERINHAS ACUM.</th><th>IRLINHAS ACUM.</th><th>SANTINHAS ACUM.</th><th>TroNpá! ACUM.</th>`;
     if(isDef) htmlClasif += `<th style="background:#e84393; color:white;">Pts. ESPECIALES</th>`;
     htmlClasif += `</tr></thead><tbody>`;
-    tablaGeneral.forEach((j, idx) => { htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td class="td-total-gen">${isDef ? (j.puntosFinalesMundial||j.totalGeneral):j.totalGeneral} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td>`; if(isDef) htmlClasif += `<td style="font-weight:bold; color:#e84393;">${j.puntosEspecialesExtra || 0}</td>`; htmlClasif += `</tr>`; });
+    tablaGeneral.forEach((j, idx) => { htmlClasif += `<tr><td class="td-pos">${idx + 1}</td><td class="td-nombre">${j.nombre}</td><td class="td-total-gen">${isDef ? (j.puntosFinalesLiga||j.totalGeneral):j.totalGeneral} pts</td><td>${j.c_exactos_gen}</td><td>${j.c_signos_gen}</td><td>${j.p_bomba_gen}</td><td>${j.p_val_gen}</td><td>${j.p_irl_gen}</td><td>${j.p_san_gen}</td><td>${j.p_tronpa_gen}</td>`; if(isDef) htmlClasif += `<td style="font-weight:bold; color:#e84393;">${j.puntosEspecialesExtra || 0}</td>`; htmlClasif += `</tr>`; });
     htmlClasif += `</tbody></table>`; document.getElementById('tituloClasificacion').innerText = isDef ? `🏆 CLASIFICACIÓN DEFINITIVA DE LA LIGA` : `🏆 CLASIFICACIÓN GENERAL ACUMULADA (${titulo})`; document.getElementById('tablaClasificacion').innerHTML = htmlClasif; document.getElementById('zonaClasificacion').style.display = "block";
 
     if(listaJugadores[0].purosAcumulados !== undefined || listaJugadores[0].puntosPurosAcumulados !== undefined) {
@@ -1126,13 +954,7 @@
 
   function pintarGanancias(listaJugadores, ganadoresDeLaJornada) {
     if(!ganadoresDeLaJornada) ganadoresDeLaJornada = []; document.getElementById('historialGanadores').innerHTML = ganadoresDeLaJornada.map(txt => `<p style="margin: 5px 0; border-bottom: 1px dashed #eee; padding-bottom: 5px;">${txt}</p>`).join("");
-    
-    let lbl = document.getElementById('lblTituloGanadores');
-    if(lbl) {
-        let isDef = document.getElementById('jorConsultaAdmin').value === "DEFINITIVA";
-        lbl.innerText = isDef ? "🏆 Campeones de La Liga" : "🏆 Campeones de Jornada";
-    }
-
+    let lbl = document.getElementById('lblTituloGanadores'); if(lbl) { let isDef = document.getElementById('jorConsultaAdmin').value === "DEFINITIVA"; lbl.innerText = isDef ? "🏆 Campeones de La Liga" : "🏆 Campeones de Jornada"; }
     let htmlGanancias = `<table style="width: 100%; border-collapse: collapse; text-align: left;"><thead><tr><th>JUGADOR</th><th style="text-align:right;">GANANCIAS (€)</th></tr></thead><tbody>`;
     let listaGanancias = listaJugadores.map(j => ({nombre: j.nombre, dinero: Number(j.gananciasTotales)})); listaGanancias.sort((a,b) => b.dinero - a.dinero);
     listaGanancias.forEach(g => { htmlGanancias += `<tr><td style="padding:8px; border-bottom:1px solid #eee;"><strong>${g.nombre}</strong></td><td style="padding:8px; border-bottom:1px solid #eee; text-align:right; color:${g.dinero > 0 ? '#27ae60':'#95a5a6'}; font-weight:bold; font-size: 16px;">${g.dinero.toFixed(2)} €</td></tr>`; });
