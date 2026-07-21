@@ -133,7 +133,7 @@
 <div id="pantallaLogin">
     <div class="login-card">
         <div style="text-align: center; margin-bottom: 20px;">
-            <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="La Liga 26/27" style="max-height: 120px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.5));">
+            <img src="https://img.icons8.com/color/240/000000/trophy.png" alt="La Liga 26/27" style="max-height: 120px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.5));">
         </div>
         <h2 style="color:var(--accent-gold) !important; font-size:24px; margin-bottom: 5px;">LA LIGA 26/27</h2>
         <p style="margin-bottom: 25px; color:var(--text-muted) !important;">Identifícate para entrar a la liga</p>
@@ -184,7 +184,7 @@
       <!-- CABECERA -->
       <div class="top-header">
            <div style="text-align: center; width: 45px;">
-             <img src="https://img.icons8.com/color/240/000000/world-cup.png" alt="Liga" style="width:100%; height:auto;">
+             <img src="https://img.icons8.com/color/240/000000/trophy.png" alt="Liga" style="width:100%; height:auto;">
            </div>
            <h1 class="titulo-header">LA LIGA 26/27</h1>
           <div class="right-actions">
@@ -769,6 +769,65 @@
       provSnap.forEach(doc => {
           if (doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data();
           else if (doc.id !== "GANADORES_JORNADA") listaProv.push(doc.data());
+      });
+
+      // Recalcular lógica Valerinha (Votos y Castigos) en tiempo real
+      let votos = {};
+      try {
+          const vSnap = await getDocs(collection(db, "votos_valerinha_jornada_" + jorActualStr));
+          vSnap.forEach(doc => { votos[doc.id] = doc.data(); });
+      } catch(e) {}
+
+      let redirigidos = {}; let changed = true;
+      while(changed) {
+          changed = false; let counts = {};
+          Object.keys(votos).forEach(att => {
+              let v = votos[att];
+              if (v.tipo === "restar" && v.objetivo) {
+                  let target = redirigidos[att] ? v.objetivo2 : v.objetivo;
+                  if(!counts[target]) counts[target] = []; counts[target].push(att);
+              }
+          });
+          for (let target in counts) {
+              if (counts[target].length > 4) {
+                  let attackers = counts[target].filter(a => !redirigidos[a]);
+                  if (attackers.length > 0) {
+                      attackers.sort((a,b) => (votos[a].objetivo2 || "").localeCompare(votos[b].objetivo2 || ""));
+                      redirigidos[attackers[0]] = true; changed = true; break;
+                  }
+              }
+          }
+      }
+
+      listaProv.forEach(j => {
+          j.val_ganados = 0; j.val_perdidos = 0; j.dec_val = "-";
+          if (j.statVal === "exacto") {
+              if (votos[j.nombre]) {
+                  let miVoto = votos[j.nombre];
+                  if (miVoto.tipo === "sumar") { j.val_ganados += 1; j.dec_val = "🛡️ Se suma +1"; }
+                  else if (miVoto.tipo === "restar" && miVoto.objetivo !== "") {
+                      let isDiverted = redirigidos[j.nombre]; let finalTarget = isDiverted ? miVoto.objetivo2 : miVoto.objetivo;
+                      j.dec_val = `⚔️ Resta -1 a ${finalTarget}` + (isDiverted ? " (Desvío)" : "");
+                  }
+              } else {
+                  j.val_perdidos -= 1;
+                  j.dec_val = `❌ Castigo (No votó)`;
+              }
+          }
+      });
+      
+      Object.keys(votos).forEach(att => {
+          let v = votos[att];
+          if(v.tipo === "restar" && v.objetivo) {
+              let isDiverted = redirigidos[att]; let finalTarget = isDiverted ? v.objetivo2 : v.objetivo;
+              let target = listaProv.find(p => p.nombre === finalTarget);
+              if (target) target.val_perdidos -= 1;
+          }
+      });
+
+      listaProv.forEach(j => {
+          if (j.val_perdidos < -4) j.val_perdidos = -4;
+          j.p_val = (j.val_ganados + j.val_perdidos); 
       });
 
       if (Number(jorActualStr) <= 1) {
