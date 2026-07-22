@@ -27,57 +27,189 @@
             min-height: 100vh;
         }
 
-        .contenedor.usuario { max-width: 600px; margin: 0 auto; padding: 20px; padding-bottom: 90px; }
+        .contenedor.usuario { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            padding-bottom: 90px; 
+        }
 
         /* PANTALLA DE LOGIN */
-        #pantallaLogin { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
-        .login-card { background: rgba(13, 17, 23, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px 30px; width: 100%; max-width: 400px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); text-align: center; }
+        #pantallaLogin { 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 20px; 
+            box-sizing: border-box; 
+        }
+        .login-card { 
+            background: rgba(13, 17, 23, 0.85); 
+            backdrop-filter: blur(15px); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 20px; 
+            padding: 40px 30px; 
+            width: 100%; 
+            max-width: 400px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8); 
+            text-align: center; 
+        }
         
         /* HEADER CON TÍTULO */
-        .top-header { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); padding: 15px; border-radius: 16px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1); }
-        .titulo-header { color: var(--accent-gold); font-size: 20px; margin: 0; text-transform: uppercase; font-weight: 900; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        #btnLogout { background: rgba(238, 82, 83, 0.2); color: #ff7675; border: none; width: 35px; height: 35px; border-radius: 50%; font-weight: bold; cursor: pointer; font-size: 16px; display: flex; justify-content: center; align-items: center; }
+        .top-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: rgba(255,255,255,0.05); 
+            backdrop-filter: blur(10px); 
+            padding: 15px; 
+            border-radius: 16px; 
+            margin-bottom: 25px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+        }
+        .titulo-header { 
+            color: var(--accent-gold); 
+            font-size: 20px; 
+            margin: 0; 
+            text-transform: uppercase; 
+            font-weight: 900; 
+            letter-spacing: 1px; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5); 
+        }
+        #btnLogout { 
+            background: rgba(238, 82, 83, 0.2); 
+            color: #ff7675; 
+            border: none; 
+            width: 35px; 
+            height: 35px; 
+            border-radius: 50%; 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 16px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+        }
 
-        select, input[type="password"], input[type="text"], input[type="number"] { background: rgba(0,0,0,0.5) !important; border: 1px solid rgba(255,255,255,0.2) !important; color: white !important; border-radius: 8px; padding: 12px; font-family: 'Inter', sans-serif; font-weight: 600; width: 100%; box-sizing: border-box; font-size: 15px; }
-        input:focus, select:focus { outline: none; border-color: var(--accent-gold) !important; }
+        select, input[type="password"], input[type="text"], input[type="number"] { 
+            background: rgba(0,0,0,0.5) !important; 
+            border: 1px solid rgba(255,255,255,0.2) !important; 
+            color: white !important; 
+            border-radius: 8px; 
+            padding: 12px; 
+            font-family: 'Inter', sans-serif; 
+            font-weight: 600; 
+            width: 100%; 
+            box-sizing: border-box; 
+            font-size: 15px; 
+        }
+        input:focus, select:focus { 
+            outline: none; 
+            border-color: var(--accent-gold) !important; 
+        }
 
-        .tarjeta { background: var(--penka-grad) !important; border: 1px solid rgba(255,255,255,0.1) !important; border-radius: 16px !important; padding: 20px !important; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.5) !important; position: relative; overflow: hidden; }
-        .tarjeta.clean { background: rgba(13, 17, 23, 0.8) !important; }
-        .tarjeta::before { content: '🏆'; position: absolute; right: -15px; top: -15px; font-size: 80px; opacity: 0.05; transform: rotate(15deg); pointer-events: none; }
+        .tarjeta { 
+            background: var(--penka-grad) !important; 
+            border: 1px solid rgba(255,255,255,0.1) !important; 
+            border-radius: 16px !important; 
+            padding: 20px !important; 
+            margin-bottom: 20px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5) !important; 
+            position: relative; 
+            overflow: hidden; 
+        }
+        .tarjeta.clean { 
+            background: rgba(13, 17, 23, 0.8) !important; 
+        }
+        .tarjeta::before { 
+            content: '🏆'; 
+            position: absolute; 
+            right: -15px; 
+            top: -15px; 
+            font-size: 80px; 
+            opacity: 0.05; 
+            transform: rotate(15deg); 
+            pointer-events: none; 
+        }
 
         .profile-header { display: flex; align-items: center; gap: 15px; }
-        .avatar { width: 60px; height: 60px; border-radius: 50%; background: var(--accent-gold); display: flex; justify-content: center; align-items: center; font-size: 30px; font-weight: bold; color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid white; }
+        .avatar { 
+            width: 60px; height: 60px; border-radius: 50%; background: var(--accent-gold); 
+            display: flex; justify-content: center; align-items: center; 
+            font-size: 30px; font-weight: bold; color: white; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid white; 
+        }
         .profile-info h2 { font-size: 22px; margin: 0; color: white !important; letter-spacing: 0; text-transform: none; }
         .profile-info p { font-size: 13px; margin: 2px 0 0 0; color: var(--text-muted) !important; }
-        .profile-stats { display: flex; justify-content: space-between; align-items: center; text-align: center; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        
+        .profile-stats { 
+            display: flex; justify-content: space-between; align-items: center; text-align: center; 
+            margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; 
+        }
         .stat-box { flex: 1; overflow: hidden; }
         .stat-box:not(:last-child) { border-right: 1px solid rgba(255,255,255,0.1); }
-        .stat-value { display: block; font-size: clamp(16px, 5vw, 24px); font-weight: 900; color: white; line-height: 1; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .stat-value { 
+            display: block; font-size: clamp(16px, 5vw, 24px); font-weight: 900; 
+            color: white; line-height: 1; margin-bottom: 5px; white-space: nowrap; 
+            overflow: hidden; text-overflow: ellipsis; 
+        }
         .stat-value.money { color: #10ac84; }
         .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
 
         h2, h3 { color: white !important; margin-top: 0; font-weight: 800; font-size: 18px; text-transform: uppercase; letter-spacing: 0.5px; }
         p, label { color: #d1d5db !important; }
 
-        .btn-principal { background: linear-gradient(135deg, var(--accent-gold), #ea580c) !important; color: white !important; border: none; border-radius: 12px; padding: 15px; font-weight: 800; font-size: 15px; width: 100%; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4); cursor: pointer; transition: 0.2s; }
+        .btn-principal { 
+            background: linear-gradient(135deg, var(--accent-gold), #ea580c) !important; 
+            color: white !important; border: none; border-radius: 12px; padding: 15px; 
+            font-weight: 800; font-size: 15px; width: 100%; text-transform: uppercase; 
+            letter-spacing: 1px; box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4); 
+            cursor: pointer; transition: 0.2s; 
+        }
         .btn-principal:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-2px); }
         .btn-principal:disabled { opacity: 0.8; cursor: not-allowed; transform: none; box-shadow: none; }
 
         /* BOTONES + Y - */
-        .btn-step { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 36px; height: 26px; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3); transition: 0.1s; }
+        .btn-step { 
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
+            color: white; width: 36px; height: 26px; border-radius: 6px; 
+            font-weight: bold; font-size: 16px; cursor: pointer; 
+            display: flex; align-items: center; justify-content: center; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3); transition: 0.1s; 
+        }
         .btn-step:active { background: var(--accent-gold); border-color: var(--accent-gold); transform: scale(0.95); }
 
         /* BARRA INFERIOR */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(13, 17, 23, 0.95); backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-around; align-items: flex-end; padding: 10px 5px 20px 5px; z-index: 1000; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
-        .bottom-nav button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; background: transparent; color: #6b7280; border: none; font-size: 9px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; padding: 0; }
+        .bottom-nav { 
+            position: fixed; bottom: 0; left: 0; width: 100%; 
+            background: rgba(13, 17, 23, 0.95); backdrop-filter: blur(15px); 
+            border-top: 1px solid rgba(255,255,255,0.05); display: flex; 
+            justify-content: space-around; align-items: flex-end; 
+            padding: 10px 5px 20px 5px; z-index: 1000; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); 
+        }
+        .bottom-nav button { 
+            flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; 
+            background: transparent; color: #6b7280; border: none; font-size: 9px; 
+            font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; padding: 0; 
+        }
         .bottom-nav button i { font-size: 20px; font-style: normal; filter: grayscale(100%); opacity: 0.6; transition: 0.3s; }
         .bottom-nav button.activa { color: white; }
         .bottom-nav button.activa i { filter: grayscale(0%); opacity: 1; transform: translateY(-3px); }
-        #btnTabQuiniela { position: relative; top: -20px; background: radial-gradient(circle, var(--accent-gold) 0%, #d97706 100%); width: 60px; height: 60px; border-radius: 50%; justify-content: center; box-shadow: 0 0 20px rgba(245, 158, 11, 0.6); border: 4px solid var(--bg-dark); color: white !important; flex: none; margin: 0 5px; }
+        #btnTabQuiniela { 
+            position: relative; top: -20px; 
+            background: radial-gradient(circle, var(--accent-gold) 0%, #d97706 100%); 
+            width: 60px; height: 60px; border-radius: 50%; justify-content: center; 
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.6); border: 4px solid var(--bg-dark); 
+            color: white !important; flex: none; margin: 0 5px; 
+        }
         #btnTabQuiniela i { font-size: 26px; filter: grayscale(0%); opacity: 1; transform: none !important; }
         #btnTabQuiniela span { display: none; }
 
-        #relojQuiniela, #relojValerinha { background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.1); color: var(--accent-gold) !important; font-size: 14px; padding: 12px !important; letter-spacing: 1px; }
+        #relojQuiniela, #relojValerinha { 
+            background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.1); 
+            color: var(--accent-gold) !important; font-size: 14px; padding: 12px !important; letter-spacing: 1px; 
+        }
 
         /* SISTEMA MATRICIAL ESTRICTO (CONGELADO STICKY) */
         .table-container-matriz { max-height: 65vh; overflow: auto; width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: var(--bg-dark); position: relative; }
@@ -276,7 +408,7 @@
       <div id="vistaEspeciales" style="display:none;">
         <div class="tarjeta" style="background: linear-gradient(135deg, #0d5f49 0%, #06382a 100%) !important;">
           <h2 style="margin-top:0; color:white !important; font-size:22px; font-weight:900;">⭐ APUESTAS ESPECIALES</h2>
-          <p style="font-size:13px; margin-bottom:15px; color:#d1fae5 !important;">Pronósticos globales del torneo. <strong>Solo una oportunidad</strong> antes de arrancar.</p>
+          <p style="font-size:13px; margin-bottom:15px; color:#d1fae5 !important;">Pronósticos globales de La Liga. <strong>Solo una oportunidad</strong> antes de arrancar.</p>
           <div id="textoEstadoEspeciales" style="font-size:14px; font-weight:bold; color:white; margin-bottom:10px; display:none; background:rgba(0,0,0,0.3); padding:10px; border-radius:8px; text-align:center;">APUESTAS ESPECIALES NO DISPONIBLES</div>
           <button id="btnVerEspeciales" class="btn-principal" style="background:white !important; color:var(--accent-green) !important; display:none;"></button>
         </div>
@@ -349,9 +481,7 @@
   const codigosLiga = { "Deportivo Alavés": "ALA", "Atlético de Madrid": "ATM", "FC Barcelona": "BAR", "RC Celta": "CEL", "RC Deportivo de A Coruña": "DEP", "Elche CF": "ELC", "RCD Espanyol": "ESP", "Getafe CF": "GET", "Levante UD": "LEV", "Málaga CF": "MAL", "CA Osasuna": "OSA", "Real Racing Club": "RAC", "Rayo Vallecano": "RAY", "Real Betis": "BET", "Real Madrid": "RMA", "Real Sociedad": "RSO", "Sevilla FC": "SEV", "Valencia CF": "VAL", "Villarreal CF": "VIL", "Athletic Club": "ATH" };
   const puntosLiga = { "Deportivo Alavés": 1500, "Atlético de Madrid": 1800, "FC Barcelona": 1850, "RC Celta": 1550, "RC Deportivo de A Coruña": 1450, "Elche CF": 1500, "RCD Espanyol": 1500, "Getafe CF": 1550, "Levante UD": 1450, "Málaga CF": 1450, "CA Osasuna": 1600, "Real Racing Club": 1450, "Rayo Vallecano": 1500, "Real Betis": 1650, "Real Madrid": 1900, "Real Sociedad": 1700, "Sevilla FC": 1600, "Valencia CF": 1600, "Villarreal CF": 1700, "Athletic Club": 1750 };
   
-  const preguntasEspecialesGlobal = [ 
-      "Campeón de La Liga", "Equipos de Champions", "Último clasificado", "Equipos Descenso", "Pichichi", "Zamora", "Zarra", "Primer Entrenador Destituido", "1º Puntos Puros", "Último Puntos Puros", "Campeón Copa del Rey" 
-  ];
+  const preguntasEspecialesGlobal = [ "Campeón de La Liga", "Equipos de Champions", "Último clasificado", "Equipos Descenso", "Pichichi", "Zamora", "Zarra", "Primer Entrenador Destituido", "1º Puntos Puros", "Último Puntos Puros", "Campeón Copa del Rey" ];
 
   window.jorQuinielaActual = 1; 
   window.jorValerinhaActual = 1; 
@@ -360,7 +490,6 @@
   let esJornadaQuinielaCerrada = false; 
   let esJornadaValerinhaCerrada = false;
 
-  // FUNCIONES DE CONTROL DE UI
   function switchTabJugador(tabName) {
       ['vistaInicio', 'vistaQuiniela', 'vistaValerinha', 'vistaResultados', 'vistaReglas', 'vistaEnJuego', 'vistaEspeciales'].forEach(v => { 
           let el = document.getElementById(v); if(el) el.style.display = 'none'; 
@@ -475,9 +604,6 @@
       }
   }
 
-  // ========================================================
-  // 🔐 LOGIN
-  // ========================================================
   document.getElementById('btnEntrar').addEventListener('click', () => {
       let nom = document.getElementById('loginNombre').value; 
       let pin = document.getElementById('loginPin').value.trim();
@@ -521,7 +647,12 @@
       let listaProv = []; window.realResultsActuales = null;
       provSnap.forEach(doc => { if (doc.id === "RESULTADOS_REALES") window.realResultsActuales = doc.data(); else if (doc.id !== "GANADORES_JORNADA") listaProv.push(doc.data()); });
 
-      let votos = {}; try { const vSnap = await getDocs(collection(db, "votos_valerinha_jornada_" + jorActualStr)); vSnap.forEach(doc => { votos[doc.id] = doc.data(); }); } catch(e) {}
+      let votos = {}; 
+      try { 
+          const vSnap = await getDocs(collection(db, "votos_valerinha_jornada_" + jorActualStr)); 
+          vSnap.forEach(doc => { votos[doc.id] = doc.data(); }); 
+      } catch(e) {}
+      
       let redirigidos = {}; let changed = true;
       while(changed) {
           changed = false; let counts = {};
@@ -536,7 +667,7 @@
                   let miVoto = votos[j.nombre];
                   if (miVoto.tipo === "sumar") { j.val_ganados += 1; j.dec_val = "🛡️ Se suma +1"; }
                   else if (miVoto.tipo === "restar" && miVoto.objetivo !== "") { let isDiverted = redirigidos[j.nombre]; let finalTarget = isDiverted ? miVoto.objetivo2 : miVoto.objetivo; j.dec_val = `⚔️ Resta -1 a ${finalTarget}` + (isDiverted ? " (Desvío)" : ""); }
-              } else { j.dec_val = `⏳ Pendiente de voto`; }
+              } else { j.dec_val = `⏳ Pendiente de voto`; } // NO HAY CASTIGO AÚN EN PROVISIONAL
           }
       });
       
@@ -610,22 +741,23 @@
           
           let sortBy = isDefinitiva ? "puntosFinalesLiga" : "totalGeneral";
           lista.sort((a, b) => { 
-              if(Number(b[sortBy] || 0) !== Number(a[sortBy] || 0)) return Number(b[sortBy] || 0) - Number(a[sortBy] || 0); 
+              let ptsA = isDefinitiva ? (a.puntosFinalesLiga || a.totalGeneral || 0) : (a.totalGeneral || 0);
+              let ptsB = isDefinitiva ? (b.puntosFinalesLiga || b.totalGeneral || 0) : (b.totalGeneral || 0);
+              if(ptsB !== ptsA) return ptsB - ptsA; 
               if(Number(b.c_exactos_gen || 0) !== Number(a.c_exactos_gen || 0)) return Number(b.c_exactos_gen || 0) - Number(a.c_exactos_gen || 0); 
               if(Number(b.c_signos_gen || 0) !== Number(a.c_signos_gen || 0)) return Number(b.c_signos_gen || 0) - Number(a.c_signos_gen || 0); 
-              return ((Number(b[sortBy] || 0)) - Number(b.puntosPurosAcumulados || 0)) - ((Number(a[sortBy] || 0)) - Number(a.puntosPurosAcumulados || 0)); 
+              return (ptsB - Number(b.puntosPurosAcumulados || 0)) - (ptsA - Number(a.puntosPurosAcumulados || 0)); 
           });
           
           let myIndex = lista.findIndex(j => j.nombre === window.jugadorLogueado);
           if(myIndex !== -1) {
               document.getElementById('uiPosicion').innerText = (myIndex + 1) + "º";
-              document.getElementById('uiPuntos').innerText = isDefinitiva ? lista[myIndex].puntosFinalesLiga : lista[myIndex].totalGeneral;
+              document.getElementById('uiPuntos').innerText = isDefinitiva ? (lista[myIndex].puntosFinalesLiga || lista[myIndex].totalGeneral) : lista[myIndex].totalGeneral;
               document.getElementById('uiSaldo').innerText = Number(lista[myIndex].gananciasTotales).toFixed(2) + " €";
           }
           if(lista.length > 0) { renderMiniRankings(lista); }
       }
 
-      // AUTO-SELECCIÓN DE LA JORNADA EN JUEGO
       let jorEnJuegoDefecto = 1;
       if (jorCerrada === "FINAL_LIGA") { jorEnJuegoDefecto = 38; } else { jorEnJuegoDefecto = jorCerrada + 1; if (jorEnJuegoDefecto > 38) jorEnJuegoDefecto = 38; }
       let selEnJuego = document.getElementById('jorConsultaEnJuego'); if (selEnJuego) selEnJuego.value = jorEnJuegoDefecto;
@@ -664,7 +796,6 @@
         else if (estadoEsp === "cerrado") { btnEsp.style.display = "block"; btnEsp.innerText = "COMPROBAR APUESTAS ESPECIALES"; txtEsp.style.display = "none"; tarjetaInicioEsp.style.display = "none"; }
     } catch(e) {}
 
-    // CARGAR JORNADA ACTUAL
     try {
       const snapConfig = await getDocs(collection(db, "config_jornadas"));
       let configs = []; snapConfig.forEach(doc => { let parts = doc.id.split("_"); if(parts.length === 2 && !isNaN(parts[1])) { configs.push({ num: parseInt(parts[1]), ...doc.data() }); } });
@@ -694,7 +825,7 @@
       let htmlPartidos = "";
       if(configQ_Data && configQ_Data.partidos) {
           configQ_Data.partidos.forEach((p, i) => { 
-            let flagL = equiposLiga[p.local] || ""; let flagV = equiposLiga[p.visita] || ""; let codL = codigosLiga[p.local] || p.local.substring(0,3).toUpperCase(); let codV = codigosLiga[p.visita] || p.visita.substring(0,3).toUpperCase();
+            let flagL = equiposLiga[p.local] || ""; let flagV = equiposLiga[p.visita] || ""; let codL = codigosLiga[p.local] || (p.local?p.local.substring(0,3).toUpperCase():""); let codV = codigosLiga[p.visita] || (p.visita?p.visita.substring(0,3).toUpperCase():"");
             let valL = (yaEnviado && pData && pData.partidos && pData.partidos[i]) ? pData.partidos[i].local : 0; let valV = (yaEnviado && pData && pData.partidos && pData.partidos[i]) ? pData.partidos[i].visita : 0;
             let btnStyle = esJornadaQuinielaCerrada ? "display:none;" : "display:flex;";
             
@@ -738,9 +869,9 @@
           if (esJornadaQuinielaCerrada) {
               document.querySelectorAll('#vistaQuiniela .btn-step').forEach(b => b.style.display = 'none');
               let btnE = document.getElementById('btnEnviar'); 
-              btnE.innerText = yaEnviado && !pData.fechaEnvio.includes("(Auto)") ? "JORNADA ENVIADA ✅" : "JORNADA CERRADA 🛑"; 
+              btnE.innerText = yaEnviado && (!pData || !pData.fechaEnvio.includes("(Auto)")) ? "JORNADA ENVIADA ✅" : "JORNADA CERRADA 🛑"; 
               btnE.disabled = true; 
-              btnE.style.background = yaEnviado && !pData.fechaEnvio.includes("(Auto)") ? "var(--accent-green)" : "#374151";
+              btnE.style.background = yaEnviado && (!pData || !pData.fechaEnvio.includes("(Auto)")) ? "var(--accent-green)" : "#374151";
               document.getElementById('valerinhaRespuesta').readOnly = true; document.getElementById('irlinhaRespuesta').readOnly = true; document.getElementById('santinhaRespuesta').readOnly = true; document.getElementById('tronpaApuesta').disabled = true; document.getElementById('tronpaRespuesta').readOnly = true;
           } else {
               let btnE = document.getElementById('btnEnviar'); 
@@ -748,7 +879,6 @@
           }
       }
 
-      // ESTADO VALERINHA
       let configV = configs.find(c => c.fechaLimiteValerinha && new Date(c.fechaLimiteValerinha) > ahora);
       if(configV) {
          window.jorValerinhaActual = configV.num; 
@@ -1013,7 +1143,9 @@
            
            filasPartidosBlank.forEach((f, idx) => { 
                let lLoc = plantilla[idx]?.local || ""; let lVis = plantilla[idx]?.visita || ""; 
-               let labelPartido = `<span style="white-space:nowrap">${equiposLiga[lLoc]||''} ${codigosLiga[lLoc]||(lLoc?lLoc.substring(0,3).toUpperCase():'')}</span> - <span style="white-space:nowrap">${equiposLiga[lVis]||''} ${codigosLiga[lVis]||(lVis?lVis.substring(0,3).toUpperCase():'')}</span>`; 
+               let cL = codigosLiga[lLoc] || (lLoc ? lLoc.substring(0,3).toUpperCase() : "");
+               let cV = codigosLiga[lVis] || (lVis ? lVis.substring(0,3).toUpperCase() : "");
+               let labelPartido = (lLoc && lVis) ? `<span style="white-space:nowrap">${equiposLiga[lLoc]||''} ${cL}</span> - <span style="white-space:nowrap">${equiposLiga[lVis]||''} ${cV}</span>` : `Partido ${idx+1}`; 
                htmlMatrix += `<tr><td><strong>${labelPartido}</strong></td><td style="background:rgba(0,0,0,0.5);">R</td>${f}</tr>`; 
            });
            let tdNomRow = arrayPronos.map(p => `<td>${p.jugador}</td>`).join("");
@@ -1040,7 +1172,6 @@
     let isDef = (jorStr === "DEFINITIVA" || containerPrefix === "Jugador" || containerPrefix === "EnJuego");
     let isHistorialDefinitivoGlobal = (containerPrefix === "Jugador" && jorStr === "DEFINITIVA");
     
-    // ORDENACIÓN CLASIFICACIÓN GENERAL (Manejando que en J1 totalGeneral manda y puntosFinalesLiga es 0)
     let tablaGeneral = [...listaJugadores].sort((a, b) => { 
         let ptsA = isHistorialDefinitivoGlobal ? (a.puntosFinalesLiga || a.totalGeneral || 0) : (a.totalGeneral || 0);
         let ptsB = isHistorialDefinitivoGlobal ? (b.puntosFinalesLiga || b.totalGeneral || 0) : (b.totalGeneral || 0);
@@ -1055,35 +1186,27 @@
         return diff !== 0 ? diff : a.nombre.localeCompare(b.nombre);
     });
 
-    let thNom = ""; 
-    let numPartidosVisuales = tablaJornada[0].partidosVisuales.length; 
-    let filasPartidos = Array(numPartidosVisuales).fill(""); 
-    let tdTr = "", tdBm = "", tdVa1 = "", tdVa2 = "", tdVaDec = "", tdIr = "", tdSa = "", tdTot = ""; 
-    let nombresPartidos = [];
+    let thNom = ""; let numPartidosVisuales = tablaJornada[0].partidosVisuales.length; let filasPartidos = Array(numPartidosVisuales).fill(""); 
+    let tdTr = "", tdBm = "", tdVa1 = "", tdVa2 = "", tdVaDec = "", tdIr = "", tdSa = "", tdTot = ""; let nombresPartidos = [];
     
     tablaJornada.forEach(j => {
       thNom += `<th>${j.nombre.substring(0,6)}</th>`; 
-      j.partidosVisuales.forEach((p, idx) => { 
-          if(nombresPartidos.length <= idx) nombresPartidos.push(p.matchText || `Partido ${idx+1}`); 
-          filasPartidos[idx] += `<td><span class="${p.stat}">${p.texto}</span></td>`; 
-      });
+      j.partidosVisuales.forEach((p, idx) => { if(nombresPartidos.length <= idx) nombresPartidos.push(p.matchText || `Partido ${idx+1}`); filasPartidos[idx] += `<td><span class="${p.stat}">${p.texto}</span></td>`; });
       tdTr += `<td><span class="${j.statTronpa}">${j.trT}</span></td>`; tdBm += `<td><span class="${j.statBomba}">${j.bmT}</span></td>`; tdVa1 += `<td><span class="${j.statVal}">${j.valT}</span></td>`;
-      let valPts = Number(j.p_val) || 0; let valClass = valPts > 0 ? "exacto" : (valPts < 0 ? "fallo" : ""); let valText = valPts > 0 ? `+${valPts}` : (valPts === 0 ? "" : valPts); 
-      tdVa2 += `<td><span class="${valClass}">${valText}</span></td>`;
-      let dVal = j.dec_val || "-"; let decClass = dVal.includes("🛡️") ? "exacto" : (dVal.includes("⚔️") || dVal.includes("❌") ? "fallo" : ""); 
-      tdVaDec += `<td><span class="${decClass}">${dVal}</span></td>`;
+      let valPts = Number(j.p_val) || 0; let valClass = valPts > 0 ? "exacto" : (valPts < 0 ? "fallo" : ""); let valText = valPts > 0 ? `+${valPts}` : (valPts === 0 ? "" : valPts); tdVa2 += `<td><span class="${valClass}">${valText}</span></td>`;
+      let dVal = j.dec_val || "-"; let decClass = dVal.includes("🛡️") ? "exacto" : (dVal.includes("⚔️") || dVal.includes("❌") ? "fallo" : ""); tdVaDec += `<td><span class="${decClass}">${dVal}</span></td>`;
       tdIr += `<td><span class="${j.statIrl}">${j.irlT} (${j.p_irl})</span></td>`; tdSa += `<td><span class="${j.statSan}">${j.sanT} (${j.p_san})</span></td>`; tdTot += `<td class="total-pts">${j.totalJornada}</td>`;
     });
     
-    let resPartidos = window.realResultsActuales?.partidos || []; 
-    let resTronpa = window.realResultsActuales?.tronpa || "-"; 
-    let resBomba = window.realResultsActuales?.bomba || "-";
+    let resPartidos = window.realResultsActuales?.partidos || []; let resTronpa = window.realResultsActuales?.tronpa || "-"; let resBomba = window.realResultsActuales?.bomba || "-";
     
+    // BLINDAJE JORNADA 1 
     let htmlPartidosTerminado = filasPartidos.map((f, i) => { 
-        let lLoc = configJor.partidos?.[i]?.local || ""; let lVis = configJor.partidos?.[i]?.visita || "";
+        let lLoc = ""; let lVis = "";
+        if (configJor && configJor.partidos && configJor.partidos[i]) { lLoc = configJor.partidos[i].local || ""; lVis = configJor.partidos[i].visita || ""; }
         let cL = codigosLiga[lLoc] || (lLoc ? lLoc.substring(0,3).toUpperCase() : ""); let cV = codigosLiga[lVis] || (lVis ? lVis.substring(0,3).toUpperCase() : "");
-        let lbl = configJor.partidos ? `<span style="white-space:nowrap">${equiposLiga[lLoc]||''} ${cL}</span> - <span style="white-space:nowrap">${equiposLiga[lVis]||''} ${cV}</span>` : `Partido ${i+1}`;
-        return `<tr><td><strong>${lbl}</strong></td><td style="background:rgba(0,0,0,0.5);">${resPartidos[i] || "-"}</td>${f}</tr>`; 
+        let lbl = (lLoc && lVis) ? `<span style="white-space:nowrap">${equiposLiga[lLoc]||''} ${cL}</span> - <span style="white-space:nowrap">${equiposLiga[lVis]||''} ${cV}</span>` : `Partido ${i+1}`;
+        let rRes = resPartidos[i] || "-"; return `<tr><td><strong>${lbl}</strong></td><td style="font-weight:bold; background:rgba(0,0,0,0.5); color:white;">${rRes}</td>${f}</tr>`; 
     }).join("");
 
     let tdNomRow = tablaJornada.map(j => `<td>${j.nombre}</td>`).join("");
@@ -1178,9 +1301,11 @@
     
     let resPartidos = window.realResultsActuales?.partidos || [], resTronpa = window.realResultsActuales?.tronpa || "-", resBomba = window.realResultsActuales?.bomba || "-";
     let htmlPartidosTerminado = filasPartidos.map((f, i) => { 
-        let lLoc = configJor.partidos?.[i]?.local || "", lVis = configJor.partidos?.[i]?.visita || "";
-        let lbl = `${equiposLiga[lLoc]||''} - ${equiposLiga[lVis]||''}`;
-        return `<tr><td><strong>${lbl}</strong></td><td>${resPartidos[i] || "-"}</td>${f}</tr>`; 
+        let lLoc = ""; let lVis = "";
+        if (configJor && configJor.partidos && configJor.partidos[i]) { lLoc = configJor.partidos[i].local || ""; lVis = configJor.partidos[i].visita || ""; }
+        let cL = codigosLiga[lLoc] || (lLoc ? lLoc.substring(0,3).toUpperCase() : ""); let cV = codigosLiga[lVis] || (lVis ? lVis.substring(0,3).toUpperCase() : "");
+        let lbl = (lLoc && lVis) ? `<span style="white-space:nowrap">${equiposLiga[lLoc]||''} ${cL}</span> - <span style="white-space:nowrap">${equiposLiga[lVis]||''} ${cV}</span>` : `Partido ${i+1}`;
+        return `<tr><td><strong>${lbl}</strong></td><td style="background:rgba(0,0,0,0.5);">${resPartidos[i] || "-"}</td>${f}</tr>`; 
     }).join("");
     let tdNomRow = tablaJornada.map(j => `<td>${j.nombre}</td>`).join("");
 
